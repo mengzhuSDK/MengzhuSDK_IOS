@@ -5,10 +5,11 @@
 //  Created by LiWei on 2019/9/26.
 //  Copyright © 2019 mengzhu.com. All rights reserved.
 //
-#import "Constant.h"
+//#import "Constant.h"
+
 #import "MZDimenComment.h"
-#import "MJRefresh.h"
-#import "MJRefresh.h"
+//#import "UIView+SYExtend.h"
+//#import "MZRefresh.h"
 #import <MZMediaSDK/MZMediaSDK.h>
 
 #ifndef MZKitDemoPrefixHeader_pch
@@ -46,6 +47,5 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 #define MZ_UserIcon_DefaultImage [UIImage imageNamed:@"avatar_placeholder"]
 //活动封面
 #define MZ_FocusDefaultImage     [UIImage imageNamed:@"cover_default"]
-#define MZ_DefailtTicket_id    @"10002012"
 
 #endif /* MZKitDemoPrefixHeader_pch */

@@ -7,24 +7,21 @@
 //
 
 #import "ViewController.h"
-#import "TestLiveStream.h"
-#import "PushViewController.h"
-#import "PlayerViewController.h"
 #import "MZVerticalPlayerVC.h"
-#import "Constant.h"
-#import "MZGoodsListView.h"
 
-
-@interface ViewController ()<MZChatKitDelegate>{
+@interface ViewController (){
     UIButton *pushBtn;
     UIButton *playerBtn;
     UIButton *playerViewBtn;
-    MZPlayerManager *manager;
+//    MZPlayerManager *manager;
     
 }
-@property(nonatomic,strong)MZChatKitManager *chatManager;
-@property (nonatomic, strong) TestLiveStream *testVideoCapture;
-@property (nonatomic ,strong) UITextView *liveIDTextView;
+//@property(nonatomic,strong)MZChatKitManager *chatManager;
+@property (nonatomic ,strong) UITextView *ticket_IDTextView;
+@property (nonatomic ,strong) UITextView *UIDTextView;
+@property (nonatomic ,strong) UITextView *nameTextView;
+@property (nonatomic ,strong) UITextView *avatarTextView;
+@property (nonatomic ,strong) UITextView *accountNoTextView;
 @end
 
 @implementation ViewController
@@ -35,158 +32,99 @@
 
 - (void)setNavigationbar{
     self.navigationItem.title = @"SDKdemo";
-//    CGRect screenRect = [[UIScreen mainScreen] bounds];
-////    UINavigationBar *navigationBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, NavY, screenRect.size.width, NavH)];
-////    //创建UINavigationItem
-////    UINavigationItem * navigationBarTitle = [[UINavigationItem alloc] initWithTitle:@"SDKdemo"];
-////    [navigationBar pushNavigationItem: navigationBarTitle animated:YES];
-////
-////    [self.view addSubview: navigationBar];
-////
-////
-////    [navigationBar setItems:[NSArray arrayWithObject: navigationBarTitle]];
-    
-    
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    __weak typeof(self)weakSelf = self;
-    MZSDKInitManager* manager=[MZSDKInitManager sharedManager];
-    self.chatManager=[[MZChatKitManager alloc]init];
-    self.chatManager.delegate=self;
+
+    [self customAddSubviews];
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
+- (void)customAddSubviews{
     
-    MZUser *user=[[MZUser alloc]init];
-    user.userId=@"2095938";
-    user.appID=@"2019091711154563239";
-    user.avatar=@"https://avatars3.githubusercontent.com/u/13464940?s=60&v=4";
-    user.nickName=@"test";
-    [MZUserServer updateCurrentUser:user];
-    
-    [manager initSDK:MZ_ONLINE_TYPE token:@"f117526418fd24b3294aca1ed0c2b896_156136291484092_1566301110" success:^(id responseObject) {
-      
-        NSLog(@"%d",manager.isPassValidation);
-    } failure:^(NSError *error) {
-        NSLog(@"%@",manager.errorMsg);
-    }];
-    __weak typeof(self)WeakSelf = self;
-    [MZSDKBusinessManager reqPlayInfo:MZ_DefailtTicket_id success:^(MZMoviePlayerModel* responseObject) {
-        MZMoviePlayerModel* model=responseObject;
-//        NSLog(model.channel_name);
-//        [MZSDKBusinessManager reqChatHistoryWith:MZ_DefailtTicket_id offset:1 limit:1 last_id:0 success:^(id responseObject) {
-//            [weakSelf.chatManager startTimelyChar:model.ticket_id receive_url:model.chat_config.receive_url srv:model.msg_config.msg_online_srv token:model.msg_config.msg_token];
-//        } failure:^(NSError *error) {
-//            NSLog(@"");
-//        }];
-        
-    } failure:^(NSError *error) {
-        
-    }];
-//    pushBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, NavY+NavH+100, self.view.bounds.size.width, 40)];
-//    [pushBtn setTitle:@"推流" forState:UIControlStateNormal];
-//    [pushBtn addTarget:self action:@selector(onPushClick) forControlEvents:UIControlEventTouchDown];
-//    [pushBtn setBackgroundColor:[UIColor blueColor]];
-//    [self.view addSubview:pushBtn];
-//    playerBtn=[[UIButton alloc]initWithFrame:CGRectMake(pushBtn.frame.origin.x, pushBtn.frame.origin.y+pushBtn.frame.size.height+30+100, self.view.bounds.size.width, 40)];
-//    [playerBtn setTitle:@"播放" forState:UIControlStateNormal];
-//    [playerBtn setBackgroundColor:[UIColor blueColor]];
-//    [playerBtn addTarget:self action:@selector(onPlayerClick) forControlEvents:UIControlEventTouchDown];
-//    [self.view addSubview:playerBtn];
-    
-    self.liveIDTextView = [[UITextView alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 200, self.view.bounds.size.width, 40)];
-    self.liveIDTextView.backgroundColor = [UIColor cyanColor];
-    self.liveIDTextView.keyboardType = UIKeyboardTypeNumberPad;
-    [self.view addSubview:self.liveIDTextView];
-    self.liveIDTextView.text = @"10008540";
-    
-    playerViewBtn=[[UIButton alloc]initWithFrame:CGRectMake(playerBtn.frame.origin.x, playerBtn.frame.origin.y+playerBtn.frame.size.height+30+100, self.view.bounds.size.width, 40)];
+    playerViewBtn=[[UIButton alloc]initWithFrame:CGRectMake(playerBtn.frame.origin.x, playerBtn.frame.origin.y+playerBtn.frame.size.height+500, self.view.bounds.size.width, 40)];
     [playerViewBtn setTitle:@"基础播放器" forState:UIControlStateNormal];
     [playerViewBtn setBackgroundColor:[UIColor blueColor]];
     [playerViewBtn addTarget:self action:@selector(onPlayerViewClick) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:playerViewBtn];
-    playerViewBtn.center = self.view.center;
-    UIButton * goodsListView= [[UIButton alloc]initWithFrame:CGRectMake(playerViewBtn.frame.origin.x, playerViewBtn.frame.origin.y+ playerViewBtn.frame.size.height, playerViewBtn.frame.size.width, playerViewBtn.frame.size.height)];
-    [goodsListView setTitle:@"商品列表" forState:UIControlStateNormal];
-    [goodsListView setBackgroundColor:[UIColor blueColor]];
-    [goodsListView addTarget:self action:@selector(goodsListDidClick) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:goodsListView];
+
+//  输入框
     
-    UIButton *userListView =[[UIButton alloc]initWithFrame:CGRectMake(goodsListView.frame.origin.x, goodsListView.frame.origin.y+goodsListView.frame.size.height, goodsListView.frame.size.width, goodsListView.frame.size.height)];
+    UILabel *tipL1 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 90, self.view.bounds.size.width, 20)];
+    [self.view addSubview:tipL1];
+    tipL1.text = @"ticket_ID";
     
-    [userListView setTitle:@"观众列表" forState:UIControlStateNormal];
-    [userListView setBackgroundColor:[UIColor blueColor]];
-    [userListView addTarget:self action:@selector(userListDidClick) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:userListView];
+    self.ticket_IDTextView = [[UITextView alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 110, self.view.bounds.size.width, 30)];
+    self.ticket_IDTextView.backgroundColor = [UIColor cyanColor];
+    self.ticket_IDTextView.keyboardType = UIKeyboardTypeNumberPad;
+    [self.view addSubview:self.ticket_IDTextView];
+    self.ticket_IDTextView.text = @"10008683";
     
-//    [manager play];
+    UILabel *tipL2 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 140, self.view.bounds.size.width, 20)];
+    [self.view addSubview:tipL2];
+    tipL2.text = @"观众信息：UID";
+    self.UIDTextView = [[UITextView alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 160, self.view.bounds.size.width, 30)];
+    self.UIDTextView.backgroundColor = [UIColor cyanColor];
+    self.UIDTextView.keyboardType = UIKeyboardTypeNumberPad;
+    [self.view addSubview:self.UIDTextView];
+    self.UIDTextView.text = @"2095938";
     
+    UILabel *tipL3 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 190, self.view.bounds.size.width, 20)];
+    [self.view addSubview:tipL3];
+    tipL3.text = @"观众信息：NAME";
+    self.nameTextView = [[UITextView alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 210, self.view.bounds.size.width, 30)];
+    self.nameTextView.backgroundColor = [UIColor cyanColor];
+    self.nameTextView.keyboardType = UIKeyboardTypeNumberPad;
+    [self.view addSubview:self.nameTextView];
+    self.nameTextView.text = @"观众名称";
+    
+    UILabel *tipL4 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 240, self.view.bounds.size.width, 20)];
+    [self.view addSubview:tipL4];
+    tipL4.text = @"观众信息：AVATAR";
+    self.avatarTextView = [[UITextView alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 260, self.view.bounds.size.width, 30)];
+    self.avatarTextView.backgroundColor = [UIColor cyanColor];
+    self.avatarTextView.keyboardType = UIKeyboardTypeNumberPad;
+    [self.view addSubview:self.avatarTextView];
+    self.avatarTextView.text = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570785203973&di=c706e6986a2f4bb7d816298dc9834b34&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D1285762059%2C1341816031%26fm%3D214%26gp%3D0.jpg";
+    
+    UILabel *tipL5 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 290, self.view.bounds.size.width, 20)];
+    [self.view addSubview:tipL5];
+    tipL5.text = @"accountNo：";
+    self.accountNoTextView = [[UITextView alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 310, self.view.bounds.size.width, 30)];
+    self.accountNoTextView.text = @"GM20181202092638000826";
+    self.accountNoTextView.backgroundColor = [UIColor cyanColor];
+    self.accountNoTextView.keyboardType = UIKeyboardTypeNumberPad;
+    [self.view addSubview:self.accountNoTextView];
 }
 
--(void)userListDidClick
-{
-    [MZSDKBusinessManager reqGetUserList:MZ_DefailtTicket_id offset:1 limit:1 success:^(id responseObject) {
-        NSLog(@"");
-    } failure:^(NSError *error) {
-        NSLog(@"");
-    }];
-}
 
--(void)goodsListDidClick
-{
-    [MZSDKBusinessManager reqGoodsList:MZ_DefailtTicket_id offset:1 limit:50 success:^(id responseObject) {
-        MZGoodsListOuterModel *goodsListOuterModel = (MZGoodsListOuterModel *)responseObject;
-        MZGoodsListView *goodsListView = [[MZGoodsListView alloc]initWithFrame:CGRectMake(0, 0, MZ_SW, MZTotalScreenHeight)];
-        [goodsListView.dataArr addObjectsFromArray:goodsListOuterModel.list];
-        [self.view addSubview:goodsListView];
-        
-    } failure:^(NSError *error) {
-        NSLog(@"");
-    }];
-}
-
--(void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
-    [self.testVideoCapture onLayout];
-}
-
--(void)onPlayerClick{
-    [self.navigationController pushViewController:[[PlayerViewController alloc]init]  animated:YES];
-}
 -(void)onPlayerViewClick{
-    if (self.liveIDTextView.text.length == 0) {
+    if (self.ticket_IDTextView.text.length == 0) {
         
         return;
     }
+    MZUser *user=[[MZUser alloc]init];
+    user.userId = self.UIDTextView.text;
+    //    开发环境
+    //    user.appID=@"2019091711154563239";
+    //    测试环境
+    user.appID=@"2019101019585068343";
+    user.avatar=self.avatarTextView.text;
+    user.nickName=self.nameTextView.text;
+    user.accountNo = self.accountNoTextView.text;
+    [MZUserServer updateCurrentUser:user];
     MZVerticalPlayerVC *liveVC = [[MZVerticalPlayerVC alloc]init];
-    liveVC.liveIDString = self.liveIDTextView.text;
+    liveVC.ticket_id = self.ticket_IDTextView.text;
+//    liveVC.UID = self.UIDTextView.text;
+//    liveVC.name = self.nameTextView.text;
+//    liveVC.avatar = self.avatarTextView.text;
     [self.navigationController pushViewController:liveVC  animated:YES];
 
-}
-
-
--(void)onPushClick{
-    [self.navigationController pushViewController:[[PushViewController alloc]init] animated:YES];
-    
-}
-
-/*!
- 直播时参会人数发生变化
- */
--(void)activityOnlineNumberdidchange:(NSString * )onlineNo{
-    NSLog(@"%@",onlineNo);
-}
-/*!
- 直播时礼物数发生变化
- */
--(void)activityOnlineNumGiftchange:(NSString *)onlineGiftMoney{
-    NSLog(@"%@",onlineGiftMoney);
-}
-/*!
- 直播时收到一条新消息
- */
--(void)activityGetNewMsg:(MZLongPollDataModel * )msg{
-    NSLog(@"%@",msg.userName);
 }
 
 @end
