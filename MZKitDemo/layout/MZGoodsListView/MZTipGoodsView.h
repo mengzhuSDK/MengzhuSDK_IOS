@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <MZMediaSDK/MZRefreshBackNormalFooter.h>
-//#import <MZMediaSDK/MZRefreshNormalHeader.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

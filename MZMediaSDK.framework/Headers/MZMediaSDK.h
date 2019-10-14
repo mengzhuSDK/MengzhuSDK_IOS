@@ -67,7 +67,4 @@ FOUNDATION_EXPORT const unsigned char MZMediaSDKVersionString[];
 #import "UIImageView+MZHighlightedWebCache.h"
 #import "UIImageView+MZWebCache.h"
 #import "UIView+MZWebCacheOperation.h"
-#import "UIView+SYExtend.h"
-#import "MZRefreshBackNormalFooter.h"
-#import "MZRefreshNormalHeader.h"
 

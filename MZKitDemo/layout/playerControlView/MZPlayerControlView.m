@@ -9,7 +9,6 @@
 #import "MZBottomTalkBtn.h"
 #import "MZMessageToolView.h"
 #import "MZTipGoodsView.h"
-#import <MZMediaSDK/MZSDKInitManager.h>
 
 #define kViewFramePath      @"frame"
 
@@ -506,11 +505,6 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 #pragma mark - 视频SDK
 -(void)playVideoWithLiveIDString:(NSString *)ticket_id;{
     self.ticket_id = ticket_id;
-    [[MZSDKInitManager sharedManager] initSDK:MZ_ONLINE_TYPE token:@"sss" success:^(id responseObject) {
-        NSLog(@"");
-    } failure:^(NSError *error) {
-        NSLog(@"");
-    }];
 //    获取播放信息
     [MZSDKBusinessManager reqPlayInfo:ticket_id success:^(MZMoviePlayerModel *responseObject) {
 //        http://vod.t.zmengzhu.com/record/base/hls-sd/a954304bb6482c3c00083250.m3u8

@@ -34,14 +34,11 @@
     self.audienceTabView.dataSource = self;
     [self.audienceTabView registerClass:[MZAudienceTableViewCell class] forCellReuseIdentifier:NSStringFromClass([MZAudienceTableViewCell class])];
     [self addSubview:self.audienceTabView];
-//    self.audienceTabView.MZ_header = [MZRefreshNormalHeader headerWithRefreshingBlock:^{
-//        [self loadDataWithIsMore:NO];
-//    }];
-    self.audienceTabView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.audienceTabView.MZ_header = [MZRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadDataWithIsMore:NO];
     }];
     
-    self.audienceTabView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    self.audienceTabView.MZ_footer = [MZRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self loadDataWithIsMore:YES];
     }];
     [MZGlobalTools bezierPathWithRoundedRect:self.audienceTabView.bounds radius:16*MZ_RATE view:self.audienceTabView byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight];
