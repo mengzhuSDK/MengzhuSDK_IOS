@@ -13,7 +13,8 @@
 		155B397821774F7C00A7AD9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 155B397721774F7C00A7AD9D /* Assets.xcassets */; };
 		155B397B21774F7C00A7AD9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 155B397921774F7C00A7AD9D /* LaunchScreen.storyboard */; };
 		155B397E21774F7C00A7AD9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 155B397D21774F7C00A7AD9D /* main.m */; };
-		155B3BA02177656500A7AD9D /* camera_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 155B3B9F2177656500A7AD9D /* camera_switch.png */; };
+		156799F023547F02001E6F6E /* MZMediaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156799EF23547F01001E6F6E /* MZMediaSDK.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		15679A0723548EA8001E6F6E /* UIView+SYExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 15679A0623548EA8001E6F6E /* UIView+SYExtend.m */; };
 		156ED390217F0D290047B6DB /* MZMediaSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */; };
 		D0917E4A235458BB0022E7C7 /* MZVerticalPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0917E15235458BA0022E7C7 /* MZVerticalPlayerVC.m */; };
 		D0917E4B235458BB0022E7C7 /* MZPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0917E19235458BA0022E7C7 /* MZPlayerControlView.m */; };
@@ -57,7 +58,6 @@
 		155B397A21774F7C00A7AD9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		155B397C21774F7C00A7AD9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		155B397D21774F7C00A7AD9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		155B3B9F2177656500A7AD9D /* camera_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_switch.png; sourceTree = "<group>"; };
 		155B3E612178333800A7AD9D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		155B3E632178334B00A7AD9D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		155B3E652178335600A7AD9D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -66,6 +66,9 @@
 		155B3E6B2178338800A7AD9D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		155B3E6D2178339200A7AD9D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		155B3E6F217833A400A7AD9D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		156799EF23547F01001E6F6E /* MZMediaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MZMediaSDK.framework; sourceTree = "<group>"; };
+		15679A0523548EA7001E6F6E /* UIView+SYExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SYExtend.h"; sourceTree = "<group>"; };
+		15679A0623548EA8001E6F6E /* UIView+SYExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SYExtend.m"; sourceTree = "<group>"; };
 		156ED2C2217DC2400047B6DB /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		156ED2C4217DC2690047B6DB /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		156ED2C6217DC2880047B6DB /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
@@ -128,6 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0917E72235466AA0022E7C7 /* libbz2.tbd in Frameworks */,
+				156799F023547F02001E6F6E /* MZMediaSDK.framework in Frameworks */,
 				D0917E712354669F0022E7C7 /* libbz2.1.0.tbd in Frameworks */,
 				D0917E70235466930022E7C7 /* libz.1.2.5.tbd in Frameworks */,
 				D0917E6E235466830022E7C7 /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -160,11 +164,11 @@
 		155B396D21774F7B00A7AD9D /* MZKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				156799EF23547F01001E6F6E /* MZMediaSDK.framework */,
 				D0917E16235458BA0022E7C7 /* layout */,
 				D0917E48235458BB0022E7C7 /* MZDimenComment.h */,
 				D0917E49235458BB0022E7C7 /* MZVerticalPlayerVC.h */,
 				D0917E15235458BA0022E7C7 /* MZVerticalPlayerVC.m */,
-				155B3B9F2177656500A7AD9D /* camera_switch.png */,
 				155B396E21774F7B00A7AD9D /* AppDelegate.h */,
 				155B396F21774F7C00A7AD9D /* AppDelegate.m */,
 				155B397121774F7C00A7AD9D /* ViewController.h */,
@@ -205,6 +209,8 @@
 		D0917E16235458BA0022E7C7 /* layout */ = {
 			isa = PBXGroup;
 			children = (
+				15679A0523548EA7001E6F6E /* UIView+SYExtend.h */,
+				15679A0623548EA8001E6F6E /* UIView+SYExtend.m */,
 				D0917E17235458BA0022E7C7 /* playerControlView */,
 				D0917E1A235458BA0022E7C7 /* MZLiveAudienceHeaderView.h */,
 				D0917E1B235458BA0022E7C7 /* MZLiveManagerHearderView.h */,
@@ -367,7 +373,6 @@
 			files = (
 				155B397B21774F7C00A7AD9D /* LaunchScreen.storyboard in Resources */,
 				155B397821774F7C00A7AD9D /* Assets.xcassets in Resources */,
-				155B3BA02177656500A7AD9D /* camera_switch.png in Resources */,
 				155B397621774F7C00A7AD9D /* Main.storyboard in Resources */,
 				156ED390217F0D290047B6DB /* MZMediaSDK.bundle in Resources */,
 			);
@@ -380,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15679A0723548EA8001E6F6E /* UIView+SYExtend.m in Sources */,
 				D0917E4B235458BB0022E7C7 /* MZPlayerControlView.m in Sources */,
 				D0917E4D235458BB0022E7C7 /* MZAudienceTableViewCell.m in Sources */,
 				D0917E52235458BB0022E7C7 /* MZChatTableViewCell.m in Sources */,
@@ -568,6 +574,7 @@
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"$(inherited)",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mengzhu.play.kit.demo;
 				PRODUCT_NAME = MZKitSDKDemo;
@@ -603,6 +610,7 @@
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"$(inherited)",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mengzhu.play.kit.demo;
 				PRODUCT_NAME = MZKitSDKDemo;

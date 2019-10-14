@@ -112,4 +112,5 @@
 
 //变成圆角
 -(instancetype)roundChangeWithRadius:(CGFloat)radius;
+void runNSNumberXxxForLib();
 @end
