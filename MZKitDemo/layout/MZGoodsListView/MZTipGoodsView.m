@@ -7,7 +7,6 @@
 //
 
 #import "MZTipGoodsView.h"
-#import "MZMediaSDK.h"
 
 @interface MZTipGoodsView ()
 @property (nonatomic ,strong)UIImageView *coverImageView;

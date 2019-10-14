@@ -1,0 +1,6 @@
+framework module MZMediaSDK {
+  umbrella header "MZMediaSDK.h"
+
+  export *
+  module * { export * }
+}

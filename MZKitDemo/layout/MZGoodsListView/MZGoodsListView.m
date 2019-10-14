@@ -8,6 +8,7 @@
 
 #import "MZGoodsListView.h"
 #import "MZGoodsListTabCell.h"
+#import <MZMediaSDK/MZRefreshNormalHeader.h>
 
 @interface MZGoodsListView ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)UITableView *goodTabView;

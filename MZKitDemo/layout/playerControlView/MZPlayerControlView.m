@@ -3,7 +3,6 @@
 #import "MZPlayerControlView.h"
 #import "MZLiveManagerHearderView.h"
 #import "MZLiveAudienceHeaderView.h"
-#import "MZMediaSDK.h"
 #import "MZGoodsListView.h"
 //#import "MZChatView.h"
 #import "MZHistoryChatView.h"

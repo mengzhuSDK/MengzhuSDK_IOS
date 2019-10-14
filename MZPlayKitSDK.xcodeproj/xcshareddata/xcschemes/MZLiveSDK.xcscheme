@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "155B396A21774F7B00A7AD9D"
-               BuildableName = "MZKitDemo.app"
+               BuildableName = "MZKitSDKDemo.app"
                BlueprintName = "MZKitDemo"
                ReferencedContainer = "container:MZPlayKitSDK.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "155B396A21774F7B00A7AD9D"
-            BuildableName = "MZKitDemo.app"
+            BuildableName = "MZKitSDKDemo.app"
             BlueprintName = "MZKitDemo"
             ReferencedContainer = "container:MZPlayKitSDK.xcodeproj">
          </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "155B396A21774F7B00A7AD9D"
-            BuildableName = "MZKitDemo.app"
+            BuildableName = "MZKitSDKDemo.app"
             BlueprintName = "MZKitDemo"
             ReferencedContainer = "container:MZPlayKitSDK.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "155B396A21774F7B00A7AD9D"
-            BuildableName = "MZKitDemo.app"
+            BuildableName = "MZKitSDKDemo.app"
             BlueprintName = "MZKitDemo"
             ReferencedContainer = "container:MZPlayKitSDK.xcodeproj">
          </BuildableReference>
