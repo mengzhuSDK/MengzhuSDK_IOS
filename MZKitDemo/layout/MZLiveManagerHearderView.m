@@ -7,6 +7,7 @@
 //
 
 #import "MZLiveManagerHearderView.h"
+#import <MZMediaSDK/UIView+SYExtend.h>
 
 @interface MZLiveManagerHearderView ()
 @property (nonatomic ,strong)UIButton *headerBtn;

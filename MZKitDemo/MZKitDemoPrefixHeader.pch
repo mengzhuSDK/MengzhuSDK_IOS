@@ -12,6 +12,9 @@
 #import "UIView+SYExtend.h"
 //#import "MZRefresh.h"
 #import <MZMediaSDK/MZMediaSDK.h>
+#import <MZMediaSDK/UIView+SYExtend.h>
+#import <MZMediaSDK/UIView+MZExtension.h>
+#import "MJRefresh.h"
 
 
 #if kMDHeight
