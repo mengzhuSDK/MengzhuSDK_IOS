@@ -8,7 +8,7 @@
 
 #import "MZGoodsListView.h"
 #import "MZGoodsListTabCell.h"
-#import <MZMediaSDK/MZRefreshNormalHeader.h>
+//#import <MZMediaSDK/MZRefreshNormalHeader.h>
 
 @interface MZGoodsListView ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)UITableView *goodTabView;
@@ -67,11 +67,11 @@
     self.goodTabView.tableFooterView = [[UIView alloc]init];
     
     [self.goodTabView registerClass:[MZGoodsListTabCell class] forCellReuseIdentifier:@"MZGoodsListTabCell"];
-    self.goodTabView.MZ_header = [MZRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.goodTabView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadDataWithIsMore:NO];
     }];
     
-    self.goodTabView.MZ_footer = [MZRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    self.goodTabView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self loadDataWithIsMore:YES];
     }];
 

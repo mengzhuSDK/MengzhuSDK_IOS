@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MZMediaSDK/UIView+SYExtend.h>
 
 @interface MZLiveManagerHearderView : UIView
 
