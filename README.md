@@ -82,3 +82,5 @@ b 引用tdb`Linked Frameworks andLibraries`点击`+`搜索`libbz2.tbd`，`libbz2
       -(void)shoppingBagDidClick:(id)playInfo//购物点击
       -(void)attentionButtonDidClick:(id)playInfo//关注点击
       -(void)chatUserDidClick:(id)playInfo//聊天用户点击
+# **6.非固定UI版功能集成 **
+- 不使用自带UI的具体实现方式请查看wiki文档
