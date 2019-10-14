@@ -15,6 +15,7 @@
 @property (nonatomic ,strong)UILabel *priceL;
 @property (nonatomic,assign) NSInteger currenGoodIndex;
 @property (nonatomic ,strong)MZGoodsListModel *currentShowGoodsModel;
+@property (nonatomic ,assign)BOOL isStartAnimation;
 @end
 @implementation MZTipGoodsView
 
@@ -89,6 +90,7 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.frame = CGRectMake(self.left, self.top, 185*MZ_RATE, 60*MZ_RATE);
         self.alpha = 1;
+        self.isStartAnimation=YES;
     } completion:^(BOOL finished) {
         self.frame = CGRectMake(self.left, self.top, 185*MZ_RATE, 60*MZ_RATE);
         self.alpha = 1;
@@ -103,6 +105,7 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.frame = CGRectMake(self.left, self.top, 1, 1);
         self.alpha = 0;
+        self.isStartAnimation=NO;
     } completion:^(BOOL finished) {
         self.frame = CGRectMake(self.left, self.top, 1, 1);
         self.alpha = 0;
@@ -114,18 +117,24 @@
 
 -(void)keepShowTheGoodsView
 {
+    WeaklySelf(weakSelf);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self hiddenGoodViewWithModel:self.goodsListModelArr[0]];
+        if(weakSelf.isStartAnimation){
+            [weakSelf hiddenGoodViewWithModel:nil];
+        }
     });
 }
 
 -(void)beginAnimation;//开启动画
 {
     if(self.goodsListModelArr.count > 0){
+        
         if(self.isCirclePlay){
+            self.isOpen=YES;
             if(self.currenGoodIndex > self.goodsListModelArr.count - 1){//展示到最后一个的时候要再次展示第一个
                 self.currenGoodIndex = 0;
             }
+            if([self.goodsListModelArr count]==0)return;
             [self showGoodsViewWithModel:self.goodsListModelArr[self.currenGoodIndex]];
             self.currenGoodIndex ++;
         }else{
@@ -145,6 +154,8 @@
             
         }
         
+    }else{
+        self.isOpen=NO;
     }
 }
 -(void)stopAnimation;//关闭动画

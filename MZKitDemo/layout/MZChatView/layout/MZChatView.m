@@ -111,35 +111,12 @@
     view.backgroundColor = MakeColorRGB(0xf3f3f3);
     [talkView addSubview:view];
     
-//<<<<<<< HEAD:MZKitDemo/layout/MZChatView/layout/MZChatView.m
-//    MLEmojiLabel *t_emojiLabel = [[MLEmojiLabel alloc]initWithFrame:CGRectMake(10, 2, view.width - 20, _talkFont.xHeight)];
-//    t_emojiLabel.numberOfLines = 0;
-//    t_emojiLabel.font = _talkFont;
-//    t_emojiLabel.userInteractionEnabled=YES;
-//    //    t_emojiLabel.emojiDelegate = self;
-//    t_emojiLabel.backgroundColor = [UIColor clearColor];
-//    t_emojiLabel.lineBreakMode = NSLineBreakByWordWrapping;
-//    t_emojiLabel.isNeedAtAndPoundSign = YES;
-//    t_emojiLabel.disableThreeCommon = YES;
-//    //    t_emojiLabel.atColor = [UIColor whiteColor];
-//    t_emojiLabel.textColor = MakeColorRGB(0x2b2b2b);
-//    t_emojiLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
-//    t_emojiLabel.customEmojiPlistName = @"faceExpression.plist";
-//    t_emojiLabel.lineSpacing = 0.0;
-//    t_emojiLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
-//    [t_emojiLabel setText:pollingDate.data.msgText];
-//
-//    //   [t_emojiLabel addGestureRecognizer:tapGesture];
-//    @try {[t_emojiLabel sizeToFit];} @catch (NSException* e) {}
-//    [view addSubview:t_emojiLabel];
-//=======
     UILabel *t_emojiLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 2, view.width - 20, _talkFont.xHeight)];
     t_emojiLabel.numberOfLines = 2;
     t_emojiLabel.font = _talkFont;
     t_emojiLabel.userInteractionEnabled=YES;
     //    t_emojiLabel.emojiDelegate = self;
     t_emojiLabel.backgroundColor = [UIColor clearColor];
-    t_emojiLabel.lineBreakMode = NSLineBreakByWordWrapping;
     //    t_emojiLabel.atColor = [UIColor whiteColor];
     t_emojiLabel.textColor = MakeColorRGB(0x2b2b2b);
     [t_emojiLabel setText:pollingDate.data.msgText];
@@ -220,29 +197,7 @@
         view.layer.cornerRadius = 5;
         view.clipsToBounds = YES;
         [talkView addSubview:view];
-        
-//<<<<<<< HEAD:MZKitDemo/layout/MZChatView/layout/MZChatView.m
-//        MLEmojiLabel *t_emojiLabel = [[MLEmojiLabel alloc]initWithFrame:CGRectMake(10, 2, view.width-20, _talkFont.xHeight)];
-//        t_emojiLabel.numberOfLines = 0;
-//        t_emojiLabel.font = _talkFont;
-//        t_emojiLabel.userInteractionEnabled=YES;
-//        //    t_emojiLabel.emojiDelegate = self;
-//        t_emojiLabel.backgroundColor = [UIColor clearColor];
-//        t_emojiLabel.lineBreakMode = NSLineBreakByWordWrapping;
-//        t_emojiLabel.isNeedAtAndPoundSign = YES;
-//        t_emojiLabel.textColor=MakeColorRGB(0x2b2b2b);
-//        t_emojiLabel.disableThreeCommon = YES;
-//
-//        t_emojiLabel.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
-//        t_emojiLabel.customEmojiPlistName = @"faceExpression.plist";
-//        t_emojiLabel.lineSpacing = 0.0;
-//        t_emojiLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
-//        [t_emojiLabel setText:pollingDate.data.msgText];
-//
-//        //   [t_emojiLabel addGestureRecognizer:tapGesture];
-//        @try {[t_emojiLabel sizeToFit];} @catch (NSException* e) {}
-//        [view addSubview:t_emojiLabel];
-//=======
+
         UILabel *t_emojiLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 2, view.width-20, _talkFont.xHeight)];
         t_emojiLabel.numberOfLines = 0;
         t_emojiLabel.font = _talkFont;

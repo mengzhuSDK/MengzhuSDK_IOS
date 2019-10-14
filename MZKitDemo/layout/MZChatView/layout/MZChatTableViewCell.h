@@ -26,6 +26,8 @@ extern NSString * const MZMsgTypeVisitCardRedBag;
 extern NSString * const MZMsgTypeCircleGeneralizeMsg;
 extern NSString * const MZMsgTypeGoodsUrl;
 
+
+
 @interface MZChatTableViewCell : UITableViewCell
 @property (nonatomic ,copy) NSString *role_name;
 + (float)getCellHeight:(MZLongPollDataModel *)pollingDate cellWidth:(CGFloat)cellWidth;

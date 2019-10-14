@@ -38,7 +38,6 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
 //   5 销毁播放器
-    [self.playerControlView playerShutDown];
 }
 #pragma mark - View Helper
 
@@ -94,6 +93,7 @@
 
 #pragma mark - 播放器代理
 - (void)closeButtonDidClick:(id)playInfo{
+    [self.playerControlView playerShutDown];
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)avatarDidClick:(id)playInfo{
@@ -130,7 +130,13 @@
     NSLog(@"%s",__func__);
     [self sv_showMessage:@"聊天用户点击--国民实现"];
 }
-
-
+-(void)goodsItemDidClick:(MZGoodsListModel *)GoodsListModel;{
+    NSLog(@"%s",__func__);
+    [self sv_showMessage:@"商品点击--国民实现"];
+}
+-(void)chatUserHeaderDidClick:(MZLongPollDataModel *)GoodsListModel;{
+    NSLog(@"%s",__func__);
+    [self sv_showMessage:@"聊天点击--国民实现"];
+}
 
 @end

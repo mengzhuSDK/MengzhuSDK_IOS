@@ -240,7 +240,7 @@
     //        iphonXH = 34;
     //    }
     __weak typeof(self)weakSelf = self;
-    NSLog(@"onlineCountDownNum %d",_onlineCountDownNum);
+//    NSLog(@"onlineCountDownNum %d",_onlineCountDownNum);
     _onlineCountDownNum = _onlineCountDownNum - 1;
     if(_onlineCountDownNum <= 0){
         if(!_onlineIconBtn.hidden){
@@ -289,6 +289,10 @@
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _tempArr.count)];
     [self.dataArray insertObjects:_tempArr atIndexes:indexSet];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.chatTable reloadData];
+        [self scrollViewToBottom];
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.chatTable reloadData];
         [self scrollViewToBottom];
     });
@@ -376,17 +380,9 @@
         }
         cell.pollingDate = msg;
         
-        __weak __typeof(self) weakself = self;
-//        cell.headerViewAction = ^(MZLongPollDataModel *msgModel){
-//            if (weakself.userHeardAction) {
-//                if(!weakSelf.forbiden_check_userinfo || [[MZUserServer currentUser].userId isEqualToString:msgModel.userId] || weakSelf.isManager){
-//                    weakself.userHeardAction(msgModel.userId);
-//                }else{
-//                    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"不允许查看频道成员资料" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//                    [alertView show];
-//                }
-//            }
-//        };
+        cell.headerViewAction = ^(MZLongPollDataModel *msgModel){
+            [weakSelf.chatDelegate historyChatViewUserHeaderClick:msgModel];
+        };
         return cell;
     }else{
         MZChatTableViewCell *cell = [[MZChatTableViewCell alloc]init];

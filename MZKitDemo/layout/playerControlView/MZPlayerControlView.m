@@ -13,7 +13,9 @@
 
 #define kViewFramePath      @"frame"
 
-@interface MZPlayerControlView()<MZMessageToolBarDelegate,UITextViewDelegate,MZChatKitDelegate>
+typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
+@interface MZPlayerControlView()<MZMessageToolBarDelegate,UITextViewDelegate,MZChatKitDelegate,MZGoodsRequestProtocol,MZHistoryChatViewProtocol>
+
 @property (nonatomic ,strong)UIView *playerContentView;//播放器上盖的一层View
 @property (nonatomic ,strong)MZLiveManagerHearderView *liveManagerHearderView;//左上角主播按钮view
 @property (nonatomic ,strong)MZLiveAudienceHeaderView *liveAudienceHeaderView;//右上角观众view
@@ -41,8 +43,12 @@
 @property (nonatomic ,strong)NSMutableArray *goodsListArr;//底部弹窗共用的数组
 @property (nonatomic,strong)MZChatKitManager *chatKitManager;
 @property (nonatomic ,strong) MZHostModel *hostModel;
+@property (nonatomic ,assign) int goodsOffset;
+@property (nonatomic ,strong)MZGoodsListView *goodsListView;
+@property (nonatomic,assign) int totalNum;
 
 @property (nonatomic ,strong)UILabel *goodsNumLabel;
+@property (nonatomic ,strong)UILabel *unusualTipView;
 
 @property (nonatomic ,strong)NSString *HostUID;
 @property (nonatomic ,strong)NSString *Hostname;
@@ -155,6 +161,7 @@
     self.goodsNumLabel.font = [UIFont systemFontOfSize:12];
     self.goodsNumLabel.textAlignment = NSTextAlignmentCenter;
     self.goodsNumLabel.textColor = [UIColor whiteColor];
+    self.goodsNumLabel.hidden=YES;
     [shoppingBagButton addSubview:self.goodsNumLabel];
     
     self.bottomTalkBtn = [[MZBottomTalkBtn alloc]initWithFrame:CGRectMake(shoppingBagButton.right + 14*MZ_RATE, shoppingBagButton.top, 120*MZ_RATE, 44*MZ_RATE)];
@@ -171,35 +178,72 @@
 -(void)setupChatView
 {
     self.chatView = [[MZHistoryChatView alloc]initWithFrame:CGRectMake(0, kDHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), kDWidth, 130*MZ_RATE)];
-//    self.chatView.delegate =self;
+    self.chatView.chatDelegate =self;
     [self.playerContentView addSubview:self.chatView];
     
 }
 -(void)tipGoodAnimationWithGoodsListArr:(NSMutableArray *)arr
 {
     WeaklySelf(weakSelf);
-    self.circleTipGoodsView = [[MZTipGoodsView alloc]initWithFrame:CGRectMake(18*MZ_RATE, self.chatView.bottom + 3*MZ_RATE, 185*MZ_RATE, 60*MZ_RATE)];
-    self.circleTipGoodsView.goodsClickBlock = ^(MZGoodsListModel * _Nonnull model) {
-        [weakSelf.playerDelegate goodsItemDidClick:model];
-    };
-    self.circleTipGoodsView.isCirclePlay = YES;
-    self.circleTipGoodsView.alpha = 0;
-    [self addSubview:self.circleTipGoodsView];
-    self.circleTipGoodsView.goodsListModelArr = arr;
-    [self.circleTipGoodsView beginAnimation];
+    if(!self.circleTipGoodsView){
+        self.circleTipGoodsView = [[MZTipGoodsView alloc]initWithFrame:CGRectMake(18*MZ_RATE, self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE, 185*MZ_RATE, 60*MZ_RATE)];
+        
+        self.circleTipGoodsView.goodsClickBlock = ^(MZGoodsListModel * _Nonnull model) {
+            [weakSelf.playerDelegate goodsItemDidClick:model];
+        };
+        self.circleTipGoodsView.isCirclePlay = YES;
+        self.circleTipGoodsView.alpha = 0;
+        [self addSubview:self.circleTipGoodsView];
+    }else{
+        self.circleTipGoodsView.frame=CGRectMake(18*MZ_RATE, self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE, 185*MZ_RATE, 60*MZ_RATE);
+    }
+        self.circleTipGoodsView.goodsListModelArr = arr;
+    if(!self.circleTipGoodsView.isOpen){
+        [self.circleTipGoodsView beginAnimation];
+    }else{
+        if([arr count]==0){
+            [self.circleTipGoodsView hiddenGoodViewWithModel:nil];
+        }
+    }
 }
 
--(void)loadGoodsList
+-(void)loadGoodsList:(int) offset limit:(int)limit callback:(GoodsDataCallback)callback
 {
-    [MZSDKBusinessManager reqGoodsList:self.ticket_id offset:1 limit:50 success:^(id responseObject) {
+    
+    [MZSDKBusinessManager reqGoodsList:self.ticket_id offset:offset limit:limit success:^(id responseObject) {
         MZGoodsListOuterModel *goodsListOuterModel = (MZGoodsListOuterModel *)responseObject;
-        self.goodsListArr  = goodsListOuterModel.list;
+        if([goodsListOuterModel.list count]!=0&&self.goodsListArr&&[self.goodsListArr count]>0&&offset>self.goodsOffset){
+            [self.goodsListArr addObjectsFromArray:goodsListOuterModel.list];
+            self.goodsOffset=offset;
+        }else {
+            if(offset>self.goodsOffset){
+                
+            }else{
+                self.goodsListArr  = goodsListOuterModel.list;
+            }
+            
+        
+        }
+        self.totalNum = goodsListOuterModel.total;
+        
+        
+        NSLog(@"-goodsListOuterModel %lu",[goodsListOuterModel.list count]);
+        NSLog(@"+goodsListArr %lu",[self.goodsListArr count]);
         self.goodsNumLabel.text = [NSString stringWithFormat:@"%d",goodsListOuterModel.total];
+        if(goodsListOuterModel.total==0){
+            self.goodsNumLabel.hidden=YES;
+        }else{
+            self.goodsNumLabel.hidden=NO;
+        }
         if(self.goodsListArr.count == 0){
             self.chatView.frame = CGRectMake(0, kDHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), kDWidth, 198*MZ_RATE);
         }else{
             self.chatView.frame = CGRectMake(0, kDHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), kDWidth, 130*MZ_RATE);
         }
+        if(callback){
+            callback(goodsListOuterModel);
+        }
+        
         [self tipGoodAnimationWithGoodsListArr:self.goodsListArr];
         
     } failure:^(NSError *error) {
@@ -234,6 +278,9 @@
     [self updateUIWithAvatarURLString:self.Hostavatar name:self.Hostname];
 }
 #pragma mark 聊天
+- (void)historyChatViewUserHeaderClick:(MZLongPollDataModel *)msgModel{
+    [self.playerDelegate chatUserHeaderDidClick:msgModel];
+}
 - (void)showKeyboard{
     _hideKeyBoardBtn.hidden = NO;
     self.chatToolBar.hidden = NO;
@@ -268,6 +315,15 @@
                 [self addSubview:_chatToolBar];
             }
         }
+    }
+}
+
+-(void)textViewDidChange:(UITextView *)textView
+{
+    if(textView.text.length > 0){
+        _chatToolBar.msgTextView.centerPlaceHolderLable.hidden = YES;
+    }else{
+        _chatToolBar.msgTextView.centerPlaceHolderLable.hidden = NO;
     }
 }
 
@@ -315,9 +371,14 @@
 }
 
 #pragma mark - 销毁播放器
--(void)playerShutDown;{
+-(void)playerShutDown
+{
+    [self.chatKitManager closeLongPoll];
+    [self.chatKitManager closeSocketIO];
+    self.chatKitManager.delegate = nil;
     [self.manager shutdown];
     [self.manager didShutdown];
+    
 }
 #pragma mark - 点赞动画
 -(void)likeButtonDidClick:(UIButton *)button {
@@ -408,13 +469,31 @@
 -(void)shoppingBagButtonClick{
     NSLog(@"%s",__func__);
 
-    MZGoodsListView *goodsListView = [[MZGoodsListView alloc]initWithFrame:CGRectMake(0, 0, MZ_SW, MZTotalScreenHeight)];
-    [goodsListView.dataArr addObjectsFromArray:self.goodsListArr];
-    goodsListView.goodsListViewCellClickBlock = ^(MZGoodsListModel * _Nonnull model) {
-        [self.playerDelegate goodsItemDidClick:model];
+    _goodsListView = [[MZGoodsListView alloc]initWithFrame:CGRectMake(0, 0, MZ_SW, MZTotalScreenHeight)];
+    _goodsListView.totalNum = self.totalNum;
+    [_goodsListView.dataArr addObjectsFromArray:self.goodsListArr];
+    _goodsListView.requestDelegate=self;
+    _goodsListView.offset=_goodsOffset;
+    WeaklySelf(weakSelf);
+    _goodsListView.goodsListViewCellClickBlock = ^(MZGoodsListModel * _Nonnull model) {
+        [weakSelf.playerDelegate goodsItemDidClick:model];
     };
-    [self addSubview:goodsListView];
+    [self addSubview:_goodsListView];
 }
+
+- (void)requestGoodsList:(GoodsDataResult)block offset:(int)offset{
+    WeaklySelf(weakSelf);
+    [self loadGoodsList:offset limit:50 callback:^(MZGoodsListOuterModel *model) {
+        if(weakSelf.goodsListView&&weakSelf.goodsListView.dataArr){
+            weakSelf.goodsListView.dataArr=weakSelf.goodsListArr;
+        }
+        if(block){
+            block(model);
+        }
+       
+    }];
+}
+
 - (void)closeButtonDidclick:(UIButton *)button{
     NSLog(@"%s",__func__);
     [self.playerDelegate closeButtonDidClick:self.playInfo];
@@ -434,7 +513,7 @@
         self.playInfo = responseObject;
         self.chatView.activity = self.playInfo;
         self.bottomTalkBtn.isBanned = self.playInfo.user_status == 1? NO : YES;
-        [self loadGoodsList];
+        [self loadGoodsList:0 limit:50 callback:nil];
         [self playerVideoWithURLString:responseObject.video.url];
         [self updateUIWithPlayInfo];
         self.chatKitManager = [[MZChatKitManager alloc]init];
@@ -502,7 +581,13 @@
         self.liveAudienceHeaderView.numStr = [NSString stringWithFormat:@"%d",self.liveAudienceHeaderView.numStr.intValue - 1];
         [_chatView addChatData:msg];
     }else if(msg.event == MsgTypeOtherChat || msg.event == MsgTypeMeChat){
-        [_chatView addChatData:msg];
+        if([self.playInfo.chat_uid isEqualToString:msg.userId]){
+            msg.event = MsgTypeMeChat;
+            return;
+        }else{
+            [_chatView addChatData:msg];
+        }
+        
     }else if (msg.event == MsgTypeGoodsUrl){//推广商品
         MZGoodsListModel *goodsListModel = [[MZGoodsListModel alloc]init];
         goodsListModel.id = msg.data.goods_id;
@@ -511,21 +596,41 @@
         goodsListModel.price = msg.data.price;
         goodsListModel.pic = msg.data.pic;
         goodsListModel.buy_url = msg.data.url;
+        if(goodsListModel){
+            self.chatView.frame = CGRectMake(0, kDHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), kDWidth, 130*MZ_RATE);
+        }
         if(!self.spreadTipGoodsView){
-            self.spreadTipGoodsView = [[MZTipGoodsView alloc]initWithFrame:self.circleTipGoodsView.frame];
+            self.spreadTipGoodsView = [[MZTipGoodsView alloc]initWithFrame:CGRectMake(18*MZ_RATE, self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE, 185*MZ_RATE, 60*MZ_RATE)];
+            
             self.spreadTipGoodsView.alpha = 0;
             self.spreadTipGoodsView.goodsListModelArr = [NSMutableArray array];
             [self addSubview:self.spreadTipGoodsView];
             [self.spreadTipGoodsView.goodsListModelArr addObject:goodsListModel];
             [self spreadTipGoodsViewDidShow];
         }else{
+            self.spreadTipGoodsView.frame=CGRectMake(18*MZ_RATE, self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE, 185*MZ_RATE, 60*MZ_RATE);
             if(self.spreadTipGoodsView.isEnd){
                  [self.spreadTipGoodsView.goodsListModelArr addObject:goodsListModel];
                 [self spreadTipGoodsViewDidShow];
             }
         }
-        
-        
+    }else if (msg.event == MsgTypeLiveOver){//中途结束
+        self.unusualTipView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200*MZ_RATE, 56*MZ_RATE)];
+        self.unusualTipView.textAlignment = NSTextAlignmentCenter;
+        self.unusualTipView.textColor = MakeColorRGB(0xffffff);
+        self.unusualTipView.font = [UIFont systemFontOfSize:20*MZ_RATE];
+        self.unusualTipView.text = @"主播暂时离开，\n稍等一下马上回来";
+        self.unusualTipView.numberOfLines = 2;
+        [self addSubview:self.unusualTipView];
+        self.unusualTipView.center = self.center;
+    }else if (msg.event == MsgTypeDisableChat){
+        if(self.playInfo.chat_uid.intValue  == msg.data.disableChatUserID.intValue){
+            self.bottomTalkBtn.isBanned = YES;
+        }
+    }else if (msg.event == MsgTypeAbleChat){
+        if(self.playInfo.chat_uid.intValue  == msg.data.ableChatUserID.intValue){
+            self.bottomTalkBtn.isBanned = NO;
+        }
     }
     
 }
@@ -537,6 +642,9 @@
     self.circleTipGoodsView.hidden = YES;
     self.spreadTipGoodsView.tipGoodsViewEndBlock = ^{
         weakSelf.circleTipGoodsView.hidden = NO;
+        if([weakSelf.goodsListArr count]==0){
+            weakSelf.chatView.frame = CGRectMake(0, kDHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), kDWidth, 198*MZ_RATE);
+        }
     };
 }
 
@@ -560,6 +668,7 @@
 -(void)updateUIWithPlayInfo{
 //    处理人气
     self.liveManagerHearderView.numStr = self.playInfo.popular;
+    self.popularityNum = self.playInfo.popular.intValue;
     //    处理UV
     self.liveAudienceHeaderView.numStr = self.playInfo.uv;
     

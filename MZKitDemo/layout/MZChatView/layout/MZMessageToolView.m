@@ -506,55 +506,60 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if (textView.text.length > 0)
-    {
-        if (_maxLength > 0) {
-            NSString * str = textView.text;
-            if ([MZGlobalTools isLealString:textView.text limitStringSizeOf:_maxLength * 2]) {
-            }
-            else {
-                textView.text = [MZGlobalTools limitString:str sizeOf:_maxLength * 2];
-            }
-        }
-        else {
-            NSString * str = textView.text;
-            if ([MZGlobalTools isLealString:str limitStringSizeOf:100 * 2]) {
-            }
-            else {
-                textView.text = [MZGlobalTools limitString:str sizeOf:100 * 2];
-            }
-        }
-        
-        if (_type == 1)
-        {
-            [_sendButton setTitleColor:MessageTool_SendBtnColor
-                                forState:UIControlStateNormal];
-        }
-        else if(_type == 2)
-        {
-            [_sendButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
-        }else if (_type ==3)
-        {
-            [_sendButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
-        }
-
-        [_sendButton setUserInteractionEnabled:YES];
+    if(textView.text.length > 0){
+        self.msgTextView.centerPlaceHolderLable.hidden = YES;
+    }else{
+        self.msgTextView.centerPlaceHolderLable.hidden = NO;
     }
-    else
-    {
-        [_sendButton setTitleColor: MessageTool_SendBtnColor forState:UIControlStateNormal];
-        
-        
-        if (_type ==3) {
-            [_sendButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
-        }
-        
-//        [_sendButton setUserInteractionEnabled:NO];
-    }
-    
-    [self willShowInputTextViewToHeight:[self getTextViewContentH:textView]];
-    self.tempString = textView.text;
-    [_msgTextView scrollRangeToVisible:NSMakeRange(_msgTextView.text.length, 1)];
+//    if (textView.text.length > 0)
+//    {
+//        if (_maxLength > 0) {
+//            NSString * str = textView.text;
+//            if ([MZGlobalTools isLealString:textView.text limitStringSizeOf:_maxLength * 2]) {
+//            }
+//            else {
+//                textView.text = [MZGlobalTools limitString:str sizeOf:_maxLength * 2];
+//            }
+//        }
+//        else {
+//            NSString * str = textView.text;
+//            if ([MZGlobalTools isLealString:str limitStringSizeOf:100 * 2]) {
+//            }
+//            else {
+//                textView.text = [MZGlobalTools limitString:str sizeOf:100 * 2];
+//            }
+//        }
+//
+//        if (_type == 1)
+//        {
+//            [_sendButton setTitleColor:MessageTool_SendBtnColor
+//                                forState:UIControlStateNormal];
+//        }
+//        else if(_type == 2)
+//        {
+//            [_sendButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
+//        }else if (_type ==3)
+//        {
+//            [_sendButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
+//        }
+//
+//        [_sendButton setUserInteractionEnabled:YES];
+//    }
+//    else
+//    {
+//        [_sendButton setTitleColor: MessageTool_SendBtnColor forState:UIControlStateNormal];
+//
+//
+//        if (_type ==3) {
+//            [_sendButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
+//        }
+//
+////        [_sendButton setUserInteractionEnabled:NO];
+//    }
+//
+//    [self willShowInputTextViewToHeight:[self getTextViewContentH:textView]];
+//    self.tempString = textView.text;
+//    [_msgTextView scrollRangeToVisible:NSMakeRange(_msgTextView.text.length, 1)];
 
 
 }

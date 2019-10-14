@@ -11,6 +11,7 @@
 
 @interface MZGoodsListView ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)UITableView *goodTabView;
+@property (nonatomic ,strong)UILabel *goodsTitleLabel;
 
 @end
 
@@ -41,11 +42,11 @@
     headerView.backgroundColor = [UIColor whiteColor];
     [self addSubview:headerView];
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(12*MZ_RATE, 12*MZ_RATE, 200*MZ_RATE, 20*MZ_RATE)];
-    titleLabel.text = @"全部商品·";
-    titleLabel.font = FontSystemSize(14*MZ_RATE);
-    titleLabel.textColor = MakeColorRGB(0x999999);
-    [headerView addSubview:titleLabel];
+    self.goodsTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(12*MZ_RATE, 12*MZ_RATE, 200*MZ_RATE, 20*MZ_RATE)];
+    self.goodsTitleLabel.text = @"全部商品·";
+    self.goodsTitleLabel.font = FontSystemSize(14*MZ_RATE);
+    self.goodsTitleLabel.textColor = MakeColorRGB(0x999999);
+    [headerView addSubview:self.goodsTitleLabel];
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 44*MZ_RATE - 1, MZ_SW, 1)];
     lineView.backgroundColor = MakeColorRGB(0xdddddd);
     [headerView addSubview:lineView];
@@ -75,6 +76,12 @@
 
 }
 
+-(void)setTotalNum:(int)totalNum
+{
+    _totalNum = totalNum;
+    self.goodsTitleLabel.text = [NSString stringWithFormat:@"全部商品·%d",self.totalNum];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.dataArr.count;
@@ -85,7 +92,7 @@
     MZGoodsListTabCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MZGoodsListTabCell"];
     cell.backgroundColor = [UIColor whiteColor];
     cell.model = self.dataArr[indexPath.row];
-    cell.index = (int)(indexPath.row + 1);
+    cell.index =(int) (self.totalNum  - indexPath.row);
     return cell;
 }
 
@@ -115,8 +122,28 @@
 
 -(void)loadDataWithIsMore:(BOOL)isMore
 {
-    [self.goodTabView.MZ_header endRefreshing];
-    [self.goodTabView.MZ_footer endRefreshing];
+//    [self.goodTabView reloadData];
+//    [self.goodTabView.MZ_footer endRefreshing];
+    WeaklySelf(weakSelf);
+    if(isMore){
+        [self.requestDelegate requestGoodsList:^(MZGoodsListOuterModel * _Nonnull model) {
+            self.totalNum = model.total;
+                [weakSelf.goodTabView reloadData];
+            [weakSelf.goodTabView.MZ_footer endRefreshing];
+            NSLog(@"MZ_footer %lu",(unsigned long)[weakSelf.dataArr count]);
+               } offset:self.offset+50];
+    }else{
+
+        [self.requestDelegate requestGoodsList:^(MZGoodsListOuterModel * _Nonnull model) {
+            self.totalNum = model.total;
+            [weakSelf.goodTabView reloadData];
+            [weakSelf.goodTabView.MZ_header endRefreshing];
+            NSLog(@"MZ_header %lu",(unsigned long)[weakSelf.dataArr count]);
+        } offset:0];
+
+    }
+    
+    
 }
 
 @end

@@ -24,7 +24,8 @@
 -(void)chatUserDidClick:(id)playInfo;
 //商品的点击事件
 -(void)goodsItemDidClick:(MZGoodsListModel *)GoodsListModel;
-
+//聊天头像点击事件
+-(void)chatUserHeaderDidClick:(MZLongPollDataModel *)GoodsListModel;
 @end
 @interface MZPlayerControlView : MZBaseView
 

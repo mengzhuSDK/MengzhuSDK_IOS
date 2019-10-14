@@ -20,6 +20,8 @@ typedef void(^TipGoodsViewGoodsClickBlock)(MZGoodsListModel *model);
 @property (nonatomic,copy) TipGoodsViewEndBlock tipGoodsViewEndBlock;
 @property (nonatomic,copy) TipGoodsViewGoodsClickBlock goodsClickBlock;
 @property (nonatomic,assign) BOOL isEnd;
+@property (nonatomic,assign)BOOL isOpen;
+-(void)hiddenGoodViewWithModel:(MZGoodsListModel *)model;
 -(void)beginAnimation;//开启动画
 //-(void)stopAnimation;//关闭动画
 

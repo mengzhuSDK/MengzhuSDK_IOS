@@ -90,7 +90,7 @@
     self.avatarTextView.backgroundColor = [UIColor cyanColor];
     self.avatarTextView.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:self.avatarTextView];
-    self.avatarTextView.text = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570785203973&di=c706e6986a2f4bb7d816298dc9834b34&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D1285762059%2C1341816031%26fm%3D214%26gp%3D0.jpg";
+    self.avatarTextView.text = @"http://pic27.nipic.com/20130321/9678987_225139671149_2.jpg";
     
     UILabel *tipL5 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 290, self.view.bounds.size.width, 20)];
     [self.view addSubview:tipL5];
@@ -111,7 +111,6 @@
     MZUser *user=[[MZUser alloc]init];
     user.userId = self.UIDTextView.text;
     //    开发环境
-    //    user.appID=@"2019091711154563239";
     //    测试环境
     user.appID=@"2019101019585068343";
     user.avatar=self.avatarTextView.text;

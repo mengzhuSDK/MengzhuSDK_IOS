@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@protocol MZHistoryChatViewProtocol <NSObject>
+
+-(void)historyChatViewUserHeaderClick:(MZLongPollDataModel *)msgModel;
+
+@end
 
 @interface MZHistoryChatView : UIView
+@property (nonatomic ,weak) id<MZHistoryChatViewProtocol> chatDelegate;
 @property(nonatomic,strong)NSMutableArray *dataArray; //观看回放 加载数据 ， 观看直播 轮训数据
 @property (nonatomic ,strong)NSString *ticket_id;
 @property(nonatomic,strong)MZMoviePlayerModel *activity;//播放器的详情model
@@ -22,4 +27,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
+
