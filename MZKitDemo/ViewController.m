@@ -110,9 +110,6 @@
     }
     MZUser *user=[[MZUser alloc]init];
     user.userId = self.UIDTextView.text;
-    //    开发环境
-    //    user.appID=@"2019091711154563239";
-    //    测试环境
     user.appID=@"2019101019585068343";
     user.avatar=self.avatarTextView.text;
     user.nickName=self.nameTextView.text;
@@ -120,9 +117,6 @@
     [MZUserServer updateCurrentUser:user];
     MZVerticalPlayerVC *liveVC = [[MZVerticalPlayerVC alloc]init];
     liveVC.ticket_id = self.ticket_IDTextView.text;
-//    liveVC.UID = self.UIDTextView.text;
-//    liveVC.name = self.nameTextView.text;
-//    liveVC.avatar = self.avatarTextView.text;
     [self.navigationController pushViewController:liveVC  animated:YES];
 
 }

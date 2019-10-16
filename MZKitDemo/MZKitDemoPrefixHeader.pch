@@ -8,9 +8,10 @@
 //#import "Constant.h"
 
 #import "MZDimenComment.h"
-#import "UIView+SYExtend.h"
+#import "UIView+MZExtend.h"
 //#import "MZRefresh.h"
 #import <MZMediaSDK/MZMediaSDK.h>
+
 
 #ifndef MZKitDemoPrefixHeader_pch
 #define MZKitDemoPrefixHeader_pch
@@ -24,7 +25,7 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 }\
 (isPhoneX);})
 
-#define MZ_RATE         (kDWidth/375.0)//以ip6为标准 ip5缩小 ip6p放大 zoom
+#define MZ_RATE         (MZWidth/375.0)//以ip6为标准 ip5缩小 ip6p放大 zoom
 #define WeaklySelf(weakSelf)  __weak __typeof(&*self)weakSelf = self
 
 #pragma mark 颜色设置宏

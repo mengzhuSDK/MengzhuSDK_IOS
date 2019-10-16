@@ -1,7 +1,7 @@
 
-#import "UIView+SYExtend.h"
+#import "UIView+MZExtend.h"
 
-@implementation UIView (SYExtend)
+@implementation UIView (MZExtend)
 
 
 /**

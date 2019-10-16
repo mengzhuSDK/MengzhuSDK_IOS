@@ -43,6 +43,7 @@
 
 -(void)setupUI
 {
+    
 //    初始化带UI的播放器View
     self.playerControlView = [[MZPlayerControlView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.playerControlView];

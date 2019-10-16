@@ -10,7 +10,7 @@
 #import "MZGoodsListTabCell.h"
 
 @interface MZGoodsListView ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic ,strong)UITableView *goodTabView;
+
 @property (nonatomic ,strong)UILabel *goodsTitleLabel;
 
 @end
@@ -131,7 +131,7 @@
                 [weakSelf.goodTabView reloadData];
             [weakSelf.goodTabView.MZ_footer endRefreshing];
             NSLog(@"MZ_footer %lu",(unsigned long)[weakSelf.dataArr count]);
-               } offset:self.offset+50];
+               } offset:(int)self.dataArr.count];
     }else{
 
         [self.requestDelegate requestGoodsList:^(MZGoodsListOuterModel * _Nonnull model) {

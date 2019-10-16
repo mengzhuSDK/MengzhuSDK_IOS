@@ -49,7 +49,7 @@
     
     self.signImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 22*MZ_RATE, 16*MZ_RATE)];
     self.signImageView.image = ImageName(@"live_tagNumber");
-    [self.contentView addSubview:self.signImageView];
+    [self.coverView addSubview:self.signImageView];
     
     self.numLabel = [[UILabel alloc]initWithFrame:self.signImageView.bounds];
     self.numLabel.font = FontSystemSize(10*MZ_RATE);
@@ -63,8 +63,14 @@
     self.titleLabel.textColor = MakeColorRGB(0x333333);
     [self.contentView addSubview:self.titleLabel];
     
-    self.salePriceLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.titleLabel.left, self.titleLabel.bottom + 13*MZ_RATE, self.titleLabel.width, 25*MZ_RATE)];
-    self.salePriceLabel.font = FontSystemSize(12*MZ_RATE);
+    UILabel *moneyL = [[UILabel alloc]initWithFrame:CGRectMake(self.titleLabel.left, self.coverView.bottom - 20*MZ_RATE, 14*MZ_RATE, 16*MZ_RATE)];
+    moneyL.font = [UIFont boldSystemFontOfSize:12*MZ_RATE];
+    moneyL.text = @"￥";
+    moneyL.textColor = MakeColorRGB(0xff4141);
+    [self.contentView addSubview:moneyL];
+    
+    self.salePriceLabel = [[UILabel alloc]initWithFrame:CGRectMake(moneyL.right, self.coverView.bottom  - 25*MZ_RATE, self.titleLabel.width, 25*MZ_RATE)];
+    self.salePriceLabel.font = [UIFont boldSystemFontOfSize:18*MZ_RATE];
     self.salePriceLabel.textColor = MakeColorRGB(0xff4141);
     [self.contentView addSubview:self.salePriceLabel];
     
@@ -74,7 +80,7 @@
     self.buyBtn.titleLabel.font = FontSystemSize(12*MZ_RATE);
     [self.contentView addSubview:self.buyBtn];
     
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(self.titleLabel.left, self.salePriceLabel.bottom + 10*MZ_RATE, self.titleLabel.width, 1)];
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(self.titleLabel.left, 100*MZ_RATE - 1, self.titleLabel.width, 1)];
     lineView.backgroundColor = MakeColorRGB(0xdddddd);
     [self.contentView addSubview:lineView];
     

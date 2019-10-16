@@ -176,7 +176,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 }
 -(void)setupChatView
 {
-    self.chatView = [[MZHistoryChatView alloc]initWithFrame:CGRectMake(0, kDHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), kDWidth, 130*MZ_RATE)];
+    self.chatView = [[MZHistoryChatView alloc]initWithFrame:CGRectMake(0, MZHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), MZWidth, 130*MZ_RATE)];
     self.chatView.chatDelegate =self;
     [self.playerContentView addSubview:self.chatView];
     
@@ -224,7 +224,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         
         }
         self.totalNum = goodsListOuterModel.total;
-        
+        if(goodsListOuterModel.list.count < 50){
+            
+        }
         
         NSLog(@"-goodsListOuterModel %lu",[goodsListOuterModel.list count]);
         NSLog(@"+goodsListArr %lu",[self.goodsListArr count]);
@@ -235,9 +237,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             self.goodsNumLabel.hidden=NO;
         }
         if(self.goodsListArr.count == 0){
-            self.chatView.frame = CGRectMake(0, kDHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), kDWidth, 198*MZ_RATE);
+            self.chatView.frame = CGRectMake(0, MZHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), MZWidth, 198*MZ_RATE);
         }else{
-            self.chatView.frame = CGRectMake(0, kDHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), kDWidth, 130*MZ_RATE);
+            self.chatView.frame = CGRectMake(0, MZHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), MZWidth, 130*MZ_RATE);
         }
         if(callback){
             callback(goodsListOuterModel);
@@ -486,6 +488,12 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         if(weakSelf.goodsListView&&weakSelf.goodsListView.dataArr){
             weakSelf.goodsListView.dataArr=weakSelf.goodsListArr;
         }
+        if(weakSelf.goodsListArr.count % 50 > 0){
+            [self.goodsListView.goodTabView.MZ_footer endRefreshingWithNoMoreData];
+        }else{
+            [self.goodsListView.goodTabView.MZ_footer endRefreshing];
+        }
+        [self.goodsListView.goodTabView.MZ_header endRefreshing];
         if(block){
             block(model);
         }
@@ -505,39 +513,45 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 #pragma mark - 视频SDK
 -(void)playVideoWithLiveIDString:(NSString *)ticket_id;{
     self.ticket_id = ticket_id;
-//    获取播放信息
-    [MZSDKBusinessManager reqPlayInfo:ticket_id success:^(MZMoviePlayerModel *responseObject) {
-//        http://vod.t.zmengzhu.com/record/base/hls-sd/a954304bb6482c3c00083250.m3u8
-         NSLog(@"%@",responseObject);
-        self.playInfo = responseObject;
-        self.chatView.activity = self.playInfo;
-        self.bottomTalkBtn.isBanned = self.playInfo.user_status == 1? NO : YES;
-        [self loadGoodsList:0 limit:50 callback:nil];
-        [self playerVideoWithURLString:responseObject.video.url];
-        [self updateUIWithPlayInfo];
-        self.chatKitManager = [[MZChatKitManager alloc]init];
-        self.chatKitManager.delegate = self;
-        [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
+    WeaklySelf(weakSelf);
+    [[MZSDKInitManager sharedManager]initSDK:^(id responseObject) {
+        //    获取播放信息
+        [MZSDKBusinessManager reqPlayInfo:ticket_id success:^(MZMoviePlayerModel *responseObject) {
+            //        http://vod.t.zmengzhu.com/record/base/hls-sd/a954304bb6482c3c00083250.m3u8
+            NSLog(@"%@",responseObject);
+            self.playInfo = responseObject;
+            self.chatView.activity = self.playInfo;
+            self.bottomTalkBtn.isBanned = self.playInfo.user_status == 1? NO : YES;
+            [self loadGoodsList:0 limit:50 callback:nil];
+            [self playerVideoWithURLString:responseObject.video.url];
+            [self updateUIWithPlayInfo];
+            self.chatKitManager = [[MZChatKitManager alloc]init];
+            self.chatKitManager.delegate = self;
+            [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+            
+        }] ;
         
-    }] ;
-    
-    
-//    获取在线人数
-    [MZSDKBusinessManager reqGetUserList:ticket_id offset:0 limit:0 success:^(NSArray* responseObject) {
         
-        [self updateUIWithOnlineUsers:responseObject];
+        //    获取在线人数
+        [MZSDKBusinessManager reqGetUserList:ticket_id offset:0 limit:0 success:^(NSArray* responseObject) {
+            
+            [self updateUIWithOnlineUsers:responseObject];
+        } failure:^(NSError *error) {
+            NSLog(@"error %@",error);
+        }];
+        //    获取主播信息
+        [MZSDKBusinessManager reqHostInfo:ticket_id success:^(MZHostModel *responseObject) {
+            self.hostModel = responseObject;
+            
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
     } failure:^(NSError *error) {
-         NSLog(@"error %@",error);
+        [weakSelf showTextView:weakSelf message:@"sdk验证失败"];
     }];
-//    获取主播信息
-    [MZSDKBusinessManager reqHostInfo:ticket_id success:^(MZHostModel *responseObject) {
-        self.hostModel = responseObject;
-        
-    } failure:^(NSError *error) {
-         NSLog(@"%@",error);
-    }];
+
 }
 
 /*!
@@ -596,7 +610,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         goodsListModel.pic = msg.data.pic;
         goodsListModel.buy_url = msg.data.url;
         if(goodsListModel){
-            self.chatView.frame = CGRectMake(0, kDHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), kDWidth, 130*MZ_RATE);
+            self.chatView.frame = CGRectMake(0, MZHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), MZWidth, 130*MZ_RATE);
         }
         if(!self.spreadTipGoodsView){
             self.spreadTipGoodsView = [[MZTipGoodsView alloc]initWithFrame:CGRectMake(18*MZ_RATE, self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE, 185*MZ_RATE, 60*MZ_RATE)];
@@ -615,6 +629,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         }
     }else if (msg.event == MsgTypeLiveOver){//中途结束
         self.unusualTipView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200*MZ_RATE, 56*MZ_RATE)];
+        self.unusualTipView.backgroundColor = MakeColorRGBA(0x000000, 0.6);
         self.unusualTipView.textAlignment = NSTextAlignmentCenter;
         self.unusualTipView.textColor = MakeColorRGB(0xffffff);
         self.unusualTipView.font = [UIFont systemFontOfSize:20*MZ_RATE];
@@ -642,7 +657,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     self.spreadTipGoodsView.tipGoodsViewEndBlock = ^{
         weakSelf.circleTipGoodsView.hidden = NO;
         if([weakSelf.goodsListArr count]==0){
-            weakSelf.chatView.frame = CGRectMake(0, kDHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), kDWidth, 198*MZ_RATE);
+            weakSelf.chatView.frame = CGRectMake(0, MZHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), MZWidth, 198*MZ_RATE);
         }
     };
 }

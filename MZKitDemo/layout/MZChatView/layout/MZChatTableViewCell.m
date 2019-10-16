@@ -160,6 +160,7 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
         nickLabel.font = [UIFont systemFontOfSize:13*MZ_RATE];
         nickLabel.frame = CGRectMake(0, 0, CGFLOAT_MAX, 18*MZ_RATE);
         nickLabel.text = [NSString stringWithFormat:@"%@:",[MZGlobalTools cutStringWithString:pollingDate.userName SizeOf:20]];
+        [nickLabel sizeToFit];
         g_textLabel.frame = CGRectMake(0, 0, cellWidth - 40*MZ_RATE - 18*MZ_RATE - nickLabel.width, CGFLOAT_MAX);
         [g_textLabel setText:pollingDate.data.msgText];
         [g_textLabel sizeToFit];

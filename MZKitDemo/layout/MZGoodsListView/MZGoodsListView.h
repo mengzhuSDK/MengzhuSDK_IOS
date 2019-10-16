@@ -16,6 +16,7 @@ typedef void(^GoodsDataResult)(MZGoodsListOuterModel *model);
 @end
 @interface MZGoodsListView : UIView
 @property (nonatomic ,strong)NSMutableArray *dataArr;
+@property (nonatomic ,strong)UITableView *goodTabView;
 @property (nonatomic,assign) int totalNum;
 @property (nonatomic,assign)int offset;
 @property (nonatomic,strong)id<MZGoodsRequestProtocol> requestDelegate;

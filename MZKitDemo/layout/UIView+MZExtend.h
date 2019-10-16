@@ -2,31 +2,31 @@
 #import <UIKit/UIKit.h>
 
 
-#if kDHeight
+#if MZHeight
 #else
 
-#define kDHeight [UIScreen mainScreen].bounds.size.height
+#define MZHeight [UIScreen mainScreen].bounds.size.height
 
 #endif
 
-#if kDWidth
+#if MZWidth
 #else
 
-#define kDWidth [UIScreen mainScreen].bounds.size.width
+#define MZWidth [UIScreen mainScreen].bounds.size.width
 
 #endif
 
 
 
-#define FrameRight(frame) (frame.origin.x + frame.size.width)
-#define FrameLeft(frame) (frame.origin.x)
-#define FrameTop(frame) (frame.origin.y)
-#define FrameBottom(frame) (frame.origin.y + frame.size.height)
-#define FrameCenterY(frame) (frame.origin.y + frame.size.height/2)
-#define FrameCenterX(frame) (frame.origin.x + frame.size.width/2)
+#define MZFrameRight(frame) (frame.origin.x + frame.size.width)
+#define MZFrameLeft(frame) (frame.origin.x)
+#define MZFrameTop(frame) (frame.origin.y)
+#define MZFrameBottom(frame) (frame.origin.y + frame.size.height)
+#define MZFrameCenterY(frame) (frame.origin.y + frame.size.height/2)
+#define MZFrameCenterX(frame) (frame.origin.x + frame.size.width/2)
 
 
-@interface UIView (SYExtend)
+@interface UIView (MZExtend)
 
 
 @property (nonatomic, assign) CGFloat height;
