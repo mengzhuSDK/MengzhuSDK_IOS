@@ -537,8 +537,13 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         
         //    获取在线人数
         [MZSDKBusinessManager reqGetUserList:ticket_id offset:0 limit:0 success:^(NSArray* responseObject) {
-            
-            [self updateUIWithOnlineUsers:responseObject];
+            NSMutableArray *tempArr = responseObject.mutableCopy;
+            for (MZOnlineUserListModel* model in responseObject) {
+                if(model.uid.longLongValue > 5000000000){//uid大于五十亿是游客
+                    [tempArr removeObject:model];
+                }
+            }
+            [self updateUIWithOnlineUsers:tempArr];
         } failure:^(NSError *error) {
             NSLog(@"error %@",error);
         }];
@@ -571,11 +576,13 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     WeaklySelf(weakSelf);
     if(msg.event == MsgTypeOnline){
         [_chatView addChatData:msg];
-        MZOnlineUserListModel *user = [[MZOnlineUserListModel alloc]init];
-        user.uid = msg.userId;
-        user.avatar = msg.userAvatar;
-        user.nickname = msg.userName;
-        [self.onlineUsersArr addObject:user];
+        if(msg.userId.longLongValue <= 5000000000){
+            MZOnlineUserListModel *user = [[MZOnlineUserListModel alloc]init];
+            user.uid = msg.userId;
+            user.avatar = msg.userAvatar;
+            user.nickname = msg.userName;
+            [self.onlineUsersArr addObject:user];
+        }
         self.liveAudienceHeaderView.userArr = self.onlineUsersArr;
         self.popularityNum ++;
         self.liveAudienceHeaderView.numStr = [NSString stringWithFormat:@"%d",self.liveAudienceHeaderView.numStr.intValue + 1];
@@ -584,14 +591,15 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 //        有人下线
         NSMutableArray *temArr = self.onlineUsersArr.mutableCopy;
         if(temArr.count > 0){
-            for (MZOnlineUserListModel *user in temArr) {
-                if([user.uid isEqualToString:msg.userId]){
-                    [self.onlineUsersArr removeObject:user];
-                    self.liveAudienceHeaderView.userArr = self.onlineUsersArr;
+            if(msg.userId.longLongValue <= 5000000000){
+                for (MZOnlineUserListModel *user in temArr) {
+                    if([user.uid isEqualToString:msg.userId]){
+                        [self.onlineUsersArr removeObject:user];
+                        self.liveAudienceHeaderView.userArr = self.onlineUsersArr;
+                    }
                 }
             }
         }
-        
         self.liveAudienceHeaderView.numStr = [NSString stringWithFormat:@"%d",self.liveAudienceHeaderView.numStr.intValue - 1];
         [_chatView addChatData:msg];
     }else if(msg.event == MsgTypeOtherChat || msg.event == MsgTypeMeChat){
