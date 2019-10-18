@@ -22,6 +22,7 @@
 //获取当前用户
 +(MZUser *)currentUser;
 
++(void)signOutCurrentUser;
 /*!
  更新用户登录信息
  */

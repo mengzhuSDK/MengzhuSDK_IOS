@@ -342,8 +342,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
 - (void)didSendText:(NSString *)text userName:(NSString *)userName joinID:(NSString *)joinID
 {
-    if(![MZUserServer currentUser]){
-//        [self showTextView:self.navigationController.view message:@"您还未登录"];
+    if([MZUserServer currentUser].accountNo.length == 0){
+        [self showTextView:self.superview message:@"您还未登录"];
+        [self hideKeyboard];
         return;
     }
     if ([MZGlobalTools isBlankString:text]) {
