@@ -224,8 +224,8 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         
         }
         self.totalNum = goodsListOuterModel.total;
-        if(goodsListOuterModel.list.count < 50){
-            
+        if(goodsListOuterModel.list.count % 50 > 0){
+            [self.goodsListView.goodTabView.MZ_footer endRefreshingWithNoMoreData];
         }
         
         NSLog(@"-goodsListOuterModel %lu",[goodsListOuterModel.list count]);
@@ -248,6 +248,8 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         [self tipGoodAnimationWithGoodsListArr:self.goodsListArr];
         
     } failure:^(NSError *error) {
+        [self.goodsListView.goodTabView.MZ_header endRefreshing];
+        [self.goodsListView.goodTabView.MZ_footer endRefreshing];
         NSLog(@"");
     }];
 }
@@ -472,10 +474,11 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     NSLog(@"%s",__func__);
 
     _goodsListView = [[MZGoodsListView alloc]initWithFrame:CGRectMake(0, 0, MZ_SW, MZTotalScreenHeight)];
-    _goodsListView.totalNum = self.totalNum;
-    [_goodsListView.dataArr addObjectsFromArray:self.goodsListArr];
+//    _goodsListView.totalNum = self.totalNum;
+//    [_goodsListView.dataArr addObjectsFromArray:self.goodsListArr];
     _goodsListView.requestDelegate=self;
-    _goodsListView.offset=_goodsOffset;
+    [_goodsListView loadDataWithIsMore:NO];
+//    _goodsListView.offset=_goodsOffset;
     WeaklySelf(weakSelf);
     _goodsListView.goodsListViewCellClickBlock = ^(MZGoodsListModel * _Nonnull model) {
         [weakSelf.playerDelegate goodsItemDidClick:model];
@@ -486,6 +489,15 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 - (void)requestGoodsList:(GoodsDataResult)block offset:(int)offset{
     WeaklySelf(weakSelf);
     [self loadGoodsList:offset limit:50 callback:^(MZGoodsListOuterModel *model) {
+        if(model.list.count == 0){
+            if(offset == 0){
+                [self.goodsListView.goodTabView.MZ_header endRefreshing];
+                [self.goodsListView.goodTabView.MZ_footer endRefreshingWithNoMoreData];
+            }else{
+                [self.goodsListView.goodTabView.MZ_header endRefreshing];
+                [self.goodsListView.goodTabView.MZ_footer endRefreshingWithNoMoreData];
+            }
+        }
         if(weakSelf.goodsListView&&weakSelf.goodsListView.dataArr){
             weakSelf.goodsListView.dataArr=weakSelf.goodsListArr;
         }
@@ -637,7 +649,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             }
         }
     }else if (msg.event == MsgTypeLiveOver){//中途结束
-        self.unusualTipView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200*MZ_RATE, 56*MZ_RATE)];
+        self.unusualTipView = [[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200*MZ_RATE, 56*MZ_RATE)] roundChangeWithRadius:4];
         self.unusualTipView.backgroundColor = MakeColorRGBA(0x000000, 0.6);
         self.unusualTipView.textAlignment = NSTextAlignmentCenter;
         self.unusualTipView.textColor = MakeColorRGB(0xffffff);
@@ -646,6 +658,16 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         self.unusualTipView.numberOfLines = 2;
         [self addSubview:self.unusualTipView];
         self.unusualTipView.center = self.center;
+    }else if (msg.event == MsgTypeLiveReallyEnd){
+        UILabel *realyEndView = [[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200*MZ_RATE, 56*MZ_RATE)] roundChangeWithRadius:4];
+        realyEndView.backgroundColor = MakeColorRGBA(0x000000, 0.6);
+        realyEndView.textAlignment = NSTextAlignmentCenter;
+        realyEndView.textColor = MakeColorRGB(0xffffff);
+        realyEndView.font = [UIFont systemFontOfSize:20*MZ_RATE];
+        realyEndView.text = @"直播已结束";
+        realyEndView.numberOfLines = 1;
+        [self addSubview:realyEndView];
+        realyEndView.center = self.center;
     }else if (msg.event == MsgTypeDisableChat){
         if(self.playInfo.chat_uid.intValue  == msg.data.disableChatUserID.intValue){
             self.bottomTalkBtn.isBanned = YES;

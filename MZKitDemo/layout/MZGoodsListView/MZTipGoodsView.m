@@ -15,6 +15,7 @@
 @property (nonatomic,assign) NSInteger currenGoodIndex;
 @property (nonatomic ,strong)MZGoodsListModel *currentShowGoodsModel;
 @property (nonatomic ,assign)BOOL isStartAnimation;
+@property (nonatomic,assign) CGRect initFrame;
 @end
 @implementation MZTipGoodsView
 
@@ -31,6 +32,7 @@
 
 -(void)setupUI
 {
+    self.initFrame = self.frame;
     UITapGestureRecognizer *tapClick = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goodsDidTap)];
     [self addGestureRecognizer:tapClick];
     
@@ -87,11 +89,11 @@
     self.frame = CGRectMake(self.left, self.top, 1, 1);
     self.alpha = 0;
     [UIView animateWithDuration:0.5 animations:^{
-        self.frame = CGRectMake(self.left, self.top, 185*MZ_RATE, 60*MZ_RATE);
+        self.frame = self.initFrame;
         self.alpha = 1;
         self.isStartAnimation=YES;
     } completion:^(BOOL finished) {
-        self.frame = CGRectMake(self.left, self.top, 185*MZ_RATE, 60*MZ_RATE);
+        self.frame = self.initFrame;
         self.alpha = 1;
         [self keepShowTheGoodsView];
     }];
@@ -99,14 +101,14 @@
 
 -(void)hiddenGoodViewWithModel:(MZGoodsListModel *)model
 {
-    self.frame = CGRectMake(self.left, self.top, 185*MZ_RATE, 60*MZ_RATE);
+    self.frame = self.initFrame;;
     self.alpha = 1;
     [UIView animateWithDuration:0.5 animations:^{
-        self.frame = CGRectMake(self.left, self.top, 1, 1);
+        self.frame = CGRectMake(self.initFrame.origin.x, self.initFrame.origin.y + self.initFrame.size.height, 1, 1);
         self.alpha = 0;
         self.isStartAnimation=NO;
     } completion:^(BOOL finished) {
-        self.frame = CGRectMake(self.left, self.top, 1, 1);
+        self.frame = CGRectMake(self.initFrame.origin.x, self.initFrame.origin.y + self.initFrame.size.height, 1, 1);
         self.alpha = 0;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self beginAnimation];

@@ -122,14 +122,12 @@
 
 -(void)loadDataWithIsMore:(BOOL)isMore
 {
-//    [self.goodTabView reloadData];
-//    [self.goodTabView.MZ_footer endRefreshing];
     WeaklySelf(weakSelf);
     if(isMore){
         [self.requestDelegate requestGoodsList:^(MZGoodsListOuterModel * _Nonnull model) {
             self.totalNum = model.total;
                 [weakSelf.goodTabView reloadData];
-            [weakSelf.goodTabView.MZ_footer endRefreshing];
+//            [weakSelf.goodTabView.MZ_footer endRefreshing];
             NSLog(@"MZ_footer %lu",(unsigned long)[weakSelf.dataArr count]);
                } offset:(int)self.dataArr.count];
     }else{
@@ -137,7 +135,7 @@
         [self.requestDelegate requestGoodsList:^(MZGoodsListOuterModel * _Nonnull model) {
             self.totalNum = model.total;
             [weakSelf.goodTabView reloadData];
-            [weakSelf.goodTabView.MZ_header endRefreshing];
+//            [weakSelf.goodTabView.MZ_header endRefreshing];
             NSLog(@"MZ_header %lu",(unsigned long)[weakSelf.dataArr count]);
         } offset:0];
 

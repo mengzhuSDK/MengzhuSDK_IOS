@@ -21,6 +21,7 @@ typedef void(^GoodsDataResult)(MZGoodsListOuterModel *model);
 @property (nonatomic,assign)int offset;
 @property (nonatomic,strong)id<MZGoodsRequestProtocol> requestDelegate;
 @property (nonatomic,copy) GoodsListViewCellClickBlock goodsListViewCellClickBlock;
+-(void)loadDataWithIsMore:(BOOL)isMore;
 @end
 
 NS_ASSUME_NONNULL_END
