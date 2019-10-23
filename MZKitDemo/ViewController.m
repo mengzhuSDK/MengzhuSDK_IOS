@@ -91,7 +91,7 @@
     self.avatarTextView.backgroundColor = [UIColor cyanColor];
     self.avatarTextView.keyboardType = UIKeyboardTypeDefault;
     [self.view addSubview:self.avatarTextView];
-    self.avatarTextView.text = @"http://pic27.nipic.com/20130321/9678987_225139671149_2.jpg";
+    self.avatarTextView.text = @"https://cdn.duitang.com/uploads/item/201410/26/20141026191422_yEKyd.thumb.700_0.jpeg";
     
     UILabel *tipL5 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 290, self.view.bounds.size.width, 20)];
     [self.view addSubview:tipL5];
@@ -111,7 +111,8 @@
     }
     MZUser *user=[[MZUser alloc]init];
     user.userId = self.UIDTextView.text;
-    user.appID=@"2019101019585068343";
+//    user.appID=@"2019101019585068343";//t环境
+    user.appID = @"";//线上模拟环境(这里需要自己填一下)
     user.avatar=self.avatarTextView.text;
     user.nickName=self.nameTextView.text;
     user.accountNo = self.accountNoTextView.text;
