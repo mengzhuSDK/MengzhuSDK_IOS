@@ -1,7 +1,6 @@
 
 
 #import "MZPlayerControlView.h"
-#import "MZLiveManagerHearderView.h"
 #import "MZLiveAudienceHeaderView.h"
 #import "MZGoodsListView.h"
 //#import "MZChatView.h"
@@ -16,7 +15,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 @interface MZPlayerControlView()<MZMessageToolBarDelegate,UITextViewDelegate,MZChatKitDelegate,MZGoodsRequestProtocol,MZHistoryChatViewProtocol>
 
 @property (nonatomic ,strong)UIView *playerContentView;//播放器上盖的一层View
-@property (nonatomic ,strong)MZLiveManagerHearderView *liveManagerHearderView;//左上角主播按钮view
+
 @property (nonatomic ,strong)MZLiveAudienceHeaderView *liveAudienceHeaderView;//右上角观众view
 @property (nonatomic ,strong)  UIView               * preView;//预览view
 @property (nonatomic ,strong)UIButton *closeLiveBtn;

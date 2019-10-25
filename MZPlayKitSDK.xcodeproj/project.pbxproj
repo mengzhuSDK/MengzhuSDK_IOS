@@ -179,20 +179,20 @@
 		155B396D21774F7B00A7AD9D /* MZKitDemo */ = {
 			isa = PBXGroup;
 			children = (
-				D0917E16235458BA0022E7C7 /* layout */,
-				D0917E48235458BB0022E7C7 /* MZDimenComment.h */,
-				D0917E49235458BB0022E7C7 /* MZVerticalPlayerVC.h */,
-				D0917E15235458BA0022E7C7 /* MZVerticalPlayerVC.m */,
 				155B396E21774F7B00A7AD9D /* AppDelegate.h */,
 				155B396F21774F7C00A7AD9D /* AppDelegate.m */,
+				155B397721774F7C00A7AD9D /* Assets.xcassets */,
+				155B397C21774F7C00A7AD9D /* Info.plist */,
+				155B397921774F7C00A7AD9D /* LaunchScreen.storyboard */,
+				D0917E16235458BA0022E7C7 /* layout */,
+				155B397D21774F7C00A7AD9D /* main.m */,
+				155B397421774F7C00A7AD9D /* Main.storyboard */,
+				D0917E48235458BB0022E7C7 /* MZDimenComment.h */,
+				D050527A233CEA4B00D7F33C /* MZKitDemoPrefixHeader.pch */,
+				D0917E49235458BB0022E7C7 /* MZVerticalPlayerVC.h */,
+				D0917E15235458BA0022E7C7 /* MZVerticalPlayerVC.m */,
 				155B397121774F7C00A7AD9D /* ViewController.h */,
 				155B397221774F7C00A7AD9D /* ViewController.m */,
-				155B397421774F7C00A7AD9D /* Main.storyboard */,
-				155B397721774F7C00A7AD9D /* Assets.xcassets */,
-				155B397921774F7C00A7AD9D /* LaunchScreen.storyboard */,
-				155B397C21774F7C00A7AD9D /* Info.plist */,
-				155B397D21774F7C00A7AD9D /* main.m */,
-				D050527A233CEA4B00D7F33C /* MZKitDemoPrefixHeader.pch */,
 			);
 			path = MZKitDemo;
 			sourceTree = "<group>";
@@ -224,19 +224,19 @@
 		D0917E16235458BA0022E7C7 /* layout */ = {
 			isa = PBXGroup;
 			children = (
-				D0EDB2E2235749EB006B2E22 /* UIView+MZExtend.h */,
-				D0EDB2E3235749EB006B2E22 /* UIView+MZExtend.m */,
-				D0917E17235458BA0022E7C7 /* playerControlView */,
-				D0917E1A235458BA0022E7C7 /* MZLiveAudienceHeaderView.h */,
-				D0917E1B235458BA0022E7C7 /* MZLiveManagerHearderView.h */,
 				D0917E1C235458BA0022E7C7 /* MZAudienceListView */,
 				D0917E23235458BA0022E7C7 /* MZBaseView.h */,
-				D0917E24235458BA0022E7C7 /* popView */,
-				D0917E27235458BA0022E7C7 /* MZLiveAudienceHeaderView.m */,
-				D0917E28235458BA0022E7C7 /* MZChatView */,
-				D0917E3F235458BA0022E7C7 /* MZLiveManagerHearderView.m */,
 				D0917E40235458BA0022E7C7 /* MZBaseView.m */,
+				D0917E28235458BA0022E7C7 /* MZChatView */,
 				D0917E41235458BA0022E7C7 /* MZGoodsListView */,
+				D0917E1A235458BA0022E7C7 /* MZLiveAudienceHeaderView.h */,
+				D0917E27235458BA0022E7C7 /* MZLiveAudienceHeaderView.m */,
+				D0917E1B235458BA0022E7C7 /* MZLiveManagerHearderView.h */,
+				D0917E3F235458BA0022E7C7 /* MZLiveManagerHearderView.m */,
+				D0917E17235458BA0022E7C7 /* playerControlView */,
+				D0917E24235458BA0022E7C7 /* popView */,
+				D0EDB2E2235749EB006B2E22 /* UIView+MZExtend.h */,
+				D0EDB2E3235749EB006B2E22 /* UIView+MZExtend.m */,
 			);
 			path = layout;
 			sourceTree = "<group>";

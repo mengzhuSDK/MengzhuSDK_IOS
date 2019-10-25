@@ -9,11 +9,7 @@
 #import "MZLiveManagerHearderView.h"
 
 @interface MZLiveManagerHearderView ()
-@property (nonatomic ,strong)UIButton *headerBtn;
-@property (nonatomic ,strong)UILabel *titleL;
-@property (nonatomic ,strong)UILabel *numL;
-@property (nonatomic ,strong)UIButton *subBtn;
-@property (nonatomic ,strong) UIButton *attentionBtn;
+
 @end
 @implementation MZLiveManagerHearderView
 

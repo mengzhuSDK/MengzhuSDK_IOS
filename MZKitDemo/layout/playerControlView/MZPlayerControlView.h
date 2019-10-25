@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MZBaseView.h"
+#import "MZLiveManagerHearderView.h"
 
 @protocol MZPlayerControlViewProtocol <NSObject>
 
@@ -36,6 +37,7 @@
 @property (nonatomic ,strong)NSString *UserName;
 @property (nonatomic ,strong)NSString *UserAvatar;
 @property (nonatomic ,strong)MZPlayerManager *manager;
+@property (nonatomic ,strong)MZLiveManagerHearderView *liveManagerHearderView;//左上角主播按钮view
 
 -(void)playVideoWithLiveIDString:(NSString *)ticket_id;
 -(void)playerShutDown;
