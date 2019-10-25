@@ -28,7 +28,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 @property (nonatomic,assign) NSTimeInterval duration;
 @property (nonatomic ,strong) MZTimer *timer;
 @property (nonatomic ,strong)MZHistoryChatView *chatView;
-@property (nonatomic ,strong)MZPlayerManager *manager;
+
 //@property (nonatomic ,strong)MZMoviePlayerModel *moviePlayerDetailModel;//视频播放详情Model
 @property (nonatomic ,strong)MZBottomTalkBtn *bottomTalkBtn;
 @property (nonatomic ,strong)UIButton *hideKeyBoardBtn;

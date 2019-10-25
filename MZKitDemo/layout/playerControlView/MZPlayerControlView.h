@@ -35,6 +35,7 @@
 @property (nonatomic ,strong)NSString *UserUID;
 @property (nonatomic ,strong)NSString *UserName;
 @property (nonatomic ,strong)NSString *UserAvatar;
+@property (nonatomic ,strong)MZPlayerManager *manager;
 
 -(void)playVideoWithLiveIDString:(NSString *)ticket_id;
 -(void)playerShutDown;
