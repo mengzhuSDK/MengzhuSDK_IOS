@@ -1,6 +1,7 @@
 
 
 #import "MZPlayerControlView.h"
+#import "MZLiveManagerHearderView.h"
 #import "MZLiveAudienceHeaderView.h"
 #import "MZGoodsListView.h"
 //#import "MZChatView.h"
@@ -594,12 +595,14 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             user.nickname = msg.userName;
             [self.onlineUsersArr addObject:user];
         }
+        NSLog(@"上线了上线了");
         self.liveAudienceHeaderView.userArr = self.onlineUsersArr;
         self.popularityNum ++;
         self.liveAudienceHeaderView.numStr = [NSString stringWithFormat:@"%d",self.liveAudienceHeaderView.numStr.intValue + 1];
         self.liveManagerHearderView.numStr = [NSString stringWithFormat:@"%lld",self.popularityNum];
     }else if(msg.event == MsgTypeOffline){
 //        有人下线
+        NSLog(@"下线了下线了");
         NSMutableArray *temArr = self.onlineUsersArr.mutableCopy;
         if(temArr.count > 0){
             if(msg.userId.longLongValue <= 5000000000){
@@ -634,7 +637,6 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         }
         if(!self.spreadTipGoodsView){
             self.spreadTipGoodsView = [[MZTipGoodsView alloc]initWithFrame:CGRectMake(18*MZ_RATE, self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE, 185*MZ_RATE, 60*MZ_RATE)];
-            
             self.spreadTipGoodsView.alpha = 0;
             self.spreadTipGoodsView.goodsListModelArr = [NSMutableArray array];
             [self addSubview:self.spreadTipGoodsView];

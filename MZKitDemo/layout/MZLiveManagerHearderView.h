@@ -21,8 +21,6 @@
 @property (nonatomic ,strong)UILabel *numL;
 @property (nonatomic ,strong)UIButton *subBtn;
 @property (nonatomic ,strong) UIButton *attentionBtn;
-
-
 @end
 
 

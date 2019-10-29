@@ -28,6 +28,7 @@
 
 @property (nonatomic ,strong)NSString *accountNo;
 @property (nonatomic,strong)NSString * appID;
+@property (nonatomic,strong)NSString * secretKey;
 
 + (instancetype)currentUserLoginDictionary:(NSDictionary *)dic;
 

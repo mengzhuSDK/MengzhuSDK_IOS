@@ -15,7 +15,6 @@
 #import "MZUser.h"
 @interface MZUserServer : NSObject
 
-
 //当前用户在活动中的角色
 +(UserRoleType)currentUserRoleInActivity:(NSString *)roleName;
 
@@ -44,7 +43,6 @@
  *用户上传头像(完善信息)
  */
 +(void)uploadUserIcon:(UIImage *)image success:(void(^)(id responseObject))success failure:(void(^)(NSError * error))failure;
-
 
 @end
 

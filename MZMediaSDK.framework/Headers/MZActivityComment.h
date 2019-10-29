@@ -91,7 +91,7 @@ typedef NS_ENUM(NSUInteger, MsgType) {
 
     //收到历史消息 的时间标签
     MsgTypeHistoryRecordLabel,
-    MsgTypeLiveReallyEnd,
+    MsgTypeLiveReallyEnd,//直播真正结束
     MsgTypeLiveForbidden,
     //开启关闭投票
     MsgTypeVoteStart,
