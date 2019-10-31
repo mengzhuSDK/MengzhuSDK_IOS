@@ -347,6 +347,10 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     if([MZUserServer currentUser].accountNo.length == 0){
         [self showTextView:self.superview message:@"您还未登录"];
         [self hideKeyboard];
+        
+        if (self.playerDelegate && [self.playerDelegate respondsToSelector:@selector(playerNotLogin)]) {
+            [self.playerDelegate playerNotLogin];
+        }
         return;
     }
     if ([MZGlobalTools isBlankString:text]) {
@@ -366,8 +370,10 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     [self.chatView addChatData:msgModel];
     
     [MZChatKitManager sendText:text host:host token:token userID:[MZUserServer currentUser].userId userNickName:[MZUserServer currentUser].nickName userAvatar:[MZUserServer currentUser].avatar isBarrage:NO success:^(MZLongPollDataModel *msgModel) {
+        
         NSLog(@"发送成功");
     } failure:^(NSError *error) {
+        
         NSLog(@"发送失败");
     }];
     

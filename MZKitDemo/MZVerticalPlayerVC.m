@@ -139,5 +139,8 @@
     NSLog(@"%s",__func__);
     [self sv_showMessage:@"聊天点击--国民实现"];
 }
-
+-(void)playerNotLogin{
+    NSLog(@"%s",__func__);
+    [self sv_showMessage:@"未登录--国民实现"];
+}
 @end

@@ -27,6 +27,8 @@
 -(void)goodsItemDidClick:(MZGoodsListModel *)GoodsListModel;
 //聊天头像点击事件
 -(void)chatUserHeaderDidClick:(MZLongPollDataModel *)GoodsListModel;
+//未登录回调
+-(void)playerNotLogin;
 @end
 @interface MZPlayerControlView : MZBaseView
 
