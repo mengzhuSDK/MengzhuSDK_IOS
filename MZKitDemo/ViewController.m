@@ -113,11 +113,13 @@
     user.userId = self.UIDTextView.text;
 //    user.appID=@"2019101019585068343";//t环境
     user.appID = @"";//线上模拟环境(这里需要自己填一下)
+//    user.secretKey = @"xEyRRg4QYWbk09hfRJHYHeKPv8nWZITlBiklc44MZCxbdk4E6cGVzrXve6iVaNBn";
     user.secretKey = @"";
     user.avatar=self.avatarTextView.text;
     user.nickName=self.nameTextView.text;
     user.accountNo = self.accountNoTextView.text;
     [MZUserServer updateCurrentUser:user];
+    
     MZVerticalPlayerVC *liveVC = [[MZVerticalPlayerVC alloc]init];
     liveVC.ticket_id = self.ticket_IDTextView.text;
     [self.navigationController pushViewController:liveVC  animated:YES];
