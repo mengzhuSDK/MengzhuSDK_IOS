@@ -29,6 +29,8 @@
 -(void)chatUserHeaderDidClick:(MZLongPollDataModel *)GoodsListModel;
 //未登录回调
 -(void)playerNotLogin;
+
+-(void)newMsgCallback:(MZLongPollDataModel * )msg;
 @end
 @interface MZPlayerControlView : MZBaseView
 
@@ -40,7 +42,7 @@
 //@property (nonatomic ,strong)NSString *UserAvatar;
 @property (nonatomic ,strong)MZPlayerManager *manager;
 @property (nonatomic ,strong)MZLiveManagerHearderView *liveManagerHearderView;//左上角主播按钮view
-
+- (void)setAttentionState:(BOOL)isAttention;
 -(void)playVideoWithLiveIDString:(NSString *)ticket_id;
 -(void)playerShutDown;
 -(void)updatePlayInfo;

@@ -143,6 +143,28 @@
     NSLog(@"%s",__func__);
     [self sv_showMessage:@"未登录--国民实现"];
 }
+-(void)newMsgCallback:(MZLongPollDataModel *)msg{
+     if(msg.event == MsgTypeOnline){//上线消息
+            
+     }else if(msg.event == MsgTypeOffline){//下线消息
+    //
+     }else if(msg.event == MsgTypeOtherChat || msg.event == MsgTypeMeChat){//文本消息
+            
+     }else if (msg.event == MsgTypeGoodsUrl){//推广商品
+           
+     }else if (msg.event == MsgTypeLiveOver){//主播暂时离开
+           
+     }else if (msg.event == MsgTypeLiveReallyEnd){//直播结束
+           
+     }else if (msg.event == MsgTypeDisableChat){//用户禁言
+            
+     }else if (msg.event == MsgTypeAbleChat){//取消禁言
+            
+     }
+}
+
+
+
 
 //-(void)loginUpdate{
 //    MZUser *user=[MZUserServer currentUser];

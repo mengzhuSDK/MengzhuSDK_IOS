@@ -114,7 +114,7 @@
     MZUser *user=[[MZUser alloc]init];
     user.appID = @"";//线上模拟环境(这里需要自己填一下)
     user.secretKey = @"";
-    user.accountNo = @"GM20181202092745000830";
+    user.accountNo = @"";
     [MZUserServer updateCurrentUser:user];
     MZVerticalPlayerVC *liveVC = [[MZVerticalPlayerVC alloc]init];
     liveVC.ticket_id = self.ticket_IDTextView.text;

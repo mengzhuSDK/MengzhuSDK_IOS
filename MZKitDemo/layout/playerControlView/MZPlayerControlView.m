@@ -708,6 +708,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             self.bottomTalkBtn.isBanned = NO;
         }
     }
+    if (self.playerDelegate && [self.playerDelegate respondsToSelector:@selector(newMsgCallback:)]) {
+        [self.playerDelegate newMsgCallback:msg];
+    }
     
 }
 
@@ -770,6 +773,12 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     }
     self.onlineUsersArr = UsersUrlMArray;
     self.liveAudienceHeaderView.userArr = UsersUrlMArray;
+}
+
+// 设置关注按钮状态
+- (void)setAttentionState:(BOOL)isAttention {
+    self.liveManagerHearderView.width = isAttention ? 135*MZ_RATE : 172*MZ_RATE;
+    self.liveManagerHearderView.attentionBtn.hidden = isAttention;
 }
 
 -(void)updatePlayInfo{
