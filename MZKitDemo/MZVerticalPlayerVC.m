@@ -52,9 +52,9 @@
 //    选择播放的ID
     [self.playerControlView playVideoWithLiveIDString:self.ticket_id];
 //    保存用户数据
-    self.playerControlView.UserUID = [MZUserServer currentUser].userId;
-    self.playerControlView.UserName = [MZUserServer currentUser].nickName;
-    self.playerControlView.UserAvatar = [MZUserServer currentUser].avatar;
+//    self.playerControlView.UserUID = [MZUserServer currentUser].userId;
+//    self.playerControlView.UserName = [MZUserServer currentUser].nickName;
+//    self.playerControlView.UserAvatar = [MZUserServer currentUser].avatar;
 }
 
 
@@ -143,4 +143,16 @@
     NSLog(@"%s",__func__);
     [self sv_showMessage:@"未登录--国民实现"];
 }
+
+//-(void)loginUpdate{
+//    MZUser *user=[MZUserServer currentUser];
+//    user.avatar=@"https://upload.jianshu.io/users/upload_avatars/2640663/d6f196c2717c?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96/format/webp";
+//        user.nickName=@"22222";
+//        user.accountNo = @"GM20181202092745000830";
+//        [MZUserServer updateCurrentUser:user];
+//    if(self.playerControlView){
+//        [self.playerControlView updatePlayInfo];
+//    }
+//}
+
 @end

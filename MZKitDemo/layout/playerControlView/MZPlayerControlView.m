@@ -52,6 +52,8 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 @property (nonatomic ,strong)NSString *HostUID;
 @property (nonatomic ,strong)NSString *Hostname;
 @property (nonatomic ,strong)NSString *Hostavatar;
+@property (nonatomic ,assign)BOOL isPraise;
+
 @end
 @implementation MZPlayerControlView
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -62,10 +64,10 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     return self;
 }
 - (void)customAddSubviews{
-    MZUser *user= [MZUserServer currentUser];
-    self.UserUID=user.userId;
-    self.UserName=user.nickName;
-    self.UserAvatar=user.avatar;
+//    MZUser *user= [MZUserServer currentUser];
+//    self.UserUID=user.userId;
+//    self.UserName=user.nickName;
+//    self.UserAvatar=user.avatar;
     self.playerContentView = [[UIView alloc]initWithFrame:self.bounds];
     self.playerContentView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self addSubview:self.playerContentView];
@@ -93,6 +95,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
  
 }
 -(void)createTopView{
+    self.isPraise=YES;
     WeaklySelf(weakself);
     CGFloat topSpace = IPHONE_X ? 20 : 0;
     self.liveManagerHearderView = [[MZLiveManagerHearderView alloc]initWithFrame:CGRectMake(12*MZ_RATE,topSpace + 22*MZ_RATE, 172*MZ_RATE, 40*MZ_RATE)];
@@ -392,6 +395,27 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 }
 #pragma mark - 点赞动画
 -(void)likeButtonDidClick:(UIButton *)button {
+    if(self.isPraise){
+        [MZSDKBusinessManager reqPostPraise:self.playInfo.ticket_id channel_id:self.playInfo.channel_id praises:@"1" chat_uid:self.playInfo.chat_uid success:^(id responseObject) {
+            dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
+            dispatch_after(timer, dispatch_get_main_queue(), ^{
+                self.isPraise=YES;
+                NSLog(@"likeButtonDidClick %d",self.isPraise);
+
+            });
+           
+            
+        } failure:^(NSError *error) {
+            dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
+            dispatch_after(timer, dispatch_get_main_queue(), ^{
+                self.isPraise=YES;
+                NSLog(@"likeButtonDidClick %d",self.isPraise);
+
+            });
+        }];
+        self.isPraise=NO;
+    }
+    
     [self.playerDelegate likeButtonDidClick:self.playInfo];
     
     [self praiseAnimationWithBtn:button];
@@ -746,6 +770,25 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     }
     self.onlineUsersArr = UsersUrlMArray;
     self.liveAudienceHeaderView.userArr = UsersUrlMArray;
+}
+
+-(void)updatePlayInfo{
+    WeaklySelf(weakSelf);
+    //    获取播放信息
+    [MZSDKBusinessManager reqPlayInfo:self.ticket_id success:^(MZMoviePlayerModel *responseObject) {
+        //        http://vod.t.zmengzhu.com/record/base/hls-sd/a954304bb6482c3c00083250.m3u8
+        NSLog(@"%@",responseObject);
+        self.playInfo = responseObject;
+        if(self.chatKitManager){
+            [self.chatKitManager closeLongPoll];
+            [self.chatKitManager closeSocketIO];
+            self.chatView.activity = self.playInfo;
+            [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+        
+    }] ;
 }
 
 @end

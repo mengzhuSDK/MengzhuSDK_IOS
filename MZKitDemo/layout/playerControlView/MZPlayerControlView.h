@@ -35,14 +35,15 @@
 @property (nonatomic ,weak) id<MZPlayerControlViewProtocol> playerDelegate;
 @property (nonatomic ,strong)NSString *ticket_id;
 
-@property (nonatomic ,strong)NSString *UserUID;
-@property (nonatomic ,strong)NSString *UserName;
-@property (nonatomic ,strong)NSString *UserAvatar;
+//@property (nonatomic ,strong)NSString *UserUID;
+//@property (nonatomic ,strong)NSString *UserName;
+//@property (nonatomic ,strong)NSString *UserAvatar;
 @property (nonatomic ,strong)MZPlayerManager *manager;
 @property (nonatomic ,strong)MZLiveManagerHearderView *liveManagerHearderView;//左上角主播按钮view
 
 -(void)playVideoWithLiveIDString:(NSString *)ticket_id;
 -(void)playerShutDown;
+-(void)updatePlayInfo;
 @end
 
 

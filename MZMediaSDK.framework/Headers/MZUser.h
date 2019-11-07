@@ -16,7 +16,7 @@
 /*!
  用户名字
  */
-@property (nonatomic,strong)NSString * userName;
+//@property (nonatomic,strong)NSString * userName;
 /*!
  用户昵称
  */
