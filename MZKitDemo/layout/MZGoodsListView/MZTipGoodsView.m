@@ -86,7 +86,7 @@
     self.currentShowGoodsModel = model;
     self.goodsTitleL.text = model.name;
     self.priceL.text = [NSString stringWithFormat:@"￥%@",model.price];
-    self.frame = CGRectMake(self.left, self.top, 1, 1);
+    self.frame = CGRectMake(self.left, self.bottom, 1, 1);
     self.alpha = 0;
     [UIView animateWithDuration:0.5 animations:^{
         self.frame = self.initFrame;
@@ -148,7 +148,7 @@
                     self.tipGoodsViewEndBlock();
                 }
             }else{
-                self.currenGoodIndex = 0;
+                self.isEnd = NO;
                 [self showGoodsViewWithModel:self.goodsListModelArr[self.currenGoodIndex]];
                 self.currenGoodIndex ++;
             }

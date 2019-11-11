@@ -674,9 +674,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             [self spreadTipGoodsViewDidShow];
         }else{
             self.spreadTipGoodsView.frame=CGRectMake(18*MZ_RATE, self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE, 185*MZ_RATE, 60*MZ_RATE);
+            [self.spreadTipGoodsView.goodsListModelArr addObject:goodsListModel];
             if(self.spreadTipGoodsView.isEnd){
-                 [self.spreadTipGoodsView.goodsListModelArr addObject:goodsListModel];
-                [self spreadTipGoodsViewDidShow];
+                 [self spreadTipGoodsViewDidShow];
             }
         }
     }else if (msg.event == MsgTypeLiveOver){//中途结束
