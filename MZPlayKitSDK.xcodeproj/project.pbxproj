@@ -16,6 +16,7 @@
 		15679A1223549A2A001E6F6E /* MZMediaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; };
 		15679A1323549A2A001E6F6E /* MZMediaSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		156ED390217F0D290047B6DB /* MZMediaSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */; };
+		15F7EC8D237C27A500FB4609 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F7EC8C237C27A500FB4609 /* PlayerViewController.m */; };
 		D0917E4A235458BB0022E7C7 /* MZVerticalPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0917E15235458BA0022E7C7 /* MZVerticalPlayerVC.m */; };
 		D0917E4B235458BB0022E7C7 /* MZPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0917E19235458BA0022E7C7 /* MZPlayerControlView.m */; };
 		D0917E4C235458BB0022E7C7 /* MZAudienceListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0917E1E235458BA0022E7C7 /* MZAudienceListView.m */; };
@@ -86,6 +87,8 @@
 		156ED2C4217DC2690047B6DB /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		156ED2C6217DC2880047B6DB /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MZMediaSDK.bundle; sourceTree = "<group>"; };
+		15F7EC8B237C27A400FB4609 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
+		15F7EC8C237C27A500FB4609 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
 		D050527A233CEA4B00D7F33C /* MZKitDemoPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZKitDemoPrefixHeader.pch; sourceTree = "<group>"; };
 		D0917E15235458BA0022E7C7 /* MZVerticalPlayerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZVerticalPlayerVC.m; sourceTree = "<group>"; };
 		D0917E18235458BA0022E7C7 /* MZPlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZPlayerControlView.h; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 		155B396D21774F7B00A7AD9D /* MZKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				15F7EC8B237C27A400FB4609 /* PlayerViewController.h */,
+				15F7EC8C237C27A500FB4609 /* PlayerViewController.m */,
 				155B396E21774F7B00A7AD9D /* AppDelegate.h */,
 				155B396F21774F7C00A7AD9D /* AppDelegate.m */,
 				155B397721774F7C00A7AD9D /* Assets.xcassets */,
@@ -409,6 +414,7 @@
 				D0917E5A235458BB0022E7C7 /* MZCustomTapRecognizer.m in Sources */,
 				155B397321774F7C00A7AD9D /* ViewController.m in Sources */,
 				D0917E55235458BB0022E7C7 /* MZOnlineTipView.m in Sources */,
+				15F7EC8D237C27A500FB4609 /* PlayerViewController.m in Sources */,
 				155B397E21774F7C00A7AD9D /* main.m in Sources */,
 				D0917E54235458BB0022E7C7 /* MZMessageTextView.m in Sources */,
 				D0917E4A235458BB0022E7C7 /* MZVerticalPlayerVC.m in Sources */,

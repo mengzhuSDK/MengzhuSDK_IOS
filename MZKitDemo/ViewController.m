@@ -8,11 +8,13 @@
 
 #import "ViewController.h"
 #import "MZVerticalPlayerVC.h"
+#import "PlayerViewController.h"
 
 @interface ViewController (){
     UIButton *pushBtn;
     UIButton *playerBtn;
     UIButton *playerViewBtn;
+    UIButton *playerViewBtn2;
 //    MZPlayerManager *manager;
     
 }
@@ -53,6 +55,11 @@
     [playerViewBtn setBackgroundColor:[UIColor blueColor]];
     [playerViewBtn addTarget:self action:@selector(onPlayerViewClick) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:playerViewBtn];
+    playerViewBtn2=[[UIButton alloc]initWithFrame:CGRectMake(playerViewBtn.frame.origin.x, playerViewBtn.frame.origin.y+playerViewBtn.frame.size.height+20, self.view.bounds.size.width, 40)];
+    [playerViewBtn2 setTitle:@"横屏测试" forState:UIControlStateNormal];
+    [playerViewBtn2 setBackgroundColor:[UIColor blueColor]];
+    [playerViewBtn2 addTarget:self action:@selector(onLandscapePlayerClick) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:playerViewBtn2];
 
 //  输入框
     
@@ -103,13 +110,28 @@
     [self.view addSubview:self.accountNoTextView];
 }
 
+-(void)onLandscapePlayerClick{
+    [MZSDKBusinessManager setDebug:YES];
+    MZUser *user=[[MZUser alloc]init];
+    user.appID = @"";//线上模拟环境(这里需要自己填一下)
+    user.secretKey = @"";
+    user.accountNo = @"GM20181202092745000830";
+    [MZUserServer updateCurrentUser:user];
+    [[MZSDKInitManager sharedManager]initSDK:^(id responseObject) {
+        PlayerViewController *liveVC=[[PlayerViewController alloc]init];
+        [self.navigationController pushViewController:liveVC  animated:YES];
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
 
 -(void)onPlayerViewClick{
     if (self.ticket_IDTextView.text.length == 0) {
         
         return;
     }
-    [MZSDKBusinessManager setDebug:NO];
+    [MZSDKBusinessManager setDebug:YES];
     
     MZUser *user=[[MZUser alloc]init];
     user.appID = @"";//线上模拟环境(这里需要自己填一下)

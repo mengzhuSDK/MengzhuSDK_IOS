@@ -48,6 +48,9 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
 @property (nonatomic ,strong)UILabel *chatTextLabel;
 @property (nonatomic,copy)NSString *MZMsgType;
 @property (nonatomic,assign) CGFloat iconHeight;
+
+@property (nonatomic,strong)UILabel *noticeLabel;
+@property (nonatomic, strong)UIView* talkView;
 @end
 
 @implementation MZChatTableViewCell
@@ -79,14 +82,26 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
         [self.contentView addSubview:self.nickNameL];
         
         self.chatTextLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        self.chatTextLabel.numberOfLines = 2;
+        self.chatTextLabel.numberOfLines = 5;
         self.chatTextLabel.font = [UIFont systemFontOfSize:13*MZ_RATE];
         self.chatTextLabel.userInteractionEnabled=YES;
         self.chatTextLabel.backgroundColor = [UIColor clearColor];
         self.chatTextLabel.textColor = MakeColorRGB(0xffffff);
         [self.contentView addSubview:self.chatTextLabel];
-    }else{
+    }else if([_MZMsgType isEqualToString:MZMsgTypeNotice]){
+        self.talkView = [[UIView alloc]initWithFrame:CGRectMake(18*MZ_RATE, 4.5*MZ_RATE, 208*MZ_RATE, 106*MZ_RATE)];
+        self.noticeLabel=[[UILabel alloc] initWithFrame:CGRectMake(8*MZ_RATE, 8*MZ_RATE, self.talkView.width-16*MZ_RATE, self.talkView.height-16*MZ_RATE)];
+
+        self.noticeLabel.numberOfLines = 0;
+        self.noticeLabel.textAlignment = NSTextAlignmentLeft;
+        self.talkView.layer.masksToBounds = YES;
+        self.talkView.layer.cornerRadius = 4*MZ_RATE;
         
+        self.noticeLabel.font=[UIFont systemFontOfSize:13];
+        self.noticeLabel.textColor=MakeColorRGB(0xFFFFFF);
+        [self.talkView addSubview:self.noticeLabel];
+        self.talkView.backgroundColor=MakeColorRGBA(0xff2145, 0.5);
+        [self.contentView addSubview:self.talkView];
     }
 }
 
@@ -111,8 +126,8 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
         [self.chatTextLabel setText:pollingDate.data.msgText];
         [self.chatTextLabel sizeToFit];
         self.chatTextLabel.frame = CGRectMake(self.nickNameL.right, self.nickNameL.top, self.chatTextLabel.width,  self.chatTextLabel.height);
-    }else{
-        
+    }else if([_MZMsgType isEqualToString:MZMsgTypeNotice]){
+        self.noticeLabel.text=pollingDate.data.msgText;
     }
     
 }
@@ -153,7 +168,7 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
             if(g_textLabel == nil)
             {
                 g_textLabel = [UILabel new];
-                g_textLabel.numberOfLines = 2;
+                g_textLabel.numberOfLines = 5;
                 g_textLabel.font = TEXT_Font;
             }
         UILabel *nickLabel = [[UILabel alloc]init];

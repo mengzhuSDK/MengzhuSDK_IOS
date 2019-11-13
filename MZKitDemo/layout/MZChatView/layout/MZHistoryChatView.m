@@ -278,11 +278,24 @@
         
     }];
 }
-
+- (MZLongPollDataModel *)getNotice
+{
+    
+    MZLongPollDataModel*msgModel = [[MZLongPollDataModel alloc]init];
+    msgModel.event = MsgTypeNotice;
+    MZActMsg *actMsg = [[MZActMsg alloc]init];
+    actMsg.msgText = @"国民直播依法对直播内容进行24小时巡查，禁止传播暴力血腥、低俗色情、招嫖诈骗、非法政治活动等违法信息，坚决维护社会文明健康环境";
+    msgModel.data = actMsg;
+    return msgModel;
+    
+}
 -(void)afterLoadData:(NSMutableArray *)result isMore:(BOOL)isMore
 {
     if (![result isKindOfClass:[NSArray class]] || [result isKindOfClass:[NSNull class]] || result == nil) {
         return;
+    }
+    if(!isMore){
+        [result addObject:[self getNotice]];
     }
     _tempArr = result;
     _chatTable.userInteractionEnabled = YES;
@@ -349,7 +362,12 @@
     return _dataArray.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [MZChatTableViewCell getCellHeight:_dataArray[indexPath.row] cellWidth:MZ_SW];
+    MZLongPollDataModel *model=self.dataArray[indexPath.row];
+    if(model.event==MsgTypeNotice){
+        return 114*MZ_RATE;
+    }else{
+        return [MZChatTableViewCell getCellHeight:_dataArray[indexPath.row] cellWidth:MZ_SW];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -366,12 +384,13 @@
         //        取出当前cell需要的model
         MZLongPollDataModel *msg = _dataArray[indexPath.row];
         NSString *identitystr = [NSString string];
-        
         if(msg.event == MsgTypeMeChat)
         {
             identitystr = MZMsgTypeMeChat;
         }else if (msg.event == MsgTypeOtherChat){
             identitystr = MZMsgTypeOtherChat;
+        } else if(msg.event == MsgTypeNotice){
+            identitystr= MZMsgTypeNotice;
         }
         MZChatTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:identitystr];
         if (cell ==nil){
@@ -384,6 +403,8 @@
             [weakSelf.chatDelegate historyChatViewUserHeaderClick:msgModel];
         };
         return cell;
+            
+        
     }else{
         MZChatTableViewCell *cell = [[MZChatTableViewCell alloc]init];
         return cell;
