@@ -7,8 +7,10 @@
 //
 
 #import "PlayerViewController.h"
+#import "UIView+SYExtend.h"
 #import <MZMediaSDK/MZMediaPlayerView.h>
 #import "AppDelegate.h"
+#import "MZSDKInitManager.h"
 #define TopMargin 20
 
 #define MinPlayerHeight (kDWidth / 16 * 9)
@@ -72,7 +74,7 @@
     appDelegate.fullScreen = YES;
     self.view.backgroundColor=[UIColor whiteColor];
     _mvUrl = @"http://vod.t.zmengzhu.com/record/base/hls-sd/a002307efd50b06100084555.m3u8";
-    _headerView =[[UIView alloc]initWithFrame:CGRectMake(0, 50*MZ_RATE+TopMargin, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-450)];
+    _headerView =[[UIView alloc]initWithFrame:CGRectMake(0, 50*MZ_RATE+TopMargin, kDWidth, kDHeight-450)];
     _headerView.backgroundColor=[UIColor redColor];
     [self.view addSubview:_headerView];
     
