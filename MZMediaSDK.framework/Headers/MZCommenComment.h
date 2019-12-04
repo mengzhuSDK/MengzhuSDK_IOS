@@ -102,37 +102,7 @@ typedef void (^MZShareCompletion)(BOOL MZShareCompletionFlag);
 //二维码默认图
 #define MZ_QrPlaceHolder      [UIImage imageNamed:@"二维码默认图"]
 
-
-/**********************支付**************************/
-#pragma mark 支付
-
-#define kQuertPayResultSleepTime  0.5 //查询支付结果统一延时0.5s
-//购买物品类型
-typedef enum {
-    MZRewardItem = 11,     //打赏
-    MZInviteItem = 21,     //邀约红包
-    MZRedPacketItem = 26,  //发红包(邀约/注册/拼手气)
-    MZGiftItem   = 31,     //虚拟礼物
-    MZRechargeItem   = 61, //钱包充值
-    MZVoteItem=29,//付费投票付费
-    MZDocDownItem = 30,//付费投票付费
-}MZBuyItemType;
-
-//支付方式
-typedef enum {
-    MZBalancePay,  //银两支付
-    MZSliverPay,   //铜钱支付
-    MZAliPay,      //支付宝支付
-    MZWeixinPay,     //微信支付
-    MZNoPay        //无支付
-}MZPayType;
-
-//支付状态
-typedef enum {
-    MZPaySuccess,//支付成功
-    MZPayFail,   //支付失败
-    MZPayCannel  //用户取消
-}MZPayState;
+#define kQuertPayResultSleepTime  0.5 //查询结果统一延时0.5s
 
 #pragma mark 升级状态
 typedef enum {
