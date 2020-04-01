@@ -17,6 +17,11 @@
 		15679A1323549A2A001E6F6E /* MZMediaSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		156ED390217F0D290047B6DB /* MZMediaSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */; };
 		15F7EC8D237C27A500FB4609 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F7EC8C237C27A500FB4609 /* PlayerViewController.m */; };
+		C07AB9612434B76200A81CC9 /* MZM3U8DownLoaderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AB9602434B76100A81CC9 /* MZM3U8DownLoaderSDK.framework */; };
+		C07AB9622434B76200A81CC9 /* MZM3U8DownLoaderSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C07AB9602434B76100A81CC9 /* MZM3U8DownLoaderSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C07AB9642434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C07AB9632434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle */; };
+		C07AB96A2434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AB9682434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m */; };
+		C07AB96B2434B7CB00A81CC9 /* MZDownLoadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AB9692434B7CB00A81CC9 /* MZDownLoadCell.m */; };
 		D0917E4A235458BB0022E7C7 /* MZVerticalPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0917E15235458BA0022E7C7 /* MZVerticalPlayerVC.m */; };
 		D0917E4B235458BB0022E7C7 /* MZPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0917E19235458BA0022E7C7 /* MZPlayerControlView.m */; };
 		D0917E4C235458BB0022E7C7 /* MZAudienceListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0917E1E235458BA0022E7C7 /* MZAudienceListView.m */; };
@@ -56,6 +61,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C07AB9622434B76200A81CC9 /* MZM3U8DownLoaderSDK.framework in Embed Frameworks */,
 				15679A1323549A2A001E6F6E /* MZMediaSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -89,6 +95,12 @@
 		156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MZMediaSDK.bundle; sourceTree = "<group>"; };
 		15F7EC8B237C27A400FB4609 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
 		15F7EC8C237C27A500FB4609 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
+		C07AB9602434B76100A81CC9 /* MZM3U8DownLoaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MZM3U8DownLoaderSDK.framework; sourceTree = "<group>"; };
+		C07AB9632434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MZM3U8DownLoaderSDKBundle.bundle; sourceTree = "<group>"; };
+		C07AB9662434B7CB00A81CC9 /* MZM3U8DownLoadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZM3U8DownLoadViewController.h; sourceTree = "<group>"; };
+		C07AB9672434B7CB00A81CC9 /* MZDownLoadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZDownLoadCell.h; sourceTree = "<group>"; };
+		C07AB9682434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZM3U8DownLoadViewController.m; sourceTree = "<group>"; };
+		C07AB9692434B7CB00A81CC9 /* MZDownLoadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZDownLoadCell.m; sourceTree = "<group>"; };
 		D050527A233CEA4B00D7F33C /* MZKitDemoPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZKitDemoPrefixHeader.pch; sourceTree = "<group>"; };
 		D0917E15235458BA0022E7C7 /* MZVerticalPlayerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZVerticalPlayerVC.m; sourceTree = "<group>"; };
 		D0917E18235458BA0022E7C7 /* MZPlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZPlayerControlView.h; sourceTree = "<group>"; };
@@ -155,6 +167,7 @@
 				D0917E6E235466830022E7C7 /* libstdc++.6.0.9.tbd in Frameworks */,
 				D0917E6F235466830022E7C7 /* libstdc++.6.tbd in Frameworks */,
 				D0917E6B2354666F0022E7C7 /* libz.tbd in Frameworks */,
+				C07AB9612434B76200A81CC9 /* MZM3U8DownLoaderSDK.framework in Frameworks */,
 				D0917E68235465BC0022E7C7 /* libstdc++.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +195,7 @@
 		155B396D21774F7B00A7AD9D /* MZKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C07AB9652434B7CB00A81CC9 /* DownLoad */,
 				15F7EC8B237C27A400FB4609 /* PlayerViewController.h */,
 				15F7EC8C237C27A500FB4609 /* PlayerViewController.m */,
 				155B396E21774F7B00A7AD9D /* AppDelegate.h */,
@@ -205,6 +219,8 @@
 		155B3E602178333700A7AD9D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C07AB9632434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle */,
+				C07AB9602434B76100A81CC9 /* MZM3U8DownLoaderSDK.framework */,
 				15679A1123549A2A001E6F6E /* MZMediaSDK.framework */,
 				D0917E6C235466830022E7C7 /* libstdc++.6.0.9.tbd */,
 				D0917E6D235466830022E7C7 /* libstdc++.6.tbd */,
@@ -224,6 +240,17 @@
 				155B3E612178333800A7AD9D /* AssetsLibrary.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C07AB9652434B7CB00A81CC9 /* DownLoad */ = {
+			isa = PBXGroup;
+			children = (
+				C07AB9662434B7CB00A81CC9 /* MZM3U8DownLoadViewController.h */,
+				C07AB9682434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m */,
+				C07AB9672434B7CB00A81CC9 /* MZDownLoadCell.h */,
+				C07AB9692434B7CB00A81CC9 /* MZDownLoadCell.m */,
+			);
+			path = DownLoad;
 			sourceTree = "<group>";
 		};
 		D0917E16235458BA0022E7C7 /* layout */ = {
@@ -392,6 +419,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C07AB9642434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle in Resources */,
 				155B397B21774F7C00A7AD9D /* LaunchScreen.storyboard in Resources */,
 				155B397821774F7C00A7AD9D /* Assets.xcassets in Resources */,
 				155B397621774F7C00A7AD9D /* Main.storyboard in Resources */,
@@ -408,8 +436,10 @@
 			files = (
 				D0917E4B235458BB0022E7C7 /* MZPlayerControlView.m in Sources */,
 				D0917E4D235458BB0022E7C7 /* MZAudienceTableViewCell.m in Sources */,
+				C07AB96B2434B7CB00A81CC9 /* MZDownLoadCell.m in Sources */,
 				D0917E52235458BB0022E7C7 /* MZChatTableViewCell.m in Sources */,
 				D0917E59235458BB0022E7C7 /* MZHistoryChatView.m in Sources */,
+				C07AB96A2434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m in Sources */,
 				D0917E4F235458BB0022E7C7 /* MZPopView.m in Sources */,
 				D0917E5A235458BB0022E7C7 /* MZCustomTapRecognizer.m in Sources */,
 				155B397321774F7C00A7AD9D /* ViewController.m in Sources */,

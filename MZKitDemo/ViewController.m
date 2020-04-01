@@ -9,12 +9,14 @@
 #import "ViewController.h"
 #import "MZVerticalPlayerVC.h"
 #import "PlayerViewController.h"
+#import "MZM3U8DownLoadViewController.h"
 
 @interface ViewController (){
     UIButton *pushBtn;
     UIButton *playerBtn;
     UIButton *playerViewBtn;
     UIButton *playerViewBtn2;
+    UIButton *playerViewBtn3;
 //    MZPlayerManager *manager;
     
 }
@@ -60,7 +62,11 @@
     [playerViewBtn2 setBackgroundColor:[UIColor blueColor]];
     [playerViewBtn2 addTarget:self action:@selector(onLandscapePlayerClick) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:playerViewBtn2];
-
+    playerViewBtn3=[[UIButton alloc]initWithFrame:CGRectMake(playerViewBtn.frame.origin.x, playerViewBtn2.frame.origin.y+playerViewBtn2.frame.size.height+20, self.view.bounds.size.width, 40)];
+    [playerViewBtn3 setTitle:@"下载测试" forState:UIControlStateNormal];
+    [playerViewBtn3 setBackgroundColor:[UIColor blueColor]];
+    [playerViewBtn3 addTarget:self action:@selector(downloadClick) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:playerViewBtn3];
 //  输入框
     
     UILabel *tipL1 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 90, self.view.bounds.size.width, 20)];
@@ -144,4 +150,9 @@
 
 }
 
+- (void)downloadClick {
+    MZM3U8DownLoadViewController *downloadVC = [[MZM3U8DownLoadViewController alloc] init];
+    downloadVC.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:downloadVC animated:YES completion:nil];
+}
 @end
