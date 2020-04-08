@@ -554,6 +554,21 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     [self.tipButon_jvbao sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 #pragma mark - 视频SDK
+-(void)playVideoWithLocalMVURLString:(NSString *)mvURLString {
+    WeaklySelf(weakSelf);
+    [[MZSDKInitManager sharedManager] initSDK:^(id responseObject) {
+        NSLog(@"sdk验证成功");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf playerVideoWithURLString:mvURLString];
+        });
+    } failure:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf showTextView:weakSelf message:@"sdk验证失败"];
+        });
+    }];
+}
+
+
 -(void)playVideoWithLiveIDString:(NSString *)ticket_id;{
     self.ticket_id = ticket_id;
     WeaklySelf(weakSelf);

@@ -9,13 +9,13 @@
 #import "MZDownLoadCell.h"
 #import <AVKit/AVKit.h>
 #import "PlayerViewController.h"
+#import "MZVerticalPlayerVC.h"
 
 @interface MZDownLoadCell()
 @property (nonatomic, strong) UIButton *menuButton;
 @property (nonatomic, strong) UILabel *progressLabel;
 
 @property (nonatomic, strong) MZDownLoader *loader;
-@property (nonatomic, strong) PlayerViewController *playVC;
 @end
 
 @implementation MZDownLoadCell
@@ -142,12 +142,20 @@
         if (errorString.length) {
             NSLog(@"errorString = %@",errorString);
         } else {
-            NSLog(@"记得播放前先实力化sdk并且验证");
-            self.playVC = [[PlayerViewController alloc] init];
-            self.playVC.mvUrl = m3u8URLString;
-            [[self viewController] presentViewController:self.playVC animated:YES completion:nil];
+            
+            [MZSDKBusinessManager setDebug:YES];
 
+            MZUser *user=[[MZUser alloc]init];
+            user.appID = @"";//线上模拟环境(这里需要自己填一下)
+            user.secretKey = @"";
+            user.accountNo = @"GM20181202092745000830";
+            [MZUserServer updateCurrentUser:user];
+            MZVerticalPlayerVC *liveVC = [[MZVerticalPlayerVC alloc]init];
+            liveVC.mvURLString = m3u8URLString;
+            [[self viewController].navigationController pushViewController:liveVC animated:YES];
+            
             return;
+            
         }
     }];
 

@@ -44,6 +44,7 @@
 @property (nonatomic ,strong)MZLiveManagerHearderView *liveManagerHearderView;//左上角主播按钮view
 - (void)setAttentionState:(BOOL)isAttention;
 -(void)playVideoWithLiveIDString:(NSString *)ticket_id;
+-(void)playVideoWithLocalMVURLString:(NSString *)mvURLString;
 -(void)playerShutDown;
 -(void)updatePlayInfo;
 @end

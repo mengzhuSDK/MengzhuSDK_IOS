@@ -153,6 +153,6 @@
 - (void)downloadClick {
     MZM3U8DownLoadViewController *downloadVC = [[MZM3U8DownLoadViewController alloc] init];
     downloadVC.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:downloadVC animated:YES completion:nil];
+    [self.navigationController pushViewController:downloadVC animated:YES];
 }
 @end

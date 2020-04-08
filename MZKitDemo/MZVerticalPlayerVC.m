@@ -49,8 +49,15 @@
     [self.view addSubview:self.playerControlView];
     //    设置代理接收回调
     self.playerControlView.playerDelegate = self;
-//    选择播放的ID
-    [self.playerControlView playVideoWithLiveIDString:self.ticket_id];
+    
+    if (self.mvURLString.length) {
+        // 走播放本地视频的逻辑
+        [self.playerControlView playVideoWithLocalMVURLString:self.mvURLString];
+
+    } else {
+        //    选择播放的ID
+        [self.playerControlView playVideoWithLiveIDString:self.ticket_id];
+    }
 //    保存用户数据
 //    self.playerControlView.UserUID = [MZUserServer currentUser].userId;
 //    self.playerControlView.UserName = [MZUserServer currentUser].nickName;

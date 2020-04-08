@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MZVerticalPlayerVC : UIViewController
 @property (nonatomic ,copy) NSString *ticket_id;
 
+@property (nonatomic ,copy) NSString *mvURLString;//下载到本地的视频播放地址
+
 //@property (nonatomic ,copy) NSString *UID;
 //@property (nonatomic ,copy) NSString *name;
 //@property (nonatomic ,copy) NSString *avatar;

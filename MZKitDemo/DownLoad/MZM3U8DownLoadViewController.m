@@ -24,41 +24,39 @@
     NSLog(@"%@ 销毁了", NSStringFromClass([self class]));
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"M3U8下载demo";
+    self.navigationItem.title = @"下载";
     self.dataArray = @[].mutableCopy;
-    
+        
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerClass:[MZDownLoadCell class] forCellReuseIdentifier:@"MZDownLoadCell"];
     [self.view addSubview:self.tableView];
     
-    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 64.0)];
+    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 44.0)];
     topView.backgroundColor = [UIColor whiteColor];
     self.tableView.tableHeaderView = topView;
-
-    UIButton *button0 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button0 setTitle:@"返回" forState:UIControlStateNormal];
-    [button0 setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [button0 addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    button0.frame = CGRectMake(0, 0, 64, 64);
-    [topView addSubview:button0];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"添加" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(addDownLoadData:) forControlEvents:UIControlEventTouchUpInside];
-    button.frame = CGRectMake(self.view.frame.size.width - 64, 0, 64, 64);
+    button.frame = CGRectMake(self.view.frame.size.width - 64, 0, 44, 44);
     [topView addSubview:button];
     
     UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [button1 setTitle:@"全部开始" forState:UIControlStateNormal];
     [button1 setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [button1 addTarget:self action:@selector(allPause:) forControlEvents:UIControlEventTouchUpInside];
-    button1.frame = CGRectMake(self.view.frame.size.width - 64 - 110, 0, 110, 64);
+    button1.frame = CGRectMake(self.view.frame.size.width - 64 - 110, 0, 110, 44);
     [topView addSubview:button1];
     
     // 获取缓存的下载列表数据
@@ -79,13 +77,18 @@
 }
 
 - (void)backButtonClick:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)addDownLoadData:(UIButton *)sender {
-    NSArray *list = @[@"http://vod-o.t.zmengzhu.com/record/base/6eab6cca45f2368b00086104.m3u8",@"http://vod01.zmengzhu.com/record/base/hls-sd/0228089bcf8ab1ca00110584_190910104916.m3u8",
-                      @"http://vod-o.t.zmengzhu.com/record/base/22a9457a1d14332d00085481.m3u8",
+    NSArray *list = @[@"http://vod-o.t.zmengzhu.com/record/base/22a9457a1d14332d00085481.m3u8",
                       @"http://vod01-o.zmengzhu.com/record/base/bafbd9a06339e83a00149677.m3u8",
+                      @"http://vod-o.t.zmengzhu.com/record/base/6eab6cca45f2368b00086104.m3u8",
+                      @"http://vod01.zmengzhu.com/record/base/hls-sd/0228089bcf8ab1ca00110584_190910104916.m3u8",
                       @"http://vod01.zmengzhu.com/record/base/hls-sd/10afcf6cbf8daf5500132013.m3u8",
                       @"http://vod01.zmengzhu.com/record/base/hls-sd/0882b2ab34d015a600125417.m3u8"];
 
