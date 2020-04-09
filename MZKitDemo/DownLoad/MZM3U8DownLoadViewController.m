@@ -85,6 +85,22 @@
 }
 
 - (void)addDownLoadData:(UIButton *)sender {
+    for (int i = 0; i < 10; i++) {
+        [[MZDownLoaderCenter shareInstanced] addDownloadWithM3u8URL:[NSURL URLWithString:@"http://vod-o.t.zmengzhu.com/record/base/22a9457a1d14332d00085481.m3u8"] completeBlock:^(MZDownLoader *downloader, NSString *errorString) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (errorString) {
+                    NSLog(@"errorString = %@",errorString);
+                } else {
+                    [self.dataArray insertObject:downloader atIndex:0];
+                    [self reloadTableData];
+                    [[MZDownLoaderCenter shareInstanced] start:downloader];
+                }
+            });
+        }];
+    }
+    return;
+    
+    
     NSArray *list = @[@"http://vod-o.t.zmengzhu.com/record/base/22a9457a1d14332d00085481.m3u8",
                       @"http://vod01-o.zmengzhu.com/record/base/bafbd9a06339e83a00149677.m3u8",
                       @"http://vod-o.t.zmengzhu.com/record/base/6eab6cca45f2368b00086104.m3u8",
