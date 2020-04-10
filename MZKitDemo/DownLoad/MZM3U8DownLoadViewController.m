@@ -74,6 +74,16 @@
 
     self.dataArray = [[MZDownLoaderCenter shareInstanced] getAllTask];
     [self.tableView reloadData];
+    
+    // 处理因网络导致的问题
+    for (MZDownLoader *loader in self.dataArray) {
+        if ([[MZDownLoaderCenter shareInstanced] getTaskState:loader] == MZDownLoaderState_Downloading) {
+            [[MZDownLoaderCenter shareInstanced] pause:loader];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[MZDownLoaderCenter shareInstanced] start:loader];
+            });
+        }
+    }
 }
 
 - (void)backButtonClick:(UIButton *)sender {
