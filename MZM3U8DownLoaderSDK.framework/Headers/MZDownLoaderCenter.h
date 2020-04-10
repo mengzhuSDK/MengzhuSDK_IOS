@@ -225,6 +225,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)taskExits:(NSURL *)url;
 
+/**
+ 获取所有正在下载的线程
+ */
+- (NSMutableArray *)getAllQueue;
+
 @end
 
 NS_ASSUME_NONNULL_END
