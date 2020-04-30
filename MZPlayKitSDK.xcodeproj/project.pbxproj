@@ -13,8 +13,6 @@
 		155B397821774F7C00A7AD9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 155B397721774F7C00A7AD9D /* Assets.xcassets */; };
 		155B397B21774F7C00A7AD9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 155B397921774F7C00A7AD9D /* LaunchScreen.storyboard */; };
 		155B397E21774F7C00A7AD9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 155B397D21774F7C00A7AD9D /* main.m */; };
-		15679A1223549A2A001E6F6E /* MZMediaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; };
-		15679A1323549A2A001E6F6E /* MZMediaSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		156ED390217F0D290047B6DB /* MZMediaSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */; };
 		15F7EC8D237C27A500FB4609 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F7EC8C237C27A500FB4609 /* PlayerViewController.m */; };
 		C04C9D322456D9010048F6D8 /* MZActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9CDF2456D9010048F6D8 /* MZActionSheetView.m */; };
@@ -67,8 +65,8 @@
 		C04C9D612456D9010048F6D8 /* MZImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9D2D2456D9010048F6D8 /* MZImagePickerViewController.m */; };
 		C04C9D622456D9010048F6D8 /* MZReadyLiveCellBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9D2F2456D9010048F6D8 /* MZReadyLiveCellBtn.m */; };
 		C04C9D682456E1540048F6D8 /* MZBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9D672456E1540048F6D8 /* MZBaseNavigationController.m */; };
-		C07AB9612434B76200A81CC9 /* MZM3U8DownLoaderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AB9602434B76100A81CC9 /* MZM3U8DownLoaderSDK.framework */; };
-		C07AB9622434B76200A81CC9 /* MZM3U8DownLoaderSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C07AB9602434B76100A81CC9 /* MZM3U8DownLoaderSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C0537538245A82ED006B85B3 /* MZMediaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; };
+		C0537539245A8315006B85B3 /* MZM3U8DownLoaderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AB9602434B76100A81CC9 /* MZM3U8DownLoaderSDK.framework */; };
 		C07AB9642434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C07AB9632434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle */; };
 		C07AB96A2434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AB9682434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m */; };
 		C07AB96B2434B7CB00A81CC9 /* MZDownLoadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AB9692434B7CB00A81CC9 /* MZDownLoadCell.m */; };
@@ -111,8 +109,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C07AB9622434B76200A81CC9 /* MZM3U8DownLoaderSDK.framework in Embed Frameworks */,
-				15679A1323549A2A001E6F6E /* MZMediaSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,14 +284,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0537539245A8315006B85B3 /* MZM3U8DownLoaderSDK.framework in Frameworks */,
+				C0537538245A82ED006B85B3 /* MZMediaSDK.framework in Frameworks */,
 				D0917E72235466AA0022E7C7 /* libbz2.tbd in Frameworks */,
-				15679A1223549A2A001E6F6E /* MZMediaSDK.framework in Frameworks */,
 				D0917E712354669F0022E7C7 /* libbz2.1.0.tbd in Frameworks */,
 				D0917E70235466930022E7C7 /* libz.1.2.5.tbd in Frameworks */,
 				D0917E6E235466830022E7C7 /* libstdc++.6.0.9.tbd in Frameworks */,
 				D0917E6F235466830022E7C7 /* libstdc++.6.tbd in Frameworks */,
 				D0917E6B2354666F0022E7C7 /* libz.tbd in Frameworks */,
-				C07AB9612434B76200A81CC9 /* MZM3U8DownLoaderSDK.framework in Frameworks */,
 				D0917E68235465BC0022E7C7 /* libstdc++.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -966,6 +962,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.0.0;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 9E78V92FYD;
 				ENABLE_BITCODE = NO;
@@ -983,6 +980,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"$(inherited)",
@@ -1002,6 +1000,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.0.0;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 9E78V92FYD;
 				ENABLE_BITCODE = NO;
@@ -1019,6 +1018,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"$(inherited)",
