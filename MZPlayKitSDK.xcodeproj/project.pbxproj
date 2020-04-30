@@ -15,6 +15,7 @@
 		155B397E21774F7C00A7AD9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 155B397D21774F7C00A7AD9D /* main.m */; };
 		156ED390217F0D290047B6DB /* MZMediaSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */; };
 		15F7EC8D237C27A500FB4609 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F7EC8C237C27A500FB4609 /* PlayerViewController.m */; };
+		C0015DD7245AA8A50043F271 /* MZM3U8DownLoaderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0015DD6245AA8A50043F271 /* MZM3U8DownLoaderSDK.framework */; };
 		C04C9D322456D9010048F6D8 /* MZActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9CDF2456D9010048F6D8 /* MZActionSheetView.m */; };
 		C04C9D332456D9010048F6D8 /* MZCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9CE22456D9010048F6D8 /* MZCameraViewController.m */; };
 		C04C9D342456D9010048F6D8 /* MZCameraHelperView.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9CE62456D9010048F6D8 /* MZCameraHelperView.m */; };
@@ -65,8 +66,8 @@
 		C04C9D612456D9010048F6D8 /* MZImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9D2D2456D9010048F6D8 /* MZImagePickerViewController.m */; };
 		C04C9D622456D9010048F6D8 /* MZReadyLiveCellBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9D2F2456D9010048F6D8 /* MZReadyLiveCellBtn.m */; };
 		C04C9D682456E1540048F6D8 /* MZBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9D672456E1540048F6D8 /* MZBaseNavigationController.m */; };
-		C0537538245A82ED006B85B3 /* MZMediaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; };
-		C0537539245A8315006B85B3 /* MZM3U8DownLoaderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AB9602434B76100A81CC9 /* MZM3U8DownLoaderSDK.framework */; };
+		C053753D245AA183006B85B3 /* MZMediaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; };
+		C053753E245AA183006B85B3 /* MZMediaSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C07AB9642434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C07AB9632434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle */; };
 		C07AB96A2434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AB9682434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m */; };
 		C07AB96B2434B7CB00A81CC9 /* MZDownLoadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AB9692434B7CB00A81CC9 /* MZDownLoadCell.m */; };
@@ -109,6 +110,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C053753E245AA183006B85B3 /* MZMediaSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,7 +118,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		155B396B21774F7B00A7AD9D /* MZKitSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZKitSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		155B396B21774F7B00A7AD9D /* 测试SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "测试SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		155B396E21774F7B00A7AD9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		155B396F21774F7C00A7AD9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		155B397121774F7C00A7AD9D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MZMediaSDK.bundle; sourceTree = "<group>"; };
 		15F7EC8B237C27A400FB4609 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
 		15F7EC8C237C27A500FB4609 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
+		C0015DD6245AA8A50043F271 /* MZM3U8DownLoaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MZM3U8DownLoaderSDK.framework; sourceTree = "<group>"; };
 		C04C9CDB2456D9010048F6D8 /* MZAudienceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAudienceView.h; sourceTree = "<group>"; };
 		C04C9CDE2456D9010048F6D8 /* MZActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZActionSheetView.h; sourceTree = "<group>"; };
 		C04C9CDF2456D9010048F6D8 /* MZActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZActionSheetView.m; sourceTree = "<group>"; };
@@ -219,7 +222,6 @@
 		C04C9D312456D9010048F6D8 /* MZCameraImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCameraImageHelper.h; sourceTree = "<group>"; };
 		C04C9D662456E1540048F6D8 /* MZBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZBaseNavigationController.h; sourceTree = "<group>"; };
 		C04C9D672456E1540048F6D8 /* MZBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZBaseNavigationController.m; sourceTree = "<group>"; };
-		C07AB9602434B76100A81CC9 /* MZM3U8DownLoaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MZM3U8DownLoaderSDK.framework; sourceTree = "<group>"; };
 		C07AB9632434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MZM3U8DownLoaderSDKBundle.bundle; sourceTree = "<group>"; };
 		C07AB9662434B7CB00A81CC9 /* MZM3U8DownLoadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZM3U8DownLoadViewController.h; sourceTree = "<group>"; };
 		C07AB9672434B7CB00A81CC9 /* MZDownLoadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZDownLoadCell.h; sourceTree = "<group>"; };
@@ -284,8 +286,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0537539245A8315006B85B3 /* MZM3U8DownLoaderSDK.framework in Frameworks */,
-				C0537538245A82ED006B85B3 /* MZMediaSDK.framework in Frameworks */,
+				C0015DD7245AA8A50043F271 /* MZM3U8DownLoaderSDK.framework in Frameworks */,
+				C053753D245AA183006B85B3 /* MZMediaSDK.framework in Frameworks */,
 				D0917E72235466AA0022E7C7 /* libbz2.tbd in Frameworks */,
 				D0917E712354669F0022E7C7 /* libbz2.1.0.tbd in Frameworks */,
 				D0917E70235466930022E7C7 /* libz.1.2.5.tbd in Frameworks */,
@@ -311,7 +313,7 @@
 		155B396C21774F7B00A7AD9D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				155B396B21774F7B00A7AD9D /* MZKitSDKDemo.app */,
+				155B396B21774F7B00A7AD9D /* 测试SDK.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -343,8 +345,8 @@
 		155B3E602178333700A7AD9D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C0015DD6245AA8A50043F271 /* MZM3U8DownLoaderSDK.framework */,
 				C07AB9632434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle */,
-				C07AB9602434B76100A81CC9 /* MZM3U8DownLoaderSDK.framework */,
 				15679A1123549A2A001E6F6E /* MZMediaSDK.framework */,
 				D0917E6C235466830022E7C7 /* libstdc++.6.0.9.tbd */,
 				D0917E6D235466830022E7C7 /* libstdc++.6.tbd */,
@@ -684,7 +686,7 @@
 			);
 			name = MZKitDemo;
 			productName = MZKitDemo;
-			productReference = 155B396B21774F7B00A7AD9D /* MZKitSDKDemo.app */;
+			productReference = 155B396B21774F7B00A7AD9D /* 测试SDK.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -981,13 +983,14 @@
 				);
 				MACH_O_TYPE = mh_execute;
 				MARKETING_VERSION = 2.0.0;
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"$(inherited)",
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mengzhu.play.kit.demo;
-				PRODUCT_NAME = MZKitSDKDemo;
+				PRODUCT_NAME = "测试SDK";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e armv7s";
@@ -1019,13 +1022,14 @@
 				);
 				MACH_O_TYPE = mh_execute;
 				MARKETING_VERSION = 2.0.0;
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"$(inherited)",
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mengzhu.play.kit.demo;
-				PRODUCT_NAME = MZKitSDKDemo;
+				PRODUCT_NAME = "测试SDK";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e armv7s";
