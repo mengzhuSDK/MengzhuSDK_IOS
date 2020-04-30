@@ -555,6 +555,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 }
 #pragma mark - 视频SDK
 -(void)playVideoWithLocalMVURLString:(NSString *)mvURLString {
+
     WeaklySelf(weakSelf);
     [[MZSDKInitManager sharedManager] initSDK:^(id responseObject) {
         NSLog(@"sdk验证成功");
@@ -563,6 +564,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         });
     } failure:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf playerVideoWithURLString:mvURLString];
             [weakSelf showTextView:weakSelf message:@"sdk验证失败"];
         });
     }];

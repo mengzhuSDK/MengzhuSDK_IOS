@@ -39,10 +39,8 @@
  */
 +(void)modifyCurrentUserInfo:(NSDictionary *)parama success:(void(^)())success failure:(void (^)(NSError *error))failure;
 
-/*!
- *用户上传头像(完善信息)
- */
-+(void)uploadUserIcon:(UIImage *)image success:(void(^)(id responseObject))success failure:(void(^)(NSError * error))failure;
+
+
 
 @end
 

@@ -21,8 +21,26 @@
 @property (nonatomic ,strong)MZOnlineTipView *onlineIconBtn;
 @property (nonatomic,assign) BOOL isTabInBottom;//当前聊天是否在底部
 @property (nonatomic,assign) CGFloat oldOffset;
+
+@property (nonatomic,assign) float endSpace;
+
 @end
 @implementation MZHistoryChatView
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
+        self.endSpace = MZ_FULL_RATE;
+    } else {
+        self.endSpace = MZ_RATE;
+    }
+    _chatTable.frame = self.bounds;
+    _chatTable.estimatedSectionHeaderHeight = 10*self.endSpace;
+    
+    _onlineIconBtn.frame = CGRectMake(-10*self.endSpace, -(25+10)*self.endSpace, 165*self.endSpace, 25*self.endSpace);
+    
+    [_chatTable reloadData];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -32,6 +50,11 @@
         self.autoresizesSubviews = YES;
         self.loadOldCount = 0;
         self.isTabInBottom = YES;
+        
+        self.endSpace = MZ_RATE;
+        if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
+            self.endSpace = MZ_FULL_RATE;
+        }
     }
     return self;
 }
@@ -48,8 +71,10 @@
     _chatTable.delegate = self;
     _chatTable.dataSource = self;
     _chatTable.estimatedRowHeight = 0;
-    _chatTable.estimatedSectionHeaderHeight = 10*MZ_RATE;
+    _chatTable.estimatedSectionHeaderHeight = 10*self.endSpace;
     _chatTable.estimatedSectionFooterHeight = 0;
+    _chatTable.showsHorizontalScrollIndicator = NO;
+    _chatTable.showsVerticalScrollIndicator = NO;
     [self addSubview:_chatTable];
     [self setSubViewAutoresizingMask:_chatTable];
 }
@@ -156,16 +181,16 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         //           上线消息提示
         if(dataModel.event == MsgTypeOnline){
-            weakSelf.onlineIconBtn.frame = CGRectMake(-self.onlineIconBtn.width, - 10*MZ_RATE - 26*MZ_RATE, self.onlineIconBtn.width, self.onlineIconBtn.height);
+            weakSelf.onlineIconBtn.frame = CGRectMake(-self.onlineIconBtn.width, - 10*self.endSpace - 26*self.endSpace, self.onlineIconBtn.width, self.onlineIconBtn.height);
             weakSelf.onlineIconBtn.title = dataModel.userName;
             weakSelf.onlineIconBtn.tagData = dataModel;
             if(weakSelf.onlineCountDownNum <= 0 ){
                 weakSelf.onlineCountDownNum = 3;
                 weakSelf.onlineIconBtn.hidden = NO;
                 [UIView animateWithDuration:0.5 animations:^{
-                    weakSelf.onlineIconBtn.frame = CGRectMake(15*MZ_RATE, weakSelf.onlineIconBtn.top, weakSelf.onlineIconBtn.width, weakSelf.onlineIconBtn.height);
+                    weakSelf.onlineIconBtn.frame = CGRectMake(18*self.endSpace, weakSelf.onlineIconBtn.top, weakSelf.onlineIconBtn.width, weakSelf.onlineIconBtn.height);
                 } completion:^(BOOL finished) {
-                    weakSelf.onlineIconBtn.frame = CGRectMake(15*MZ_RATE, weakSelf.onlineIconBtn.top, weakSelf.onlineIconBtn.width, weakSelf.onlineIconBtn.height);
+                    weakSelf.onlineIconBtn.frame = CGRectMake(18*self.endSpace, weakSelf.onlineIconBtn.top, weakSelf.onlineIconBtn.width, weakSelf.onlineIconBtn.height);
                     if(!weakSelf.onlineTipTimer){
                         [weakSelf addOnlineTimer];
                     }
@@ -284,7 +309,7 @@
     MZLongPollDataModel*msgModel = [[MZLongPollDataModel alloc]init];
     msgModel.event = MsgTypeNotice;
     MZActMsg *actMsg = [[MZActMsg alloc]init];
-    actMsg.msgText = @"国民直播依法对直播内容进行24小时巡查，禁止传播暴力血腥、低俗色情、招嫖诈骗、非法政治活动等违法信息，坚决维护社会文明健康环境";
+    actMsg.msgText = @"依法对直播内容进行24小时巡查，禁止传播暴力血腥、低俗色情、招嫖诈骗、非法政治活动等违法信息，坚决维护社会文明健康环境";
     msgModel.data = actMsg;
     return msgModel;
     
@@ -338,7 +363,7 @@
 -(MZOnlineTipView *)onlineIconBtn
 {
     if(!_onlineIconBtn){
-        _onlineIconBtn = [[[MZOnlineTipView alloc]initWithFrame:CGRectMake(0, 0, 110*MZ_RATE, 25*MZ_RATE)] roundChangeWithRadius:4*MZ_RATE];
+        _onlineIconBtn = [[[MZOnlineTipView alloc]initWithFrame:CGRectMake(0, 0, 165*self.endSpace, 25*self.endSpace)] roundChangeWithRadius:4*self.endSpace];
         [_onlineIconBtn addTarget:self action:@selector(iconCLick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_onlineIconBtn];
     }
@@ -364,15 +389,20 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     MZLongPollDataModel *model=self.dataArray[indexPath.row];
     if(model.event==MsgTypeNotice){
-        return 114*MZ_RATE;
+        if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
+            return 108*self.endSpace;
+        }
+        return 114*self.endSpace;
     }else{
-        return [MZChatTableViewCell getCellHeight:_dataArray[indexPath.row] cellWidth:MZ_SW];
+        BOOL isLand = (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height);
+
+        return [MZChatTableViewCell getCellHeight:_dataArray[indexPath.row] cellWidth:self.frame.size.width isLand:isLand];
     }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MZ_SW, 10*MZ_RATE)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 10*self.endSpace)];
     
     return headerView;
 }

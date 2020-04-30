@@ -22,6 +22,21 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    float space = MZ_RATE;
+    if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
+        space = MZ_FULL_RATE;
+    }
+    
+    [self roundChangeWithRadius:20*space];
+    self.headerBtn.frame = CGRectMake(5*space, 5*space, 30*space, 30*space);
+    self.titleL.frame = CGRectMake(40*space, 4*space, 78*space, 18*space);
+    self.numL.frame = CGRectMake(40*space, 22*space, 78*space, 14*space);
+    self.attentionBtn.frame = CGRectMake(124*space, 9*space, 39*space, 22*space);
+
+}
+
 -(void)setupUI
 {
     [self roundChangeWithRadius:20*MZ_RATE];

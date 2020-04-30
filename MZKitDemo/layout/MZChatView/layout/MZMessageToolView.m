@@ -200,7 +200,7 @@
         _smallButton.hidden = YES;
         _sendButton.hidden = YES;
         _msgTextView.frame = CGRectMake(15, 8, self.width - 30, 32);
-        _msgTextView.centerPlaceHolder = @"跟主播聊点什么？";
+        _msgTextView.centerPlaceHolder = @"聊点什么？";
         _msgTextView.centerPlaceHolderColor = MakeColorRGB(0xbbbbbb);
     }
 
@@ -389,6 +389,7 @@
 {
     if (beginFrame.origin.y == [[UIScreen mainScreen] bounds].size.height)
     {
+        NSLog(@"弹出");
         [self willShowBottomHeight:toFrame.size.height];
         if (self.activityButtomView) {
             [self.activityButtomView removeFromSuperview];
@@ -397,6 +398,7 @@
     }
     else if (toFrame.origin.y == [[UIScreen mainScreen] bounds].size.height)
     {
+        NSLog(@"收回");
         [self willShowBottomHeight:beginFrame.size.height ];
     }
     else
@@ -409,9 +411,11 @@
 
 - (void)willShowBottomHeight:(CGFloat)bottomHeight
 {
+
     CGRect fromFrame = self.frame;
     CGFloat toHeight = self.toolBackGroundView.frame.size.height + bottomHeight;
     CGRect toFrame = CGRectMake(fromFrame.origin.x, fromFrame.origin.y + (fromFrame.size.height - toHeight), fromFrame.size.width, toHeight);
+    
     
     if(bottomHeight == 0 && self.frame.size.height == self.toolBackGroundView.frame.size.height)
     {
@@ -482,7 +486,7 @@
 {
     if ([text isEqual:@""]) {
         if (textView.text.length > 0) {
-            _msgTextView.centerPlaceHolder=@"跟主播聊点什么？";
+            _msgTextView.centerPlaceHolder=@"聊点什么？";
 //            textView.text = [textView.text substringToIndex:textView.text.length-1];
             return YES;
         }

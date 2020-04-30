@@ -22,5 +22,3 @@
 @property (nonatomic ,strong)UIButton *subBtn;
 @property (nonatomic ,strong) UIButton *attentionBtn;
 @end
-
-

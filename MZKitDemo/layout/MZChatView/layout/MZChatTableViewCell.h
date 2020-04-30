@@ -30,7 +30,7 @@ extern NSString * const MZMsgTypeGoodsUrl;
 
 @interface MZChatTableViewCell : UITableViewCell
 @property (nonatomic ,copy) NSString *role_name;
-+ (float)getCellHeight:(MZLongPollDataModel *)pollingDate cellWidth:(CGFloat)cellWidth;
++ (float)getCellHeight:(MZLongPollDataModel *)pollingDate cellWidth:(CGFloat)cellWidth isLand:(BOOL)isLand;
 @property(nonatomic,strong) MZLongPollDataModel *pollingDate;
 @property (nonatomic,copy)void(^headerViewAction)(MZLongPollDataModel *);
 @property (nonatomic,copy)void(^headerViewLongPress)(MZLongPollDataModel *);

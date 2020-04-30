@@ -25,15 +25,36 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    float space = MZ_RATE;
+    if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
+        space = MZ_FULL_RATE;
+    }
+    
+    self.headBtnOne.frame = CGRectMake(0, 0, 28*space, 28*space);
+    [self.headBtnOne.layer setCornerRadius:(28*space/2.0)];
+    
+    self.headBtnTwo.frame = CGRectMake(self.headBtnOne.right - 6*space, 0, 28*space, 28*space);
+    [self.headBtnTwo.layer setCornerRadius:(28*space/2.0)];
+    
+    self.headBtnThree.frame = CGRectMake(self.headBtnTwo.right - 6*space, 0, 28*space, 28*space);
+    [self.headBtnThree.layer setCornerRadius:(28*space/2.0)];
+    
+    self.numLabel.frame = CGRectMake(self.headBtnThree.right + 3*space, 0, 41*space, 28*space);
+    self.numLabel.font = FontSystemSize(12*space);
+
+}
+
 -(void)setupUI
 {
     self.headBtnOne = [[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 28*MZ_RATE, 28*MZ_RATE)] roundChangeWithRadius:14*MZ_RATE];
-//    self.headBtnOne.hidden = YES;
+    self.headBtnOne.hidden = YES;
     [self.headBtnOne addTarget:self action:@selector(avatarClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.headBtnOne];
     
     self.headBtnTwo = [[[UIButton alloc]initWithFrame:CGRectMake(self.headBtnOne.right - 6*MZ_RATE, 0, 28*MZ_RATE, 28*MZ_RATE)] roundChangeWithRadius:14*MZ_RATE];
-//    self.headBtnTwo.hidden = YES;
+    self.headBtnTwo.hidden = YES;
     [self.headBtnTwo addTarget:self action:@selector(avatarClick) forControlEvents:UIControlEventTouchUpInside];
     [self insertSubview:self.headBtnTwo belowSubview:self.headBtnOne];
     
@@ -43,9 +64,10 @@
     [self insertSubview:self.headBtnThree belowSubview:self.headBtnTwo];
     
     self.numLabel = [[[UILabel alloc]initWithFrame:CGRectMake(self.headBtnThree.right + 3*MZ_RATE, 0, 41*MZ_RATE, 28*MZ_RATE)] roundChangeWithRadius:14*MZ_RATE];
-//    self.numLabel.hidden = YES;
+    self.numLabel.hidden = YES;
     self.numLabel.font = FontSystemSize(12*MZ_RATE);
     self.numLabel.backgroundColor = MakeColorRGBA(0x000000, 0.25);
+    self.numLabel.backgroundColor = [UIColor clearColor];
     self.numLabel.textAlignment = NSTextAlignmentCenter;
     self.numLabel.textColor = MakeColorRGB(0xffffff);
     [self addSubview:self.numLabel];
@@ -95,6 +117,9 @@
 
 -(void)setNumStr:(NSString *)numStr
 {
+    if ([numStr intValue] < 0) {
+        numStr = @"0";
+    }
     _numStr = numStr;
     self.numLabel.text = numStr;
 }

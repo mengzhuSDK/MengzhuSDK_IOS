@@ -15,17 +15,8 @@
 #import "MZMyButton.h"
 #import "MZTopLeftLabel.h"
 
-#define  TEXT_Font [UIFont systemFontOfSize:13*MZ_RATE]
+#define  TEXT_Font 13
 
-#define  front 15*MZ_RATE
-#define  UISTEP 8*MZ_RATE
-#define   bgH   11*MZ_RATE
-#define  ICON_W 34*MZ_RATE
-#define  MIN_CHAT_BG_W  44*MZ_RATE
-#define  MAX_CHAT_BG_W  216*MZ_RATE
-#define  MAX_Online_BG_W  280*MZ_RATE
-#define  MAX_pay_BG_W  250//*VH_RATE_SCALE
-#define  Online_H  40
 UILabel  *g_textLabel;
 NSString * const MZMsgTypeMeChat    = @"MZMsgTypeMeChat";
 NSString * const MZMsgTypeOnline    = @"MZMsgTypeOnline";
@@ -51,6 +42,8 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
 
 @property (nonatomic,strong)UILabel *noticeLabel;
 @property (nonatomic, strong)UIView* talkView;
+
+@property (nonatomic, assign) float space;
 @end
 
 @implementation MZChatTableViewCell
@@ -60,7 +53,11 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _MZMsgType = reuseIdentifier;
-        self.iconHeight = 17*MZ_RATE;
+        self.space = MZ_RATE;
+        if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
+            self.space = MZ_FULL_RATE;
+        }
+        self.iconHeight = 17*self.space;
         [self setupUI];
         self.backgroundColor = [UIColor clearColor];
         
@@ -70,38 +67,74 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
 -(void)setupUI
 {
     if ([_MZMsgType isEqualToString:MZMsgTypeMeChat] || [_MZMsgType isEqualToString:MZMsgTypeOtherChat]) {//t我和他人的文字和图片信息
-        self.headerBtn=[[MZMyButton alloc] initWithFrame:CGRectMake(18*MZ_RATE, 4.5*MZ_RATE, _iconHeight, _iconHeight)];
+        self.headerBtn=[[MZMyButton alloc] initWithFrame:CGRectMake(18*self.space, 4.5*self.space, _iconHeight, _iconHeight)];
         self.headerBtn.layer.masksToBounds=YES;
         self.headerBtn.layer.cornerRadius=_iconHeight/2.0;
         [self.headerBtn addTarget:self action:@selector(heardAction) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.headerBtn];
         
         self.nickNameL = [[UILabel alloc]init];
-        self.nickNameL.font = [UIFont systemFontOfSize:13*MZ_RATE];
+        self.nickNameL.font = [UIFont systemFontOfSize:13*self.space];
         self.nickNameL.textColor = MakeColorRGB(0x0091ff);
         [self.contentView addSubview:self.nickNameL];
         
         self.chatTextLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         self.chatTextLabel.numberOfLines = 5;
-        self.chatTextLabel.font = [UIFont systemFontOfSize:13*MZ_RATE];
+        self.chatTextLabel.font = [UIFont systemFontOfSize:13*self.space];
         self.chatTextLabel.userInteractionEnabled=YES;
         self.chatTextLabel.backgroundColor = [UIColor clearColor];
         self.chatTextLabel.textColor = MakeColorRGB(0xffffff);
         [self.contentView addSubview:self.chatTextLabel];
     }else if([_MZMsgType isEqualToString:MZMsgTypeNotice]){
-        self.talkView = [[UIView alloc]initWithFrame:CGRectMake(18*MZ_RATE, 4.5*MZ_RATE, 208*MZ_RATE, 106*MZ_RATE)];
-        self.noticeLabel=[[UILabel alloc] initWithFrame:CGRectMake(8*MZ_RATE, 8*MZ_RATE, self.talkView.width-16*MZ_RATE, self.talkView.height-16*MZ_RATE)];
+        
+        self.talkView = [[UIView alloc]initWithFrame:CGRectMake(18*self.space, 4.5*self.space, 208*self.space, 106*self.space)];
+        self.noticeLabel=[[UILabel alloc] initWithFrame:CGRectMake(8*self.space, 8*self.space, self.talkView.width-16*self.space, self.talkView.height-16*self.space)];
 
         self.noticeLabel.numberOfLines = 0;
         self.noticeLabel.textAlignment = NSTextAlignmentLeft;
         self.talkView.layer.masksToBounds = YES;
-        self.talkView.layer.cornerRadius = 4*MZ_RATE;
+        self.talkView.layer.cornerRadius = 4*self.space;
         
         self.noticeLabel.font=[UIFont systemFontOfSize:13];
         self.noticeLabel.textColor=MakeColorRGB(0xFFFFFF);
         [self.talkView addSubview:self.noticeLabel];
         self.talkView.backgroundColor=MakeColorRGBA(0xff2145, 0.5);
         [self.contentView addSubview:self.talkView];
+    }
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.space = MZ_RATE;
+    if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
+       self.space = MZ_FULL_RATE;
+    }
+    
+    if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
+        self.iconHeight = 17*self.space;
+
+        self.headerBtn.frame = CGRectMake(18*self.space, 4.5*self.space, _iconHeight, _iconHeight);
+        
+        self.talkView.frame = CGRectMake(18*self.space, 4.5*self.space, 208*self.space, 100*self.space);
+        self.noticeLabel.frame = CGRectMake(8*self.space, 8*self.space, self.talkView.width-16*self.space, self.talkView.height-16*self.space);
+        
+        self.nickNameL.font = [UIFont systemFontOfSize:13*self.space];
+        self.talkView.layer.cornerRadius = 4*self.space;
+        self.headerBtn.layer.cornerRadius=_iconHeight/2.0;
+
+        self.chatTextLabel.font = [UIFont systemFontOfSize:13*self.space];
+    } else {
+        self.iconHeight = 17*self.space;
+
+        self.headerBtn.frame = CGRectMake(18*self.space, 4.5*self.space, _iconHeight, _iconHeight);
+        self.talkView.frame = CGRectMake(18*self.space, 4.5*self.space, 208*self.space, 106*self.space);
+        self.noticeLabel.frame = CGRectMake(8*self.space, 8*self.space, self.talkView.width-16*self.space, self.talkView.height-16*self.space);
+        
+        self.nickNameL.font = [UIFont systemFontOfSize:13*self.space];
+        self.talkView.layer.cornerRadius = 4*self.space;
+        self.headerBtn.layer.cornerRadius=_iconHeight/2.0;
+
+        self.chatTextLabel.font = [UIFont systemFontOfSize:13*self.space];
     }
 }
 
@@ -121,11 +154,20 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
         self.nickNameL.text = [NSString stringWithFormat:@"%@:",[MZGlobalTools cutStringWithString:pollingDate.userName SizeOf:20]];
 //        self.nickNameL.text = [NSString stringWithFormat:@"%@：",pollingDate.userName];
         [self.nickNameL sizeToFit];
-        self.nickNameL.frame = CGRectMake(self.headerBtn.right + 5*MZ_RATE, self.headerBtn.top, self.nickNameL.width, self.nickNameL.height);
-        self.chatTextLabel.frame = CGRectMake(self.nickNameL.right, self.nickNameL.top, self.width - self.nickNameL.right - 18*MZ_RATE, CGFLOAT_MAX);
+        
+        self.nickNameL.frame = CGRectMake(self.headerBtn.right + 5*self.space, self.headerBtn.top, self.nickNameL.width, self.nickNameL.height);
+        
+        if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
+            self.chatTextLabel.frame = CGRectMake(self.nickNameL.right, self.nickNameL.top, UIScreen.mainScreen.bounds.size.width/2.0 - self.nickNameL.frame.size.width - self.nickNameL.frame.origin.x - 18*self.space, CGFLOAT_MAX);
+        } else {
+            self.chatTextLabel.frame = CGRectMake(self.nickNameL.right, self.nickNameL.top, UIScreen.mainScreen.bounds.size.width - self.nickNameL.frame.size.width - self.nickNameL.frame.origin.x - 18*self.space, CGFLOAT_MAX);
+        }
+        
         [self.chatTextLabel setText:pollingDate.data.msgText];
         [self.chatTextLabel sizeToFit];
+        
         self.chatTextLabel.frame = CGRectMake(self.nickNameL.right, self.nickNameL.top, self.chatTextLabel.width,  self.chatTextLabel.height);
+
     }else if([_MZMsgType isEqualToString:MZMsgTypeNotice]){
         self.noticeLabel.text=pollingDate.data.msgText;
     }
@@ -157,7 +199,7 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
 }
 
 
-+ (float)getCellHeight:(MZLongPollDataModel *)pollingDate cellWidth:(CGFloat)cellWidth
++ (float)getCellHeight:(MZLongPollDataModel *)pollingDate cellWidth:(CGFloat)cellWidth isLand:(BOOL)isLand
 {
     float h = 0;
     if(pollingDate == nil)
@@ -165,29 +207,38 @@ NSString * const MZMsgTypeCircleGeneralizeMsg=@"MZMsgTypeCircleGeneralizeMsg";
     
     if(pollingDate.event == MsgTypeMeChat || pollingDate.event == MsgTypeOtherChat)
     {
-            if(g_textLabel == nil)
-            {
-                g_textLabel = [UILabel new];
-                g_textLabel.numberOfLines = 5;
-                g_textLabel.font = TEXT_Font;
-            }
+        float space = MZ_RATE;
+        if (isLand) space = MZ_FULL_RATE;
+        
+        if(g_textLabel == nil)
+        {
+            g_textLabel = [UILabel new];
+            g_textLabel.numberOfLines = 5;
+        }
+    
+        g_textLabel.font = [UIFont systemFontOfSize:TEXT_Font*space];
+
         UILabel *nickLabel = [[UILabel alloc]init];
-        nickLabel.font = [UIFont systemFontOfSize:13*MZ_RATE];
-        nickLabel.frame = CGRectMake(0, 0, CGFLOAT_MAX, 18*MZ_RATE);
+        nickLabel.font = [UIFont systemFontOfSize:13*space];
+        nickLabel.frame = CGRectMake(0, 0, CGFLOAT_MAX, 18*space);
         nickLabel.text = [NSString stringWithFormat:@"%@:",[MZGlobalTools cutStringWithString:pollingDate.userName SizeOf:20]];
         [nickLabel sizeToFit];
-        g_textLabel.frame = CGRectMake(0, 0, cellWidth - 40*MZ_RATE - 18*MZ_RATE - nickLabel.width, CGFLOAT_MAX);
+        g_textLabel.frame = CGRectMake(0, 0, cellWidth - 40*space - 18*space - nickLabel.width, CGFLOAT_MAX);
         [g_textLabel setText:pollingDate.data.msgText];
         [g_textLabel sizeToFit];
-        
-        if(g_textLabel.height >= 17*MZ_RATE){
-            return g_textLabel.height + 9*MZ_RATE;
+
+        if(g_textLabel.height >= 17*space){
+            return g_textLabel.height + 9*space;
         }else{
-            return 17*MZ_RATE + 9*MZ_RATE;
+            return 17*space + 9*space;
         }
     }
-    NSLog(@"输出%f",h);
     return h;
+}
+
+- (void)dealloc
+{
+    NSLog(@"cell释放");
 }
 
 @end

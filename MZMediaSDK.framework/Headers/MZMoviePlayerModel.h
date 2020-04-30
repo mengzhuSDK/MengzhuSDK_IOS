@@ -20,6 +20,7 @@
 
 @interface MZMoviePlayerChat_conf : NSObject
 @property (nonatomic ,strong)NSString *pub_url;
+@property (nonatomic ,strong)NSString *token;
 @property (nonatomic ,strong)NSString *receive_url;
 @property (nonatomic ,strong)NSString *room;
 @property (nonatomic ,strong)NSString *chat_uid;
@@ -32,6 +33,44 @@
 
 @end
 
+
+
+@interface MZRightContenModel:NSObject
+@property (nonatomic ,strong)NSString *id;
+@property (nonatomic ,strong)NSString *channel_id;
+@property (nonatomic ,strong)NSString *uid;
+@property (nonatomic ,strong)NSString *title;
+@property (nonatomic ,strong)NSString *image;
+@property (nonatomic ,assign)BOOL is_auto_pop;
+@property (nonatomic ,strong)NSString *created_at;
+@property (nonatomic ,strong)NSString *updated_at;
+@property (nonatomic ,strong)NSString *online_gift_id;
+@property (nonatomic ,assign)int recive_gift_level;
+@property (nonatomic ,assign)int can_recived_level;  // 是否可以领取0-1 BOOL
+@property (nonatomic ,strong)NSArray *online_gift_rule;
+@property (nonatomic ,strong)NSString *url;
+@property (nonatomic ,strong)NSString *answer_bonus_id;
+@property (nonatomic ,strong)NSString *app_url;
+
+@property (nonatomic ,strong)NSString *status;//0:未开始 1:进行中 2:已结束
+@property (nonatomic ,assign)BOOL is_sign;//是否已签到is_expired;
+//@property (nonatomic ,assign)BOOL is_expired;//签到是否过期
+//@property (nonatomic ,assign)int is_force;//是否是强制签到
+@property (nonatomic,assign) BOOL redirect_sign;//是否需要弹web签到（这个包含了is_expired和is_force）
+@property (nonatomic,assign) int force_type;
+@property (nonatomic ,copy) NSString *ticket_id;
+//广告图相关字段
+@property (nonatomic ,copy) NSString *adver_id;
+@property (nonatomic ,strong) NSArray *content;
+
+@end
+
+
+@interface MZRightModel:NSObject
+@property (nonatomic ,strong)NSString *type;
+@property (nonatomic,assign) BOOL is_open;
+@property (nonatomic ,strong)MZRightContenModel *content;
+@end
 
 
 @interface MZMoviePlayerModel : NSObject
@@ -50,8 +89,5 @@
 @property (nonatomic ,strong)NSString *like_num;// 用户点赞数量
 @property (nonatomic,strong)NSString *uv;
 @property (nonatomic,assign)int *live_style;// 直播样式 0:横屏 1:竖屏
-
-
-
-
 @end
+

@@ -9,23 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef enum : NSUInteger {
-    MZAVCaptureTypeNone,
-    MZAVCaptureTypeSystem,
-    MZAVCaptureTypeGPUImage,
-} MZAVCaptureType;
-typedef enum : NSUInteger {
-    MZVideoEncoderTypeNone,
-    MZVideoEncoderTypeHWH264,
-    MZVideoEncoderTypeSWX264,
-} MZVideoEncoderType;
-
-typedef enum : NSUInteger {
-    MZAudioEncoderTypeNone,
-    MZAudioEncoderTypeHWAACLC,
-    MZAudioEncoderTypeSWFAAC,
-} MZAudioEncoderType;
-
+//直播状态
 typedef enum mz_rtmp_state{
     mz_rtmp_state_idle,//默认情况
     mz_rtmp_state_connecting,//连接中
@@ -36,34 +20,31 @@ typedef enum mz_rtmp_state{
     mz_rtmp_state_error_open,//打开失败，发送后回到idle
     mz_rtmp_state_error_net,//多次连接失败，网络错误
 }mz_rtmp_state;
-//音频码率
-typedef NS_ENUM (NSUInteger, MZLiveAudioBitRate) {
-    /// 32Kbps 音频码率
-    MZLiveAudioBitRate_32Kbps = 32000,
-    /// 64Kbps 音频码率
-    MZLiveAudioBitRate_64Kbps = 64000,
-    /// 96Kbps 音频码率
-    MZLiveAudioBitRate_96Kbps = 96000,
-    /// 128Kbps 音频码率
-    MZLiveAudioBitRate_128Kbps = 128000,
-    /// 默认音频码率，默认为 96Kbps
-    MZLiveAudioBitRate_Default = MZLiveAudioBitRate_96Kbps
-};
 
-/// 音频采样率 (默认44.1KHz)
-typedef NS_ENUM (NSUInteger, MZLiveAudioSampleRate){
-    /// 16KHz 采样率
-    MZLiveAudioSampleRate_16000Hz = 16000,
-    /// 44.1KHz 采样率
-    MZLiveAudioSampleRate_44100Hz = 44100,
-    /// 48KHz 采样率
-    MZLiveAudioSampleRate_48000Hz = 48000,
-    /// 默认音频采样率，默认为 44.1KHz
-    MZLiveAudioSampleRate_Default = MZLiveAudioSampleRate_44100Hz
+/// 直播视频分辨率
+typedef NS_ENUM (NSUInteger, MZCaptureSessionPreset){
+    /// 低分辨率
+    MZCaptureSessionPreset360x640 = 0,
+    /// 中分辨率
+    MZCaptureSessionPreset540x960 = 1,
+    /// 高分辨率
+    MZCaptureSessionPreset720x1280 = 2
 };
 
 @protocol MZAVCaptureDelegate <NSObject>
+/**
+ * 直播状态的变更
+ *
+ * @param fromState 更改前的状态
+ * @param toState 更改后的状态
+ */
 -(void) avCapture:(mz_rtmp_state) fromState toState:(mz_rtmp_state) toState;
+/**
+ * 获取实时码率
+ *
+ * @param currentBandwidth 带宽
+ */
+-(void) videoBitrateCurrentBandwidth:(CGFloat)currentBandwidth;
 @end
 
 @interface MZPushStreamManager : NSObject
@@ -71,56 +52,74 @@ typedef NS_ENUM (NSUInteger, MZLiveAudioSampleRate){
 @property (nonatomic, weak) id<MZAVCaptureDelegate> stateDelegate;
 //预览view
 @property (nonatomic, strong) UIView *preview;
-/**
- 初始化（设置默认录音录像配置）
- */
--(instancetype)init:(MZAudioEncoderType)audioEncoderType videoEncoderType:(MZVideoEncoderType)videoEncoderType;
 
 /**
- 录音配置
- bitrate;//可自由设置
- channelCount;//可选 1 2
- sampleRate;//可选 44100 22050 11025 5500
- sampleSize;//可选 16 8
+ * 初始化
+ *
+ * @param videoSessionPreset 视频分辨率(码率，帧率fps, 都是根据分辨率自动配置的最优选项)
+ * @param outputImageOrientation 直播方向
+ * @return self
  */
--(void) audioConfigDeploy:(long)audioBitrate channelCount:(int)channelCount sampleSize:(int)sampleSize sampleRate:(int)sampleRate;
-
+-(instancetype) initWithVideoSessionPreset:(MZCaptureSessionPreset)videoSessionPreset
+                    outputImageOrientation:(UIInterfaceOrientation)outputImageOrientation;
 
 /**
- 视频配置
- width;//可选，系统支持的分辨率，采集分辨率的宽
- height;//可选，系统支持的分辨率，采集分辨率的高
- bitrate;//自由设置
- fps;//自由设置
- dataFormat;//目前软编码只能是X264_CSP_NV12，硬编码无需设置
- orientation;//推流方向
-  推流分辨率宽高，目前不支持自由设置，只支持旋转。
-  UIInterfaceOrientationLandscapeLeft 和 UIInterfaceOrientationLandscapeRight 为横屏，其他值均为竖屏。
+ * 初始化
+ *
+ * @param videoSessionPreset 分辨率
+ * @param videoBitRate 码率 单位是 bps
+ * @param videoFrameRate 帧率fps
+ * @param outputImageOrientation 直播方向
+ * @return self
  */
--(void) videoConfigDeploy: (int)width height:(int)height bitrate:(int)bitrate fps:(int)fps dataFormat:(int)dataFormat orientation:(int)orientation;
+-(instancetype) initWithVideoSessionPreset:(MZCaptureSessionPreset)videoSessionPreset
+                              videoBitRate:(NSUInteger)videoBitRate
+                            videoFrameRate:(NSUInteger)videoFrameRate
+                    outputImageOrientation:(UIInterfaceOrientation)outputImageOrientation;
 
-//开始直播
+/**
+ * 开始直播
+ *
+ * @param rtmpUrl 推流地址
+ * @return 是否成功
+ */
 -(BOOL) startCaptureWithRtmpUrl:(NSString *)rtmpUrl;
-//-(BOOL) startCaptureWithRtmpUrl:(NSString *)rtmpUrl isBackstagePush:(BOOL)isBackstagePush;
 
-//停止直播
+/**
+ * 停止直播
+ */
 -(void) stopCapture;
 
-//切换摄像头
--(void) switchCamera;
+/**
+ * 切换摄像头
+ *
+ * @param isFront 是否设置为前置摄像头
+ */
+-(void) switchCameraIsFront:(BOOL)isFront;
 
-//美颜开关
-- (void)setBeautyFace:(BOOL)beautyFace;
+/**
+ * 美颜开关
+ */
+- (void) setBeautyFace:(BOOL)beautyFace;
 
-//镜像开关
--(void)setMirroring:(BOOL)isMirroring;
+/**
+ * 镜像开关
+ */
+-(void) setMirroring:(BOOL)isMirroring;
 
-//修改fps
--(void) updateFps:(NSInteger) fps;
+/**
+ * 设置是否静音
+ */
+-(void) setMute:(BOOL)isMute;
 
+/**
+ * 开启闪光灯（只有后置摄像头有此功能）
+ */
+-(BOOL) setTorch:(BOOL)isTorch;
 
--(BOOL) isPlugFlow;
-//是否正在推流
+/**
+ * 是否正在推流
+ */
 -(BOOL) isCapturing;
 
 @end
