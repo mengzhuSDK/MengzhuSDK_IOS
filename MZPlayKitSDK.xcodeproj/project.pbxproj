@@ -113,7 +113,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		155B396B21774F7B00A7AD9D /* 盟主SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "盟主SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		155B396B21774F7B00A7AD9D /* 盟主SDK Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "盟主SDK Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		155B396E21774F7B00A7AD9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		155B396F21774F7C00A7AD9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		155B397121774F7C00A7AD9D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -316,7 +316,7 @@
 		155B396C21774F7B00A7AD9D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				155B396B21774F7B00A7AD9D /* 盟主SDK.app */,
+				155B396B21774F7B00A7AD9D /* 盟主SDK Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -689,7 +689,7 @@
 			);
 			name = MZKitDemo;
 			productName = MZKitDemo;
-			productReference = 155B396B21774F7B00A7AD9D /* 盟主SDK.app */;
+			productReference = 155B396B21774F7B00A7AD9D /* 盟主SDK Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1052,7 +1052,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mengzhu.play.kit.demo;
-				PRODUCT_NAME = "盟主SDK";
+				PRODUCT_NAME = "盟主SDK Demo";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e armv7s";
@@ -1093,7 +1093,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mengzhu.play.kit.demo;
-				PRODUCT_NAME = "盟主SDK";
+				PRODUCT_NAME = "盟主SDK Demo";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e armv7s";

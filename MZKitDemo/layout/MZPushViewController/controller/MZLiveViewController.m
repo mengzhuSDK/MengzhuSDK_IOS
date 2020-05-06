@@ -113,7 +113,6 @@ CGFloat BtnSpace = 28 + 12;
     UIAlertView *_pushErorrAlert;
     UIAlertView *_reconnectionErorrAlert;
 
-
     //直播SDK新变量
     MZPushStreamManager * _pushManager;
 
@@ -152,6 +151,8 @@ CGFloat BtnSpace = 28 + 12;
 @property (nonatomic ,strong)UIButton *mirrorBtn;//镜像按钮
 @property (nonatomic ,strong)UIButton *beautyFaceBtn;//美颜按钮
 @property (nonatomic ,strong)UIButton *blockAllButton;//全体禁言，解禁
+
+@property (nonatomic ,strong)MZLiveAlertView *liveAlertView;//断流提示的view
 
 @property (nonatomic ,strong)UIVisualEffectView *blurEffectBgView;
 @property (nonatomic ,strong)UIView *effectBgView;
@@ -1001,17 +1002,28 @@ CGFloat BtnSpace = 28 + 12;
         //阻止iOS设备锁屏
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
         
-        MZLiveAlertView *liveAlertView = [[MZLiveAlertView alloc]init];
-        NSString *startTip = @"您的直播推流失败，请点击“重试”进行尝试新的推流！";
-        NSString *centerTip = @"您的直播出现意外“断流”，请点击“重试”按钮恢复直播推流！";
-        [liveAlertView showInWithView:self.view title:self.isStartPush ? centerTip :startTip leftBtn:@"结束" rightBtn:@"重试" clickBlock:^(MZLiveAlerBtnClickType clickType) {
-            if(clickType == MZLiveAlerLeftClick){
-                [self stopLive];
-            }else{
-                [_pushManager startCaptureWithRtmpUrl:_url];
-            }
-        }];
+        [MZSimpleHud hide];
+        if (!self.liveAlertView) {
+            self.liveAlertView = [[MZLiveAlertView alloc]init];
+            NSString *startTip = @"您的直播推流失败，请点击“重试”进行尝试新的推流！";
+            NSString *centerTip = @"您的直播出现意外“断流”，请点击“重试”按钮恢复直播推流！";
+            WeaklySelf(weakSelf);
+            [self.liveAlertView showInWithView:self.view title:self.isStartPush ? centerTip :startTip leftBtn:@"结束" rightBtn:@"重试" clickBlock:^(MZLiveAlerBtnClickType clickType) {
+                weakSelf.liveAlertView = nil;
+                if(clickType == MZLiveAlerLeftClick){
+                    [weakSelf stopLive];
+                }else{
+                    [weakSelf outToConnect];
+                    [MZSimpleHud show];
+                }
+            }];
+        }
     });
+}
+
+/// 断流后重连
+- (void)outToConnect {
+    [_pushManager startCaptureWithRtmpUrl:_url];
 }
 
 - (void)videoBitrateCurrentBandwidth:(CGFloat)currentBandwidth {
