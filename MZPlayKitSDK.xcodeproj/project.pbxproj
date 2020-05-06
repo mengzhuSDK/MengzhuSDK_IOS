@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,9 +13,8 @@
 		155B397821774F7C00A7AD9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 155B397721774F7C00A7AD9D /* Assets.xcassets */; };
 		155B397B21774F7C00A7AD9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 155B397921774F7C00A7AD9D /* LaunchScreen.storyboard */; };
 		155B397E21774F7C00A7AD9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 155B397D21774F7C00A7AD9D /* main.m */; };
-		156ED390217F0D290047B6DB /* MZMediaSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */; };
 		15F7EC8D237C27A500FB4609 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F7EC8C237C27A500FB4609 /* PlayerViewController.m */; };
-		C0015DD7245AA8A50043F271 /* MZM3U8DownLoaderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0015DD6245AA8A50043F271 /* MZM3U8DownLoaderSDK.framework */; };
+		917DFDFED83C4FA172CABAB2 /* Pods_MZKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA325422B7FDC74F9315113 /* Pods_MZKitDemo.framework */; };
 		C04C9D322456D9010048F6D8 /* MZActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9CDF2456D9010048F6D8 /* MZActionSheetView.m */; };
 		C04C9D332456D9010048F6D8 /* MZCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9CE22456D9010048F6D8 /* MZCameraViewController.m */; };
 		C04C9D342456D9010048F6D8 /* MZCameraHelperView.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9CE62456D9010048F6D8 /* MZCameraHelperView.m */; };
@@ -66,9 +65,6 @@
 		C04C9D612456D9010048F6D8 /* MZImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9D2D2456D9010048F6D8 /* MZImagePickerViewController.m */; };
 		C04C9D622456D9010048F6D8 /* MZReadyLiveCellBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9D2F2456D9010048F6D8 /* MZReadyLiveCellBtn.m */; };
 		C04C9D682456E1540048F6D8 /* MZBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C9D672456E1540048F6D8 /* MZBaseNavigationController.m */; };
-		C053753D245AA183006B85B3 /* MZMediaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; };
-		C053753E245AA183006B85B3 /* MZMediaSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 15679A1123549A2A001E6F6E /* MZMediaSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C07AB9642434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C07AB9632434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle */; };
 		C07AB96A2434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AB9682434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m */; };
 		C07AB96B2434B7CB00A81CC9 /* MZDownLoadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C07AB9692434B7CB00A81CC9 /* MZDownLoadCell.m */; };
 		D0917E4A235458BB0022E7C7 /* MZVerticalPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D0917E15235458BA0022E7C7 /* MZVerticalPlayerVC.m */; };
@@ -110,7 +106,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C053753E245AA183006B85B3 /* MZMediaSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,14 +131,14 @@
 		155B3E6B2178338800A7AD9D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		155B3E6D2178339200A7AD9D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		155B3E6F217833A400A7AD9D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		15679A1123549A2A001E6F6E /* MZMediaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MZMediaSDK.framework; sourceTree = "<group>"; };
 		156ED2C2217DC2400047B6DB /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		156ED2C4217DC2690047B6DB /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		156ED2C6217DC2880047B6DB /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
-		156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MZMediaSDK.bundle; sourceTree = "<group>"; };
 		15F7EC8B237C27A400FB4609 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
 		15F7EC8C237C27A500FB4609 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
-		C0015DD6245AA8A50043F271 /* MZM3U8DownLoaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MZM3U8DownLoaderSDK.framework; sourceTree = "<group>"; };
+		1CA325422B7FDC74F9315113 /* Pods_MZKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MZKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		482F66C8FBD3B84E6E4FEE28 /* Pods-MZKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZKitDemo.release.xcconfig"; path = "Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo.release.xcconfig"; sourceTree = "<group>"; };
+		9B20DC7CA2963627E89D3C7E /* Pods-MZKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZKitDemo.debug.xcconfig"; path = "Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C04C9CDB2456D9010048F6D8 /* MZAudienceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAudienceView.h; sourceTree = "<group>"; };
 		C04C9CDE2456D9010048F6D8 /* MZActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZActionSheetView.h; sourceTree = "<group>"; };
 		C04C9CDF2456D9010048F6D8 /* MZActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZActionSheetView.m; sourceTree = "<group>"; };
@@ -222,7 +217,6 @@
 		C04C9D312456D9010048F6D8 /* MZCameraImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCameraImageHelper.h; sourceTree = "<group>"; };
 		C04C9D662456E1540048F6D8 /* MZBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZBaseNavigationController.h; sourceTree = "<group>"; };
 		C04C9D672456E1540048F6D8 /* MZBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZBaseNavigationController.m; sourceTree = "<group>"; };
-		C07AB9632434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MZM3U8DownLoaderSDKBundle.bundle; sourceTree = "<group>"; };
 		C07AB9662434B7CB00A81CC9 /* MZM3U8DownLoadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZM3U8DownLoadViewController.h; sourceTree = "<group>"; };
 		C07AB9672434B7CB00A81CC9 /* MZDownLoadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZDownLoadCell.h; sourceTree = "<group>"; };
 		C07AB9682434B7CB00A81CC9 /* MZM3U8DownLoadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZM3U8DownLoadViewController.m; sourceTree = "<group>"; };
@@ -286,8 +280,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0015DD7245AA8A50043F271 /* MZM3U8DownLoaderSDK.framework in Frameworks */,
-				C053753D245AA183006B85B3 /* MZMediaSDK.framework in Frameworks */,
 				D0917E72235466AA0022E7C7 /* libbz2.tbd in Frameworks */,
 				D0917E712354669F0022E7C7 /* libbz2.1.0.tbd in Frameworks */,
 				D0917E70235466930022E7C7 /* libz.1.2.5.tbd in Frameworks */,
@@ -295,18 +287,29 @@
 				D0917E6F235466830022E7C7 /* libstdc++.6.tbd in Frameworks */,
 				D0917E6B2354666F0022E7C7 /* libz.tbd in Frameworks */,
 				D0917E68235465BC0022E7C7 /* libstdc++.tbd in Frameworks */,
+				917DFDFED83C4FA172CABAB2 /* Pods_MZKitDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04537A76BDC6AE6E3DD815E5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9B20DC7CA2963627E89D3C7E /* Pods-MZKitDemo.debug.xcconfig */,
+				482F66C8FBD3B84E6E4FEE28 /* Pods-MZKitDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		155B396221774F7B00A7AD9D = {
 			isa = PBXGroup;
 			children = (
 				155B396D21774F7B00A7AD9D /* MZKitDemo */,
 				155B396C21774F7B00A7AD9D /* Products */,
 				155B3E602178333700A7AD9D /* Frameworks */,
+				04537A76BDC6AE6E3DD815E5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -345,14 +348,10 @@
 		155B3E602178333700A7AD9D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C0015DD6245AA8A50043F271 /* MZM3U8DownLoaderSDK.framework */,
-				C07AB9632434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle */,
-				15679A1123549A2A001E6F6E /* MZMediaSDK.framework */,
 				D0917E6C235466830022E7C7 /* libstdc++.6.0.9.tbd */,
 				D0917E6D235466830022E7C7 /* libstdc++.6.tbd */,
 				D0917E6A2354666F0022E7C7 /* libz.tbd */,
 				D0917E67235465BC0022E7C7 /* libstdc++.tbd */,
-				156ED38F217F0D290047B6DB /* MZMediaSDK.bundle */,
 				156ED2C6217DC2880047B6DB /* libz.1.2.5.tbd */,
 				156ED2C4217DC2690047B6DB /* libbz2.1.0.tbd */,
 				156ED2C2217DC2400047B6DB /* libbz2.tbd */,
@@ -364,6 +363,7 @@
 				155B3E652178335600A7AD9D /* CoreVideo.framework */,
 				155B3E632178334B00A7AD9D /* CoreMedia.framework */,
 				155B3E612178333800A7AD9D /* AssetsLibrary.framework */,
+				1CA325422B7FDC74F9315113 /* Pods_MZKitDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -675,10 +675,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 155B398121774F7C00A7AD9D /* Build configuration list for PBXNativeTarget "MZKitDemo" */;
 			buildPhases = (
+				A3B6A954F295957552FA0E79 /* [CP] Check Pods Manifest.lock */,
 				155B396721774F7B00A7AD9D /* Sources */,
 				155B396821774F7B00A7AD9D /* Frameworks */,
 				155B396921774F7B00A7AD9D /* Resources */,
 				15679A1423549A2A001E6F6E /* Embed Frameworks */,
+				5ED93F81F5D6EB90DC5BA4AA /* [CP] Copy Pods Resources */,
+				D9BE4AABC5F39D448491C0C8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -734,7 +737,6 @@
 				C04C9D482456D9010048F6D8 /* loading2@3x.png in Resources */,
 				C04C9D432456D9010048F6D8 /* loading5@3x.png in Resources */,
 				C04C9D452456D9010048F6D8 /* loading2@2x.png in Resources */,
-				C07AB9642434B77500A81CC9 /* MZM3U8DownLoaderSDKBundle.bundle in Resources */,
 				C04C9D4D2456D9010048F6D8 /* loading4@3x.png in Resources */,
 				155B397B21774F7C00A7AD9D /* LaunchScreen.storyboard in Resources */,
 				C04C9D422456D9010048F6D8 /* loadingin@3x.png in Resources */,
@@ -752,13 +754,71 @@
 				C04C9D4C2456D9010048F6D8 /* loading6@2x.png in Resources */,
 				C04C9D472456D9010048F6D8 /* loadingout@3x.png in Resources */,
 				C04C9D3E2456D9010048F6D8 /* loading_3@2x.png in Resources */,
-				156ED390217F0D290047B6DB /* MZMediaSDK.bundle in Resources */,
 				C04C9D4A2456D9010048F6D8 /* loading4@2x.png in Resources */,
 				C04C9D3D2456D9010048F6D8 /* loadingin@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5ED93F81F5D6EB90DC5BA4AA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3B6A954F295957552FA0E79 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MZKitDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9BE4AABC5F39D448491C0C8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		155B396721774F7B00A7AD9D /* Sources */ = {
@@ -960,6 +1020,7 @@
 		};
 		155B398221774F7C00A7AD9D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B20DC7CA2963627E89D3C7E /* Pods-MZKitDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -974,7 +1035,8 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = $SRCROOT/MZKitDemo/MZKitDemoPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$SRCROOT/MZKitDemo/MZKitDemoPrefixHeader.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = MZKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -999,6 +1061,7 @@
 		};
 		155B398321774F7C00A7AD9D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 482F66C8FBD3B84E6E4FEE28 /* Pods-MZKitDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1013,7 +1076,8 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = $SRCROOT/MZKitDemo/MZKitDemoPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$SRCROOT/MZKitDemo/MZKitDemoPrefixHeader.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = MZKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

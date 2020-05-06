@@ -110,7 +110,6 @@ CGFloat BtnSpace = 28 + 12;
     //自己结束的
     BOOL    selfStopped;
     BOOL _isConnecting;
-    BOOL _isCanShowVerticalScreen;//只有在停止播放的时候才能显示竖屏
     UIAlertView *_pushErorrAlert;
     UIAlertView *_reconnectionErorrAlert;
 
@@ -315,10 +314,6 @@ CGFloat BtnSpace = 28 + 12;
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
-    [_timer invalidate];
-    _timer = nil;
-    [self.chatKitManager closeLongPoll];
-    [self.chatKitManager closeSocketIO];
 
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -326,15 +321,11 @@ CGFloat BtnSpace = 28 + 12;
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:YES];
-    [_pushManager stopCapture];
     
-    self.chatKitManager.delegate = nil;
-    self.chatKitManager = nil;
+    [self destoryPusher];
 
     _chatView = nil;
     _chatToolBar = nil;
-    [self stopLiveTimer];
-    [self stopCountDownTimer];
     [self.view removeObserver:self forKeyPath:kViewFramePath];
     [self removeKeyBoardNoti];
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
@@ -605,14 +596,27 @@ CGFloat BtnSpace = 28 + 12;
     [_previewView addSubview:_pushManager.preview];
 }
 
-- (void)destroySession{
-    _pushManager.stateDelegate = nil;
-    _pushManager.preview = nil;
-    _previewView = nil;
+/// 销毁推流相关的具柄
+- (void)destoryPusher {
+    _isConnecting = NO; // 连接关闭
+    [self stopLiveTimer]; // 销毁直播计时器
+    [self hideKeyboard]; // 收起键盘
     
-    [self stopLiveTimer];
-    _isConnecting = NO;
-    _isCanShowVerticalScreen = YES;
+    [self destoryChatKitManager];
+    [self destroySession];
+}
+
+/// 销毁聊天具柄
+- (void)destoryChatKitManager {
+    [self.chatKitManager closeLongPoll];
+    [self.chatKitManager closeSocketIO];
+    self.chatKitManager.delegate = nil;
+    self.chatKitManager = nil;
+}
+
+/// 销毁推流具柄
+- (void)destroySession{
+    [_pushManager stopCapture];
 }
 
 #pragma mark - User Interaction
@@ -834,10 +838,9 @@ CGFloat BtnSpace = 28 + 12;
 {
     [MZSimpleHud show];
     NSLog(@"show 1");
-    [self destroySession];
+    [self destoryPusher];
 
     [MZSDKBusinessManager stopLive:_model.channelId ticketId:_model.ticket_id success:^(MZLiveFinishModel *model) {
-        _isCanShowVerticalScreen = YES;
 
         [MZSimpleHud hide];
     
@@ -910,34 +913,20 @@ CGFloat BtnSpace = 28 + 12;
 #pragma mark - Notification Handler
 
 - (void)appResignActive{
-    if(self.isStartPush){
-        [self hideKeyboard];
-        [self stopLiveTimer];
-//        [self stopLive:@"视频直播异常停止，确定后将继续发起直播"];
-
-        _isConnecting = NO;
-        NSLog(@"MZLiveViewController appResignActive");
-        [self.chatKitManager closeLongPoll];
-        [self.chatKitManager closeSocketIO];
-        self.chatKitManager.delegate = nil;
-        self.chatKitManager = nil;
-
-        // 监听电话
-        _callCenter = [[CTCallCenter alloc] init];
-        _isCTCallStateDisconnected = NO;
-        _callCenter.callEventHandler = ^(CTCall* call) {
-            if ([call.callState isEqualToString:CTCallStateDisconnected])
-            {
-                _isCTCallStateDisconnected = YES;
-            }
-            else if([call.callState isEqualToString:CTCallStateConnected]){
-                _callCenter = nil;
-            }
-        };
-    }else{
-
-    }
+    [self destoryPusher];
     
+    // 监听电话
+    _callCenter = [[CTCallCenter alloc] init];
+    _isCTCallStateDisconnected = NO;
+    _callCenter.callEventHandler = ^(CTCall* call) {
+        if ([call.callState isEqualToString:CTCallStateDisconnected])
+        {
+            _isCTCallStateDisconnected = YES;
+        }
+        else if([call.callState isEqualToString:CTCallStateConnected]){
+            _callCenter = nil;
+        }
+    };
 }
 //   断网弹窗关闭后  会回调
 - (void)appBecomeActive
@@ -1011,6 +1000,7 @@ CGFloat BtnSpace = 28 + 12;
     dispatch_async(dispatch_get_main_queue(), ^{
         //阻止iOS设备锁屏
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+        
         MZLiveAlertView *liveAlertView = [[MZLiveAlertView alloc]init];
         NSString *startTip = @"您的直播推流失败，请点击“重试”进行尝试新的推流！";
         NSString *centerTip = @"您的直播出现意外“断流”，请点击“重试”按钮恢复直播推流！";
@@ -1174,10 +1164,8 @@ CGFloat BtnSpace = 28 + 12;
 }
 
 - (void)stopLive{
-    [self destroySession];
-    _isCanShowVerticalScreen = YES;
+    [self destoryPusher];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self rotateScreen:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
     });
     
@@ -1291,42 +1279,35 @@ CGFloat BtnSpace = 28 + 12;
 
 #pragma mark - 视频直播异常打断
 - (void)applicationDidEnterBackground{
+    NSLog(@"进入后台，停止直播");
+
     [self hideKeyboard];
     [self appResignActive];
-    [self stopLive:@"视频直播异常停止，确定后将继续发起直播"];
 }
 
-- (void)stopLive:(NSString*)str{
-    if (_liveState == MZLiveLaunching) {
-        return;
-    }
-//    [self stopLive];
-    [self stopLiveTimer];
-    [self stopCountDownTimer];
-    WeaklySelf(weakSelf);
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"视频直播异常停止" message:@"确定后将继续发起直播" preferredStyle:UIAlertControllerStyleActionSheet];
-        
-    [alertController addAction:[UIAlertAction actionWithTitle:@"继续直播" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [MZSDKBusinessManager stopLive:nil ticketId:_model.ticket_id success:^(MZLiveFinishModel *model) {
-            [weakSelf stopLive];
-        } failure:^(NSError * error) {
-            [weakSelf stopLive];
-        }];
-    }]];
-    
-    [alertController addAction:[UIAlertAction actionWithTitle:@"结束" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        [self.chatKitManager closeLongPoll];
-        [self.chatKitManager closeSocketIO];
-        [weakSelf startLive];
-    }]];
-    //增加取消按钮；
-    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }]];
-    
-    [self presentViewController:alertController animated:true completion:nil];
-}
+//- (void)stopLive:(NSString*)str{
+//    if (_liveState == MZLiveLaunching) {
+//        return;
+//    }
+//    [self stopLiveTimer];
+//    [self stopCountDownTimer];
+//    WeaklySelf(weakSelf);
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"视频直播异常停止" message:@"确定后将继续发起直播" preferredStyle:UIAlertControllerStyleActionSheet];
+//
+//    [alertController addAction:[UIAlertAction actionWithTitle:@"结束" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [MZSDKBusinessManager stopLive:nil ticketId:_model.ticket_id success:^(MZLiveFinishModel *model) {
+//            [weakSelf stopLive];
+//        } failure:^(NSError * error) {
+//            [weakSelf stopLive];
+//        }];
+//    }]];
+//
+//    [alertController addAction:[UIAlertAction actionWithTitle:@"继续直播" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [weakSelf startLive];
+//    }]];
+//
+//    [self presentViewController:alertController animated:true completion:nil];
+//}
 
 
 
@@ -1619,10 +1600,7 @@ CGFloat BtnSpace = 28 + 12;
             [self getStopLiveData];
         }
         else if(alertView.tag == 88){
-            [self stopLiveTimer];
-            _isCanShowVerticalScreen = YES;
-            //        [self rotateScreen:NO];
-            [_pushManager stopCapture];
+            [self destoryPusher];
             [self dismissViewControllerAnimated:YES completion:nil];
         }else{
             if (buttonIndex != alertView.cancelButtonIndex) {
@@ -1682,7 +1660,6 @@ CGFloat BtnSpace = 28 + 12;
 -(void)receiveOtherLoginMessage
 {
     [self destroySession];
-    _isCanShowVerticalScreen = YES;
 }
 
 

@@ -137,7 +137,7 @@
             } else {
                 [self.dataArray insertObject:downloader atIndex:0];
                 [self reloadTableData];
-//                [[MZDownLoaderCenter shareInstanced] start:downloader];
+                [[MZDownLoaderCenter shareInstanced] start:downloader];
             }
         });
     }];
