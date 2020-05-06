@@ -131,7 +131,7 @@
         user.userId = @"10001091";
         user.nickName = @"张三";
         
-#warning 请输入分配给你们的appID和secretKey
+#warning 请配置appID和secretKey
         user.appID = @"";//线上模拟环境(这里需要自己填一下)
         user.secretKey = @"";
         
