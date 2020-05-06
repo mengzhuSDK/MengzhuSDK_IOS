@@ -35,8 +35,14 @@
 
 # **4. SDK配置及介绍**
 本文是根据附加demo来介绍SDK集成，可在已下载的SDK文件路径下引入demo项目。通过查看demo可了解更多详细功能。
-## **4. 1 工具包及资源文件接入介绍**
-当前版本支持framework工具包方式接入，暂不支持CocoaPods方式接入，如需要CocoaPods方式接入请等待后续版本。
+## **4. 1 cocoapods集成**
+### 本项目支持cocoapods安装，只需要将如下代码添加到Podfile中：   
+    pod 'MZMediaSDK'#推流和播放器的SDK，最新版本1.0.2
+    pod 'MZDownLoaderSDK'#下载器的SDK，最新版本1.0.7（如需要下载功能，添加此行带代码）
+
+执行pod install或pod update。
+
+## **4. 2 手动集成**
 ### **- SDK工具包及导入介绍**
     MZMediaSDK.framework
 a 将工具包MZMediaSDK.framework复制到项目目录下，进入`project` 设置界面选择`Linked Frameworks andLibraries`点击`+`选择项目内的framework工具包点完成。
@@ -51,7 +57,7 @@ b 引用tdb`Linked Frameworks andLibraries`点击`+`搜索`libbz2.tbd`，`libbz2
 进入`project`选择`Build Settings` `all` `Combined` 搜索`ENABLE_BITCODE`设为`NO`
 
 ![](https://wmz.zmengzhu.com/uploads/201811/5bdd1d33a59a9_5bdd1d33.png)
-## **4.2 权限设置**
+## **4.3 权限设置**
 具体权限配置请查看demo info
 ![](https://wmz.zmengzhu.com/uploads/201811/5bdd3e32a1c7b_5bdd3e32.png)
 
