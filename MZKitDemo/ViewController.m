@@ -18,6 +18,7 @@
     UIButton *playerViewBtn;
     UIButton *playerViewBtn2;
     UIButton *playerViewBtn3;
+    UIButton *playerViewBtn4;
 //    MZPlayerManager *manager;
     
 }
@@ -64,13 +65,18 @@
     [playerViewBtn2 setTitle:@"推流测试" forState:UIControlStateNormal];
     
     [playerViewBtn2 setBackgroundColor:[UIColor blueColor]];
-    [playerViewBtn2 addTarget:self action:@selector(onLandscapePlayerClick:) forControlEvents:UIControlEventTouchDown];
+    [playerViewBtn2 addTarget:self action:@selector(pusherClick:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:playerViewBtn2];
     playerViewBtn3=[[UIButton alloc]initWithFrame:CGRectMake(playerViewBtn.frame.origin.x, playerViewBtn2.frame.origin.y+playerViewBtn2.frame.size.height+20, self.view.bounds.size.width, 40)];
     [playerViewBtn3 setTitle:@"下载测试" forState:UIControlStateNormal];
     [playerViewBtn3 setBackgroundColor:[UIColor blueColor]];
     [playerViewBtn3 addTarget:self action:@selector(downloadClick) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:playerViewBtn3];
+    playerViewBtn4=[[UIButton alloc]initWithFrame:CGRectMake(playerViewBtn3.frame.origin.x, playerViewBtn3.frame.origin.y+playerViewBtn3.frame.size.height+20, self.view.bounds.size.width, 40)];
+    [playerViewBtn4 setTitle:@"超级播放器" forState:UIControlStateNormal];
+    [playerViewBtn4 setBackgroundColor:[UIColor blueColor]];
+    [playerViewBtn4 addTarget:self action:@selector(onNBPlayerViewClick:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:playerViewBtn4];
 //  输入框
     
     UILabel *tipL1 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 90, self.view.bounds.size.width, 20)];
@@ -120,42 +126,45 @@
     [self.view addSubview:self.accountNoTextView];
 }
 
--(void)onLandscapePlayerClick:(UIButton *)sender{
-    if ([sender.titleLabel.text isEqualToString:@"推流测试"]) {
-        [MZSDKBusinessManager setDebug:YES];
+
+- (void)onNBPlayerViewClick:(UIButton *)sender {
+    [MZSDKBusinessManager setDebug:YES];
+    MZUser *user=[[MZUser alloc]init];
+    
+#warning 请输入分配给你们的appID和secretKey
+    user.appID = @"";//线上模拟环境(这里需要自己填一下)
+    user.secretKey = @"";
+    
+    user.accountNo = @"GM20181202092745000830";
+    [MZUserServer updateCurrentUser:user];
+    [[MZSDKInitManager sharedManager]initSDK:^(id responseObject) {
+        PlayerViewController *liveVC=[[PlayerViewController alloc]init];
+        [self.navigationController pushViewController:liveVC  animated:YES];
+    } failure:^(NSError *error) {
         
-        MZUser *user=[[MZUser alloc]init];
-        user.accountNo = @"GM20181202092745000830";
-        
-#warning 这里是我模拟的用户信息，使用的时候，请使用你们自己服务器的用户信息
-        user.userId = @"10001091";
-        user.nickName = @"张三";
-        
-#warning 请配置appID和secretKey
-        user.appID = @"";//线上模拟环境(这里需要自己填一下)
-        user.secretKey = @"";
-        
-        [MZUserServer updateCurrentUser:user];
-        
-        MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    } else if ([sender.titleLabel.text isEqualToString:@"横屏测试"]) {
-        [MZSDKBusinessManager setDebug:YES];
-        MZUser *user=[[MZUser alloc]init];
-        user.appID = @"";//线上模拟环境(这里需要自己填一下)
-        user.secretKey = @"";
-        user.accountNo = @"GM20181202092745000830";
-        [MZUserServer updateCurrentUser:user];
-        [[MZSDKInitManager sharedManager]initSDK:^(id responseObject) {
-            PlayerViewController *liveVC=[[PlayerViewController alloc]init];
-            [self.navigationController pushViewController:liveVC  animated:YES];
-        } failure:^(NSError *error) {
-            
-        }];
-    }
+    }];
 }
 
+-(void)pusherClick:(UIButton *)sender{
+    [MZSDKBusinessManager setDebug:YES];
+    
+    MZUser *user=[[MZUser alloc]init];
+    user.accountNo = @"GM20181202092745000830";
+    
+#warning 这里是我模拟的用户信息，使用的时候，请使用你们自己服务器的用户信息
+    user.userId = @"10001091";
+    user.nickName = @"张三";
+    
+#warning 请输入分配给你们的appID和secretKey
+    user.appID = @"2019101019585068343";//线上模拟环境(这里需要自己填一下)
+    user.secretKey = @"xEyRRg4QYWbk09hfRJHYHeKPv8nWZITlBiklc44MZCxbdk4E6cGVzrXve6iVaNBn";
+    
+    [MZUserServer updateCurrentUser:user];
+    
+    MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 -(void)onPlayerViewClick{
     if (self.ticket_IDTextView.text.length == 0) {
         
@@ -164,8 +173,11 @@
     [MZSDKBusinessManager setDebug:YES];
     
     MZUser *user=[[MZUser alloc]init];
+    
+#warning 请输入分配给你们的appID和secretKey
     user.appID = @"";//线上模拟环境(这里需要自己填一下)
     user.secretKey = @"";
+    
     user.accountNo = @"GM20181202092745000830";
     [MZUserServer updateCurrentUser:user];
     MZVerticalPlayerVC *liveVC = [[MZVerticalPlayerVC alloc]init];
@@ -178,5 +190,17 @@
     MZM3U8DownLoadViewController *downloadVC = [[MZM3U8DownLoadViewController alloc] init];
     downloadVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.navigationController pushViewController:downloadVC animated:YES];
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
 }
 @end
