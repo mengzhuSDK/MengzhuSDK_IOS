@@ -5,7 +5,7 @@ use_frameworks!
 target'MZKitDemo'do
 
 pod 'MZDownLoaderSDK','~>1.0.7’ #下载器的盟主SDK，最新版本1.0.7
-pod 'MZMediaSDK','~>1.0.2' #推流和播放器的盟主SDK，最新版本1.0.2
+pod 'MZMediaSDK','~>1.0.3' #推流和播放器的盟主SDK，最新版本1.0.3
 
 end
 

@@ -796,7 +796,7 @@ CGFloat BtnSpace = 28 + 12;
     [MZSimpleHud show];
     NSLog(@"show 3");
 
-    [MZSDKBusinessManager blockAllOrAlowChatWithChannelId:_model.channelId ticketId:_model.ticket_id type:self.blockAllButton.selected success:^(id responseObject) {
+    [MZSDKBusinessManager blockAllOrAlowChatWithChannelId:_model.channelId ticketId:_model.ticket_id isChat:self.blockAllButton.selected success:^(id responseObject) {
         [MZSimpleHud hide];
         if(self.blockAllButton.selected){
             [self showTextView:self.view message:@"已关闭全体禁言"];

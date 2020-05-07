@@ -67,15 +67,15 @@
 +(void)bannedOrUnBannedUserWithTicketId:(NSString *)ticketId uid:(NSString *)uid isBanned:(BOOL)isBanned success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 
 /**
- * 聊天室里是否开启禁言功能
+ * 聊天室里是否可以聊天
  *
  * @param channelId 频道ID
  * @param ticketId 直播活动ID
- * @param isBlockChat 是否开启禁言 e.g YES=开启，NO=关闭
+ * @param isChat 是否可以聊天 e.g YES=可以，NO=不可以
  * @param success 成功回调
  * @param failure 失败原因回调
  */
-+(void)blockAllOrAlowChatWithChannelId:(NSString *)channelId ticketId:(NSString *)ticketId type:(BOOL)isBlockChat success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
++(void)blockAllOrAlowChatWithChannelId:(NSString *)channelId ticketId:(NSString *)ticketId isChat:(BOOL)isChat success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
 
 @end
 

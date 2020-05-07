@@ -1,10 +1,10 @@
 PODS:
   - MZDownLoaderSDK (1.0.7)
-  - MZMediaSDK (1.0.2)
+  - MZMediaSDK (1.0.3)
 
 DEPENDENCIES:
   - MZDownLoaderSDK (~> 1.0.7)
-  - MZMediaSDK (~> 1.0.2)
+  - MZMediaSDK (~> 1.0.3)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -13,8 +13,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   MZDownLoaderSDK: 993092f4508a95f576f5b296ef8ac816f85c9fda
-  MZMediaSDK: 59a8817349e6e7b268a4f6b463ef87236ec0d44a
+  MZMediaSDK: 05191725aa09400078f7eef5878fcc81523e7497
 
-PODFILE CHECKSUM: ccc4833183db3dd25204beded43f20255ff29942
+PODFILE CHECKSUM: cecbeefb520c4f9893bf44b20758a5ad33559e2a
 
 COCOAPODS: 1.9.0.beta.2

@@ -37,7 +37,7 @@
 本文是根据附加demo来介绍SDK集成，可在已下载的SDK文件路径下引入demo项目。通过查看demo可了解更多详细功能。
 ## **4. 1 cocoapods集成**
 ### **- 本项目支持cocoapods安装，只需要将如下代码添加到Podfile中:** 
-    pod 'MZMediaSDK'#推流和播放器的SDK，最新版本1.0.2
+    pod 'MZMediaSDK'#推流和播放器的SDK，最新版本1.0.3
     pod 'MZDownLoaderSDK'#下载器的SDK，最新版本1.0.7（如需下载功能，添加此行代码）
 
 执行pod install或pod update。
