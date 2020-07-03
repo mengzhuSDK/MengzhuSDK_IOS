@@ -30,6 +30,7 @@
         headerView.layer.cornerRadius = 15;
         [self.contentView addSubview:headerView];
         nameL = [[UILabel alloc] initWithFrame:CGRectMake(40, 15, 200, 20)];
+        nameL.textColor = [UIColor blackColor];
         nameL.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:nameL];
         line = [[UIView alloc] initWithFrame:CGRectMake(0, 49.2, self.width, 0.8)];
