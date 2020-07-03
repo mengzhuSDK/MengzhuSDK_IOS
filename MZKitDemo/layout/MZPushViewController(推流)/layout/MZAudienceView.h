@@ -14,6 +14,6 @@
 
 -(void)showWithView:(UIView *)view withJoinTotal:(int)total ;
 //-(void)setSelectAction:(void(^)(NSString * userId))action loadMore:(void(^)(void(^finish)(NSArray * userList)))loadMore;
--(void)setUserList:(NSArray*)userList withChannelId:(NSString *)chanelId ticket_id:(NSString *)ticket_id;
+-(void)setUserList:(NSArray*)userList withChannelId:(NSString *)chanelId ticket_id:(NSString *)ticket_id selectUserHandle:(void(^)(MZOnlineUserListModel *model))selectUserHandle;
 
 @end

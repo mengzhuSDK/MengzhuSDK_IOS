@@ -1417,7 +1417,11 @@ CGFloat BtnSpace = 28 + 12;
              }
          }
         [audienceView showWithView:weakself.view withJoinTotal:(int)tempArr.count];
-        [audienceView setUserList:tempArr withChannelId:weakself.model.channelId ticket_id:weakself.model.ticket_id];
+        
+        __weak typeof(self)weakSelf = self;
+        [audienceView setUserList:tempArr withChannelId:weakself.model.channelId ticket_id:weakself.model.ticket_id selectUserHandle:^(MZOnlineUserListModel *model) {
+            [weakSelf showTextView:weakSelf.view message:@"点击了某一个观众"];
+        }];
      } failure:^(NSError *error) {
          NSLog(@"error %@",error);
      }];
@@ -1450,7 +1454,6 @@ CGFloat BtnSpace = 28 + 12;
  */
 -(void)activityGetNewMsg:(MZLongPollDataModel * )msg
 {
-    WeaklySelf(weakSelf);
     if(msg.event == MsgTypeOnline){
         [_chatView addChatData:msg];
         if(msg.userId.longLongValue <= 5000000000){
@@ -1458,7 +1461,18 @@ CGFloat BtnSpace = 28 + 12;
             user.uid = msg.userId;
             user.avatar = msg.userAvatar;
             user.nickname = msg.userName;
-            [self.onlineUsersArr addObject:user];
+
+            __block BOOL onlineArrayIsHas = NO;
+            [self.onlineUsersArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                MZOnlineUserListModel *model = (MZOnlineUserListModel *)obj;
+                if ([model.uid isEqualToString:user.uid]) {
+                    onlineArrayIsHas = YES;
+                    *stop = YES;
+                }
+            }];
+            if (!onlineArrayIsHas) {
+                [self.onlineUsersArr addObject:user];
+            }
         }
         NSLog(@"上线了上线了");
         self.liveAudienceHeaderView.userArr = self.onlineUsersArr;

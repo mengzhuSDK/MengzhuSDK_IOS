@@ -19,7 +19,7 @@
     UILabel * nameL;
     UIView * line;
 }
-@property (nonatomic,retain)MZAudienceListModel * model;
+@property (nonatomic,retain)MZOnlineUserListModel * model;
 @end
 @implementation MZAudienceCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier
@@ -48,6 +48,8 @@
 }
 @end
 
+typedef void(^SelectUserHandle)(MZOnlineUserListModel *user);
+
 @interface MZAudienceView ()<UITableViewDataSource,UITableViewDelegate,VHPullingRefreshTableViewDelegate>
 {
     MZEmptyView * _emptyView;
@@ -57,9 +59,12 @@
     NSString * _channelId;
     int _total;
 }
-@property (nonatomic ,strong)NSString *ticket_id;
-@property (nonatomic,copy)void(^action)(NSString * userId);
-@property (nonatomic,copy)void(^loadMore)(void(^finish)(NSArray * userList));
+@property (nonatomic, strong)NSString *ticket_id;
+@property (nonatomic, copy)void(^action)(NSString * userId);
+@property (nonatomic, copy)void(^loadMore)(void(^finish)(NSArray * userList));
+
+@property (nonatomic, copy)SelectUserHandle selectUserHandle;
+
 @end
 
 @implementation MZAudienceView
@@ -147,8 +152,9 @@
         [self dismiss];
     }
 }
--(void)setUserList:(NSArray*)userList withChannelId:(NSString *)chanelId ticket_id:(NSString *)ticket_id;
+-(void)setUserList:(NSArray*)userList withChannelId:(NSString *)chanelId ticket_id:(NSString *)ticket_id selectUserHandle:(void(^)(MZOnlineUserListModel *model))selectUserHandle
 {
+    self.selectUserHandle = selectUserHandle;
     _channelId = chanelId;
     self.ticket_id = ticket_id;
     _tableView.reachedTheEnd = (userList.count < 20)? YES : NO;
@@ -178,7 +184,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MZAudienceListModel * model = _tableView.dataArr[indexPath.row];
+    MZOnlineUserListModel * model = _tableView.dataArr[indexPath.row];
     static NSString * identifier = @"MZAudienceCell";
     MZAudienceCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
@@ -192,6 +198,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    MZOnlineUserListModel *model = _tableView.dataArr[indexPath.row];
+    if (self.selectUserHandle) {
+        self.selectUserHandle(model);
+    }
 }
 
 #pragma mark - PullingRefreshTableViewDelegate

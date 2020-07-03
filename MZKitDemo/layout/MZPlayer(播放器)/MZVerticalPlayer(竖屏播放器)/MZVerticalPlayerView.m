@@ -154,9 +154,6 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     
     self.liveAudienceHeaderView.clickBlock = ^{
         [weakself creatAudienceWinView];
-        if (weakself.delegate && [weakself.delegate respondsToSelector:@selector(onlineListButtonDidClick:)]) {
-            [weakself.delegate onlineListButtonDidClick:weakself.playInfo];
-        }
     };
     self.closeLiveBtn = [[UIButton alloc]initWithFrame:CGRectMake(MZ_SW - 44*MZ_RATE - 8*MZ_RATE,topSpace + 20*MZ_RATE, 44*MZ_RATE, 44*MZ_RATE)];
     [self.closeLiveBtn addTarget:self action:@selector(closeButtonDidclick:) forControlEvents:UIControlEventTouchUpInside];
@@ -492,7 +489,13 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     MZAudienceView * audienceView = [[MZAudienceView alloc] initWithFrame:self.bounds];
     
     [audienceView showWithView:self withJoinTotal:(int)self.onlineUsersArr.count];
-    [audienceView setUserList:self.onlineUsersArr withChannelId:self.playInfo.channel_id ticket_id:self.playInfo.ticket_id];
+    
+    __weak typeof(self)weakSelf = self;
+    [audienceView setUserList:self.onlineUsersArr withChannelId:self.playInfo.channel_id ticket_id:self.playInfo.ticket_id selectUserHandle:^(MZOnlineUserListModel *model) {
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(onlineListButtonDidClick:)]) {
+            [weakSelf.delegate onlineListButtonDidClick:model];
+        }
+    }];
 }
 
 /// 添加/删除防录屏
@@ -944,8 +947,20 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
                 user.uid = msg.userId;
                 user.avatar = msg.userAvatar;
                 user.nickname = msg.userName;
-                [self.onlineUsersArr addObject:user];
+                
+                __block BOOL onlineArrayIsHas = NO;
+                [self.onlineUsersArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    MZOnlineUserListModel *model = (MZOnlineUserListModel *)obj;
+                    if ([model.uid isEqualToString:user.uid]) {
+                        onlineArrayIsHas = YES;
+                        *stop = YES;
+                    }
+                }];
+                if (!onlineArrayIsHas) {
+                    [self.onlineUsersArr addObject:user];
+                }
             }
+            
             // 配置在线
             self.liveAudienceHeaderView.userArr = self.onlineUsersArr;
             

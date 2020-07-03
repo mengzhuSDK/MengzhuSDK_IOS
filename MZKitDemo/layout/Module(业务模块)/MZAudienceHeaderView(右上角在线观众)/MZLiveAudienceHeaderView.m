@@ -77,16 +77,11 @@
 
 -(void)setUserArr:(NSArray *)userArr
 {
-    for (MZUser *user in userArr) {
-         NSLog(@"user.avatar %@",user.avatar);
-    }
-     NSLog(@"%@",[NSThread currentThread]);
     _userArr = userArr;
     if(userArr.count >= 3){
-         NSLog(@"%@-----%@----%@",[(MZUser *)userArr[userArr.count - 1] avatar],[(MZUser *)userArr[userArr.count - 2] avatar],[(MZUser *)userArr[userArr.count - 3] avatar]);
-        [self.headBtnOne sd_setImageWithURL:[NSURL URLWithString:((MZUser *)userArr[userArr.count - 1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
-        [self.headBtnTwo sd_setImageWithURL:[NSURL URLWithString:((MZUser *)userArr[userArr.count - 2]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
-        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZUser *)userArr[userArr.count - 3]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnOne sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnTwo sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 2]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 3]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
         
         self.headBtnOne.hidden = NO;
         self.headBtnTwo.hidden = NO;
@@ -95,13 +90,13 @@
         
     }else if (userArr.count == 2){
         self.headBtnOne.hidden = YES;
-        [self.headBtnTwo sd_setImageWithURL:[NSURL URLWithString:((MZUser *)userArr[userArr.count - 1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
-        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZUser *)userArr[userArr.count - 2]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnTwo sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 2]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
         self.headBtnTwo.hidden = NO;
         self.headBtnThree.hidden = NO;
         self.numLabel.hidden = NO;
     }else if (userArr.count == 1){
-        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZUser *)userArr[userArr.count - 1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
         self.headBtnOne.hidden = YES;
         self.headBtnTwo.hidden = YES;
         self.headBtnThree.hidden = NO;
