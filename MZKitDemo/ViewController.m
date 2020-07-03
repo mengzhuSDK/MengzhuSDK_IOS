@@ -15,8 +15,8 @@
 #import "MZSimpleHud.h"
 
 /// 分配的appID和secretKey
-#define MZSDK_AppID @""
-#define MZSDK_SecretKey @""
+#define MZSDK_AppID @"2019101019585068343"
+#define MZSDK_SecretKey @"xEyRRg4QYWbk09hfRJHYHeKPv8nWZITlBiklc44MZCxbdk4E6cGVzrXve6iVaNBn"
 
 @interface ViewController (){
     UIButton *pushBtn;

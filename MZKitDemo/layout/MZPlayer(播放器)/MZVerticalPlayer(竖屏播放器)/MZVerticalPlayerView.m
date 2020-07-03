@@ -375,7 +375,13 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 - (void)tipGoodAnimationWithGoodsListArr:(NSMutableArray *)arr {
     WeaklySelf(weakSelf);
     if(!self.circleTipGoodsView){
-        self.circleTipGoodsView = [[MZTipGoodsView alloc]initWithFrame:CGRectMake(18*MZ_RATE, self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE, 175*MZ_RATE, 60*MZ_RATE)];
+        
+        CGFloat y = self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE;
+        if (self.chatView.frame.size.height >= 198*MZ_RATE) {//暂时没有商品的情况
+            y = y - 60*MZ_RATE;
+        }
+        
+        self.circleTipGoodsView = [[MZTipGoodsView alloc]initWithFrame:CGRectMake(18*MZ_RATE, y, 175*MZ_RATE, 60*MZ_RATE)];
         
         self.circleTipGoodsView.goodsClickBlock = ^(MZGoodsListModel * _Nonnull model) {
             if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(goodsItemDidClick:)]) {
@@ -387,6 +393,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         [self addSubview:self.circleTipGoodsView];
     }else{
         self.circleTipGoodsView.frame=CGRectMake(18*MZ_RATE, self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE, 175*MZ_RATE, 60*MZ_RATE);
+        [self.chatView scrollToBottom];
     }
     self.circleTipGoodsView.goodsListModelArr = arr;
     if(!self.circleTipGoodsView.isOpen){
