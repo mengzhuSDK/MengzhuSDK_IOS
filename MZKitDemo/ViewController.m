@@ -7,10 +7,16 @@
 //
 
 #import "ViewController.h"
-#import "MZVerticalPlayerVC.h"
+#import "MZVerticalPlayerViewController.h"
 #import "PlayerViewController.h"
 #import "MZM3U8DownLoadViewController.h"
 #import "MZReadyLiveViewController.h"
+#import "MZSuperPlayerViewController.h"
+#import "MZSimpleHud.h"
+
+/// 分配的appID和secretKey
+#define MZSDK_AppID @""
+#define MZSDK_SecretKey @""
 
 @interface ViewController (){
     UIButton *pushBtn;
@@ -27,7 +33,6 @@
 @property (nonatomic ,strong) UITextView *UIDTextView;
 @property (nonatomic ,strong) UITextView *nameTextView;
 @property (nonatomic ,strong) UITextView *avatarTextView;
-@property (nonatomic ,strong) UITextView *accountNoTextView;
 @end
 
 @implementation ViewController
@@ -44,7 +49,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self customAddSubviews];
+    [self customAddSubviews];  
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -54,28 +59,25 @@
 
 - (void)customAddSubviews{
     
-    playerViewBtn=[[UIButton alloc]initWithFrame:CGRectMake(playerBtn.frame.origin.x, playerBtn.frame.origin.y+playerBtn.frame.size.height+500, self.view.bounds.size.width, 40)];
-    [playerViewBtn setTitle:@"基础播放器" forState:UIControlStateNormal];
+    playerViewBtn=[[UIButton alloc]initWithFrame:CGRectMake(playerBtn.frame.origin.x, playerBtn.frame.origin.y+playerBtn.frame.size.height+400 - 40, self.view.bounds.size.width, 40)];
+    [playerViewBtn setTitle:@"竖屏播放器" forState:UIControlStateNormal];
     [playerViewBtn setBackgroundColor:[UIColor blueColor]];
     [playerViewBtn addTarget:self action:@selector(onPlayerViewClick) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:playerViewBtn];
     playerViewBtn2=[[UIButton alloc]initWithFrame:CGRectMake(playerViewBtn.frame.origin.x, playerViewBtn.frame.origin.y+playerViewBtn.frame.size.height+20, self.view.bounds.size.width, 40)];
-    [playerViewBtn2 setTitle:@"横屏测试" forState:UIControlStateNormal];
-    
-    [playerViewBtn2 setTitle:@"推流测试" forState:UIControlStateNormal];
-    
+    [playerViewBtn2 setTitle:@"超级播放器" forState:UIControlStateNormal];
     [playerViewBtn2 setBackgroundColor:[UIColor blueColor]];
-    [playerViewBtn2 addTarget:self action:@selector(pusherClick:) forControlEvents:UIControlEventTouchDown];
+    [playerViewBtn2 addTarget:self action:@selector(onSuperPlayerViewClick:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:playerViewBtn2];
     playerViewBtn3=[[UIButton alloc]initWithFrame:CGRectMake(playerViewBtn.frame.origin.x, playerViewBtn2.frame.origin.y+playerViewBtn2.frame.size.height+20, self.view.bounds.size.width, 40)];
-    [playerViewBtn3 setTitle:@"下载测试" forState:UIControlStateNormal];
+    [playerViewBtn3 setTitle:@"推流测试" forState:UIControlStateNormal];
     [playerViewBtn3 setBackgroundColor:[UIColor blueColor]];
-    [playerViewBtn3 addTarget:self action:@selector(downloadClick) forControlEvents:UIControlEventTouchDown];
+    [playerViewBtn3 addTarget:self action:@selector(pusherClick:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:playerViewBtn3];
     playerViewBtn4=[[UIButton alloc]initWithFrame:CGRectMake(playerViewBtn3.frame.origin.x, playerViewBtn3.frame.origin.y+playerViewBtn3.frame.size.height+20, self.view.bounds.size.width, 40)];
-    [playerViewBtn4 setTitle:@"超级播放器" forState:UIControlStateNormal];
+    [playerViewBtn4 setTitle:@"下载测试" forState:UIControlStateNormal];
     [playerViewBtn4 setBackgroundColor:[UIColor blueColor]];
-    [playerViewBtn4 addTarget:self action:@selector(onNBPlayerViewClick:) forControlEvents:UIControlEventTouchDown];
+    [playerViewBtn4 addTarget:self action:@selector(downloadClick) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:playerViewBtn4];
 //  输入框
     
@@ -87,8 +89,9 @@
     self.ticket_IDTextView.backgroundColor = [UIColor cyanColor];
     self.ticket_IDTextView.keyboardType = UIKeyboardTypeDefault;
     [self.view addSubview:self.ticket_IDTextView];
-    self.ticket_IDTextView.text = @"10008683";
-    
+    self.ticket_IDTextView.text = @"10014014";//竖屏
+//    self.ticket_IDTextView.text = @"10013331";//横屏
+
     UILabel *tipL2 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 140, self.view.bounds.size.width, 20)];
     [self.view addSubview:tipL2];
     tipL2.text = @"观众信息：UID";
@@ -96,7 +99,7 @@
     self.UIDTextView.backgroundColor = [UIColor cyanColor];
     self.UIDTextView.keyboardType = UIKeyboardTypeDefault;
     [self.view addSubview:self.UIDTextView];
-    self.UIDTextView.text = @"2095938";
+    self.UIDTextView.text = @"10001091";
     
     UILabel *tipL3 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 190, self.view.bounds.size.width, 20)];
     [self.view addSubview:tipL3];
@@ -105,59 +108,61 @@
     self.nameTextView.backgroundColor = [UIColor cyanColor];
     self.nameTextView.keyboardType = UIKeyboardTypeDefault;
     [self.view addSubview:self.nameTextView];
-    self.nameTextView.text = @"观众名称";
+    self.nameTextView.text = @"小酒窝";
     
     UILabel *tipL4 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 240, self.view.bounds.size.width, 20)];
     [self.view addSubview:tipL4];
     tipL4.text = @"观众信息：AVATAR";
-    self.avatarTextView = [[UITextView alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 260, self.view.bounds.size.width, 30)];
+    self.avatarTextView = [[UITextView alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 260, self.view.bounds.size.width, 50)];
     self.avatarTextView.backgroundColor = [UIColor cyanColor];
     self.avatarTextView.keyboardType = UIKeyboardTypeDefault;
     [self.view addSubview:self.avatarTextView];
     self.avatarTextView.text = @"https://cdn.duitang.com/uploads/item/201410/26/20141026191422_yEKyd.thumb.700_0.jpeg";
-    
-    UILabel *tipL5 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 290, self.view.bounds.size.width, 20)];
-    [self.view addSubview:tipL5];
-    tipL5.text = @"accountNo：";
-    self.accountNoTextView = [[UITextView alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 310, self.view.bounds.size.width, 30)];
-    self.accountNoTextView.text = @"GM20181202092638000826";
-    self.accountNoTextView.backgroundColor = [UIColor cyanColor];
-    self.accountNoTextView.keyboardType = UIKeyboardTypeDefault;
-    [self.view addSubview:self.accountNoTextView];
 }
 
 
-- (void)onNBPlayerViewClick:(UIButton *)sender {
+- (void)onSuperPlayerViewClick:(UIButton *)sender {
     [MZSDKBusinessManager setDebug:YES];
     MZUser *user=[[MZUser alloc]init];
     
+    user.userId = self.UIDTextView.text;
+    user.nickName = self.nameTextView.text;
+
+    user.avatar = self.avatarTextView.text;
+
 #warning 请输入分配给你们的appID和secretKey
-    user.appID = @"";//线上模拟环境(这里需要自己填一下)
-    user.secretKey = @"";
+    user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
+    user.secretKey = MZSDK_SecretKey;
     
-    user.accountNo = @"GM20181202092745000830";
     [MZUserServer updateCurrentUser:user];
-    [[MZSDKInitManager sharedManager]initSDK:^(id responseObject) {
-        PlayerViewController *liveVC=[[PlayerViewController alloc]init];
-        [self.navigationController pushViewController:liveVC  animated:YES];
-    } failure:^(NSError *error) {
-        
-    }];
+    
+    
+//    [[MZSDKInitManager sharedManager]initSDK:^(id responseObject) {
+
+        MZSuperPlayerViewController *superPlayerVC = [[MZSuperPlayerViewController alloc] init];
+    superPlayerVC.ticket_id = self.ticket_IDTextView.text;
+        [self.navigationController pushViewController:superPlayerVC animated:YES];
+//        PlayerViewController *playerVC = [[PlayerViewController alloc] init];
+//        [self.navigationController pushViewController:playerVC animated:YES];
+
+//    } failure:^(NSError *error) {
+//
+//    }];
 }
 
 -(void)pusherClick:(UIButton *)sender{
+    
     [MZSDKBusinessManager setDebug:YES];
     
     MZUser *user=[[MZUser alloc]init];
-    user.accountNo = @"GM20181202092745000830";
     
 #warning 这里是我模拟的用户信息，使用的时候，请使用你们自己服务器的用户信息
     user.userId = @"10001091";
     user.nickName = @"张三";
     
 #warning 请输入分配给你们的appID和secretKey
-    user.appID = @"2019101019585068343";//线上模拟环境(这里需要自己填一下)
-    user.secretKey = @"xEyRRg4QYWbk09hfRJHYHeKPv8nWZITlBiklc44MZCxbdk4E6cGVzrXve6iVaNBn";
+    user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
+    user.secretKey = MZSDK_SecretKey;
     
     [MZUserServer updateCurrentUser:user];
     
@@ -165,6 +170,7 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
 -(void)onPlayerViewClick{
     if (self.ticket_IDTextView.text.length == 0) {
         
@@ -173,17 +179,20 @@
     [MZSDKBusinessManager setDebug:YES];
     
     MZUser *user=[[MZUser alloc]init];
+    user.userId = self.UIDTextView.text;
+    user.nickName = self.nameTextView.text;
+
+    user.avatar = self.avatarTextView.text;
     
 #warning 请输入分配给你们的appID和secretKey
-    user.appID = @"";//线上模拟环境(这里需要自己填一下)
-    user.secretKey = @"";
+    user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
+    user.secretKey = MZSDK_SecretKey;
     
-    user.accountNo = @"GM20181202092745000830";
     [MZUserServer updateCurrentUser:user];
-    MZVerticalPlayerVC *liveVC = [[MZVerticalPlayerVC alloc]init];
+    
+    MZVerticalPlayerViewController *liveVC = [[MZVerticalPlayerViewController alloc]init];
     liveVC.ticket_id = self.ticket_IDTextView.text;
     [self.navigationController pushViewController:liveVC  animated:YES];
-
 }
 
 - (void)downloadClick {
@@ -203,4 +212,6 @@
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return UIInterfaceOrientationPortrait;
 }
+
+
 @end

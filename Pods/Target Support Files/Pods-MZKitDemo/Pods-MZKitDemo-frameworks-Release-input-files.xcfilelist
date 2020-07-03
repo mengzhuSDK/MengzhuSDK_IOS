@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-frameworks.sh
+${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary/MZCoreSDKLibrary.framework
 ${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.framework

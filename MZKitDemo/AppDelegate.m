@@ -11,6 +11,7 @@
 @interface AppDelegate ()
 @property (nonatomic, assign) UIBackgroundTaskIdentifier backgrounTask;
 @property (nonatomic,strong) NSTimer *timer;
+
 @end
 
 @implementation AppDelegate
@@ -19,6 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+
+
     return YES;
 }
 
@@ -51,7 +54,7 @@
         [[UIApplication sharedApplication] endBackgroundTask:self.self.backgrounTask];
         self.backgrounTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
             [[UIApplication sharedApplication] endBackgroundTask:self.self.backgrounTask];
-            self.self.backgrounTask = UIBackgroundTaskInvalid;
+            self.backgrounTask = UIBackgroundTaskInvalid;
         }];
     }
 }

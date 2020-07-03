@@ -9,8 +9,13 @@
 
 #import "MZDimenComment.h"
 #import "UIView+MZExtend.h"
-//#import "MZRefresh.h"
-#import <MZMediaSDK/MZMediaSDK.h>
+
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>//核心组件，必须依赖
+
+#import <MZMediaSDK/MZMediaSDK.h>//业务组件
+#import <MZPlayerSDK/MZPlayerSDK.h>//播放器（观看直播和回放）组件
+#import <MZM3U8DownLoaderSDK/MZM3U8DownLoaderSDK.h>//下载器器组件
+#import <MZPushFlowSDK/MZPushFlowSDK.h>//直播推流组件
 
 #ifndef MZKitDemoPrefixHeader_pch
 #define MZKitDemoPrefixHeader_pch

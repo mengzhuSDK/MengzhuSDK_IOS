@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		4451BB4D15BA30982EB237617FF0320F /* MZCoreSDKLibrary */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = EE82032F68BB9B74F0725100280FBC33 /* Build configuration list for PBXAggregateTarget "MZCoreSDKLibrary" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = MZCoreSDKLibrary;
+		};
 		4F6D20F33C5363A3C0CE863B80A12241 /* MZMediaSDK */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 758EF7D9CE0A61D750A79CD7478F90AF /* Build configuration list for PBXAggregateTarget "MZMediaSDK" */;
@@ -28,20 +37,27 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		6CAB4B017A93194113E104FBA7FE8C1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		7E49A0202BF5D5DBFFAE56169EB64780 /* Pods-MZKitDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE705FE604D2FDCD8123A6D2EA5BEC19 /* Pods-MZKitDemo-dummy.m */; };
-		A65C5AC421D2C84249D8D3D317E4A123 /* Pods-MZKitDemo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F58E5CE9008552D3614CB937D5E5D3FD /* Pods-MZKitDemo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0706FDEEBB2DA45D9850D4A54FD39B24 /* Pods-MZKitDemo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F58E5CE9008552D3614CB937D5E5D3FD /* Pods-MZKitDemo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		161F33C983B2312FFC6119372115B841 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		8355BAF5FBE6F5B17F4EF14A7D7668D1 /* Pods-MZKitDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE705FE604D2FDCD8123A6D2EA5BEC19 /* Pods-MZKitDemo-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		32AE04EFD7F9E34138028E1E357D665E /* PBXContainerItemProxy */ = {
+		33858ABEEA7D2F899A620C76DDC87FA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4451BB4D15BA30982EB237617FF0320F;
+			remoteInfo = MZCoreSDKLibrary;
+		};
+		B214DED913900074E4B00473635A7C61 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 861952E3D42B24CC39416E4F2D37BE88;
 			remoteInfo = MZDownLoaderSDK;
 		};
-		40B89168BB0880ADEBF30E86AD74AC18 /* PBXContainerItemProxy */ = {
+		C623F8BDFC829081D5DDF5BC236B052A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -51,48 +67,52 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1432C2312B837F6DCC55540EB21E5854 /* MZDownLoaderSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MZDownLoaderSDK.release.xcconfig; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3242520D27D227B6EF207B378751240E /* MZM3U8DownLoaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MZM3U8DownLoaderSDK.framework; path = MZDownLoaderSDK/MZM3U8DownLoaderSDK.framework; sourceTree = "<group>"; };
-		3A8AD8C46D422874A0F12616CEAD9EBC /* MZMediaSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MZMediaSDK.release.xcconfig; sourceTree = "<group>"; };
+		3C2E557B4BD138822B256CAADE2C6725 /* MZDownLoaderSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MZDownLoaderSDK.debug.xcconfig; sourceTree = "<group>"; };
+		488F3F1A895B882DCE34CEF9B4AC31A5 /* MZCoreSDKLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MZCoreSDKLibrary.debug.xcconfig; sourceTree = "<group>"; };
+		4BFE7941C8939FAF882883999B2A5C91 /* MZCoreSDKLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MZCoreSDKLibrary.framework; path = MZCoreLibrary/MZCoreSDKLibrary.framework; sourceTree = "<group>"; };
 		5788DF2ACABF19A568BBF8AA749E5ABE /* Pods-MZKitDemo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MZKitDemo-acknowledgements.plist"; sourceTree = "<group>"; };
 		59C23CC7B05A2A6D7C65285DF814E345 /* Pods-MZKitDemo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MZKitDemo-acknowledgements.markdown"; sourceTree = "<group>"; };
-		689F3CD76A009E20A8FA5557619124C0 /* MZMediaSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MZMediaSDK.debug.xcconfig; sourceTree = "<group>"; };
 		726F459863916E5A1C28C89C9041FC2A /* Pods-MZKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MZKitDemo.release.xcconfig"; sourceTree = "<group>"; };
-		86C2ED2F75FA628E6BB31386323C7566 /* MZMediaSDK.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = MZMediaSDK.bundle; path = MZMediaSDK/MZMediaSDK.bundle; sourceTree = "<group>"; };
 		8A8C68254F99259251918FCD5B904A73 /* Pods_MZKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MZKitDemo.framework; path = "Pods-MZKitDemo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C1BE693F10DC296078992B84CC04B2E /* MZDownLoaderSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MZDownLoaderSDK.release.xcconfig; sourceTree = "<group>"; };
+		94D80D5B14F70DDBC7F56F5607443B94 /* MZMediaSDK.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = MZMediaSDK.bundle; path = MZMediaSDK/MZMediaSDK.bundle; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A32E76C273A46803A50693FEBBDB9680 /* MZMediaSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MZMediaSDK.debug.xcconfig; sourceTree = "<group>"; };
 		A6C2F5F158D28429FE44BF5887FDF76C /* Pods-MZKitDemo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-MZKitDemo.modulemap"; sourceTree = "<group>"; };
-		C7F77DDC7850C946EDA14365C61D4143 /* MZM3U8DownLoaderSDKBundle.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = MZM3U8DownLoaderSDKBundle.bundle; path = MZDownLoaderSDK/MZM3U8DownLoaderSDKBundle.bundle; sourceTree = "<group>"; };
+		BC918CF71A25A22B4A61C5FF9D3CB6D9 /* MZCoreSDKLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MZCoreSDKLibrary.release.xcconfig; sourceTree = "<group>"; };
+		C8A726C45631F001D2720FDA4722A7D4 /* MZM3U8DownLoaderSDKBundle.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = MZM3U8DownLoaderSDKBundle.bundle; path = MZDownLoaderSDK/MZM3U8DownLoaderSDKBundle.bundle; sourceTree = "<group>"; };
 		CD9DE4B5329F1DBD9D57F0AA69AF6B3E /* Pods-MZKitDemo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MZKitDemo-resources.sh"; sourceTree = "<group>"; };
-		D23380DC6786CEA099522077174705AA /* MZDownLoaderSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MZDownLoaderSDK.debug.xcconfig; sourceTree = "<group>"; };
+		D0882B5958A9945A4A2C8E04E7A18A7F /* MZMediaSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MZMediaSDK.release.xcconfig; sourceTree = "<group>"; };
 		D8DD920F5D7731ADD4DCC26D758310BD /* Pods-MZKitDemo-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MZKitDemo-Info.plist"; sourceTree = "<group>"; };
+		DB212BB79DE33E277924C60475573870 /* MZM3U8DownLoaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MZM3U8DownLoaderSDK.framework; path = MZDownLoaderSDK/MZM3U8DownLoaderSDK.framework; sourceTree = "<group>"; };
 		E4522F837234B708790AF4CD2587EC99 /* Pods-MZKitDemo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MZKitDemo-frameworks.sh"; sourceTree = "<group>"; };
 		EBE1B6A370C9CBEF1ABF882D3D58E923 /* Pods-MZKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MZKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		EE705FE604D2FDCD8123A6D2EA5BEC19 /* Pods-MZKitDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MZKitDemo-dummy.m"; sourceTree = "<group>"; };
 		F58E5CE9008552D3614CB937D5E5D3FD /* Pods-MZKitDemo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MZKitDemo-umbrella.h"; sourceTree = "<group>"; };
-		FB25965157FCC692BA669FBAA7D4DBD9 /* MZMediaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MZMediaSDK.framework; path = MZMediaSDK/MZMediaSDK.framework; sourceTree = "<group>"; };
+		FD8EAD6BADFA3CD2694EE5C562D11A99 /* MZMediaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MZMediaSDK.framework; path = MZMediaSDK/MZMediaSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C5553445A7D7CB0699AB2D096F0CB931 /* Frameworks */ = {
+		64F0B898CB4266BE914DDC6D3060829E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CAB4B017A93194113E104FBA7FE8C1E /* Foundation.framework in Frameworks */,
+				161F33C983B2312FFC6119372115B841 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0ACE7434A755B439C2914B6471117551 /* Pods */ = {
+		10BC89E8D2C20D395CE94677003C65A3 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				FD1E5880B7D6C8B397465F85C4369170 /* MZDownLoaderSDK */,
-				BF8DAEE2A68A6BA02C64DCD9D1574464 /* MZMediaSDK */,
+				3C2E557B4BD138822B256CAADE2C6725 /* MZDownLoaderSDK.debug.xcconfig */,
+				8C1BE693F10DC296078992B84CC04B2E /* MZDownLoaderSDK.release.xcconfig */,
 			);
-			name = Pods;
+			name = "Support Files";
+			path = "../Target Support Files/MZDownLoaderSDK";
 			sourceTree = "<group>";
 		};
 		1740B9EE60F83BC29B0EDEEC4B9EA91F /* Pods-MZKitDemo */ = {
@@ -121,46 +141,80 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		35CA5A0799111B602B78E8E82C55DB8F /* Support Files */ = {
+		41CA425394BFF89DBA2A230A2BA03525 /* MZDownLoaderSDK */ = {
 			isa = PBXGroup;
 			children = (
-				689F3CD76A009E20A8FA5557619124C0 /* MZMediaSDK.debug.xcconfig */,
-				3A8AD8C46D422874A0F12616CEAD9EBC /* MZMediaSDK.release.xcconfig */,
+				42DB36678E14F585C57BF43B27EEA65E /* Frameworks */,
+				A45BA21217C5380CE55A5A53FA48B1BC /* Resources */,
+				10BC89E8D2C20D395CE94677003C65A3 /* Support Files */,
+			);
+			name = MZDownLoaderSDK;
+			path = MZDownLoaderSDK;
+			sourceTree = "<group>";
+		};
+		4258EA01B4071D8E00A545F0DA875958 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				488F3F1A895B882DCE34CEF9B4AC31A5 /* MZCoreSDKLibrary.debug.xcconfig */,
+				BC918CF71A25A22B4A61C5FF9D3CB6D9 /* MZCoreSDKLibrary.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MZCoreSDKLibrary";
+			sourceTree = "<group>";
+		};
+		42DB36678E14F585C57BF43B27EEA65E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB212BB79DE33E277924C60475573870 /* MZM3U8DownLoaderSDK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4938EB30A8FBD11EA84BC2F7ED9B1EC4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				94D80D5B14F70DDBC7F56F5607443B94 /* MZMediaSDK.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7B46540C6CC120DAEA9E6E476EFF48A0 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A32E76C273A46803A50693FEBBDB9680 /* MZMediaSDK.debug.xcconfig */,
+				D0882B5958A9945A4A2C8E04E7A18A7F /* MZMediaSDK.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/MZMediaSDK";
 			sourceTree = "<group>";
 		};
-		6B5065FAFDC20CA26F4C16D8D39DD6C0 /* Frameworks */ = {
+		8D0FB13BDD0EB7EBB8D80FBC072DC5C3 /* MZMediaSDK */ = {
 			isa = PBXGroup;
 			children = (
-				FB25965157FCC692BA669FBAA7D4DBD9 /* MZMediaSDK.framework */,
+				DA485D07918987644E46DB5358842F27 /* Frameworks */,
+				4938EB30A8FBD11EA84BC2F7ED9B1EC4 /* Resources */,
+				7B46540C6CC120DAEA9E6E476EFF48A0 /* Support Files */,
+			);
+			name = MZMediaSDK;
+			path = MZMediaSDK;
+			sourceTree = "<group>";
+		};
+		8DE93841E45ADD89937EB9FF7B1547EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4BFE7941C8939FAF882883999B2A5C91 /* MZCoreSDKLibrary.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6D43F5798A0AE5EC66894AC461014D78 /* Frameworks */ = {
+		8FC3F78896B85941B7004A59D4E7CC43 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3242520D27D227B6EF207B378751240E /* MZM3U8DownLoaderSDK.framework */,
+				D74F8894695288803185D79431C62F97 /* MZCoreSDKLibrary */,
+				41CA425394BFF89DBA2A230A2BA03525 /* MZDownLoaderSDK */,
+				8D0FB13BDD0EB7EBB8D80FBC072DC5C3 /* MZMediaSDK */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		7158D64383218FED8B334164602FD3C0 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				C7F77DDC7850C946EDA14365C61D4143 /* MZM3U8DownLoaderSDKBundle.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		9195AF0AF690A18167C114150CD0DFEB /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				86C2ED2F75FA628E6BB31386323C7566 /* MZMediaSDK.bundle */,
-			);
-			name = Resources;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		9B626D60959C671512D951A773083BA8 /* Products */ = {
@@ -171,15 +225,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BF8DAEE2A68A6BA02C64DCD9D1574464 /* MZMediaSDK */ = {
+		A45BA21217C5380CE55A5A53FA48B1BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6B5065FAFDC20CA26F4C16D8D39DD6C0 /* Frameworks */,
-				9195AF0AF690A18167C114150CD0DFEB /* Resources */,
-				35CA5A0799111B602B78E8E82C55DB8F /* Support Files */,
+				C8A726C45631F001D2720FDA4722A7D4 /* MZM3U8DownLoaderSDKBundle.bundle */,
 			);
-			name = MZMediaSDK;
-			path = MZMediaSDK;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
@@ -195,7 +246,7 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				0ACE7434A755B439C2914B6471117551 /* Pods */,
+				8FC3F78896B85941B7004A59D4E7CC43 /* Pods */,
 				9B626D60959C671512D951A773083BA8 /* Products */,
 				185A809166A3E8CF14C2B6CF7E6561CE /* Targets Support Files */,
 			);
@@ -209,35 +260,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E00389DAC636EEF1AC941868CFD4EF15 /* Support Files */ = {
+		D74F8894695288803185D79431C62F97 /* MZCoreSDKLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				D23380DC6786CEA099522077174705AA /* MZDownLoaderSDK.debug.xcconfig */,
-				1432C2312B837F6DCC55540EB21E5854 /* MZDownLoaderSDK.release.xcconfig */,
+				8DE93841E45ADD89937EB9FF7B1547EE /* Frameworks */,
+				4258EA01B4071D8E00A545F0DA875958 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/MZDownLoaderSDK";
+			name = MZCoreSDKLibrary;
+			path = MZCoreSDKLibrary;
 			sourceTree = "<group>";
 		};
-		FD1E5880B7D6C8B397465F85C4369170 /* MZDownLoaderSDK */ = {
+		DA485D07918987644E46DB5358842F27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6D43F5798A0AE5EC66894AC461014D78 /* Frameworks */,
-				7158D64383218FED8B334164602FD3C0 /* Resources */,
-				E00389DAC636EEF1AC941868CFD4EF15 /* Support Files */,
+				FD8EAD6BADFA3CD2694EE5C562D11A99 /* MZMediaSDK.framework */,
 			);
-			name = MZDownLoaderSDK;
-			path = MZDownLoaderSDK;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		8B9AFC62CD58AB19EEBDCFA47041EAB5 /* Headers */ = {
+		308B62C053116B849570FE3D43F7AA04 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A65C5AC421D2C84249D8D3D317E4A123 /* Pods-MZKitDemo-umbrella.h in Headers */,
+				0706FDEEBB2DA45D9850D4A54FD39B24 /* Pods-MZKitDemo-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,18 +294,19 @@
 /* Begin PBXNativeTarget section */
 		D9A1ABDDA1AE20A9DAC11E8D45170842 /* Pods-MZKitDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC5E2B3C81903CAB5B4C897CD8E2EFCF /* Build configuration list for PBXNativeTarget "Pods-MZKitDemo" */;
+			buildConfigurationList = 5C68625A43EA74949542974BF77F533E /* Build configuration list for PBXNativeTarget "Pods-MZKitDemo" */;
 			buildPhases = (
-				8B9AFC62CD58AB19EEBDCFA47041EAB5 /* Headers */,
-				13685569984FDBC21B11847BFA10C089 /* Sources */,
-				C5553445A7D7CB0699AB2D096F0CB931 /* Frameworks */,
-				E9BC6AA1267CB734490EC5DE86640133 /* Resources */,
+				308B62C053116B849570FE3D43F7AA04 /* Headers */,
+				2C48D4B22FFFA603DF17F9C178B1CCF0 /* Sources */,
+				64F0B898CB4266BE914DDC6D3060829E /* Frameworks */,
+				1B09C871219AE444995ED43710B1B6D9 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5CBB3B7E8D743780573ECFB4E0F8E5F1 /* PBXTargetDependency */,
-				3FE65F1AE00749594792CCC3CB201FAE /* PBXTargetDependency */,
+				FFC9306570C0AFB5D8C337DC4ABEC9D2 /* PBXTargetDependency */,
+				1D1EF28E85B7B28BFDA849A06BE47C82 /* PBXTargetDependency */,
+				75266ECC3C056EE5B6C9EED139AF7978 /* PBXTargetDependency */,
 			);
 			name = "Pods-MZKitDemo";
 			productName = "Pods-MZKitDemo";
@@ -286,6 +335,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				4451BB4D15BA30982EB237617FF0320F /* MZCoreSDKLibrary */,
 				861952E3D42B24CC39416E4F2D37BE88 /* MZDownLoaderSDK */,
 				4F6D20F33C5363A3C0CE863B80A12241 /* MZMediaSDK */,
 				D9A1ABDDA1AE20A9DAC11E8D45170842 /* Pods-MZKitDemo */,
@@ -294,7 +344,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E9BC6AA1267CB734490EC5DE86640133 /* Resources */ = {
+		1B09C871219AE444995ED43710B1B6D9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -304,35 +354,74 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		13685569984FDBC21B11847BFA10C089 /* Sources */ = {
+		2C48D4B22FFFA603DF17F9C178B1CCF0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E49A0202BF5D5DBFFAE56169EB64780 /* Pods-MZKitDemo-dummy.m in Sources */,
+				8355BAF5FBE6F5B17F4EF14A7D7668D1 /* Pods-MZKitDemo-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3FE65F1AE00749594792CCC3CB201FAE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MZMediaSDK;
-			target = 4F6D20F33C5363A3C0CE863B80A12241 /* MZMediaSDK */;
-			targetProxy = 40B89168BB0880ADEBF30E86AD74AC18 /* PBXContainerItemProxy */;
-		};
-		5CBB3B7E8D743780573ECFB4E0F8E5F1 /* PBXTargetDependency */ = {
+		1D1EF28E85B7B28BFDA849A06BE47C82 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MZDownLoaderSDK;
 			target = 861952E3D42B24CC39416E4F2D37BE88 /* MZDownLoaderSDK */;
-			targetProxy = 32AE04EFD7F9E34138028E1E357D665E /* PBXContainerItemProxy */;
+			targetProxy = B214DED913900074E4B00473635A7C61 /* PBXContainerItemProxy */;
+		};
+		75266ECC3C056EE5B6C9EED139AF7978 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MZMediaSDK;
+			target = 4F6D20F33C5363A3C0CE863B80A12241 /* MZMediaSDK */;
+			targetProxy = C623F8BDFC829081D5DDF5BC236B052A /* PBXContainerItemProxy */;
+		};
+		FFC9306570C0AFB5D8C337DC4ABEC9D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MZCoreSDKLibrary;
+			target = 4451BB4D15BA30982EB237617FF0320F /* MZCoreSDKLibrary */;
+			targetProxy = 33858ABEEA7D2F899A620C76DDC87FA8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		136EC7004D0E40851CADF442D2095CEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 488F3F1A895B882DCE34CEF9B4AC31A5 /* MZCoreSDKLibrary.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3B822F1B1B9595F3F71A633CBAC06021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC918CF71A25A22B4A61C5FF9D3CB6D9 /* MZCoreSDKLibrary.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		3D003E2329343441460C0AB16F9296B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 689F3CD76A009E20A8FA5557619124C0 /* MZMediaSDK.debug.xcconfig */;
+			baseConfigurationReference = A32E76C273A46803A50693FEBBDB9680 /* MZMediaSDK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -348,7 +437,7 @@
 		};
 		4225B9D493685D12B80F3DD1F937581E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1432C2312B837F6DCC55540EB21E5854 /* MZDownLoaderSDK.release.xcconfig */;
+			baseConfigurationReference = 8C1BE693F10DC296078992B84CC04B2E /* MZDownLoaderSDK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -363,7 +452,62 @@
 			};
 			name = Release;
 		};
-		4BE66A09A74FD25164AAB3C2645B9B93 /* Release */ = {
+		809A335814D111A86D665694A84E17AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 726F459863916E5A1C28C89C9041FC2A /* Pods-MZKitDemo.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8287739800CFA6EA5897A412C35CF328 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0882B5958A9945A4A2C8E04E7A18A7F /* MZMediaSDK.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8F17DC3A99F99FBAD606CE6963886315 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -411,7 +555,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -423,7 +567,7 @@
 			};
 			name = Release;
 		};
-		7EF7227D9B20A1D549000096ACCB23D7 /* Debug */ = {
+		916E0404255105F480DC4950B7625F7A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -474,7 +618,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -487,9 +631,9 @@
 			};
 			name = Debug;
 		};
-		8287739800CFA6EA5897A412C35CF328 /* Release */ = {
+		AD4E9E086F20A200E4F45342BCBB3456 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A8AD8C46D422874A0F12616CEAD9EBC /* MZMediaSDK.release.xcconfig */;
+			baseConfigurationReference = 3C2E557B4BD138822B256CAADE2C6725 /* MZDownLoaderSDK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -500,49 +644,10 @@
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
-		84F0E36AE95CBA79BC2C18EFC9EA4CC8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 726F459863916E5A1C28C89C9041FC2A /* Pods-MZKitDemo.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		897156D9305D7430767DE89EE2B08281 /* Debug */ = {
+		BFC164B9365E7B7B69DCD534B6160FEE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EBE1B6A370C9CBEF1ABF882D3D58E923 /* Pods-MZKitDemo.debug.xcconfig */;
 			buildSettings = {
@@ -558,7 +663,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -576,22 +681,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		AD4E9E086F20A200E4F45342BCBB3456 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D23380DC6786CEA099522077174705AA /* MZDownLoaderSDK.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -610,8 +699,17 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7EF7227D9B20A1D549000096ACCB23D7 /* Debug */,
-				4BE66A09A74FD25164AAB3C2645B9B93 /* Release */,
+				916E0404255105F480DC4950B7625F7A /* Debug */,
+				8F17DC3A99F99FBAD606CE6963886315 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C68625A43EA74949542974BF77F533E /* Build configuration list for PBXNativeTarget "Pods-MZKitDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFC164B9365E7B7B69DCD534B6160FEE /* Debug */,
+				809A335814D111A86D665694A84E17AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -625,11 +723,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC5E2B3C81903CAB5B4C897CD8E2EFCF /* Build configuration list for PBXNativeTarget "Pods-MZKitDemo" */ = {
+		EE82032F68BB9B74F0725100280FBC33 /* Build configuration list for PBXAggregateTarget "MZCoreSDKLibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				897156D9305D7430767DE89EE2B08281 /* Debug */,
-				84F0E36AE95CBA79BC2C18EFC9EA4CC8 /* Release */,
+				136EC7004D0E40851CADF442D2095CEB /* Debug */,
+				3B822F1B1B9595F3F71A633CBAC06021 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
