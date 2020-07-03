@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MZBaseModel.h"
-
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @interface MZGoodsListModel : MZBaseModel
 @property (nonatomic ,strong)NSString *id;//商品ID

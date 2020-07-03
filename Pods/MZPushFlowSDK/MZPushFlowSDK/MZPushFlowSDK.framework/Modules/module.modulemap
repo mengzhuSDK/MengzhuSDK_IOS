@@ -1,0 +1,6 @@
+framework module MZPushFlowSDK {
+  umbrella header "MZPushFlowSDK.h"
+
+  export *
+  module * { export * }
+}

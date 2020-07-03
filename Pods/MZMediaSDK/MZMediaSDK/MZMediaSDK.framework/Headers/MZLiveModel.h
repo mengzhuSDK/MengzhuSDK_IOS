@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "MZMoviePlayerModel.h"
-//#import "MZActivityComment.h"
+#import "MZActivityComment.h"
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @class MZLiveModel;
 

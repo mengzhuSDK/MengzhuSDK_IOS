@@ -1,6 +1,7 @@
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/MZDownLoaderSDK
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/MZDownLoaderSDK/MZDownLoaderSDK"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary" "${PODS_ROOT}/MZDownLoaderSDK/MZDownLoaderSDK"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+OTHER_LDFLAGS = $(inherited) -framework "AVFoundation" -framework "AssetsLibrary" -framework "CoreMedia" -framework "CoreVideo" -framework "Foundation" -framework "MZCoreSDKLibrary" -framework "OpenGLES" -framework "QuartzCore" -framework "Security" -framework "UIKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}

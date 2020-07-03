@@ -16,77 +16,54 @@ FOUNDATION_EXPORT const unsigned char MZMediaSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MZMediaSDK/PublicHeader.h>
 
+#pragma mark - MZNetOperate
+#import "MZNetOperate.h"
 
+#pragma mark - request
+#import "MZNetSeverUrlManager.h"
+
+#pragma mark - MZLiveActivity
 #import "MZActMsg.h"
-#import "MZActivityComment.h"
-#import "MKAnnotationView+MZWebCache.h"
-
-#import "MZRefresh.h"
-#import "MZBaseModel.h"
-#import "MZAPIManager.h"
-#import "MZBaseNetModel.h"
-#import "MZBasePlayerView.h"
-#import "MZBlackListModel.h"
-#import "MZChatKitManager.h"
-#import "MZCommenComment.h"
-#import "MZGlobalTools.h"
-#import "MZTimer.h"
-#import "MZGoodsListModel.h"
-#import "MZGoodsListOuterModel.h"
-#import "MZHomeCenterModel.h"
-#import "MZImageCache.h"
 #import "MZLiveModel.h"
 #import "MZLongPollDataModel.h"
-#import "MZMediaPlayerView.h"
+
+#pragma mark - comment
+#import "MZActivityComment.h"
+#import "MZCommenComment.h"
+#import "MZEventTag.h"
+
+#pragma mark - chat
+#import "MZLongPolling.h"
+
+#pragma mark - MZPushServer
+#import "MZNewLiveActivityTest.h"
+
+#pragma mark - 网络请求句柄 && 聊天句柄 && SDK初始化句柄
+#import "MZSDKBusinessManager.h"
+#import "MZChatKitManager.h"
+#import "MZSDKInitManager.h"
+
+#pragma mark - model
+#import "MZGoodsListModel.h"
+#import "MZNetSeverUrlModel.h"
+#import "MZLiveFinishModel.h"
+#import "MZBlackListModel.h"
+#import "MZHomeCenterModel.h"
+#import "MZMyselfListModel.h"
 #import "MZMoviePlayerModel.h"
 #import "MZHostModel.h"
-#import "MZMyselfListModel.h"
+#import "MZPlayInfoModel.h"
+#import "MZGoodsListOuterModel.h"
 #import "MZOnlineUserListModel.h"
-#import "MZPlayerManager.h"
-#import "MZPushStreamManager.h"
-#import "MZSDKBusinessManager.h"
-#import "MZSDKInitManager.h"
-#import "MZSocketIOClient.h"
-#import "MZUser.h"
-#import "MZUserServer.h"
-#import "MZWebImageCompat.h"
-#import "MZWebImageDecoder.h"
-#import "MZWebImageDownloader.h"
-#import "MZWebImageDownloaderOperation.h"
-#import "MZWebImageManager.h"
-#import "MZWebImageOperation.h"
-#import "MZWebImagePrefetcher.h"
-#import "NSData+MZImageContentType.h"
-#import "SYMediaControl.h"
-#import "SYMediaGesturesView.h"
-#import "UIButton+MZWebCache.h"
-#import "UIImage+MZGIF.h"
-#import "UIImage+MZMultiFormat.h"
-#import "UIImage+MZWebP.h"
-#import "UIImageView+MZHighlightedWebCache.h"
-#import "UIImageView+MZWebCache.h"
-#import "UIView+MZWebCacheOperation.h"
 
+#pragma mark - push_model
 #import "MZUser_info.h"
 #import "MZShare_info.h"
 #import "MZHost.h"
 #import "MZChannelManagerCircleModel.h"
 #import "MZChannelManagerModel.h"
-#import "MZPresentListModel.h"
-#import "MZAudienceListModel.h"
 #import "MZLiveUserModel.h"
 #import "MZWebinar_info.h"
-#import "MZLiveFinishModel.h"
-
-#import "MZExtension.h"
-#import "NSObject+MZCoding.h"
-#import "NSObject+MZProperty.h"
-#import "NSObject+MZClass.h"
-#import "NSObject+MZKeyValue.h"
-#import "NSString+MZExtension.h"
-#import "MZExtensionConst.h"
-#import "MZFoundation.h"
-#import "MZProperty.h"
-#import "MZPropertyType.h"
-#import "MZPropertyKey.h"
-#import "MZNewLiveActivityTest.h"
+#import "MZShareModel.h"
+#import "MZPresentListModel.h"
+#import "MZAudienceListModel.h"

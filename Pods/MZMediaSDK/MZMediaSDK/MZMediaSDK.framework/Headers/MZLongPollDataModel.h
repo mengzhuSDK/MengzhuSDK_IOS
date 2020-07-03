@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MZActMsg.h"
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @interface MZLongPollDataModel : NSObject
 @property (nonatomic ,copy) NSString *id ;
@@ -27,6 +28,7 @@
 @property (nonatomic,strong)NSString    *goods_pic;
 @property (nonatomic,assign)int         buy_num;
 @property (nonatomic,strong) NSString * imgSrc;
+@property (nonatomic,assign) float cellHeight;//cell的缓存高度
 
 +(MZLongPollDataModel *)initWithDict:(NSDictionary *)data;
 

@@ -9,6 +9,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 typedef enum : NSUInteger {
     MZDownLoaderState_Wait = 0,//等待

@@ -19,6 +19,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MZPlayerSDK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MZPushFlowSDK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MZKitDemo.xcscheme</key>
 		<dict>
 			<key>isShown</key>

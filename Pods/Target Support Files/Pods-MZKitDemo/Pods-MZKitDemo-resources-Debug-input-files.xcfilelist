@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo-resources.sh
+${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary/MZRefresh.bundle
 ${PODS_ROOT}/MZDownLoaderSDK/MZDownLoaderSDK/MZM3U8DownLoaderSDKBundle.bundle
-${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.bundle
+${PODS_ROOT}/MZPlayerSDK/MZPlayerSDK/MZPlayerSDK.bundle
