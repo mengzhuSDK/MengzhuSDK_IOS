@@ -85,6 +85,7 @@
     self.DLNASearchTab.dataSource = self;
     self.DLNASearchTab.delegate = self;
     self.DLNASearchTab.rowHeight = 44*MZ_RATE;
+    self.DLNASearchTab.backgroundColor = [UIColor whiteColor];
     [self.fuctionView addSubview:self.DLNASearchTab];
     self.DLNASearchTab.tableFooterView = [UIView new];
     
@@ -96,6 +97,7 @@
     self.emptyStatueL.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1];
     self.emptyStatueL.font = FontSystemSize(14*MZ_RATE);
     self.emptyStatueL.text = @"正在搜索中...";
+    self.emptyStatueL.backgroundColor = [UIColor whiteColor];
     self.emptyStatueL.textAlignment = NSTextAlignmentCenter;
     [self.emptyView addSubview:self.emptyStatueL];
     [self.DLNASearchTab addSubview:self.emptyView];
