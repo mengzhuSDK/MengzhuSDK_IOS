@@ -15,7 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * @brief 主播头像点击
  */
-- (void)avatarDidClick:(id)playInfo;
+- (void)avatarDidClick:(MZHostModel *)hostModel;
+/**
+ * @brief 获取到主播信息
+ */
+- (void)updateHostUserInfo:(MZHostModel *)hostModel;
 /**
  * @brief 反馈按钮点击
  */

@@ -364,7 +364,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         // 互动菜单的bottom
         CGFloat tagMenuBottom = safeTopHeight + endWidth/16*9 + 44*spaceRate + 30*spaceRate + 40*spaceRate;
         
-        self.chatView.frame = CGRectMake(0, tagMenuBottom + 44.0*spaceRate, endWidth, endHeight - tagMenuBottom - safeBottomHeight - 18*spaceRate - tipGoodBackgroundViewHeight - shoppingButtonHeight - 44.0*spaceRate);
+        self.chatView.frame = CGRectMake(0, tagMenuBottom, endWidth, endHeight - tagMenuBottom - safeBottomHeight - 18*spaceRate - tipGoodBackgroundViewHeight - shoppingButtonHeight);
     }
     if (isScroolBottom) {
         [self.chatView scrollToBottom];
@@ -403,6 +403,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     } else {
         [self.playerView landSpaceRightToInset:40];
     }
+    
+    // 设置控制栏常驻
+    [self.playerView updateToolToHideAtDistantFuture];
 }
 
 /// 返回按钮点击
@@ -530,14 +533,18 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         [self.delegate onlineListButtonDidClick:self.onlineUsersArr];
     }
     
-    MZAudienceView * audienceView = [[MZAudienceView alloc] initWithFrame:self.bounds];
-    
-    [audienceView showWithView:self withJoinTotal:(int)self.onlineUsersArr.count];
-    
-    __weak typeof(self)weakSelf = self;
-    [audienceView setUserList:self.onlineUsersArr withChannelId:self.playInfo.channel_id ticket_id:self.playInfo.ticket_id selectUserHandle:^(MZOnlineUserListModel *model) {
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(onlineUserInfoDidClick:)]) {
-            [weakSelf.delegate onlineUserInfoDidClick:model];
+    [self getOnlineUsersWithFinish:^(BOOL isFinish, NSMutableArray *onlineUsers) {
+        if (isFinish) {
+            MZAudienceView * audienceView = [[MZAudienceView alloc] initWithFrame:self.bounds];
+            
+            [audienceView showWithView:self withJoinTotal:(int)onlineUsers.count];
+            
+            __weak typeof(self)weakSelf = self;
+            [audienceView setUserList:onlineUsers withChannelId:self.playInfo.channel_id ticket_id:self.playInfo.ticket_id selectUserHandle:^(MZOnlineUserListModel *model) {
+                if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(onlineUserInfoDidClick:)]) {
+                    [weakSelf.delegate onlineUserInfoDidClick:model];
+                }
+            }];
         }
     }];
 }
@@ -723,37 +730,13 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
             
             
-            //    获取在线人数
-            [MZSDKBusinessManager reqGetUserList:self.ticket_id offset:0 limit:0 success:^(NSArray* responseObject) {
-                NSMutableArray *tempArr = responseObject.mutableCopy;
-                
-                BOOL isHasMe = NO;
-
-                for (MZOnlineUserListModel* model in responseObject) {
-                    if(model.uid.longLongValue > 5000000000){//uid大于五十亿是游客
-                        [tempArr removeObject:model];
-                    }
-                    if ([model.uid isEqualToString:self.playInfo.chat_uid]) {
-                        isHasMe = YES;
-                    }
+            // 获取在线人数
+            [self getOnlineUsersWithFinish:^(BOOL isFinish, NSMutableArray *onlineUsers) {
+                if (isFinish) {
+                    [self updateUIWithOnlineUsers:onlineUsers];
                 }
-                if (isHasMe == NO) {
-                    MZOnlineUserListModel *meModel = [[MZOnlineUserListModel alloc] init];
-                    
-                    MZUser *user = [MZUserServer currentUser];
-                    
-                    meModel.nickname = user.nickName;
-                    meModel.avatar = user.avatar;
-                    meModel.uid = self.playInfo.chat_uid;
-                    
-                    [tempArr addObject:meModel];
-                }
-                
-                [self updateUIWithOnlineUsers:tempArr];
-            } failure:^(NSError *error) {
-                NSLog(@"error %@",error);
             }];
-            
+           
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
             [MZSimpleHud hide];
@@ -764,6 +747,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             // 更新主播信息
             self.hostModel = responseObject;
             [self updateHostInfo:self.hostModel];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(updateHostUserInfo:)]) {
+                [self.delegate updateHostUserInfo:self.hostModel];
+            }
             
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
@@ -772,6 +758,41 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     } failure:^(NSError *error) {
         [self showTextView:self message:@"sdk验证失败"];
         [MZSimpleHud hide];
+    }];
+}
+
+/// 获取在线人数
+- (void)getOnlineUsersWithFinish:(void(^)(BOOL isFinish, NSMutableArray *onlineUsers))finish {
+    [MZSDKBusinessManager reqGetUserList:self.ticket_id offset:0 limit:0 success:^(NSArray* responseObject) {
+        NSMutableArray *tempArr = responseObject.mutableCopy;
+        
+        BOOL isHasMe = NO;
+        
+        for (MZOnlineUserListModel* model in responseObject) {
+            if(model.uid.longLongValue > 5000000000){//uid大于五十亿是游客
+                [tempArr removeObject:model];
+            }
+            if ([model.uid isEqualToString:self.playInfo.chat_uid]) {
+                isHasMe = YES;
+            }
+        }
+        if (isHasMe == NO) {
+            MZOnlineUserListModel *meModel = [[MZOnlineUserListModel alloc] init];
+            
+            MZUser *user = [MZUserServer currentUser];
+            
+            meModel.nickname = user.nickName;
+            meModel.avatar = user.avatar;
+            meModel.uid = self.playInfo.chat_uid;
+            meModel.unique_id = user.uniqueID;
+            
+            [tempArr addObject:meModel];
+        }
+        
+        finish(YES, tempArr);
+    } failure:^(NSError *error) {
+        NSLog(@"error %@",error);
+        finish(NO, nil);
     }];
 }
 
@@ -965,8 +986,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         CGFloat safeBottomHeight = IPHONE_X ? 34.0 : 0;
         CGFloat tagMenuBottom = safeTopHeight + self.width/16*9 + 44*MZ_RATE;
         
-        _chatView = [[MZHistoryChatView alloc]initWithFrame:CGRectMake(0, tagMenuBottom + 44*MZ_RATE, self.width, self.height - tagMenuBottom - safeBottomHeight - 18*MZ_RATE - 60*MZ_RATE - 44*MZ_RATE - 44*MZ_RATE) cellType:MZChatCellType_New];
+        _chatView = [[MZHistoryChatView alloc]initWithFrame:CGRectMake(0, tagMenuBottom, self.width, self.height - tagMenuBottom - safeBottomHeight - 18*MZ_RATE - 60*MZ_RATE - 44*MZ_RATE) cellType:MZChatCellType_New];
         _chatView.chatDelegate = self;
+        [_chatView onlineButtonIsCoverAtChatView:YES];
     }
     return _chatView;
 }
@@ -1093,6 +1115,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     msgModel.event = MsgTypeMeChat;
     MZActMsg *actMsg = [[MZActMsg alloc] init];
     actMsg.msgText = text;
+    actMsg.uniqueID = [MZUserServer currentUser].uniqueID;
     actMsg.barrage = isBarrage;
     msgModel.data = actMsg;
     [self.chatView addChatData:msgModel];
@@ -1406,9 +1429,11 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     
     if (self.isLandSpace) {
         [self.playerView hideMediaControl];
+        [self.chatView onlineButtonIsCoverAtChatView:NO];
     } else {
         [self showBottomMenu];
         [self.dlnaAndRateLayer setHidden:self.dlnaButton.hidden];
+        [self.chatView onlineButtonIsCoverAtChatView:YES];
     }
     
     [self updateChatFrameAndTipGoodBackgroundView:YES];

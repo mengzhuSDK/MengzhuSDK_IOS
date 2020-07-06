@@ -1381,7 +1381,7 @@ CGFloat BtnSpace = 28 + 12;
     msgModel.event = MsgTypeMeChat;
     MZActMsg *actMsg = [[MZActMsg alloc]init];
     actMsg.msgText = text;
-    actMsg.accountNo = [MZUserServer currentUser].userId;
+    actMsg.uniqueID = [MZUserServer currentUser].uniqueID;
     msgModel.data = actMsg;
     [_chatView addChatData:msgModel];
     

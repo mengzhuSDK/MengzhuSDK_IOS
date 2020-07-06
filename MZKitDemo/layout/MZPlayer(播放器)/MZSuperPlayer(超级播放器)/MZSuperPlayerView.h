@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)avatarDidClick:(MZHostModel *)hostModel;
 /**
+ * @brief 获取到主播信息
+ */
+- (void)updateHostUserInfo:(MZHostModel *)hostModel;
+/**
  * @brief 举报点击
  */
 - (void)reportButtonDidClick:(id)playInfo;

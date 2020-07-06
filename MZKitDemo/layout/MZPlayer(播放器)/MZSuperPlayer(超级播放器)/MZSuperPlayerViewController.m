@@ -67,6 +67,12 @@
     [self showTextView:self.view message:@"主播头像点击"];
 }
 /**
+* @brief 获取到主播信息
+*/
+- (void)updateHostUserInfo:(MZHostModel *)hostModel {
+    NSLog(@"获取到了主播信息 = %@ - %@ - %@",hostModel.nickname,hostModel.uid,hostModel.unique_id);
+}
+/**
  * @brief 举报点击
  */
 - (void)reportButtonDidClick:(id)playInfo {

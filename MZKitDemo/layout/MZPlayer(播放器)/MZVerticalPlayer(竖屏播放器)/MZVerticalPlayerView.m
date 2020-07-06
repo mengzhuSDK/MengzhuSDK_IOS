@@ -496,14 +496,19 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     if (self.delegate && [self.delegate respondsToSelector:@selector(onlineListButtonDidClick:)]) {
         [self.delegate onlineListButtonDidClick:self.onlineUsersArr];
     }
-    MZAudienceView * audienceView = [[MZAudienceView alloc] initWithFrame:self.bounds];
     
-    [audienceView showWithView:self withJoinTotal:(int)self.onlineUsersArr.count];
-    
-    __weak typeof(self)weakSelf = self;
-    [audienceView setUserList:self.onlineUsersArr withChannelId:self.playInfo.channel_id ticket_id:self.playInfo.ticket_id selectUserHandle:^(MZOnlineUserListModel *model) {
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(onlineUserInfoDidClick:)]) {
-            [weakSelf.delegate onlineUserInfoDidClick:model];
+    [self getOnlineUsersWithFinish:^(BOOL isFinish, NSMutableArray *onlineUsers) {
+        if (isFinish) {
+            MZAudienceView * audienceView = [[MZAudienceView alloc] initWithFrame:self.bounds];
+            
+            [audienceView showWithView:self withJoinTotal:(int)onlineUsers.count];
+            
+            __weak typeof(self)weakSelf = self;
+            [audienceView setUserList:onlineUsers withChannelId:self.playInfo.channel_id ticket_id:self.playInfo.ticket_id selectUserHandle:^(MZOnlineUserListModel *model) {
+                if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(onlineUserInfoDidClick:)]) {
+                    [weakSelf.delegate onlineUserInfoDidClick:model];
+                }
+            }];
         }
     }];
 }
@@ -618,7 +623,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 }
 
 #pragma mark - 聊天
-/// 发送消息(这里我暂时写成弹幕消息接受的代理，回头要改一下消息工具的原代码)
+/// 发送消息
 - (void)didSendText:(NSString *)text userName:(NSString *)userName joinID:(NSString *)joinID isBarrage:(BOOL)isBarrage {
     if([MZUserServer currentUser].userId.length == 0){
         [self showTextView:self.superview message:@"您还未登录"];
@@ -641,6 +646,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     msgModel.userAvatar = [MZUserServer currentUser].avatar;
     msgModel.event = MsgTypeMeChat;
     MZActMsg *actMsg = [[MZActMsg alloc] init];
+    actMsg.uniqueID = [MZUserServer currentUser].uniqueID;
     actMsg.msgText = text;
     actMsg.barrage = isBarrage;
     msgModel.data = actMsg;
@@ -810,49 +816,25 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             
             [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
             
-            //    获取在线人数
-            [MZSDKBusinessManager reqGetUserList:ticket_id offset:0 limit:0 success:^(NSArray* responseObject) {
-                NSMutableArray *tempArr = responseObject.mutableCopy;
-                
-                BOOL isHasMe = NO;
-                for (MZOnlineUserListModel* model in responseObject) {
-                    if(model.uid.longLongValue > 5000000000){//uid大于五十亿是游客
-                        [tempArr removeObject:model];
-                    }
-                    if ([model.uid isEqualToString:self.playInfo.chat_uid]) {
-                        isHasMe = YES;
-                    }
+            // 获取在线人数
+            [self getOnlineUsersWithFinish:^(BOOL isFinish, NSMutableArray *onlineUsers) {
+                if (isFinish) {
+                    [self updateUIWithOnlineUsers:onlineUsers];
                 }
-                
-                if (isHasMe == NO) {
-                    MZOnlineUserListModel *meModel = [[MZOnlineUserListModel alloc] init];
-                    
-                    MZUser *user = [MZUserServer currentUser];
-                    
-                    meModel.nickname = user.nickName;
-                    meModel.avatar = user.avatar;
-                    meModel.uid = self.playInfo.chat_uid;
-                    
-                    [tempArr addObject:meModel];
-                }
-                
-                // 更新在线人数UI
-                [self updateUIWithOnlineUsers:tempArr];
-            } failure:^(NSError *error) {
-                NSLog(@"error %@",error);
             }];
             
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
         }] ;
         
-
-        
         //    获取主播信息
         [MZSDKBusinessManager reqHostInfo:ticket_id success:^(MZHostModel *responseObject) {
             // 更新主播信息
             self.hostModel = responseObject;
             [self updateHostInfo:self.hostModel];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(updateHostUserInfo:)]) {
+                [self.delegate updateHostUserInfo:self.hostModel];
+            }
             
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
@@ -860,7 +842,41 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     } failure:^(NSError *error) {
         [weakSelf showTextView:weakSelf message:@"sdk验证失败"];
     }];
-    
+}
+
+/// 获取在线人数
+- (void)getOnlineUsersWithFinish:(void(^)(BOOL isFinish, NSMutableArray *onlineUsers))finish {
+    [MZSDKBusinessManager reqGetUserList:self.ticket_id offset:0 limit:0 success:^(NSArray* responseObject) {
+        NSMutableArray *tempArr = responseObject.mutableCopy;
+        
+        BOOL isHasMe = NO;
+        
+        for (MZOnlineUserListModel* model in responseObject) {
+            if(model.uid.longLongValue > 5000000000){//uid大于五十亿是游客
+                [tempArr removeObject:model];
+            }
+            if ([model.uid isEqualToString:self.playInfo.chat_uid]) {
+                isHasMe = YES;
+            }
+        }
+        if (isHasMe == NO) {
+            MZOnlineUserListModel *meModel = [[MZOnlineUserListModel alloc] init];
+            
+            MZUser *user = [MZUserServer currentUser];
+            
+            meModel.nickname = user.nickName;
+            meModel.avatar = user.avatar;
+            meModel.uid = self.playInfo.chat_uid;
+            meModel.unique_id = user.uniqueID;
+            
+            [tempArr addObject:meModel];
+        }
+        
+        finish(YES, tempArr);
+    } failure:^(NSError *error) {
+        NSLog(@"error %@",error);
+        finish(NO, nil);
+    }];
 }
 
 #pragma mark - MZDLNAViewDelegate

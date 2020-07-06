@@ -11,6 +11,8 @@
 #import "MZChatNewCell.h"
 #import "MZOnlineTipView.h"
 
+static double onlineButtonOffsetY = 5;
+
 @interface MZHistoryChatView ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 @property (nonatomic ,strong) UITableView *chatTable;
 @property (nonatomic ,strong) NSMutableArray *tempArr;
@@ -26,6 +28,8 @@
 
 @property (nonatomic, assign) MZChatCellType cellType;//使用哪种cell布局，默认为0
 
+@property (nonatomic, assign) BOOL isCoverAtChatView;
+
 @end
 @implementation MZHistoryChatView
 
@@ -39,7 +43,11 @@
     _chatTable.frame = self.bounds;
     _chatTable.estimatedSectionHeaderHeight = 10*self.endSpace;
     
-    _onlineIconBtn.frame = CGRectMake(-10*self.endSpace, -(25+10)*self.endSpace, 165*self.endSpace, 25*self.endSpace);
+    if (self.isCoverAtChatView) {
+        _onlineIconBtn.frame = CGRectMake(-10*self.endSpace, onlineButtonOffsetY, 165*self.endSpace, 25*self.endSpace);
+    } else {
+        _onlineIconBtn.frame = CGRectMake(-10*self.endSpace, -(25+10)*self.endSpace, 165*self.endSpace, 25*self.endSpace);
+    }
     
     [_chatTable reloadData];
 }
@@ -66,8 +74,16 @@
     return self;
 }
 
+///上线按钮是否覆盖到聊天界面上
+- (void)onlineButtonIsCoverAtChatView:(BOOL)isCoverAtChatView {
+    self.isCoverAtChatView = isCoverAtChatView;
+    [self layoutIfNeeded];
+}
+
 -(void)setupUI
 {
+    self.isCoverAtChatView = NO;
+    
     WeaklySelf(weakSelf);
     _chatTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     if (@available(iOS 11.0, *)) {
@@ -188,7 +204,11 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         //           上线消息提示
         if(dataModel.event == MsgTypeOnline){
-            weakSelf.onlineIconBtn.frame = CGRectMake(-self.onlineIconBtn.width, - 10*self.endSpace - 26*self.endSpace, self.onlineIconBtn.width, self.onlineIconBtn.height);
+            if (weakSelf.isCoverAtChatView) {
+                weakSelf.onlineIconBtn.frame = CGRectMake(-self.onlineIconBtn.width, onlineButtonOffsetY, self.onlineIconBtn.width, self.onlineIconBtn.height);
+            } else {
+                weakSelf.onlineIconBtn.frame = CGRectMake(-self.onlineIconBtn.width, - 10*self.endSpace - 26*self.endSpace, self.onlineIconBtn.width, self.onlineIconBtn.height);
+            }
             weakSelf.onlineIconBtn.title = dataModel.userName;
             weakSelf.onlineIconBtn.tagData = dataModel;
             if(weakSelf.onlineCountDownNum <= 0 ){

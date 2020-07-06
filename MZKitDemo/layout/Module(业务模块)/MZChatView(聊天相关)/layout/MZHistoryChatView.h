@@ -21,17 +21,20 @@ typedef enum : NSUInteger {
 
 
 @interface MZHistoryChatView : UIView
-@property (nonatomic ,weak) id<MZHistoryChatViewProtocol> chatDelegate;
-@property(nonatomic,strong)NSMutableArray *dataArray; //观看回放 加载数据 ， 观看直播 轮训数据
-@property (nonatomic ,strong)NSString *ticket_id;
-@property(nonatomic,strong)MZMoviePlayerModel *activity;//播放器的详情model
+@property (nonatomic,   weak) id<MZHistoryChatViewProtocol> chatDelegate;
+@property (nonatomic, strong) NSMutableArray *dataArray; //观看回放 加载数据 ， 观看直播 轮训数据
+@property (nonatomic, strong) NSString *ticket_id;
+@property (nonatomic, strong) MZMoviePlayerModel *activity;//播放器的详情model
 
--(instancetype)initWithFrame:(CGRect)frame cellType:(MZChatCellType)cellType;
--(void)addChatData:(MZLongPollDataModel *)dataModel;
--(void)reloadData;
--(void)dismissInput;
--(void)showGoods;
--(void)scrollToBottom;
+- (instancetype)initWithFrame:(CGRect)frame cellType:(MZChatCellType)cellType;
+- (void)addChatData:(MZLongPollDataModel *)dataModel;
+- (void)reloadData;
+- (void)dismissInput;
+- (void)showGoods;
+- (void)scrollToBottom;
+
+///上线按钮是否覆盖到聊天界面上
+- (void)onlineButtonIsCoverAtChatView:(BOOL)isCoverAtChatView;
 
 @end
 

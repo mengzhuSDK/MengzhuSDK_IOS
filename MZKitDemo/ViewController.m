@@ -15,8 +15,8 @@
 #import "MZSimpleHud.h"
 
 /// 分配的appID和secretKey
-#define MZSDK_AppID @"2019101019585068343"
-#define MZSDK_SecretKey @"xEyRRg4QYWbk09hfRJHYHeKPv8nWZITlBiklc44MZCxbdk4E6cGVzrXve6iVaNBn"
+#define MZSDK_AppID @""
+#define MZSDK_SecretKey @""
 
 @interface ViewController (){
     UIButton *pushBtn;
@@ -89,8 +89,9 @@
     self.ticket_IDTextView.backgroundColor = [UIColor cyanColor];
     self.ticket_IDTextView.keyboardType = UIKeyboardTypeDefault;
     [self.view addSubview:self.ticket_IDTextView];
-    self.ticket_IDTextView.text = @"10014014";//竖屏
+    self.ticket_IDTextView.text = @"10014099";//竖屏
 //    self.ticket_IDTextView.text = @"10013331";//横屏
+//    self.ticket_IDTextView.text = @"10014014";//竖屏
 
     UILabel *tipL2 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 140, self.view.bounds.size.width, 20)];
     [self.view addSubview:tipL2];
@@ -108,7 +109,7 @@
     self.nameTextView.backgroundColor = [UIColor cyanColor];
     self.nameTextView.keyboardType = UIKeyboardTypeDefault;
     [self.view addSubview:self.nameTextView];
-    self.nameTextView.text = @"小酒窝";
+    self.nameTextView.text = @"大鸭梨";
     
     UILabel *tipL4 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 240, self.view.bounds.size.width, 20)];
     [self.view addSubview:tipL4];
@@ -127,8 +128,10 @@
     
     user.userId = self.UIDTextView.text;
     user.nickName = self.nameTextView.text;
-
     user.avatar = self.avatarTextView.text;
+    
+    /// 用户自己传过来的唯一ID
+    user.uniqueID = @"A123456B";
 
 #warning 请输入分配给你们的appID和secretKey
     user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
@@ -161,6 +164,9 @@
     user.nickName = self.nameTextView.text;
     user.avatar = self.avatarTextView.text;
     
+    /// 用户自己传过来的唯一ID
+    user.uniqueID = @"A123456B";
+    
 #warning 请输入分配给你们的appID和secretKey
     user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
     user.secretKey = MZSDK_SecretKey;
@@ -182,8 +188,10 @@
     MZUser *user=[[MZUser alloc]init];
     user.userId = self.UIDTextView.text;
     user.nickName = self.nameTextView.text;
-
     user.avatar = self.avatarTextView.text;
+    
+    /// 用户自己传过来的唯一ID
+    user.uniqueID = @"A123456B";
     
 #warning 请输入分配给你们的appID和secretKey
     user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)

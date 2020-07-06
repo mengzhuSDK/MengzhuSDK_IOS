@@ -100,9 +100,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)avatarDidClick:(id)playInfo {
+- (void)avatarDidClick:(MZHostModel *)hostModel {
      NSLog(@"%s",__func__);
-    [self sv_showMessage:@"头像点击"];
+    [self sv_showMessage:@"主播头像点击"];
+}
+
+- (void)updateHostUserInfo:(MZHostModel *)hostModel {
+    NSLog(@"获取到了主播信息 = %@ - %@ - %@",hostModel.nickname,hostModel.uid,hostModel.unique_id);
 }
 
 - (void)reportButtonDidClick:(id)playInfo {
