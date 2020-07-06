@@ -438,6 +438,7 @@ typedef enum {
         MZLiveUserModel *LiveUser = [[MZLiveUserModel alloc] init];
         LiveUser.nickname = [MZUserServer currentUser].nickName;
         LiveUser.uid = [MZUserServer currentUser].userId;
+        LiveUser.avatar = [MZUserServer currentUser].avatar;
         [MZSimpleHud hide];
         
         [self pushToLive:LiveUser];

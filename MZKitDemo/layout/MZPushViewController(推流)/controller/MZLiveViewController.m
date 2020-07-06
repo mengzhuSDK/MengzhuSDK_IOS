@@ -136,8 +136,6 @@ CGFloat BtnSpace = 28 + 12;
 @property (nonatomic,assign) BOOL isStartPush;//开始推流（这个参数是防止还没有开始推流，切换到后台或者其他操作走了appResignActive方法，然后回来后走appBecomeActive，这种情况不能走重连的方法）
 @property (nonatomic ,strong)UIView *roteScreenBGView;
 
-@property (nonatomic ,strong)MZLiveManagerHearderView *liveManagerHearderView;//左上角主播按钮view
-@property (nonatomic ,strong)MZLiveAudienceHeaderView *liveAudienceHeaderView;//右上角观众view
 @property (nonatomic ,strong)UIButton *closeLiveBtn;
 @property (nonatomic ,strong)MZBottomTalkBtn *bottomTalkBtn;
 
@@ -156,7 +154,11 @@ CGFloat BtnSpace = 28 + 12;
 @property (nonatomic ,strong)UIVisualEffectView *blurEffectBgView;
 @property (nonatomic ,strong)UIView *effectBgView;
 @property (nonatomic ,strong)MZLiveUserModel *myLiveUserModel;
+
+@property (nonatomic ,strong)MZLiveManagerHearderView *liveManagerHearderView;//左上角主播按钮view
 @property (nonatomic, assign) long long popularityNum;//主播人气
+
+@property (nonatomic ,strong)MZLiveAudienceHeaderView *liveAudienceHeaderView;//右上角观众view
 @property (nonatomic ,strong)NSMutableArray *onlineUsersArr;//在线观众
 
 @property (nonatomic ,strong)MZUserTipView *tipView;
@@ -392,6 +394,16 @@ CGFloat BtnSpace = 28 + 12;
         [weakSelf creatAudienceWinView];
     };
     
+    /// 添加在线观众（自己）
+    NSString *chat_uid = self.model.chat_conf.chat_uid;
+    MZOnlineUserListModel *onlineUserModel = [[MZOnlineUserListModel alloc] init];
+        
+    onlineUserModel.uid = chat_uid;
+    onlineUserModel.avatar = self.latestUser.avatar;
+    onlineUserModel.nickname = self.latestUser.nickname;
+    [self.onlineUsersArr addObject:onlineUserModel];
+    self.liveAudienceHeaderView.userArr = self.onlineUsersArr;
+
     self.closeLiveBtn = [[UIButton alloc]initWithFrame:CGRectMake(_preView.frame.size.width - 44*MZ_RATE - 8*MZ_RATE,topSpace + 20*MZ_RATE, 44*MZ_RATE, 44*MZ_RATE)];
     self.closeLiveBtn.tag = MZLiveViewCloseBtnTag;
     [self.closeLiveBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];

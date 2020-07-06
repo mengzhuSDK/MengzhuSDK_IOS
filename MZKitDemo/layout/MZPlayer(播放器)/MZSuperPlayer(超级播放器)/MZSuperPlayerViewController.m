@@ -91,10 +91,16 @@
 
 }
 /**
- * @brief 在线用户列表
+ * @brief 在线用户列表点击
 */
-- (void)onlineListButtonDidClick:(NSArray *)onlineUsers {
+- (void)onlineListButtonDidClick:(NSArray * _Nullable)onlineUsers {
     [self showTextView:self.view message:@"在线用户列表点击"];
+}
+/**
+ * @brief 某一个在线用户的信息点击
+*/
+- (void)onlineUserInfoDidClick:(id)onlineUserInfo {
+    [self showTextView:self.view message:@"点击一个在线用户"];
 }
 /**
  * @brief 商品袋点击

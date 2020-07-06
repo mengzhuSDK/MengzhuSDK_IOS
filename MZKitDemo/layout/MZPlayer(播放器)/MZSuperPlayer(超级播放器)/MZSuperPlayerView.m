@@ -526,14 +526,18 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
 /// 观众列表展示
 - (void)creatAudienceWinView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onlineListButtonDidClick:)]) {
+        [self.delegate onlineListButtonDidClick:self.onlineUsersArr];
+    }
+    
     MZAudienceView * audienceView = [[MZAudienceView alloc] initWithFrame:self.bounds];
     
     [audienceView showWithView:self withJoinTotal:(int)self.onlineUsersArr.count];
     
     __weak typeof(self)weakSelf = self;
     [audienceView setUserList:self.onlineUsersArr withChannelId:self.playInfo.channel_id ticket_id:self.playInfo.ticket_id selectUserHandle:^(MZOnlineUserListModel *model) {
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(onlineListButtonDidClick:)]) {
-            [weakSelf.delegate onlineListButtonDidClick:model];
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(onlineUserInfoDidClick:)]) {
+            [weakSelf.delegate onlineUserInfoDidClick:model];
         }
     }];
 }
@@ -717,6 +721,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             self.chatKitManager.delegate = self;
             
             [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
+            
             
             //    获取在线人数
             [MZSDKBusinessManager reqGetUserList:self.ticket_id offset:0 limit:0 success:^(NSArray* responseObject) {

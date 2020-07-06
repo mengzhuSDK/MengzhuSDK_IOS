@@ -41,9 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)shoppingBagDidClick:(id)playInfo;
 /**
- * @brief 在线观众点击
- */
-- (void)onlineListButtonDidClick:(id)playInfo;
+ * @brief 在线用户列表点击
+*/
+- (void)onlineListButtonDidClick:(NSArray * _Nullable)onlineUsers;
+/**
+ * @brief 某一个在线用户的信息点击
+*/
+- (void)onlineUserInfoDidClick:(id)onlineUserInfo;
 /**
  * @brief 关注按钮点击
  */

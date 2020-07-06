@@ -128,9 +128,12 @@
     NSLog(@"%s",__func__);
 }
 
-- (void)onlineListButtonDidClick:(id)playInfo {
-    NSLog(@"%s",__func__);
-    [self sv_showMessage:@"在线人数"];
+- (void)onlineListButtonDidClick:(NSArray * _Nullable)onlineUsers {
+    [self sv_showMessage:@"在线用户列表点击"];
+}
+
+- (void)onlineUserInfoDidClick:(id)onlineUserInfo {
+    [self sv_showMessage:@"点击一个在线用户"];
 }
 
 - (void)shoppingBagDidClick:(id)playInfo {
