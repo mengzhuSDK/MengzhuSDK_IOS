@@ -807,23 +807,43 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             
             [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
             
+            //    获取在线人数
+            [MZSDKBusinessManager reqGetUserList:ticket_id offset:0 limit:0 success:^(NSArray* responseObject) {
+                NSMutableArray *tempArr = responseObject.mutableCopy;
+                
+                BOOL isHasMe = NO;
+                for (MZOnlineUserListModel* model in responseObject) {
+                    if(model.uid.longLongValue > 5000000000){//uid大于五十亿是游客
+                        [tempArr removeObject:model];
+                    }
+                    if ([model.uid isEqualToString:self.playInfo.chat_uid]) {
+                        isHasMe = YES;
+                    }
+                }
+                
+                if (isHasMe == NO) {
+                    MZOnlineUserListModel *meModel = [[MZOnlineUserListModel alloc] init];
+                    
+                    MZUser *user = [MZUserServer currentUser];
+                    
+                    meModel.nickname = user.nickName;
+                    meModel.avatar = user.avatar;
+                    meModel.uid = self.playInfo.chat_uid;
+                    
+                    [tempArr addObject:meModel];
+                }
+                
+                // 更新在线人数UI
+                [self updateUIWithOnlineUsers:tempArr];
+            } failure:^(NSError *error) {
+                NSLog(@"error %@",error);
+            }];
+            
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
         }] ;
         
-        //    获取在线人数
-        [MZSDKBusinessManager reqGetUserList:ticket_id offset:0 limit:0 success:^(NSArray* responseObject) {
-            NSMutableArray *tempArr = responseObject.mutableCopy;
-            for (MZOnlineUserListModel* model in responseObject) {
-                if(model.uid.longLongValue > 5000000000){//uid大于五十亿是游客
-                    [tempArr removeObject:model];
-                }
-            }
-            // 更新在线人数UI
-            [self updateUIWithOnlineUsers:tempArr];
-        } failure:^(NSError *error) {
-            NSLog(@"error %@",error);
-        }];
+
         
         //    获取主播信息
         [MZSDKBusinessManager reqHostInfo:ticket_id success:^(MZHostModel *responseObject) {
