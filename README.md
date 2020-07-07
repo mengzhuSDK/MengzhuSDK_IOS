@@ -50,10 +50,14 @@
 ### **- 推流UI集成**
       MZUser *user=[[MZUser alloc] init];
 
-      #warning 这里是模拟的用户信息，使用的时候，请使用你们自己服务器的用户信息
-      user.userId = @"10001091";
-      user.nickName = @"张三";
-
+      #warning 这里是我模拟的用户信息，使用的时候，请使用你们自己服务器的用户信息
+      user.userId = self.UIDTextView.text;
+      user.nickName = self.nameTextView.text;
+      user.avatar = self.avatarTextView.text;
+          
+      /// 用户自己传过来的唯一ID
+      user.uniqueID = @"A123456B";
+          
       #warning 请输入分配给你们的appID和secretKey
       user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
       user.secretKey = MZSDK_SecretKey;
@@ -68,8 +72,10 @@
 
       user.userId = self.UIDTextView.text;
       user.nickName = self.nameTextView.text;
-
       user.avatar = self.avatarTextView.text;
+      
+      /// 用户自己传过来的唯一ID
+      user.uniqueID = @"A123456B";
 
       #warning 请输入分配给你们的appID和secretKey
       user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
@@ -86,8 +92,10 @@
       MZUser *user = [[MZUser alloc] init];
       user.userId = self.UIDTextView.text;
       user.nickName = self.nameTextView.text;
-
       user.avatar = self.avatarTextView.text;
+      
+      /// 用户自己传过来的唯一ID
+      user.uniqueID = @"A123456B";
 
       #warning 请输入分配给你们的appID和secretKey
       user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
