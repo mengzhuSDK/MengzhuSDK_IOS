@@ -53,7 +53,7 @@
  * @param success 成功回调
  * @param failure 失败原因回调
  */
-+ (void)stopLive:(NSString *)channelId ticketId:(NSString *)ticketId success:(void(^)(MZLiveFinishModel * model))success failure:(void (^)(NSError *))failure;
++(void)stopLive:(NSString *)channelId ticketId:(NSString *)ticketId success:(void(^)(MZLiveFinishModel * model))success failure:(void (^)(NSError *))failure;
 
 /**
  * 禁言单个用户
@@ -76,6 +76,8 @@
  * @param failure 失败原因回调
  */
 +(void)blockAllOrAlowChatWithChannelId:(NSString *)channelId ticketId:(NSString *)ticketId isChat:(BOOL)isChat success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
+#pragma mark - 超级播放器
 
 @end
 

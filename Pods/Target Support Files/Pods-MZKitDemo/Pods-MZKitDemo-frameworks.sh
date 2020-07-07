@@ -191,10 +191,16 @@ if [ -r "${ARTIFACT_LIST_FILE}" ]; then
 fi
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary/MZCoreSDKLibrary.framework"
   install_framework "${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.framework"
+  install_framework "${PODS_ROOT}/MZPlayerSDK/MZPlayerSDK/MZPlayerSDK.framework"
+  install_framework "${PODS_ROOT}/MZPushFlowSDK/MZPushFlowSDK/MZPushFlowSDK.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary/MZCoreSDKLibrary.framework"
   install_framework "${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.framework"
+  install_framework "${PODS_ROOT}/MZPlayerSDK/MZPlayerSDK/MZPlayerSDK.framework"
+  install_framework "${PODS_ROOT}/MZPushFlowSDK/MZPushFlowSDK/MZPushFlowSDK.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -37,52 +37,72 @@
 本文是根据附加demo来介绍SDK集成，可在已下载的SDK文件路径下引入demo项目。通过查看demo可了解更多详细功能。
 ## **4. 1 cocoapods集成**
 ### **- 本项目支持cocoapods安装，只需要将如下代码添加到Podfile中:** 
-    pod 'MZMediaSDK'#推流和播放器的SDK，最新版本1.0.3
-    pod 'MZDownLoaderSDK'#下载器的SDK，最新版本1.0.7（如需下载功能，添加此行代码）
-
-执行pod install或pod update。
-
-## **4. 2 手动集成**
-### **- SDK工具包及导入介绍**
-    MZMediaSDK.framework
-a 将工具包MZMediaSDK.framework复制到项目目录下，进入`project` 设置界面选择`Linked Frameworks andLibraries`点击`+`选择项目内的framework工具包点完成。
-b 展开`Embedded Binaries`点击`+`选择`MediaSDK.framework`加入完成。
-### **- SDK所需要的系统代码库引用**
-a 展开`Linked Frameworks andLibraries`点击`+`搜索`Foundation.framework`，`AVFoundation.framework`，`QuartzCore.framework`，`OpenGLES.framework`，`CoreVideo.framework`，`CoreMedia.framework``AssetsLibrary.framework`，`UIKit.framework`进行引入。
-b 引用tdb`Linked Frameworks andLibraries`点击`+`搜索`libbz2.tbd`，`libbz2.1.0.tbd`，`libz.1.2.5.tbd`，`libstdc++.6.0.9.tbd`进行引入。注：如Xcode版本在10及以上会搜索不到上述部分tbd文件，如搜索不到需要在网上下载或在Xcode9以下版本内复制粘贴至Xcode对应路径下。
-![](https://wmz.zmengzhu.com/uploads/201811/5bdd1d9d6bce7_5bdd1d9d.png)
-### **- 资源文件导入**
-将`MZMediaSDK.bundle`复制至项目目录下，`project`选择`Build Phases`展开`Copy Bundle Resources`点击`+`选择`MZMediaSDK.bundle`进行引入。
-### - 项目配置
-进入`project`选择`Build Settings` `all` `Combined` 搜索`ENABLE_BITCODE`设为`NO`
-
-![](https://wmz.zmengzhu.com/uploads/201811/5bdd1d33a59a9_5bdd1d33.png)
-## **4.3 权限设置**
-具体权限配置请查看demo info
-![](https://wmz.zmengzhu.com/uploads/201811/5bdd3e32a1c7b_5bdd3e32.png)
+    pod 'MZCoreSDKLibrary' #盟主SDK的核心依赖库，其他功能都依赖该组件
+    pod 'MZMediaSDK' #盟主业务组件，如需使用业务请求功能，请添加此行代码
+    pod 'MZPlayerSDK' #盟主播放器组件，如需播放器功能，请添加此行代码
+    pod 'MZPushFlowSDK' #盟主推流组件，如需直播功能，请添加此行代码
+    pod 'MZDownLoaderSDK' #盟主下载器的SDK，如需下载功能，请添加此行代码
+执行pod install或pod update，如若找不到库，请执行pod repo update，进行本地库更新。
 
 # **5.固定UI版快速集成 **
 - 如文档与demo有未同步情况，请先参考demo并运行测试确认是否正确。
 - 集成过程中如遇到未知错误请联系盟主客服
-### **- ViewController内实现代码**
-      self.playerControlView = [[MZPlayerControlView alloc] initWithFrame:self.view.bounds];//初始化带UI的播放器View
-      self.playerControlView.playerDelegate = MZPlayerControlViewProtocol;//设置代理接收回调
-      [self.playerControlView playVideoWithLiveIDString:self.ticket_id];//选择播放的ID
-      MZUser *user=[[MZUser alloc]init];//用户信息对象
-      user.userId=uid;//用户id
-      user.appID=appid;//APPID
-      user.avatar= avatar;//用户头像
-      user.nickName=name;//用户昵称
-      [MZUserServer updateCurrentUser:user];//更新用户信息
-  ### **- MZPlayerControlViewProtocol代理描述**
-      - (void)closeButtonDidClick:(id)playInfo//关闭按钮回调
-      -(void)avatarDidClick:(id)playInfo//头像点击
-      -(void)reportButtonDidClick:(id)playInfo//举报点击
-      -(void)shareButtonDidClick:(id)playInfo//分享点击
-      -(void)likeButtonDidClick:(id)playInfo//点赞点击
-      -(void)onlineListButtonDidClick:(id)playInfo//在线人数
-      -(void)shoppingBagDidClick:(id)playInfo//购物点击
-      -(void)attentionButtonDidClick:(id)playInfo//关注点击
-      -(void)chatUserDidClick:(id)playInfo//聊天用户点击
+### **- 推流UI集成**
+      MZUser *user=[[MZUser alloc] init];
+
+      #warning 这里是模拟的用户信息，使用的时候，请使用你们自己服务器的用户信息
+      user.userId = @"10001091";
+      user.nickName = @"张三";
+
+      #warning 请输入分配给你们的appID和secretKey
+      user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
+      user.secretKey = MZSDK_SecretKey;
+
+      [MZUserServer updateCurrentUser:user];
+
+      MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
+      [self.navigationController pushViewController:vc animated:YES];
+
+### **- 二分屏/横屏播放器UI集成**
+      MZUser *user = [[MZUser alloc] init];
+
+      user.userId = self.UIDTextView.text;
+      user.nickName = self.nameTextView.text;
+
+      user.avatar = self.avatarTextView.text;
+
+      #warning 请输入分配给你们的appID和secretKey
+      user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
+      user.secretKey = MZSDK_SecretKey;
+
+      [MZUserServer updateCurrentUser:user];
+
+
+      MZSuperPlayerViewController *superPlayerVC = [[MZSuperPlayerViewController alloc] init];
+      superPlayerVC.ticket_id = self.ticket_IDTextView.text;
+      [self.navigationController pushViewController:superPlayerVC animated:YES];
+
+### **- 竖屏播放器UI集成**
+      MZUser *user = [[MZUser alloc] init];
+      user.userId = self.UIDTextView.text;
+      user.nickName = self.nameTextView.text;
+
+      user.avatar = self.avatarTextView.text;
+
+      #warning 请输入分配给你们的appID和secretKey
+      user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
+      user.secretKey = MZSDK_SecretKey;
+
+      [MZUserServer updateCurrentUser:user];
+
+      MZVerticalPlayerViewController *liveVC = [[MZVerticalPlayerViewController alloc]init];
+      liveVC.ticket_id = self.ticket_IDTextView.text;
+      [self.navigationController pushViewController:liveVC  animated:YES];
+  
+  ### **- 下载器UI集成**
+      MZM3U8DownLoadViewController *downloadVC = [[MZM3U8DownLoadViewController alloc] init];
+      downloadVC.modalPresentationStyle = UIModalPresentationFullScreen;
+      [self.navigationController pushViewController:downloadVC animated:YES];
+
 # **6.非固定UI版功能集成 **
 - 不使用自带UI的具体实现方式请查看wiki文档

@@ -1,0 +1,6 @@
+framework module MZPlayerSDK {
+  umbrella header "MZPlayerSDK.h"
+
+  export *
+  module * { export * }
+}

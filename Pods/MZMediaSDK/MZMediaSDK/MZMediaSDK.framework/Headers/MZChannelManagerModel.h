@@ -6,12 +6,12 @@
 //  Copyright © 2016年 www.mengzhu.com. All rights reserved.
 //
 
-#import "MZBaseNetModel.h"
 #import "MZUser_info.h"
 #import "MZWebinar_info.h"
 #import "MZHost.h"
 #import "MZShare_info.h"
 #import "MZMoviePlayerModel.h"
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @class MZChannelManagerLastWebinarInfoModel;
 

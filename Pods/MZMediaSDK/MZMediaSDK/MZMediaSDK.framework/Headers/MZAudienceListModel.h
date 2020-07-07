@@ -5,8 +5,7 @@
 //  Created by vhall on 16/6/25.
 //  Copyright © 2016年 www.mengzhu.com. All rights reserved.
 //
-
-#import "MZBaseNetModel.h"
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @interface MZAudienceListModel : MZBaseNetModel
 @property (nonatomic,strong) NSString * user_id;

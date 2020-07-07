@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "MZLiveModel.h"
 #import "MZLongPollDataModel.h"
-#import "MZSocketIOClient.h"
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
+
 @protocol MZChatKitDelegate<NSObject>
 /*!
  直播时参会人数发生变化

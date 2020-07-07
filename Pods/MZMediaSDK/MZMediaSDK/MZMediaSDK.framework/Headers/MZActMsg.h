@@ -40,7 +40,7 @@
 @property (nonatomic,strong) NSString * msgText;
 @property (nonatomic,assign) BOOL barrage;
 @property (nonatomic,strong) NSString * imgSrc;
-@property (nonatomic ,strong)NSString *accountNo;//国民的用户标识ID
+@property (nonatomic,strong) NSString *accountNo;//用户ID，跟uid一样
 
 #pragma mark -红包消息
 @property (nonatomic ,copy) NSString *bonus_id;
@@ -230,6 +230,7 @@
 @property (nonatomic ,strong)NSString *uid;//连麦uid
 #pragma mark --新改的播放器开关
 @property (nonatomic ,strong)NSArray <MZGlobalContentModel *>*global_content;//全局开关配置
+@property (nonatomic ,strong)NSArray <MZSingleContentModel *>*webinar_content;//单场活动配置
 
 #pragma mark --流量用完的提示
 @property (nonatomic ,strong)NSString *msg;// 提示消息

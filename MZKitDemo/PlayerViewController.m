@@ -7,22 +7,28 @@
 //
 
 #import "PlayerViewController.h"
-#import <MZMediaSDK/MZMediaPlayerView.h>
+#import <MZPlayerSDK/MZPlayerSDK.h>
 #import "AppDelegate.h"
 #define TopMargin 20
 
-#define MinPlayerHeight (kDWidth / 16 * 9)
+#define MinPlayerHeight ([UIScreen mainScreen].bounds.size.width / 16 * 9)
 
-@interface PlayerViewController ()<MZMediaPlayerViewDelegate,MZMediaPlayerViewDelegate,UITextFieldDelegate>
+@interface PlayerViewController ()<MZMediaPlayerViewToolDelegate,UITextFieldDelegate>
 
 @property (nonatomic, strong)MZMediaPlayerView  *playerView;
 @property (nonatomic, strong)UIView             *headerView;
 @property (nonatomic, strong)UITextField        *field;
 @property (nonatomic, strong)UIButton           *playBtn;
+@property (nonatomic, strong)UIButton           *backBtn;
 @property (nonatomic,strong)UIView              *btnView;
 @end
 
 @implementation PlayerViewController
+
+- (void)dealloc
+{
+    NSLog(@"超级播放器释放");
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -71,19 +77,20 @@
     appDelegate.fullScreen = YES;
     self.view.backgroundColor=[UIColor whiteColor];
     if (_mvUrl.length <= 0) {
-        _mvUrl = @"http://vod.t.zmengzhu.com/record/base/hls-sd/a002307efd50b06100084555.m3u8";
+        _mvUrl = @"http://vod-o.t.zmengzhu.com/record/base/22a9457a1d14332d00085481.m3u8";
     }
-        _headerView =[[UIView alloc]initWithFrame:CGRectMake(0, 50*MZ_RATE+TopMargin, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-450)];
+    
+    _headerView =[[UIView alloc]initWithFrame:CGRectMake(0, 50*MZ_RATE+TopMargin, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-450)];
     _headerView.backgroundColor=[UIColor redColor];
     [self.view addSubview:_headerView];
     
     
-    _playerView=[[MZMediaPlayerView alloc]init];
-    [_playerView playerViewWithUrl:_mvUrl isLive:NO  WithView:_headerView  WithDelegate:self];
+    _playerView=[[MZMediaPlayerView alloc] init];
+    [_playerView playWithURLString:_mvUrl isLive:NO showView:_headerView delegate:self interfaceOrientation:MZMediaControlInterfaceOrientationMaskAll_old movieModel:MZMPMovieScalingModeAspectFit];
 
     [_playerView startPlayer];
     [_playerView.playerManager setPauseInBackground:NO];
-    _btnView=[[UIView alloc]initWithFrame:CGRectMake(0, _playerView.frame.size.height+80, _playerView.frame.size.width,200)];
+    _btnView=[[UIView alloc]initWithFrame:CGRectMake(0, _playerView.frame.size.height+80, _playerView.frame.size.width,250)];
     _field=[[UITextField alloc]init];
     _field.frame=CGRectMake(0, 0, _playerView.frame.size.width, 40);
     _field.borderStyle = UITextBorderStyleRoundedRect;
@@ -103,7 +110,12 @@
     [_btnView addSubview:seekBtn];
     [_playerView showPreviewImage:@"https://inews.gtimg.com/newsapp_ls/0/9563866905_294195/0"];
     
-//    [_playerView.mediaControl.playButton setImage:[UIImage imageNamed:@"camera_switch"] forState:UIControlStateNormal];
+    _backBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, seekBtn.frame.origin.y+seekBtn.frame.size.height+20, 50, 30)];
+    [_backBtn setTitle:@"退出" forState:UIControlStateNormal];
+    _backBtn.backgroundColor=[UIColor blueColor];
+    [_backBtn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchDown];
+    [_btnView addSubview:_backBtn];
+    
 //    [playerView setHistoryPlayingTime:@"1000"];
     
 }
@@ -132,13 +144,13 @@
         UIWindow*window= [UIApplication sharedApplication].keyWindow;
         _playerView.frame=CGRectMake(0, 0, size.width,size.height);
         _playerView.preview.frame=CGRectMake(0, 0, size.width,size.height);
-        _playerView.mediaControl.fullScreenBtn.selected=YES;
+        [_playerView updateFullscreenIsSelected:YES];
         _playerView.isFullScreen=YES;
         [window addSubview:_playerView];
     }else{
         _playerView.frame=CGRectMake(0, 0, size.width, size.width/16*9);
         _playerView.preview.frame=CGRectMake(0, 0, size.width, size.width/16*9);
-        _playerView.mediaControl.fullScreenBtn.selected=NO;
+        [_playerView updateFullscreenIsSelected:NO];
         _playerView.isFullScreen=NO;
         [_headerView addSubview:_playerView];
         _field.frame=CGRectMake(0, _playerView.frame.size.height+20, _playerView.frame.size.width, 40);
@@ -170,6 +182,10 @@
         NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
         [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     }
+}
+
+- (void)clickBack {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

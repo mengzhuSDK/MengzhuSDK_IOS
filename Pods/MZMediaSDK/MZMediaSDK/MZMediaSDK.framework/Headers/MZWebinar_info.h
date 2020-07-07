@@ -5,8 +5,7 @@
 //  Created by vhall on 2016/12/10.
 //  Copyright © 2016年 www.mengzhu.com. All rights reserved.
 //
-
-#import "MZBaseModel.h"
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @interface MZWebinar_info : MZBaseModel
 

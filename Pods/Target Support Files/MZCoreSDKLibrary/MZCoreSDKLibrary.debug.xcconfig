@@ -1,0 +1,14 @@
+CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES
+CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/MZCoreSDKLibrary
+ENABLE_BITCODE = NO
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) ${SDKROOT}/usr/include/libxml2
+OTHER_LDFLAGS = $(inherited) -l"bz2" -l"bz2.1.0" -l"c++" -l"icucore" -l"stdc++.6.0.9" -l"xml2" -l"z" -l"z.1.2.5" -framework "AVFoundation" -framework "AssetsLibrary" -framework "CoreMedia" -framework "CoreVideo" -framework "Foundation" -framework "OpenGLES" -framework "QuartzCore" -framework "Security" -framework "UIKit"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}
+PODS_TARGET_SRCROOT = ${PODS_ROOT}/MZCoreSDKLibrary
+PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
+SKIP_INSTALL = YES
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES

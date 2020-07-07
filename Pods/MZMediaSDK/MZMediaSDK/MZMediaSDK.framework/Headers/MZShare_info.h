@@ -6,7 +6,7 @@
 //  Copyright © 2016年 www.mengzhu.com. All rights reserved.
 //
 
-#import "MZBaseModel.h"
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @interface MZShare_info : MZBaseModel
 

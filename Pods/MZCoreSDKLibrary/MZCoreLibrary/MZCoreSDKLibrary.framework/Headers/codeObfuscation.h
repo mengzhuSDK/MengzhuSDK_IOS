@@ -1,0 +1,32 @@
+#ifndef YouHui_codeObfuscation_h
+#define YouHui_codeObfuscation_h
+//confuse string at Fri May 12 10:49:02 CST 2017
+#define startEngine 
+#define evaluateScriptWithPath 
+#define _evaluateScriptWithPath 
+#define _evaluateScript 
+#define hfevaluateScript 
+#define hotFixContext 
+#define addExtensions 
+#define defineStruct 
+#define jphandleException 
+#define formatPointerJSToOC 
+#define formatRetainedCFTypeOCToJS 
+#define formatPointerOCToJS 
+#define formatJSToOC 
+#define formatOCToJS 
+#define sizeOfStructTypes 
+#define getStructDataWidthDict 
+#define getDictOfStruct 
+#define registeredStruct 
+#define overideMethods 
+#define includedScriptPaths 
+#define unbox 
+#define unboxPointer 
+#define unboxClass 
+#define boxAssignObj 
+#define boxWeakObj 
+#define boxClass 
+#define boxPointer 
+#define boxObj 
+#endif
