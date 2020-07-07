@@ -1195,9 +1195,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 }
 
 #pragma mark - MZChatKitDelegate
-/// 直播时参会人数发生变化
+/// 直播时参会人数发生变化(暂未使用，请使用activityGetNewMsg:)
 - (void)activityOnlineNumberdidchange:(NSString * )onlineNo {
-    NSLog(@"aaa onlineNo = %@",onlineNo);
+
 }
 
 /// 直播时礼物数发生变化
