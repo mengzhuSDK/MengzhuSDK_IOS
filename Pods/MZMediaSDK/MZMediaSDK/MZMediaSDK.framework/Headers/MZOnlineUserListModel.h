@@ -15,5 +15,6 @@
 @property (nonatomic,strong)NSString * nickname;
 @property (nonatomic,strong)NSString * uid;
 @property (nonatomic,strong)NSString * avatar;
+@property (nonatomic ,copy) NSString *unique_id;//用户唯一id
 @end
 

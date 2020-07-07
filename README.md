@@ -47,6 +47,10 @@
 # **5.固定UI版快速集成 **
 - 如文档与demo有未同步情况，请先参考demo并运行测试确认是否正确。
 - 集成过程中如遇到未知错误请联系盟主客服
+### **- 使用前请在ViewController里配置appId和appSecretKey**
+      /// 分配的appID和secretKey
+      #define MZSDK_AppID @""
+      #define MZSDK_SecretKey @""
 ### **- 推流UI集成**
       MZUser *user=[[MZUser alloc] init];
 
@@ -58,7 +62,7 @@
       /// 用户自己传过来的唯一ID
       user.uniqueID = @"A123456B";
           
-      #warning 请输入分配给你们的appID和secretKey
+      #warning 请输入分配的appID和secretKey
       user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
       user.secretKey = MZSDK_SecretKey;
 
@@ -77,7 +81,7 @@
       /// 用户自己传过来的唯一ID
       user.uniqueID = @"A123456B";
 
-      #warning 请输入分配给你们的appID和secretKey
+      #warning 请输入分配的appID和secretKey
       user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
       user.secretKey = MZSDK_SecretKey;
 
@@ -97,7 +101,7 @@
       /// 用户自己传过来的唯一ID
       user.uniqueID = @"A123456B";
 
-      #warning 请输入分配给你们的appID和secretKey
+      #warning 请输入分配的appID和secretKey
       user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
       user.secretKey = MZSDK_SecretKey;
 

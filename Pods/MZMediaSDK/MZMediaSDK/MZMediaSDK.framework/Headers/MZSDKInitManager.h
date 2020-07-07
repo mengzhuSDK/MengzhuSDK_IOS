@@ -16,6 +16,7 @@
 @property(nonatomic,readonly) NSString* errorCode;
 @property(nonatomic,readonly) BOOL isPassValidation;
 + (MZSDKInitManager *)sharedManager;
+///实例化SDK
 -(void)initSDK:(void (^)(id responseObject))success failure:(void(^)(NSError*error))failure;
 
 @end

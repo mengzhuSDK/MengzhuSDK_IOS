@@ -1,20 +1,20 @@
 PODS:
-  - MZCoreSDKLibrary (1.0.6)
-  - MZDownLoaderSDK (1.0.9):
-    - MZCoreSDKLibrary
-  - MZMediaSDK (1.0.5):
-    - MZCoreSDKLibrary
-  - MZPlayerSDK (1.0.1):
-    - MZCoreSDKLibrary
-  - MZPushFlowSDK (1.0.1):
-    - MZCoreSDKLibrary
+  - MZCoreSDKLibrary (2.1.0)
+  - MZDownLoaderSDK (2.1.0):
+    - MZCoreSDKLibrary (~> 2.1.0)
+  - MZMediaSDK (2.1.0):
+    - MZCoreSDKLibrary (~> 2.1.0)
+  - MZPlayerSDK (2.1.0):
+    - MZCoreSDKLibrary (~> 2.1.0)
+  - MZPushFlowSDK (2.1.0):
+    - MZCoreSDKLibrary (~> 2.1.0)
 
 DEPENDENCIES:
-  - MZCoreSDKLibrary (~> 1.0.6)
-  - MZDownLoaderSDK (~> 1.0.9)
-  - MZMediaSDK (~> 1.0.5)
-  - MZPlayerSDK (~> 1.0.1)
-  - MZPushFlowSDK (~> 1.0.1)
+  - MZCoreSDKLibrary (~> 2.1.0)
+  - MZDownLoaderSDK (~> 2.1.0)
+  - MZMediaSDK (~> 2.1.0)
+  - MZPlayerSDK (~> 2.1.0)
+  - MZPushFlowSDK (~> 2.1.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -25,12 +25,12 @@ SPEC REPOS:
     - MZPushFlowSDK
 
 SPEC CHECKSUMS:
-  MZCoreSDKLibrary: 53c432a8df469ffffbde748a4cf19a788a56ffb6
-  MZDownLoaderSDK: db49183ab1a373070d39905ae7f2128a12d8b9ca
-  MZMediaSDK: 2fd10f6d13a535969e8604466790c43003f26c6a
-  MZPlayerSDK: 89552805b07c3b17ae166fb8ed590040238e3f6c
-  MZPushFlowSDK: 45e4046207ffd48a07feaa52f9666a60c178d856
+  MZCoreSDKLibrary: cc534fae7611f8562ebd0f2e76769933f664d8b9
+  MZDownLoaderSDK: 0ad235e343aef39642440570ef296c0fd4953527
+  MZMediaSDK: e8f3640f13e878e6e423985894dd9cfaec246a57
+  MZPlayerSDK: 18efaf4dbd9fbdfc43c5c9f52df0e136ea5dcf2b
+  MZPushFlowSDK: 17c1395b3182f30b7929181924584ac5a9260e4d
 
-PODFILE CHECKSUM: faecec1e904fd8ac2b38ef8f2da42d25f760cf23
+PODFILE CHECKSUM: e2aab3b503bbdda294f37575f993d53fd001d28f
 
 COCOAPODS: 1.9.0.beta.2

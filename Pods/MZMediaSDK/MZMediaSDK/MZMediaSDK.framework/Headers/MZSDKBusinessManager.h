@@ -13,22 +13,22 @@
 #import "MZLiveFinishModel.h"
 
 @interface MZSDKBusinessManager : NSObject
-//获取主播信息
+///获取主播信息
 + (void)reqHostInfo:(NSString*)ticketId success:(void (^)(MZHostModel*  responseObject))success failure:(void (^)(NSError *error))failure;
-//视频详情
+///视频详情
 + (void)reqPlayInfo:(NSString*)ticketId success:(void (^)(MZMoviePlayerModel*  responseObject))success failure:(void (^)(NSError *error))failure;
 
-//回放历史数据
+///回放历史数据
 +(void)reqChatHistoryWith :(NSString *)ticketId  offset : (NSInteger)offset limit :(NSInteger)limit last_id:(NSString *)last_id success:(void(^)(NSMutableArray *responseObject))success failure:(void(^)(NSError * error))failure;
-//活动商品列表
+///活动商品列表
 +(void)reqGoodsList:(NSString *)ticketId offset : (NSInteger)offset limit :(NSInteger)limit success:(void(^)(id responseObject))success failure:(void(^)(NSError * error))failure;
-//获取在线用户
+///获取在线用户
 +(void)reqGetUserList:(NSString *)ticketId offset :(NSInteger)offset limit :(NSInteger)limit success:(void(^)(id responseObject))success failure:(void(^)(NSError * error))failure;
-//点赞
+///点赞
 +(void)reqPostPraise:(NSString *)ticketId channel_id:(NSString *)channel_id praises:(NSString *)praises chat_uid:(NSString *)chat_uid success:(void(^)(id responseObject))success failure:(void(^)(NSError * error))failure;
-
+///设置是否debug
 +(void)setDebug:(BOOL)isDebug;
-
+///获取是否debug
 +(BOOL)isDebug;
 
 #pragma mark - 直播
@@ -76,8 +76,6 @@
  * @param failure 失败原因回调
  */
 +(void)blockAllOrAlowChatWithChannelId:(NSString *)channelId ticketId:(NSString *)ticketId isChat:(BOOL)isChat success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
-
-#pragma mark - 超级播放器
 
 @end
 

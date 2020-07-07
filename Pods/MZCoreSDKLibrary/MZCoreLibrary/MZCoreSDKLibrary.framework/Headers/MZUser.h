@@ -29,6 +29,8 @@
 @property (nonatomic,strong)NSString * appID;
 @property (nonatomic,strong)NSString * secretKey;
 
+@property (nonatomic,strong)NSString * uniqueID;//用户传过来的唯一id
+
 + (instancetype)currentUserLoginDictionary:(NSDictionary *)dic;
 
 

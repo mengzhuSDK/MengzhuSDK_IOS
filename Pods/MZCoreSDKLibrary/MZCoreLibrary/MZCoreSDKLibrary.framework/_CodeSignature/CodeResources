@@ -4,9 +4,57 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/GTMBase64.h</key>
+		<data>
+		c15P+Ihsc3pn7br/xk+YHZk6K40=
+		</data>
+		<key>Headers/GTMDefines.h</key>
+		<data>
+		qyipU92AAccrR6TVTy608Nnb2vk=
+		</data>
 		<key>Headers/MKAnnotationView+MZWebCache.h</key>
 		<data>
 		qOugCObIUTjkcdmCGoDOHzpeJLY=
+		</data>
+		<key>Headers/MZAFAutoPurgingImageCache.h</key>
+		<data>
+		nlrnyEvCJXrBlG+qrp+TnN0Oplk=
+		</data>
+		<key>Headers/MZAFHTTPSessionManager.h</key>
+		<data>
+		NhHeTgjLI/8ZbmzVMHBPBT1hyrI=
+		</data>
+		<key>Headers/MZAFImageDownloader.h</key>
+		<data>
+		7Sm0WIS2Bipoae5Au/ap5pflfCI=
+		</data>
+		<key>Headers/MZAFNetworkActivityIndicatorManager.h</key>
+		<data>
+		fb5B733rgBO3EzOid12Ielh4AcI=
+		</data>
+		<key>Headers/MZAFNetworkReachabilityManager.h</key>
+		<data>
+		+LoWYWem4EBrujuyc+IF/AbRnEc=
+		</data>
+		<key>Headers/MZAFNetworking.h</key>
+		<data>
+		L7GG+J2051Kzv0reXe9OhWUslig=
+		</data>
+		<key>Headers/MZAFSecurityPolicy.h</key>
+		<data>
+		jAeeTHNSKrpbVEiNc1efy1tgjI0=
+		</data>
+		<key>Headers/MZAFURLRequestSerialization.h</key>
+		<data>
+		EAaNZ2ttQVMW60yM9PmZyg3kC9U=
+		</data>
+		<key>Headers/MZAFURLResponseSerialization.h</key>
+		<data>
+		AtCsp3wjDev+K+Bu1QEKabQXueY=
+		</data>
+		<key>Headers/MZAFURLSessionManager.h</key>
+		<data>
+		tF7jHJqK77S8ieN3P71+ITpm/ls=
 		</data>
 		<key>Headers/MZAPIManager.h</key>
 		<data>
@@ -15,6 +63,18 @@
 		<key>Headers/MZActivityConfig.h</key>
 		<data>
 		UYuZoAGDrApELAlnuZe94/HAeck=
+		</data>
+		<key>Headers/MZApiClient.h</key>
+		<data>
+		00UjmwwcTQUZQ8WVwc9/SGS4qnc=
+		</data>
+		<key>Headers/MZBaseModel.h</key>
+		<data>
+		dvaXcykcHleUNDVRt3TvzBHaVkc=
+		</data>
+		<key>Headers/MZBaseNetModel.h</key>
+		<data>
+		A2pZNiRMr5YgOmVTTZwDiJ3rKTE=
 		</data>
 		<key>Headers/MZConstantConfig.h</key>
 		<data>
@@ -44,6 +104,10 @@
 		<data>
 		6xgStFj6wEK+tjnQJE/BDWrRPZg=
 		</data>
+		<key>Headers/MZGlobalTools.h</key>
+		<data>
+		NkyfrmyMG0YdZ3gCvozyRAD1oAY=
+		</data>
 		<key>Headers/MZImageCache.h</key>
 		<data>
 		2/rodziUJCFwW/pNvihID2GDijk=
@@ -55,6 +119,10 @@
 		<key>Headers/MZLogConfig.h</key>
 		<data>
 		ecNiCZooPgIZU5jRihMYpjl+Lo8=
+		</data>
+		<key>Headers/MZPersistenceManager.h</key>
+		<data>
+		htGkuxkL8Idy3owUQE2JKRdKncE=
 		</data>
 		<key>Headers/MZProperty.h</key>
 		<data>
@@ -136,9 +204,25 @@
 		<data>
 		uy/JSycORU3y0cyJb5M6DBRHBa4=
 		</data>
+		<key>Headers/MZSocketIOClient.h</key>
+		<data>
+		/v5z6S8zraTtZgvx158Qpw64LVQ=
+		</data>
 		<key>Headers/MZStatisticsStystem.h</key>
 		<data>
 		qRIDf1OCsVBm2OZyeXS1DJ+cuJM=
+		</data>
+		<key>Headers/MZTimer.h</key>
+		<data>
+		Qkbg5lr7JbxTQSbPhCTfDuYR8OY=
+		</data>
+		<key>Headers/MZUser.h</key>
+		<data>
+		dObvWNrhnUpgxxovc3X1XBNZcRw=
+		</data>
+		<key>Headers/MZUserServer.h</key>
+		<data>
+		/FB3Dpoy+d4pvFG+if6SA/I9qOg=
 		</data>
 		<key>Headers/MZVarKeyOrValue.h</key>
 		<data>
@@ -204,6 +288,26 @@
 		<data>
 		HVlOVOQe4j5uBnlfbMU9xaJ+jhU=
 		</data>
+		<key>Headers/Reachability.h</key>
+		<data>
+		7xygaUdRKTEyp51SkWuGCB+pOvk=
+		</data>
+		<key>Headers/SRWebSocket.h</key>
+		<data>
+		xjLQ7giNfBRNjKmSfEl72sf8wEs=
+		</data>
+		<key>Headers/SocketRocket.h</key>
+		<data>
+		plCpts3HSuR8swfNz+QctAtj5vM=
+		</data>
+		<key>Headers/UIActivityIndicatorView+MZAFNetworking.h</key>
+		<data>
+		rcw6V5PfaIGllcW35g61ynsFBxw=
+		</data>
+		<key>Headers/UIButton+MZAFNetworking.h</key>
+		<data>
+		zNPtmpthM4U7JWNVWoFOKqeZNNM=
+		</data>
 		<key>Headers/UIButton+MZWebCache.h</key>
 		<data>
 		cK7qQwwkW42azs+65qqBI1HZh8o=
@@ -224,6 +328,10 @@
 		<data>
 		9EuwBKFy/wRGz9P/32baBsOZCmQ=
 		</data>
+		<key>Headers/UIImageView+MZAFNetworking.h</key>
+		<data>
+		aVSPAEse8naDJbJx/Bi6SQ7GFU0=
+		</data>
 		<key>Headers/UIImageView+MZHighlightedWebCache.h</key>
 		<data>
 		i60vWb2nhPCmg4zSobo8Q7gbx2I=
@@ -231,6 +339,18 @@
 		<key>Headers/UIImageView+MZWebCache.h</key>
 		<data>
 		tce55lpLshc4bKTif6AgL9CJ4Tk=
+		</data>
+		<key>Headers/UIKit+MZAFNetworking.h</key>
+		<data>
+		3E+kqLh56otPiQ14A99esVmz5Ig=
+		</data>
+		<key>Headers/UIProgressView+MZAFNetworking.h</key>
+		<data>
+		QHV6HJZGBR8BmSES9EQ5ngvqwgI=
+		</data>
+		<key>Headers/UIRefreshControl+MZAFNetworking.h</key>
+		<data>
+		RdXJJuVk3AwzPf5Eh5YU5Ih4yl4=
 		</data>
 		<key>Headers/UIScrollView+MZExtension.h</key>
 		<data>
@@ -254,7 +374,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		PUz7G5wgIqddaj6P3BrDLkcdqkU=
+		xss18dtJTlkY6pSO30fUYH5Nqec=
 		</data>
 		<key>LICENSE</key>
 		<data>
@@ -311,6 +431,28 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/GTMBase64.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			c15P+Ihsc3pn7br/xk+YHZk6K40=
+			</data>
+			<key>hash2</key>
+			<data>
+			xXU5XcS7MCCQAs2oOzPijz1XDBWqJlgfzVfqmHi4Yz8=
+			</data>
+		</dict>
+		<key>Headers/GTMDefines.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			qyipU92AAccrR6TVTy608Nnb2vk=
+			</data>
+			<key>hash2</key>
+			<data>
+			2+/AqtYnnjLh2UXQS6JDzmXE5K+IpW1U4KiMdSuRGrc=
+			</data>
+		</dict>
 		<key>Headers/MKAnnotationView+MZWebCache.h</key>
 		<dict>
 			<key>hash</key>
@@ -320,6 +462,116 @@
 			<key>hash2</key>
 			<data>
 			VuMDkO7/fCRPckEH+0DKFYRtHRZdBwaRn0FVM/uWWvA=
+			</data>
+		</dict>
+		<key>Headers/MZAFAutoPurgingImageCache.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nlrnyEvCJXrBlG+qrp+TnN0Oplk=
+			</data>
+			<key>hash2</key>
+			<data>
+			w5aW5PTx/kt2kuiDmQeXxRNlTePLn544Vlx3memZnX4=
+			</data>
+		</dict>
+		<key>Headers/MZAFHTTPSessionManager.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NhHeTgjLI/8ZbmzVMHBPBT1hyrI=
+			</data>
+			<key>hash2</key>
+			<data>
+			Qz3Sh0SxW5vB3Cq9OSCeqtQ9t8SGA1l4PXFetbktxk0=
+			</data>
+		</dict>
+		<key>Headers/MZAFImageDownloader.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7Sm0WIS2Bipoae5Au/ap5pflfCI=
+			</data>
+			<key>hash2</key>
+			<data>
+			5LmXzr4/05CPsJTt2e5s9gvVLo+e7et3hwfr9wQ7CrY=
+			</data>
+		</dict>
+		<key>Headers/MZAFNetworkActivityIndicatorManager.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fb5B733rgBO3EzOid12Ielh4AcI=
+			</data>
+			<key>hash2</key>
+			<data>
+			kNoyQ5EI1fye3QgXRFaH4xmSei2CSdoE2Y8TIDNjxWo=
+			</data>
+		</dict>
+		<key>Headers/MZAFNetworkReachabilityManager.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+LoWYWem4EBrujuyc+IF/AbRnEc=
+			</data>
+			<key>hash2</key>
+			<data>
+			+yHWgLJzlyg2tJRv7ciPXwlW+4d6NOHEXWEeFn81g44=
+			</data>
+		</dict>
+		<key>Headers/MZAFNetworking.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			L7GG+J2051Kzv0reXe9OhWUslig=
+			</data>
+			<key>hash2</key>
+			<data>
+			0E2CrWOWNSTVIobJ4uGJoL3wy1/RogtMC3884GUNTTU=
+			</data>
+		</dict>
+		<key>Headers/MZAFSecurityPolicy.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			jAeeTHNSKrpbVEiNc1efy1tgjI0=
+			</data>
+			<key>hash2</key>
+			<data>
+			h2wD4qkmJSyeIE6Af9R2DI196kpWSOpExauagASXtMs=
+			</data>
+		</dict>
+		<key>Headers/MZAFURLRequestSerialization.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			EAaNZ2ttQVMW60yM9PmZyg3kC9U=
+			</data>
+			<key>hash2</key>
+			<data>
+			yJFdau1peBUuEwfowQUxeWh5mziw7LjqjDwamNn+8KU=
+			</data>
+		</dict>
+		<key>Headers/MZAFURLResponseSerialization.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			AtCsp3wjDev+K+Bu1QEKabQXueY=
+			</data>
+			<key>hash2</key>
+			<data>
+			ig4wkDe7h3uSMppAA+fQSr83DWDrRRBKjQhQnxWAV+g=
+			</data>
+		</dict>
+		<key>Headers/MZAFURLSessionManager.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			tF7jHJqK77S8ieN3P71+ITpm/ls=
+			</data>
+			<key>hash2</key>
+			<data>
+			Ftxm99dpdEFQGbiZ5bSvN8S0JGgGevbw62huDoC/ARM=
 			</data>
 		</dict>
 		<key>Headers/MZAPIManager.h</key>
@@ -342,6 +594,39 @@
 			<key>hash2</key>
 			<data>
 			RKdRL2bJID381r8AAzL4B0Pgx1/AsoY6Krtzey8FgxQ=
+			</data>
+		</dict>
+		<key>Headers/MZApiClient.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			00UjmwwcTQUZQ8WVwc9/SGS4qnc=
+			</data>
+			<key>hash2</key>
+			<data>
+			u7I5LG6MWweaN3cHDbGP0ca7nMBFlNH4CLSnb/pU5hs=
+			</data>
+		</dict>
+		<key>Headers/MZBaseModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dvaXcykcHleUNDVRt3TvzBHaVkc=
+			</data>
+			<key>hash2</key>
+			<data>
+			hfbSBjWaZA8aDqP0Cqu5v+9Cj1qg61qvqvft9PmA4ZY=
+			</data>
+		</dict>
+		<key>Headers/MZBaseNetModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			A2pZNiRMr5YgOmVTTZwDiJ3rKTE=
+			</data>
+			<key>hash2</key>
+			<data>
+			QAzLlNPjMW2r44WGwEx5OWbtXPKG61ccwXQK9UVyyVM=
 			</data>
 		</dict>
 		<key>Headers/MZConstantConfig.h</key>
@@ -421,6 +706,17 @@
 			VPZmd4RVTSIM6/6rB9HrcxT6Ne+ZoEvx68UNIIWvQYI=
 			</data>
 		</dict>
+		<key>Headers/MZGlobalTools.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			NkyfrmyMG0YdZ3gCvozyRAD1oAY=
+			</data>
+			<key>hash2</key>
+			<data>
+			icIo6+T3+ObBS1K8V/HiwclAcFJvj8RPBd7K12lTI+8=
+			</data>
+		</dict>
 		<key>Headers/MZImageCache.h</key>
 		<dict>
 			<key>hash</key>
@@ -452,6 +748,17 @@
 			<key>hash2</key>
 			<data>
 			c4CoqckWww9n48mfVoJd9zj0EwbufedSOzNwgQhWZ/A=
+			</data>
+		</dict>
+		<key>Headers/MZPersistenceManager.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			htGkuxkL8Idy3owUQE2JKRdKncE=
+			</data>
+			<key>hash2</key>
+			<data>
+			M/4uiySrAid+14E/M3l2L52SOrSPvvJzPSGEWw7jN+4=
 			</data>
 		</dict>
 		<key>Headers/MZProperty.h</key>
@@ -674,6 +981,17 @@
 			T8bxn1TQjlgPvmQN3Ag2/e07m18UltV59sXcO8jBcag=
 			</data>
 		</dict>
+		<key>Headers/MZSocketIOClient.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/v5z6S8zraTtZgvx158Qpw64LVQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			JpXh9C7N4SzU3x7INGjX5FzfaN0FvcVnnRdd9R2e3zE=
+			</data>
+		</dict>
 		<key>Headers/MZStatisticsStystem.h</key>
 		<dict>
 			<key>hash</key>
@@ -683,6 +1001,39 @@
 			<key>hash2</key>
 			<data>
 			EmjvKFG5fOPpAJcg3+WcoETauxEep+e2GEItMvqvElI=
+			</data>
+		</dict>
+		<key>Headers/MZTimer.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Qkbg5lr7JbxTQSbPhCTfDuYR8OY=
+			</data>
+			<key>hash2</key>
+			<data>
+			d/H8PMjeB//PtM1Hfc4YAzGUabSVWOUi3CC+RxlLL2o=
+			</data>
+		</dict>
+		<key>Headers/MZUser.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dObvWNrhnUpgxxovc3X1XBNZcRw=
+			</data>
+			<key>hash2</key>
+			<data>
+			n3eiqlAWgQTeCc7UvhH2Tm6xD2ap09qFTqGWeqJXcjI=
+			</data>
+		</dict>
+		<key>Headers/MZUserServer.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/FB3Dpoy+d4pvFG+if6SA/I9qOg=
+			</data>
+			<key>hash2</key>
+			<data>
+			p8xCEDpLVRuXY7wjAsopZitGoatEukxUXdAi0XhHopw=
 			</data>
 		</dict>
 		<key>Headers/MZVarKeyOrValue.h</key>
@@ -861,6 +1212,61 @@
 			/wjybc4Z6QZUewFeJLtKAZnNTOJVks+xr1wXNsNc5sE=
 			</data>
 		</dict>
+		<key>Headers/Reachability.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7xygaUdRKTEyp51SkWuGCB+pOvk=
+			</data>
+			<key>hash2</key>
+			<data>
+			VB4vbv7eYVQn3DExn2vZGVLVEWWdMWpk7qfgzkSBi9Y=
+			</data>
+		</dict>
+		<key>Headers/SRWebSocket.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xjLQ7giNfBRNjKmSfEl72sf8wEs=
+			</data>
+			<key>hash2</key>
+			<data>
+			hLK/1zvhpryl2MIM7/4EYIwhhg2pWx2wBCz+9GONXcU=
+			</data>
+		</dict>
+		<key>Headers/SocketRocket.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			plCpts3HSuR8swfNz+QctAtj5vM=
+			</data>
+			<key>hash2</key>
+			<data>
+			JOuEj+I37diX93QM5quieAesRTjEwEl5KBiQy4lCUr8=
+			</data>
+		</dict>
+		<key>Headers/UIActivityIndicatorView+MZAFNetworking.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rcw6V5PfaIGllcW35g61ynsFBxw=
+			</data>
+			<key>hash2</key>
+			<data>
+			1ribdxzVaY+SY1C05q1H0myAYYeYjJdpYExIs4viY2U=
+			</data>
+		</dict>
+		<key>Headers/UIButton+MZAFNetworking.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zNPtmpthM4U7JWNVWoFOKqeZNNM=
+			</data>
+			<key>hash2</key>
+			<data>
+			Zelo8OziHnid1zYlQzAVxGzPrdqtRK5r6Mlu/5Nz57I=
+			</data>
+		</dict>
 		<key>Headers/UIButton+MZWebCache.h</key>
 		<dict>
 			<key>hash</key>
@@ -916,6 +1322,17 @@
 			LqnqnzlQd8eLFaEbXIUdcrneYwatVj9A2LlpDmoOS7M=
 			</data>
 		</dict>
+		<key>Headers/UIImageView+MZAFNetworking.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			aVSPAEse8naDJbJx/Bi6SQ7GFU0=
+			</data>
+			<key>hash2</key>
+			<data>
+			gmEw9L3rSF2zCAHbkfm/Z7sY8t792oqlr7UEqi9wSvQ=
+			</data>
+		</dict>
 		<key>Headers/UIImageView+MZHighlightedWebCache.h</key>
 		<dict>
 			<key>hash</key>
@@ -936,6 +1353,39 @@
 			<key>hash2</key>
 			<data>
 			udxQ33wOY1Cfs/G3Snhvf+ES4FmANfPu8Nwv4NUs9LY=
+			</data>
+		</dict>
+		<key>Headers/UIKit+MZAFNetworking.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			3E+kqLh56otPiQ14A99esVmz5Ig=
+			</data>
+			<key>hash2</key>
+			<data>
+			dd+xlMT6Neo9hkyldxqa8BztDB4S3TBj8UXz39OaUCk=
+			</data>
+		</dict>
+		<key>Headers/UIProgressView+MZAFNetworking.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			QHV6HJZGBR8BmSES9EQ5ngvqwgI=
+			</data>
+			<key>hash2</key>
+			<data>
+			5qdlkDIgM3WURsAs7mjKvUIvVi4YwRWjmQuPg5Ou3GQ=
+			</data>
+		</dict>
+		<key>Headers/UIRefreshControl+MZAFNetworking.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RdXJJuVk3AwzPf5Eh5YU5Ih4yl4=
+			</data>
+			<key>hash2</key>
+			<data>
+			bW9o7HHI0UpES3fu7v7ziaTAmyuv+/LDmnjXEkHEHZg=
 			</data>
 		</dict>
 		<key>Headers/UIScrollView+MZExtension.h</key>

@@ -14,9 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 //uid: 2991454,
 //nickname: "aikangguobin",
 //avatar: "h
-@property (nonatomic ,copy) NSString *uid;
-@property (nonatomic ,copy) NSString *nickname;
-@property (nonatomic ,copy) NSString *avatar;
+//"unique_id" = 1000109198213;
+@property (nonatomic ,copy) NSString *uid;//用户内部的id
+@property (nonatomic ,copy) NSString *nickname;//用户名字
+@property (nonatomic ,copy) NSString *avatar;//用户头像地址
+@property (nonatomic ,copy) NSString *unique_id;//用户唯一id
 @end
 
 NS_ASSUME_NONNULL_END

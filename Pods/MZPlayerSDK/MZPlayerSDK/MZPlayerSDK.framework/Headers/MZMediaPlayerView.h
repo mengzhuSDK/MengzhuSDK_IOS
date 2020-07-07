@@ -1,9 +1,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "MZOldMediaControl.h"
-#import "MZNewMediaControl.h"
-#import "MZOnlyVerticalMediaControl.h"
+
 #import "MZPlayerManager.h"
 
 @class MZMediaPlayerView;
@@ -67,7 +65,7 @@
 @end
 
 
-typedef enum : NSUInteger {
+typedef enum : NSUInteger {//播放器控制栏的UI版本
     MZMediaControlInterfaceOrientationMaskAll_old = 0,//播放器控制栏（横屏/二分屏自适应）旧版
     MZMediaControlInterfaceOrientationMaskAll_new,//播放器控制栏（横屏/二分屏自适应）新版
     MZMediaControlInterfaceOrientationMaskPortrait,//播放器控制栏（纯竖屏版本）
@@ -75,15 +73,8 @@ typedef enum : NSUInteger {
 
 @interface MZMediaPlayerView : UIView
 
-@property (nonatomic, weak)   id<MZMediaPlayerViewToolDelegate> toolDelegate;
-@property (nonatomic, weak)   id<MZMediaPlayerViewPlayDelegate> playDelegate;
-
-/**
- * @brief 播放器的控制栏UI，有多套，同时只能使用一套，
- */
-@property (nonatomic, strong) MZOldMediaControl           *oldMediaControl;//播放器控制栏view 可更改ui,
-@property (nonatomic, strong) MZNewMediaControl           *newMediaControl;//播放器控制栏第二版view，可更改ui，
-@property (nonatomic, strong) MZOnlyVerticalMediaControl  *onlyVerticalMediaControl;//只支持竖版的播放器控制栏
+@property (nonatomic, weak)   id<MZMediaPlayerViewToolDelegate> toolDelegate;//工具栏代理
+@property (nonatomic, weak)   id<MZMediaPlayerViewPlayDelegate> playDelegate;//播放器代理
 
 @property (nonatomic, assign) BOOL                        shouldAutoplay;//是否自动播放
 @property (nonatomic, assign) BOOL                        isFullScreen;//是否全屏播放
@@ -105,34 +96,34 @@ typedef enum : NSUInteger {
  */
 - (void)playWithURLString:(NSString *)URLString isLive:(BOOL)isLive showView:(UIView*)showView delegate:(id)delegate interfaceOrientation:(MZMediaControlInterfaceOrientation)interfaceOrientation movieModel:(MZMPMovieScalingMode)movieModel;
 
+///显示播放
 - (void)playerWillShow;
+///隐藏播放
 - (void)playerWillHide;
-
+///暂停播放
 - (void)pausePlayer;
+///开始播放
 - (void)startPlayer;
-
 ///快进退
 - (void)seekTo:(NSTimeInterval)progress;
-
-///预览图
+///网络预览图
 - (void)showPreviewImage:(NSString *)imagePath;
+///本地预览图
 - (void)showLocalPreviewImage:(NSString *)imageName;
-
 ///被动转换横竖屏,非用户点击。
 - (void)fullScreen;
 ///主动隐藏播放栏
 - (void)hideMediaControl;
 ///更新全屏按钮是否选中
 - (void)updateFullscreenIsSelected:(BOOL)isSelected;
-///设置横屏下，从右侧偏移向左(MZMediaControlInterfaceOrientationMaskAll_new有效)
-- (void)landSpaceRightToInset:(CGFloat)rightInset;
-
-
-///设置竖屏全屏播放下，从右侧偏移向左(MZMediaControlInterfaceOrientationMaskPortrait有效)
-- (void)portraitRightToInset:(CGFloat)rightInset;
-
 ///设置控制栏延迟隐藏的秒数,默认为5秒
 - (void)updateSecondOfAfterDelayToHide:(double)second;
+///设置控制栏常驻
+- (void)updateToolToHideAtDistantFuture;
+///设置横屏下，播放控制栏从右侧偏移向左(MZMediaControlInterfaceOrientationMaskAll_new有效)
+- (void)landSpaceRightToInset:(CGFloat)rightInset;
+///设置竖屏全屏播放下，播放控制栏从右侧偏移向左(MZMediaControlInterfaceOrientationMaskPortrait有效)
+- (void)portraitRightToInset:(CGFloat)rightInset;
 
 @end
 

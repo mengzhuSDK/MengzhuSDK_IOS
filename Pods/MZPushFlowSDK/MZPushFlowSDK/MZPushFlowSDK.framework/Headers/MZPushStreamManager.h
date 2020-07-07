@@ -56,7 +56,7 @@ typedef NS_ENUM (NSUInteger, MZCaptureSessionPreset){
 /**
  * 初始化
  *
- * @param videoSessionPreset 视频分辨率(码率，帧率fps, 都是根据分辨率自动配置的最优选项)
+ * @param videoSessionPreset 视频分辨率(码率，帧率fps, 都是根据分辨率自动配置的最优选项)推荐此方法
  * @param outputImageOrientation 直播方向
  * @return self
  */
