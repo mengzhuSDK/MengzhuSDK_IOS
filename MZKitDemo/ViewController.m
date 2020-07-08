@@ -90,8 +90,7 @@
     self.ticket_IDTextView.keyboardType = UIKeyboardTypeDefault;
     [self.view addSubview:self.ticket_IDTextView];
     self.ticket_IDTextView.text = @"10014099";//竖屏
-//    self.ticket_IDTextView.text = @"10013331";//横屏
-//    self.ticket_IDTextView.text = @"10014014";//竖屏
+    self.ticket_IDTextView.text = @"10014121";//横屏
 
     UILabel *tipL2 = [[UILabel alloc] initWithFrame:CGRectMake(playerBtn.frame.origin.x, 140, self.view.bounds.size.width, 20)];
     [self.view addSubview:tipL2];
@@ -138,7 +137,6 @@
     user.secretKey = MZSDK_SecretKey;
     
     [MZUserServer updateCurrentUser:user];
-    
     
 //    [[MZSDKInitManager sharedManager]initSDK:^(id responseObject) {
 

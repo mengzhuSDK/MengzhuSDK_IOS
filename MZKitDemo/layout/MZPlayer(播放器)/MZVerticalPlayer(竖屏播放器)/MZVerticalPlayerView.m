@@ -140,7 +140,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     
     self.liveManagerHeaderView.clickBlock = ^{
         if (weakself.delegate && [weakself.delegate respondsToSelector:@selector(avatarDidClick:)]) {
-            [weakself.delegate avatarDidClick:weakself.playInfo];
+            [weakself.delegate avatarDidClick:weakself.hostModel];
         }
     };
     self.liveManagerHeaderView.attentionClickBlock = ^{

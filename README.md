@@ -37,7 +37,7 @@
 本文是根据附加demo来介绍SDK集成，可在已下载的SDK文件路径下引入demo项目。通过查看demo可了解更多详细功能。
 ## **4. 1 cocoapods集成**
 ### **- 本项目支持cocoapods安装，只需要将如下代码添加到Podfile中:** 
-    pod 'MZCoreSDKLibrary','~>2.1.0' #盟主SDK的核心依赖库，其他功能都依赖该组件
+    pod 'MZCoreSDKLibrary','~>2.1.0' #盟主SDK的核心依赖库，使用其他组件时，会自动下载该组件
     pod 'MZMediaSDK','~>2.1.0' #盟主业务组件，如需使用业务请求功能，请添加此行代码
     pod 'MZPlayerSDK','~>2.1.0' #盟主播放器组件，如需播放器功能，请添加此行代码
     pod 'MZPushFlowSDK','~>2.1.0' #盟主推流组件，如需直播功能，请添加此行代码
@@ -48,9 +48,10 @@
 - 如文档与demo有未同步情况，请先参考demo并运行测试确认是否正确。
 - 集成过程中如遇到未知错误请联系盟主客服
 ### **- 使用前请在ViewController里配置appId和appSecretKey**
-      /// 分配的appID和secretKey
+      #warning 分配的appID和secretKey
       #define MZSDK_AppID @""
       #define MZSDK_SecretKey @""
+      
 ### **- 推流UI集成**
       MZUser *user=[[MZUser alloc] init];
 
@@ -87,13 +88,13 @@
 
       [MZUserServer updateCurrentUser:user];
 
-
       MZSuperPlayerViewController *superPlayerVC = [[MZSuperPlayerViewController alloc] init];
       superPlayerVC.ticket_id = self.ticket_IDTextView.text;
       [self.navigationController pushViewController:superPlayerVC animated:YES];
 
 ### **- 竖屏播放器UI集成**
       MZUser *user = [[MZUser alloc] init];
+      
       user.userId = self.UIDTextView.text;
       user.nickName = self.nameTextView.text;
       user.avatar = self.avatarTextView.text;

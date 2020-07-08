@@ -25,6 +25,8 @@
 #import "MZLiveFinishViewController.h"
 #import "MZLiveSelectBiteRateView.h"
 
+#import "MZAlertController.h"
+
 typedef enum {
     MZReadyLiveViewCloseTag,
     MZReadyLiveViewChangeCameraTag,
@@ -382,10 +384,12 @@ typedef enum {
 
 -(void)createNewLiveActivity
 {
-    [MZSimpleHud show];
-    WeaklySelf(weakSelf);
 
 #warning 这里是我自己模拟的创建活动,为了获取 live_tk 和 ticket_id ,数据是写死的。（你用的时候自己从自己服务器获取 live_tk 和 ticket_id,不需要使用这个接口）
+    
+#ifdef DEBUG
+    [MZSimpleHud show];
+    
     // 直播封面地址（测试数据）
     NSString *live_coverURLString = @"http://s1.t.zmengzhu.com/upload/img/6e/77/6e77552721067fbc87ee0b00664556d1.png";
     // 直播名字（测试数据）
@@ -401,11 +405,21 @@ typedef enum {
     } failure:^(NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"error = %@",error.localizedDescription);
-            [weakSelf showTextView:self.view message:error.domain];
+            [MZAlertController showWithTitle:@"错误" message:error.domain cancelTitle:@"" sureTitle:@"确定" preferredStyle:UIAlertControllerStyleAlert handle:^(MZResultCode code) {
+            }];
+
             self.startLiveButton.userInteractionEnabled = YES;
             [MZSimpleHud hide];
         });
     }];
+
+#else
+    [MZAlertController showWithTitle:@"错误" message:@"创建活动接口只可用于测试使用" cancelTitle:@"" sureTitle:@"确定" preferredStyle:UIAlertControllerStyleAlert handle:^(MZResultCode code) {
+
+    }];
+#endif
+    
+
 }
 
 -(void)getLiveData
