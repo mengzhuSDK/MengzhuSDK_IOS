@@ -10,7 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^MZDLNADeviceSelectBlock)(MZCLUPnPDevice *model);
 typedef void(^HelpClickBlock)(void);
 
 @protocol MZDLNAViewDelegate <NSObject>

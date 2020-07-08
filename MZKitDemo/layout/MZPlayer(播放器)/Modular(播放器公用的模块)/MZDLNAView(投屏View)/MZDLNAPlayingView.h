@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,   copy) NSString *title;
 
-@property (nonatomic, strong) MZCLUPnPDevice *model;
 @property (nonatomic,   copy) MZDLNAControlBlock controlBlock;
 
 @end
