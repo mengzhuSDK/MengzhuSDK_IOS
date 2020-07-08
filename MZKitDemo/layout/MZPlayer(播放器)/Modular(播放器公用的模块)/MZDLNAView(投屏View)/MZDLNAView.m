@@ -210,6 +210,7 @@
     if(!cell){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MZ_DLNA_View_Cell"];
         cell.textLabel.textColor = [UIColor colorWithRed:155/255.0 green:155/255.0 blue:155/255.0 alpha:1];
+        cell.contentView.backgroundColor = [UIColor whiteColor];
     }
     MZCLUPnPDevice *device = self.deviceArr[indexPath.row];
     NSLog(@"+++%@",device.friendlyName);
