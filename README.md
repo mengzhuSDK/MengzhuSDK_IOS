@@ -54,17 +54,23 @@
 支持回放视频下载功能  
 支持多任务下载  
 支持后台下载  
-
+支持纯语音直播  
+支持纯语音回放  
+支持签到功能  
+支持投票功能  
+支持直播/回放文档功能  
+支持后台配置公告  
+支持历史记录是否显示
 
 # **4. SDK配置及介绍**
 本文是根据附加demo来介绍SDK集成，可在已下载的SDK文件路径下引入demo项目。通过查看demo可了解更多详细功能。
 ## **4. 1 cocoapods集成**
 ### **- 本项目支持cocoapods安装，只需要将如下代码添加到Podfile中:** 
-    pod 'MZCoreSDKLibrary','~>2.1.0' #盟主SDK的核心依赖库，使用其他组件时，会自动下载该组件
-    pod 'MZMediaSDK','~>2.1.0' #盟主业务组件，如需使用业务请求功能，请添加此行代码
-    pod 'MZPlayerSDK','~>2.1.0' #盟主播放器组件，如需播放器功能，请添加此行代码
-    pod 'MZPushFlowSDK','~>2.1.0' #盟主推流组件，如需直播功能，请添加此行代码
-    pod 'MZDownLoaderSDK','~>2.1.0' #盟主下载器的SDK，如需下载功能，请添加此行代码
+    pod 'MZCoreSDKLibrary','~>2.2.0' #盟主SDK的核心依赖库，使用其他组件时，会自动下载该组件
+    pod 'MZMediaSDK','~>2.2.1' #盟主业务组件，如需使用业务请求功能，请添加此行代码
+    pod 'MZPlayerSDK','~>2.2.0' #盟主播放器组件，如需播放器功能，请添加此行代码
+    pod 'MZPushFlowSDK','~>2.2.0' #盟主推流组件，如需直播功能，请添加此行代码
+    pod 'MZDownLoaderSDK','~>2.2.0' #盟主下载器的SDK，如需下载功能，请添加此行代码
 执行pod install或pod update，如若找不到库，请执行pod repo update，进行本地库更新。
 
 # **5.固定UI版快速集成 **
@@ -75,70 +81,93 @@
       #define MZSDK_AppID @""
       #define MZSDK_SecretKey @""
       
-### **- 推流UI集成**
-      MZUser *user=[[MZUser alloc] init];
-
-      #warning 这里是我模拟的用户信息，使用的时候，请使用你们自己服务器的用户信息
-      user.userId = self.UIDTextView.text;
-      user.nickName = self.nameTextView.text;
-      user.avatar = self.avatarTextView.text;
-          
-      /// 用户自己传过来的唯一ID
-      user.uniqueID = @"A123456B";
-          
-      #warning 请输入分配的appID和secretKey
-      user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
-      user.secretKey = MZSDK_SecretKey;
-
-      [MZUserServer updateCurrentUser:user];
-
-      MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
-      [self.navigationController pushViewController:vc animated:YES];
+### **- 推流UI集成**    
+    [MZSDKBusinessManager setDebug:YES];
+    
+    [self serUserInfoSuccess:^(BOOL result, NSString *errorString) {
+        if (result) {
+            MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            [self.view show:errorString];
+        }
+    }];
 
 ### **- 二分屏/横屏播放器UI集成**
-      MZUser *user = [[MZUser alloc] init];
-
-      user.userId = self.UIDTextView.text;
-      user.nickName = self.nameTextView.text;
-      user.avatar = self.avatarTextView.text;
-      
-      /// 用户自己传过来的唯一ID
-      user.uniqueID = @"A123456B";
-
-      #warning 请输入分配的appID和secretKey
-      user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
-      user.secretKey = MZSDK_SecretKey;
-
-      [MZUserServer updateCurrentUser:user];
-
-      MZSuperPlayerViewController *superPlayerVC = [[MZSuperPlayerViewController alloc] init];
-      superPlayerVC.ticket_id = self.ticket_IDTextView.text;
-      [self.navigationController pushViewController:superPlayerVC animated:YES];
+    [MZSDKBusinessManager setDebug:NO];
+    
+    [self serUserInfoSuccess:^(BOOL result, NSString *errorString) {
+        if (result) {
+            MZSuperPlayerViewController *superPlayerVC = [[MZSuperPlayerViewController alloc] init];
+            superPlayerVC.ticket_id = self.ticket_IDTextView.text;
+            [self.navigationController pushViewController:superPlayerVC animated:YES];
+        } else {
+            [self.view show:errorString];
+        }
+    }];
 
 ### **- 竖屏播放器UI集成**
-      MZUser *user = [[MZUser alloc] init];
-      
-      user.userId = self.UIDTextView.text;
-      user.nickName = self.nameTextView.text;
-      user.avatar = self.avatarTextView.text;
-      
-      /// 用户自己传过来的唯一ID
-      user.uniqueID = @"A123456B";
+    [MZSDKBusinessManager setDebug:YES];
+    
+    [self serUserInfoSuccess:^(BOOL result, NSString *errorString) {
+        if (result) {
+            MZVerticalPlayerViewController *liveVC = [[MZVerticalPlayerViewController alloc]init];
+            liveVC.ticket_id = self.ticket_IDTextView.text;
+            [self.navigationController pushViewController:liveVC  animated:YES];
+        } else {
+            [self.view show:errorString];
+        }
+    }];
 
-      #warning 请输入分配的appID和secretKey
-      user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
-      user.secretKey = MZSDK_SecretKey;
-
-      [MZUserServer updateCurrentUser:user];
-
-      MZVerticalPlayerViewController *liveVC = [[MZVerticalPlayerViewController alloc]init];
-      liveVC.ticket_id = self.ticket_IDTextView.text;
-      [self.navigationController pushViewController:liveVC  animated:YES];
-  
-  ### **- 下载器UI集成**
-      MZM3U8DownLoadViewController *downloadVC = [[MZM3U8DownLoadViewController alloc] init];
-      downloadVC.modalPresentationStyle = UIModalPresentationFullScreen;
-      [self.navigationController pushViewController:downloadVC animated:YES];
+### **- 配置用户信息**
+```
+-(void)serUserInfoSuccess:(void(^)(BOOL result, NSString *errorString))success {
+    if (self.ticket_IDTextView.text.length <= 0) {
+        success(NO, @"活动ID不能为空");
+        return;
+    }
+    
+    if (self.uniqueIDTextView.text.length <= 0) {
+        success(NO, @"用户ID不能为空");
+        return;
+    }
+    
+    MZUser *user = [[MZUser alloc] init];
+    
+#warning - 用户自己传过来的唯一ID
+    user.uniqueID = self.uniqueIDTextView.text;
+    user.nickName = self.nameTextView.text;
+    user.avatar = self.avatarTextView.text;
+        
+#warning - 请输入分配给你们的appID和secretKey
+    user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
+    user.secretKey = MZSDK_SecretKey;
+    
+    if (user.appID.length <= 0 || user.secretKey.length <= 0) {
+        success(NO, @"请配置appId或secretKey");
+        return;
+    }
+    
+    [MZUserServer updateCurrentUser:user];
+    
+    success(YES, @"");
+}
+```
+### **- 下载器UI集成**
+    MZM3U8DownLoadViewController *downloadVC = [[MZM3U8DownLoadViewController alloc] init];
+    downloadVC.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self.navigationController pushViewController:downloadVC animated:YES];
 
 # **6.非固定UI版功能集成 **
 - 不使用自带UI的具体实现方式请查看wiki文档
+
+
+
+# ** 版本更新 **
+
+- 2.2版本更新内容
+1. 新增发起/观看语音直播。
+2. 新增文档功能。
+3. 新增签到功能。
+4. 新增投票功能。
+5. 新增自定义公告功能。

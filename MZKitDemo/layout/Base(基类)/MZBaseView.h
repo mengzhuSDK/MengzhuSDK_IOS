@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MZBaseView : UIView
--(void)showTextView:(UIView*)view message:(NSString*)message;
+
 @end
 
 NS_ASSUME_NONNULL_END

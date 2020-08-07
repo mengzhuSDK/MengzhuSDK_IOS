@@ -29,12 +29,26 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addMenu:(NSString *)menu menuView:(UIView *)menuView;
 
 /**
- * @brief 恢复隐藏前的view
+ * @brief 删除添加的菜单
+ *
+ * @param menus @[菜单名字]
+ *
+ */
+- (void)removeMenu:(NSArray <NSString *>*)menus;
+
+/**
+ * @brief 删除所有的菜单（不包括默认的互动菜单）
+ *
+ */
+- (void)removeAllMenu;
+
+/**
+ * @brief 恢复展示上一个显示的tab
  */
 - (void)recoveryMenuView;
 
 /**
- * @brief 隐藏所有索引的view
+ * @brief 隐藏所有的tab
  */
 - (void)hideAllMenu;
 

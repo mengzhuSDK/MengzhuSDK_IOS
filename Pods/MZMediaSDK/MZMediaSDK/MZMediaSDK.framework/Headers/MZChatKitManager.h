@@ -40,7 +40,7 @@
 - (void)closeLongPoll;
 
 ///直播socketIO
-- (void)setSocketIO:(NSString *)srv token:(NSString*)token block:(socketCreatBlock)block;
+- (void)setSocketIO:(NSString *)srv token:(NSString*)token block:(void(^)(BOOL result))block;
 ///关闭直播socketIO
 - (void)sendSocketMessageWithEvent:(NSString *)event content:(NSArray *)content;
 
@@ -48,6 +48,15 @@
 - (void)startTimelyChar:(NSString *)ticket_id receive_url:(NSString *)receive_url srv:(NSString *)srv token:(NSString *)token;
 ///关闭Socket
 - (void)closeSocketIO;
+
+//发送统计事件（play) 自动播放或者开始播放
+- (void)sendStatisticsOfPlayEventWithTicket_id:(NSString *)ticket_id speed:(CGFloat)speed;
+
+//发送统计事件（end）播放暂停/结束 e.g.
+- (void)sendStatisticsOfEndEventWithTicket_id:(NSString *)ticket_id;
+
+//发送切换倍速事件（changeSpeed）
+- (void)sendStatisticsOfChangeSpeedWithTicket_id:(NSString *)ticket_id speed:(CGFloat)speed;
 
 @end
 

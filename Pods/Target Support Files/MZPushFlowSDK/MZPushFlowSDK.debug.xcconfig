@@ -1,7 +1,7 @@
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/MZPushFlowSDK
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary" "${PODS_ROOT}/MZPushFlowSDK/MZPushFlowSDK"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking" "${PODS_CONFIGURATION_BUILD_DIR}/MJExtension" "${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh" "${PODS_CONFIGURATION_BUILD_DIR}/MZSocketIO" "${PODS_CONFIGURATION_BUILD_DIR}/Masonry" "${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage" "${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary" "${PODS_ROOT}/MZPushFlowSDK/MZPushFlowSDK"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-OTHER_LDFLAGS = $(inherited) -framework "AVFoundation" -framework "AssetsLibrary" -framework "CoreMedia" -framework "CoreVideo" -framework "Foundation" -framework "MZCoreSDKLibrary" -framework "OpenGLES" -framework "QuartzCore" -framework "Security" -framework "UIKit"
+OTHER_LDFLAGS = $(inherited) -framework "AVFoundation" -framework "AssetsLibrary" -framework "CoreMedia" -framework "CoreVideo" -framework "Foundation" -framework "JavaScriptCore" -framework "MZCoreSDKLibrary" -framework "OpenGLES" -framework "QuartzCore" -framework "Security" -framework "UIKit" -framework "WebKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}

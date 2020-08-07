@@ -119,6 +119,9 @@ typedef NS_ENUM(NSUInteger, MsgType) {
     MsgTypeTipSignInWebViewMsg,//强制弹签到的webView的消息通知
     MsgTypePrizeWhirlingMsg,//主播开始抽奖通知
     MsgTypeDisChargeTipMsg,//流量预警提示
+    
+    MsgTypePlay,//点击开始播放或者自动开始播放（{tid:1001526, speed:1.25} 直播的speed恒为1）
+    MsgTypeEnd,//点击暂停或者（视频/直播）结束 1001526
 };
 
 

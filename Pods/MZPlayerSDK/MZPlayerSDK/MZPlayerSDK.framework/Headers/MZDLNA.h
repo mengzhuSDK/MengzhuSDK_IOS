@@ -7,21 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MZCLUPnP.h"
 #import "MZCLUPnPDevice.h"
 
 @protocol MZDLNADelegate <NSObject>
-
 @optional
 /**
- DLNA局域网搜索设备结果
- @param devicesArray <MZCLUPnPDevice *> 搜索到的设备
+ * @brief DLNA局域网搜索设备结果
+ * @param devicesArray <MZCLUPnPDevice *> 搜索到的设备
  */
 - (void)searchDLNAResult:(NSArray *)devicesArray;
 
-
 /**
- 投屏成功开始播放
+ * @brief 投屏成功开始播放
  */
 - (void)dlnaStartPlay;
 
@@ -29,61 +26,66 @@
 
 @interface MZDLNA : NSObject
 
-@property(nonatomic,weak)id<MZDLNADelegate> delegate;
+@property(nonatomic,   weak) id<MZDLNADelegate> delegate;//代理
+@property(nonatomic,   copy) NSString *playUrl;//投屏播放的地址
+@property(nonatomic, assign) NSInteger searchTime;//搜索时间
 
-@property(nonatomic, strong) MZCLUPnPDevice *device;
-
-@property(nonatomic,copy) NSString *playUrl;
-
-@property(nonatomic,assign) NSInteger searchTime;
+@property(nonatomic, strong) MZCLUPnPDevice *device;//投屏的设备
 
 /**
- 单例
+ * @brief 单例
+ * @return self
  */
 +(instancetype)sharedMZDLNAManager;
 
 /**
- 搜设备
+ * @brief 搜设备
  */
 - (void)startSearch;
 
 /**
- DLNA投屏
+ * @brief DLNA开始投屏
+ * @param device (MZCLUPnPDevice类型)，从搜索结果的代理获取
  */
-- (void)startDLNA;
+- (void)startDLNA:(id)device;
+
 /**
- DLNA投屏(首先停止)---投屏不了可以使用这个方法
- ** 【流程: 停止 ->设置代理 ->设置Url -> 播放】
+ * @brief DLNA投屏(首先停止)---投屏不了可以使用这个方法
+ * 【流程: 停止 ->设置代理 ->设置Url -> 播放】
  */
 - (void)startDLNAAfterStop;
 
 /**
- 退出DLNA
+ * @brief 退出DLNA
  */
 - (void)endDLNA;
 
 /**
- 播放
+ * @brief 播放
  */
 - (void)dlnaPlay;
 
 /**
- 暂停
+ * @brief 暂停
  */
 - (void)dlnaPause;
 
 /**
- 设置音量 volume建议传0-100之间字符串
+ * @brief 设置音量
+ * @param volume 音量 volume建议传0-100之间字符串
  */
 - (void)volumeChanged:(NSString *)volume;
 
 /**
- 设置播放进度 seek单位是秒
+ * @brief 设置播放进度
+ * @param seek 秒
  */
 - (void)seekChanged:(NSInteger)seek;
 
 /**
- 播放切集
+ * @brief 播放切集
+ * @param url 切集url
  */
 - (void)playTheURL:(NSString *)url;
+
 @end

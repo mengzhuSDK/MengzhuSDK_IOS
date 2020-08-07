@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, MZMPMoviePlaybackState) {
     MZInitPlayerError
     
 };
-
+//播放视频的填充模式
 typedef NS_ENUM(NSInteger, MZMPMovieScalingMode) {
     MZMPMovieScalingModeNone,       // No scaling
     MZMPMovieScalingModeAspectFit,  // Uniform scale until one dimension fits
@@ -105,6 +105,9 @@ typedef NS_ENUM(NSInteger, MZMPMovieScalingMode) {
 @property (nonatomic, readonly) MZMPMovieLoadState loadState;
 
 ///初始化
+- (instancetype)initWithContentURL:(NSURL *)aUrl movieModel:(MZMPMovieScalingMode)movieModel frame:(CGRect)frame;//默认回放
+- (instancetype)initWithContentURLString:(NSString *)aUrlString movieModel:(MZMPMovieScalingMode)movieModel frame:(CGRect)frame;
+
 - (instancetype)initWithContentURL:(NSURL *)aUrl movieModel:(MZMPMovieScalingMode)movieModel frame:(CGRect)frame isLive:(BOOL)isLive;
 ///初始化
 - (instancetype)initWithContentURLString:(NSString *)aUrlString movieModel:(MZMPMovieScalingMode)movieModel frame:(CGRect)frame isLive:(BOOL)isLive;

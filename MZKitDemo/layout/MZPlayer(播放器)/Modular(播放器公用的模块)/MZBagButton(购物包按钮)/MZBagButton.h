@@ -12,8 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MZBagButton : UIButton
 
+/// 更新商品总个数
 - (void)updateNumber:(int)number;
 
+/// 获取当前显示的商品总个数
+- (int)getNumber;
 @end
 
 NS_ASSUME_NONNULL_END

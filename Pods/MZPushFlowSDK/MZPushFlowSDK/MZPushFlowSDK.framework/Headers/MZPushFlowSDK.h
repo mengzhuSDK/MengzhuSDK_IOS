@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MZPushStreamManager.h"
+#import "MZPushStreamConst.h"
 
 //! Project version number for MZPushFlowSDK.
 FOUNDATION_EXPORT double MZPushFlowSDKVersionNumber;

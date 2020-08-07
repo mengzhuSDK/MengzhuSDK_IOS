@@ -97,13 +97,13 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary/MZRefresh.bundle"
   install_resource "${PODS_ROOT}/MZDownLoaderSDK/MZDownLoaderSDK/MZM3U8DownLoaderSDKBundle.bundle"
+  install_resource "${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.bundle"
   install_resource "${PODS_ROOT}/MZPlayerSDK/MZPlayerSDK/MZPlayerSDK.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary/MZRefresh.bundle"
   install_resource "${PODS_ROOT}/MZDownLoaderSDK/MZDownLoaderSDK/MZM3U8DownLoaderSDKBundle.bundle"
+  install_resource "${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.bundle"
   install_resource "${PODS_ROOT}/MZPlayerSDK/MZPlayerSDK/MZPlayerSDK.bundle"
 fi
 

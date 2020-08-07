@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, HeadViewActionType) {
 
 @property (nonatomic ,assign) BOOL isMySelf;
 @property (nonatomic ,assign) BOOL isManager;
-@property (nonatomic ,strong)MZLiveUserModel *otherUserInfoModel;
+@property (nonatomic ,strong) MZLiveUserModel *otherUserInfoModel;
 
 //@property (nonatomic ,strong)NSString *liveNumStr;//直播量
 //@property (nonatomic ,strong)NSString *attentionNumStr;//关注量

@@ -65,6 +65,7 @@
     
     self.numLabel = [[[UILabel alloc]initWithFrame:CGRectMake(self.headBtnThree.right + 3*MZ_RATE, 0, 41*MZ_RATE, 28*MZ_RATE)] roundChangeWithRadius:14*MZ_RATE];
     self.numLabel.hidden = YES;
+    self.numLabel.userInteractionEnabled = YES;
     self.numLabel.font = FontSystemSize(12*MZ_RATE);
     self.numLabel.backgroundColor = MakeColorRGBA(0x000000, 0.25);
     self.numLabel.backgroundColor = [UIColor clearColor];
@@ -72,6 +73,8 @@
     self.numLabel.textColor = MakeColorRGB(0xffffff);
     [self addSubview:self.numLabel];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarClick)];
+    [self.numLabel addGestureRecognizer:tap];
 }
 
 
@@ -79,9 +82,9 @@
 {
     _userArr = userArr;
     if(userArr.count >= 3){
-        [self.headBtnOne sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
-        [self.headBtnTwo sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 2]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
-        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 3]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnOne sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[0]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnTwo sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[2]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
         
         self.headBtnOne.hidden = NO;
         self.headBtnTwo.hidden = NO;
@@ -90,13 +93,13 @@
         
     }else if (userArr.count == 2){
         self.headBtnOne.hidden = YES;
-        [self.headBtnTwo sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
-        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 2]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnTwo sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[0]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
         self.headBtnTwo.hidden = NO;
         self.headBtnThree.hidden = NO;
         self.numLabel.hidden = NO;
     }else if (userArr.count == 1){
-        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[userArr.count - 1]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
+        [self.headBtnThree sd_setImageWithURL:[NSURL URLWithString:((MZOnlineUserListModel *)userArr[0]).avatar] forState:UIControlStateNormal placeholderImage:MZ_UserIcon_DefaultImage];
         self.headBtnOne.hidden = YES;
         self.headBtnTwo.hidden = YES;
         self.headBtnThree.hidden = NO;
@@ -107,8 +110,11 @@
         self.headBtnThree.hidden = YES;
         self.numLabel.hidden = YES;
     }
-    
-    self.numLabel.text = [NSString stringWithFormat:@"%d",(int)_userArr.count];
+}
+
+/// 更新当前总在线人数
+- (void)updateOnlineUserTotalCount:(int)count {
+    self.numLabel.text = [NSString stringWithFormat:@"%d",count];
 }
 
 - (void)avatarClick{

@@ -82,6 +82,7 @@ static double onlineButtonOffsetY = 5;
 
 -(void)setupUI
 {
+    self.isHideChatHistory = NO;
     self.isCoverAtChatView = NO;
     
     WeaklySelf(weakSelf);
@@ -116,11 +117,16 @@ static double onlineButtonOffsetY = 5;
 -(void)setActivity:(MZMoviePlayerModel *)activity
 {
     _activity = activity;
+    [self.dataArray removeAllObjects];
+    [self.chatTable reloadData];
     [self loadDataIsMore:NO];
 }
 
 
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    if (self.isHideChatHistory) {
+        return;
+    }
     WeaklySelf(weakSelf);
     if (self.refreshTag == 1) {
         _loadOldCount ++;
@@ -148,7 +154,7 @@ static double onlineButtonOffsetY = 5;
 //                }
 //            }
 //            if(ary.count==0){
-//                [weakSelf showTextView:self message:@"没有更多消息了"];
+//                [weakSelf show:@"没有更多消息了"];
 //                return ;
 //            }
             weakSelf.chatTable.userInteractionEnabled = YES;
@@ -236,7 +242,7 @@ static double onlineButtonOffsetY = 5;
                 //重复数据不予加入
                 if(![weakSelf arrayContainsObject:dataModel]){
                     [weakSelf.dataArray addObject:dataModel];
-                    if ([dataModel.userId isEqualToString:[MZUserServer currentUser].userId]) {
+                    if ([dataModel.data.uniqueID isEqualToString:[MZUserServer currentUser].uniqueID]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [weakSelf reloadData];
                             NSInteger totleIndex = [weakSelf.chatTable numberOfRowsInSection:0];
@@ -266,7 +272,6 @@ static double onlineButtonOffsetY = 5;
                                 weakSelf.chatTable.contentOffset = CGPointMake(0,contentOffset.y + height2 - height1);
                             }
                         });
-                        
                     }
                 }
             }
@@ -321,6 +326,9 @@ static double onlineButtonOffsetY = 5;
 #pragma 获取历史消息数据
 -(void)loadDataIsMore:(BOOL)isMore
 {
+    if (self.isHideChatHistory) {
+        return;
+    }
     __weak __typeof(self)weakSelf = self;
 //    self.activity.ticket_id
     
@@ -330,13 +338,25 @@ static double onlineButtonOffsetY = 5;
         
     }];
 }
-- (MZLongPollDataModel *)getNotice
+
+///添加一条公告信息
+- (BOOL)addNotice:(NSString *)notice {
+    if (notice.length <= 0) {
+        return NO;
+    }
+    [self.dataArray addObject:[self getNotice:notice]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.chatTable reloadData];
+        [self scrollViewToBottom];
+    });
+    return YES;
+}
+- (MZLongPollDataModel *)getNotice:(NSString *)notice
 {
-    
     MZLongPollDataModel*msgModel = [[MZLongPollDataModel alloc]init];
     msgModel.event = MsgTypeNotice;
     MZActMsg *actMsg = [[MZActMsg alloc]init];
-    actMsg.msgText = @"依法对直播内容进行24小时巡查，禁止传播暴力血腥、低俗色情、招嫖诈骗、非法政治活动等违法信息，坚决维护社会文明健康环境";
+    actMsg.msgText = notice;
     msgModel.data = actMsg;
     return msgModel;
     
@@ -346,9 +366,7 @@ static double onlineButtonOffsetY = 5;
     if (![result isKindOfClass:[NSArray class]] || [result isKindOfClass:[NSNull class]] || result == nil) {
         return;
     }
-    if(!isMore){
-        [result addObject:[self getNotice]];
-    }
+
     _tempArr = result;
     _chatTable.userInteractionEnabled = YES;
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _tempArr.count)];
@@ -408,6 +426,7 @@ static double onlineButtonOffsetY = 5;
     [self.onlineIconBtn setHidden:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
         unsigned long count = self.dataArray.count;
+        [self.chatTable reloadData];
         if (count > 0 && self.chatTable.visibleCells.count > 0) {
             NSIndexPath *lastIndex = [NSIndexPath indexPathForRow:count-1 inSection:0];
             [self.chatTable scrollToRowAtIndexPath:lastIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -427,14 +446,20 @@ static double onlineButtonOffsetY = 5;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     MZLongPollDataModel *model=self.dataArray[indexPath.row];
-    if(model.event==MsgTypeNotice){
-        if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
-            return 108*self.endSpace;
-        }
-        return 114*self.endSpace;
-    }else{
-        BOOL isLand = (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height);
+    BOOL isLand = (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height);
 
+    if(model.event==MsgTypeNotice){
+        switch (self.cellType) {
+            case MZChatCellType_New: {
+                return [MZChatNewCell getNoticeCellHeight:model isLand:isLand] + 10;
+                break;
+            }
+            default: {
+                return [MZChatTableViewCell getNoticeCellHeight:model isLand:isLand] + 10;
+                break;
+            }
+        }
+    }else{
         switch (self.cellType) {
             case MZChatCellType_New: {
                 return [MZChatNewCell getCellHeight:_dataArray[indexPath.row] cellWidth:self.frame.size.width isLand:isLand];

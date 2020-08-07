@@ -37,6 +37,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)shareButtonDidClick:(id)playInfo;
 /**
+ * @brief 倍速按钮点击
+ */
+- (void)playRateButtonClick:(id)sender;
+/**
+ * @brief 投屏按钮点击
+ */
+- (void)dlnaButtonClick:(id)sender;
+/**
  * @brief 点赞按钮点击
  */
 - (void)likeButtonDidClick:(id)playInfo;
@@ -47,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * @brief 在线用户列表点击
 */
-- (void)onlineListButtonDidClick:(NSArray * _Nullable)onlineUsers;
+- (void)onlineListButtonDidClick:(id)playInfo;
 /**
  * @brief 某一个在线用户的信息点击
 */

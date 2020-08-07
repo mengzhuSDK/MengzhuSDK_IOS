@@ -7,7 +7,6 @@
 //
 
 #import "MZMessageToolView.h"
-#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 //#import "MZCustomInputView.h"
 #define MessageTool_SendBtnColor [UIColor whiteColor]
 
@@ -34,9 +33,12 @@
     
     self.sendButton.frame = CGRectMake(self.width - 76*relativeSafeRate, kVerticalPadding, 60*relativeSafeRate, kInputTextViewMinHeight);
     
-    self.msgTextView.frame = CGRectMake(saveLeft, kVerticalPadding, self.width - (saveLeft + 92*relativeSafeRate), kInputTextViewMinHeight);
+    if(self.type == MZMessageToolBarTypeAllBtn){
+        self.msgTextView.frame = CGRectMake(saveLeft, kVerticalPadding, self.width - (saveLeft + 92*relativeSafeRate), kInputTextViewMinHeight);
+    }else if (self.type == MZMessageToolBarTypeOnlyTextView){
+        self.msgTextView.frame = CGRectMake(saveLeft, kVerticalPadding, self.width - 30, kInputTextViewMinHeight);
+    }
 }
-
 
 - (id)initWithFrame:(CGRect)frame type:(MZMessageToolBarType)type
 {
@@ -88,7 +90,7 @@
     if(!self.toolBackGroundView){
         self.toolBackGroundView = [[UIView alloc] init];
         [self addSubview:self.toolBackGroundView];
-        if(_type == 2){
+        if(_type == MZMessageToolBarTypeNoBar){
             self.toolBackGroundView.backgroundColor = [UIColor whiteColor];
         }else {
             if(_type == MZMessageToolBarTypeAllBtn ){

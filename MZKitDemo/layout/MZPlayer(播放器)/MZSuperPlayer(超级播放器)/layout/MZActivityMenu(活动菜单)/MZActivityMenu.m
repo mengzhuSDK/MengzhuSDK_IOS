@@ -137,6 +137,44 @@
     [self updateMenusFrame];
 }
 
+/**
+ * @brief 删除添加的菜单
+ *
+ * @param menus @[菜单名字]
+ *
+ */
+- (void)removeMenu:(NSArray <NSString *>*)menus {
+    for (NSString *menu in menus) {
+        [self.menuButtons enumerateObjectsUsingBlock:^(MZActivityMenuButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([menu isEqualToString:obj.titleLabel.text]) {
+                if (![obj.titleLabel.text isEqualToString:@"互动"]) {
+                    [obj.menuView removeFromSuperview];
+                    obj.menuView = nil;
+                    [obj removeFromSuperview];
+                    [self.menuButtons removeObject:obj];
+                    obj = nil;
+                }
+            }
+        }];
+    }
+}
+
+/**
+ * @brief 删除所有的菜单（不包括默认的互动菜单）
+ *
+ */
+- (void)removeAllMenu {
+    [self.menuButtons enumerateObjectsUsingBlock:^(MZActivityMenuButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (![obj.titleLabel.text isEqualToString:@"互动"]) {
+            [obj.menuView removeFromSuperview];
+            obj.menuView = nil;
+            [obj removeFromSuperview];
+            [self.menuButtons removeObject:obj];
+            obj = nil;
+        }
+    }];
+}
+
 /// 更新标题的整体位置
 - (void)updateMenusFrame {
     NSInteger count = self.menuButtons.count + 1;

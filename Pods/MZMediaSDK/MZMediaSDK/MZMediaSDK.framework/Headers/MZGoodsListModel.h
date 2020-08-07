@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MZLongPollDataModel.h"
 #import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @interface MZGoodsListModel : MZBaseModel
@@ -17,4 +18,7 @@
 @property (nonatomic ,strong)NSString *price;//商品价格
 @property (nonatomic ,strong)NSString *pic;//商品图标
 @property (nonatomic ,strong)NSString *buy_url;//商品链接
+
++ (MZGoodsListModel *)creatModelFromMsg:(MZLongPollDataModel *)msg;
+
 @end

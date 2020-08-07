@@ -1,0 +1,6 @@
+framework module MZSocketIO {
+  umbrella header "MZSocketIO-umbrella.h"
+
+  export *
+  module * { export * }
+}

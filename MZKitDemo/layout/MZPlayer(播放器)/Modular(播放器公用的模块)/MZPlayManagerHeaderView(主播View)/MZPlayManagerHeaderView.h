@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MZPlayManagerHeaderView : UIView
 
-@property (nonatomic, assign) BOOL isLive;//（是否是直播）直播/回放
+@property (nonatomic, assign) int live_status;//直播状态 0:未开播 1：直播 2:回放 3:断流
 
 @property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSString *title;

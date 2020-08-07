@@ -11,7 +11,6 @@
 #import "MZHost.h"
 #import "MZShare_info.h"
 #import "MZMoviePlayerModel.h"
-#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @class MZChannelManagerLastWebinarInfoModel;
 

@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onPlayerSeekProgress:(NSTimeInterval)progress;//快进的位置
 - (void)isPlayToolsShow:(BOOL)isShow;//是否显示下方工具栏
 
+- (void)playRateButtonClick:(id)sender;//倍速按钮点击
+- (void)dlnaButtonClick:(id)sender;//投屏按钮点击
 @end
 
 @interface MZNewMediaControl : UIView
@@ -71,25 +73,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL showActivite;//显示进度条
 
-@property (nonatomic, strong, readonly) UIView    *overlayPanel;
+@property (nonatomic, strong) UIView    *overlayPanel;
 
-@property (nonatomic, strong, readonly) MZMediaGesturesView  *gesturesView;
+@property (nonatomic, strong) MZMediaGesturesView  *gesturesView;
 
-@property (nonatomic, strong, readonly) UIView    *topPanel;
-@property (nonatomic, strong, readonly) UIButton  *closeBtn;
-@property (nonatomic, strong, readonly) UILabel   *titleLabel;
+@property (nonatomic, strong) UIView    *topPanel;
+@property (nonatomic, strong) UIButton  *closeBtn;
+@property (nonatomic, strong) UILabel   *titleLabel;
 
-@property (nonatomic, strong, readonly) UIView    *bottomPanel;
-@property (nonatomic, strong, readonly) UIButton  *playButton;
-@property (nonatomic, strong, readonly) UILabel   *currentTimeLabel;
-@property (nonatomic, strong, readonly) UILabel   *totalDurationLabel;
-@property (nonatomic, strong, readonly) UISlider  *mediaProgressSlider;
+@property (nonatomic, strong) UIView    *bottomPanel;
+@property (nonatomic, strong) UIButton  *playButton;
+@property (nonatomic, strong) UILabel   *currentTimeLabel;
+@property (nonatomic, strong) UILabel   *totalDurationLabel;
+@property (nonatomic, strong) UISlider  *mediaProgressSlider;
 
-@property (nonatomic, strong, readonly) UIButton  *fullScreenBtn;
+@property (nonatomic, strong) UIButton  *fullScreenBtn;
 
-@property (nonatomic, strong, readonly) UIButton  *hudInfoBtn;
+@property (nonatomic, strong) UIButton  *hudInfoBtn;
 
 @property (nonatomic, assign) CGFloat rightToInset;//右侧向左偏移，方便位置放自定义的图标
+
+@property (nonatomic, assign) BOOL isResponseTouchEvent;//是否响应手势事件
+
+@property (nonatomic, strong) UIButton *playRateButton;//倍速播放按钮
+@property (nonatomic, strong) UIButton *dlnaButton;//投屏按钮
 
 // 播放
 - (void)playControl;
@@ -102,6 +109,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///设置控制栏延迟隐藏的秒数,默认为5秒
 - (void)updateSecond:(double)second;
+
+/// 设置全屏按钮是否隐藏
+- (void)setFullScreenButtonIsHidden:(BOOL)isHidden;
+/// 设置倍速按钮是否隐藏
+- (void)setPlayRateButtonIsHidden:(BOOL)isHidden;
+/// 设置投屏按钮是否隐藏
+- (void)setDLNAButtonIsHidden:(BOOL)isHidden;
 
 @end
 

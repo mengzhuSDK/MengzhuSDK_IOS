@@ -69,6 +69,7 @@ UILabel  *normal_textLabel;
         
         self.talkView = [[UIView alloc]initWithFrame:CGRectMake(18*self.space, 4.5*self.space, 208*self.space, 106*self.space)];
         self.noticeLabel=[[UILabel alloc] initWithFrame:CGRectMake(8*self.space, 8*self.space, self.talkView.width-16*self.space, self.talkView.height-16*self.space)];
+        self.talkView.clipsToBounds = YES;
 
         self.noticeLabel.numberOfLines = 0;
         self.noticeLabel.textAlignment = NSTextAlignmentLeft;
@@ -95,7 +96,7 @@ UILabel  *normal_textLabel;
 
         self.headerBtn.frame = CGRectMake(18*self.space, 4.5*self.space, _iconHeight, _iconHeight);
         
-        self.talkView.frame = CGRectMake(18*self.space, 4.5*self.space, 208*self.space, 100*self.space);
+        self.talkView.frame = CGRectMake(18*self.space, 4.5*self.space, 208*self.space, self.pollingDate.cellHeight);
         self.noticeLabel.frame = CGRectMake(8*self.space, 8*self.space, self.talkView.width-16*self.space, self.talkView.height-16*self.space);
         
         self.nickNameL.font = [UIFont systemFontOfSize:13*self.space];
@@ -107,7 +108,7 @@ UILabel  *normal_textLabel;
         self.iconHeight = 17*self.space;
 
         self.headerBtn.frame = CGRectMake(18*self.space, 4.5*self.space, _iconHeight, _iconHeight);
-        self.talkView.frame = CGRectMake(18*self.space, 4.5*self.space, 208*self.space, 106*self.space);
+        self.talkView.frame = CGRectMake(18*self.space, 4.5*self.space, 208*self.space, self.pollingDate.cellHeight);
         self.noticeLabel.frame = CGRectMake(8*self.space, 8*self.space, self.talkView.width-16*self.space, self.talkView.height-16*self.space);
         
         self.nickNameL.font = [UIFont systemFontOfSize:13*self.space];
@@ -121,10 +122,9 @@ UILabel  *normal_textLabel;
 
 #pragma mark - 模型赋值
 -(void)setPollingDate:(MZLongPollDataModel *)pollingDate{
-    WeaklySelf(weakSelf);
     _pollingDate = pollingDate;
     BOOL isMyself = NO;
-    if([pollingDate.userId isEqualToString:[MZUserServer currentUser].userId]){
+    if([pollingDate.data.uniqueID isEqualToString:[MZUserServer currentUser].uniqueID]){
         isMyself = YES;
     }else{
         isMyself = NO;
@@ -215,6 +215,32 @@ UILabel  *normal_textLabel;
     }
     return h;
 }
+
+/// 获取公告的cell高度
++ (float)getNoticeCellHeight:(MZLongPollDataModel *)pollingDate isLand:(BOOL)isLand {
+    float h = 0;
+    if(pollingDate == nil)
+        return h;
+    
+    if (pollingDate.cellHeight > 10) {
+        return pollingDate.cellHeight;
+    }
+    
+    if (pollingDate.event == MsgTypeNotice) {//公告
+        float space = MZ_RATE;
+        if (isLand) space = MZ_FULL_RATE;
+        
+        CGFloat noticeMaxWidth = 208*space - 16*space;
+        
+        UIFont *curFont = [UIFont systemFontOfSize:13];
+        CGFloat contentHeight = [pollingDate.data.msgText boundingRectWithSize:CGSizeMake(noticeMaxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObject:curFont forKey:NSFontAttributeName] context:nil].size.height + 5.0;
+        
+        pollingDate.cellHeight = contentHeight + 16*space;
+        return pollingDate.cellHeight;
+    }
+    return h;
+}
+
 
 - (void)dealloc
 {

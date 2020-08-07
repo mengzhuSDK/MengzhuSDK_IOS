@@ -37,13 +37,16 @@
  *
  * @param username 用户名字
  * @param userAvatar 用户头像
- * @param userId 用户ID
+ * @param uniqueId 用户唯一ID
  * @param ticketId 直播活动ID
  * @param live_tk 直播活动凭证
  * @param success 成功回调
  * @param failure 失败原因回调
  */
-+(void)startLiveWithUsername:(NSString *)username userAvatar:(NSString *)userAvatar userId:(NSString *)userId ticketId:(NSString *)ticketId live_tk:(NSString *)live_tk success:(void(^)(id response))success failure:(void (^)(NSError *error))failure;
++(void)startLiveWithUsername:(NSString *)username userAvatar:(NSString *)userAvatar uniqueId:(NSString *)uniqueId ticketId:(NSString *)ticketId live_tk:(NSString *)live_tk success:(void(^)(id response))success failure:(void (^)(NSError *error))failure;
+
+/// 兼容旧版本
++(void)startLiveWithUsername:(NSString *)username userAvatar:(NSString *)userAvatar userId:(NSString *)uniqueId ticketId:(NSString *)ticketId live_tk:(NSString *)live_tk success:(void(^)(id response))success failure:(void (^)(NSError *error))failure;
 
 /**
  * 结束直播
@@ -76,6 +79,81 @@
  * @param failure 失败原因回调
  */
 +(void)blockAllOrAlowChatWithChannelId:(NSString *)channelId ticketId:(NSString *)ticketId isChat:(BOOL)isChat success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
++(void)blockAllOrAlowChatWithChannelId:(NSString *)channelId ticketId:(NSString *)ticketId type:(BOOL)type success:(void (^)(id))success failure:(void (^)(NSError *))failure;/// 兼容旧版本
+
+/**
+ * 获取文档列表信息
+ *
+ * @param channelId 频道ID
+ * @param ticketId 直播活动ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getDocumentListWithChannelId:(NSString *)channelId ticketId:(NSString *)ticketId success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 获取文档详情
+ *
+ * @param documentId 文档ID - 直播的时候文档ID为空
+ * @param ticketId 直播活动ID
+ * @param isLive 是否是直播
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getDocumentInfoWithDocumentId:(NSString *)documentId ticketId:(NSString *)ticketId isLive:(BOOL)isLive success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 获取文档下载信息
+ *
+ * @param channelId 频道ID
+ * @param ticketId 直播活动ID
+ * @param documentId 文档ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getDocumentURLStringWithChannelId:(NSString *)channelId ticketId:(NSString *)ticketId documentId:(NSString *)documentId success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 获取我下载的文档列表
+ *
+ * @param offset 偏移
+ * @param limit  请求个数
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getMyDocumentListWithOffset:(NSInteger)offset limit:(NSInteger)limit success:(void(^)(NSMutableArray *responseObject))success failure:(void(^)(NSError * error))failure;
+
+/**
+ * 获取该活动的投票信息
+ *
+ * @param channelId 频道ID
+ * @param ticketId 直播活动ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getVoteInfoWithChannelId:(NSString *)channelId ticketId:(NSString *)ticketId success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
+
+/**
+ * 获取该投票的所有选项
+ *
+ * @param voteId 该场投票的ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getVoteOptionWithVoteId:(NSString *)voteId success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
+
+/**
+ * 对该场投票进行投票操作
+ *
+ * @param ticketId 直播活动ID
+ * @param voteId 该场投票的ID
+ * @param optionId 选项ID，多选的话，每个选项的ID用逗号连接
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)goToVoteWithTicketId:(NSString *)ticketId voteId:(NSString *)voteId optionId:(NSString *)optionId success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
 
 @end
 

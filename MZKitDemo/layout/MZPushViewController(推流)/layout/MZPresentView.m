@@ -9,7 +9,6 @@
 #import "MZPresentView.h"
 #import "VHPullingRefreshTableView.h"
 #import "MZEmptyView.h"
-#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @interface MZPresentCell:UITableViewCell
 {
@@ -56,7 +55,7 @@
 }
 -(void)layoutSubviews
 {
-    [presentImageView sd_setImageWithURL:[NSURL URLWithString:_model.icon] placeholderImage:MZ_GiftDefaultImage];
+    [presentImageView sd_setImageWithURL:[NSURL URLWithString:_model.icon] placeholderImage:[UIImage imageNamed:@"gift_placeHolder"]];
     
     if ([MZGlobalTools isBlankString:_model.id]) {
         presentNameLabel.text = @"打赏";
@@ -68,7 +67,7 @@
         presentNameLabel.text = EmptyForNil(_model.name);
         presentPriceLabel.text = [NSString stringWithFormat:@"%@元/个",_model.price];
         presentCountLabel.text = [NSString stringWithFormat:@"%@个",_model.num];
-        [presentImageView sd_setImageWithURL:[NSURL URLWithString:_model.icon] placeholderImage:MZ_GiftDefaultImage];
+        [presentImageView sd_setImageWithURL:[NSURL URLWithString:_model.icon] placeholderImage:[UIImage imageNamed:@"gift_placeHolder"]];
     }
     
     line.width = self.width;
@@ -116,7 +115,7 @@
         [contentView addSubview:docView];
         
         UIButton *closeBtn = [[UIButton alloc]initWithFrame:CGRectMake(contentView.width - 40 * space ,docView.center.y - 10 * space, 20 * space, 20 * space)];
-        [closeBtn setBackgroundImage:[UIImage imageNamed:@"mz_Close_0422_black"] forState:UIControlStateNormal];
+        [closeBtn setBackgroundImage:[UIImage imageNamed:@"mzClose_0710_black"] forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         [contentView addSubview:closeBtn];
         

@@ -41,6 +41,7 @@
 @property (nonatomic,assign) BOOL barrage;
 @property (nonatomic,strong) NSString * imgSrc;
 @property (nonatomic,strong) NSString *uniqueID;//用户传过来的唯一id
+@property (nonatomic,strong) NSString *accountNo;//用户传过来的唯一id
 
 #pragma mark -红包消息
 @property (nonatomic ,copy) NSString *bonus_id;

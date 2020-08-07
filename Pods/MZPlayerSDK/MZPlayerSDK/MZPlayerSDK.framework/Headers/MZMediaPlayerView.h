@@ -4,10 +4,16 @@
 
 #import "MZPlayerManager.h"
 
+#import "MZMediaControl.h"
+#import "MZNewMediaControl.h"
+#import "MZOnlyVerticalMediaControl.h"
+
 @class MZMediaPlayerView;
 
-#pragma mark - 播放工具的代理
-@protocol MZMediaPlayerViewToolDelegate <NSObject>
+NS_ASSUME_NONNULL_BEGIN
+
+#pragma mark - 播放工具的代理 && 播放状态的代理
+@protocol MZMediaPlayerViewDelegate <NSObject>
 @optional
 /**
  全屏/非全屏切换
@@ -37,11 +43,15 @@
  是否显示下方工具栏
  */
 - (void)isPlayToolsShow:(BOOL)isShow;
-@end
+/**
+ 倍速按钮点击
+ */
+- (void)playRateButtonClick:(id)sender;
+/**
+ 投屏按钮点击
+*/
+- (void)dlnaButtonClick:(id)sender;
 
-#pragma mark - 播放状态的代理
-@protocol MZMediaPlayerViewPlayDelegate <NSObject>
-@optional
 /**
  开始播放状态回调
  */
@@ -73,8 +83,7 @@ typedef enum : NSUInteger {//播放器控制栏的UI版本
 
 @interface MZMediaPlayerView : UIView
 
-@property (nonatomic, weak)   id<MZMediaPlayerViewToolDelegate> toolDelegate;//工具栏代理
-@property (nonatomic, weak)   id<MZMediaPlayerViewPlayDelegate> playDelegate;//播放器代理
+@property (nonatomic, weak)   id<MZMediaPlayerViewDelegate> mediaPlayerViewDelegate;//mediaPlayerViewDelegate栏代理
 
 @property (nonatomic, assign) BOOL                        shouldAutoplay;//是否自动播放
 @property (nonatomic, assign) BOOL                        isFullScreen;//是否全屏播放
@@ -82,6 +91,11 @@ typedef enum : NSUInteger {//播放器控制栏的UI版本
 @property (nonatomic, assign) NSString                    *historyPlayingTime;//历史播放时间
 @property (nonatomic, strong) UIView                      *preview;//预览view
 @property (nonatomic, strong) MZPlayerManager             *playerManager;//控制播放器
+
+/// 播放器的控制栏UI，有多套，同时只能使用一套，参考 MZMediaControlInterfaceOrientation
+@property (nonatomic, strong) MZMediaControl              *mediaControl;//旧版播放器控制栏view 可更改ui,
+@property (nonatomic, strong) MZNewMediaControl           *newMediaControl;//默认（横屏/二分屏）播放器控制栏第二版view，可更改ui，
+@property (nonatomic, strong) MZOnlyVerticalMediaControl  *onlyVerticalMediaControl;//只支持竖版的播放器控制栏
 
 /**
  * @brief 播放
@@ -95,6 +109,9 @@ typedef enum : NSUInteger {//播放器控制栏的UI版本
  *
  */
 - (void)playWithURLString:(NSString *)URLString isLive:(BOOL)isLive showView:(UIView*)showView delegate:(id)delegate interfaceOrientation:(MZMediaControlInterfaceOrientation)interfaceOrientation movieModel:(MZMPMovieScalingMode)movieModel;
+
+/// 兼容旧版本的播放方法，不推荐使用
+- (void)playerViewWithUrl:(NSString *)mvUrl isLive:(BOOL)isLive WithView:(UIView *)withView WithDelegate:(id)delegate;
 
 ///显示播放
 - (void)playerWillShow;
@@ -110,20 +127,38 @@ typedef enum : NSUInteger {//播放器控制栏的UI版本
 - (void)showPreviewImage:(NSString *)imagePath;
 ///本地预览图
 - (void)showLocalPreviewImage:(NSString *)imageName;
-///被动转换横竖屏,非用户点击。
+///被动进行切换横竖屏，非用户主动点击
 - (void)fullScreen;
 ///主动隐藏播放栏
 - (void)hideMediaControl;
-///更新全屏按钮是否选中
+///更新全屏按钮是否选中（兼容旧版本）
 - (void)updateFullscreenIsSelected:(BOOL)isSelected;
 ///设置控制栏延迟隐藏的秒数,默认为5秒
 - (void)updateSecondOfAfterDelayToHide:(double)second;
 ///设置控制栏常驻
 - (void)updateToolToHideAtDistantFuture;
-///设置横屏下，播放控制栏从右侧偏移向左(MZMediaControlInterfaceOrientationMaskAll_new有效)
-- (void)landSpaceRightToInset:(CGFloat)rightInset;
-///设置竖屏全屏播放下，播放控制栏从右侧偏移向左(MZMediaControlInterfaceOrientationMaskPortrait有效)
-- (void)portraitRightToInset:(CGFloat)rightInset;
+///设置是否响应手势事件
+- (void)updateReponseTouchEvent:(BOOL)isReponse;
+
+#pragma mark - 下面方法支持MZMediaControlInterfaceOrientationMaskAll_new和MZMediaControlInterfaceOrientationMaskPortrait)
+///更换全屏按钮的图片
+- (void)setFullScreenButtonImage:(UIImage *_Nonnull)image;
+/// 设置倍速按钮图片
+- (void)setPlayBackRateButtonImage:(UIImage * _Nonnull)image;
+/// 设置投屏按钮图片
+- (void)setDLNAButtonImage:(UIImage * _Nonnull)image;
+
+/// 设置全屏按钮是否隐藏
+- (void)setFullScreenButtonIsHidden:(BOOL)isHidden;
+/// 设置倍速按钮是否隐藏
+- (void)setPlayRateButtonIsHidden:(BOOL)isHidden;
+/// 设置投屏按钮是否隐藏
+- (void)setDLNAButtonIsHidden:(BOOL)isHidden;
+
+///设置控制栏距离右边距
+- (void)setRightToInset:(CGFloat)rightInset;
+
+NS_ASSUME_NONNULL_END
 
 @end
 

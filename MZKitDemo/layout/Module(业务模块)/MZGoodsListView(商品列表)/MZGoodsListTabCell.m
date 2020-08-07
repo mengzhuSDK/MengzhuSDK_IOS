@@ -10,14 +10,14 @@
 #import "MZTopLeftLabel.h"
 
 @interface MZGoodsListTabCell ()
-@property (nonatomic ,strong)UIImageView *coverView;
-@property (nonatomic ,strong)UIImageView *signImageView;
-@property (nonatomic ,strong)UILabel *numLabel;
-@property (nonatomic ,strong)MZTopLeftLabel *titleLabel;
-@property (nonatomic ,strong)UILabel *salePriceLabel;
-@property (nonatomic ,strong)UIButton *buyBtn;
-
+@property (nonatomic, strong) UIImageView *coverView;
+@property (nonatomic, strong) UIImageView *signImageView;
+@property (nonatomic, strong) UILabel *numLabel;
+@property (nonatomic, strong) MZTopLeftLabel *titleLabel;
+@property (nonatomic, strong) UILabel *salePriceLabel;
+@property (nonatomic, strong) UIButton *buyBtn;
 @end
+
 @implementation MZGoodsListTabCell
 
 - (void)awakeFromNib {
@@ -100,16 +100,14 @@
 }
 
 
--(void)setModel:(MZGoodsListModel *)model
-{
+- (void)setModel:(MZGoodsListModel *)model {
     _model = model;
-    [self.coverView sd_setImageWithURL:[NSURL URLWithString:model.pic] placeholderImage:MZ_GoodsPlaceHolder];
+    [self.coverView sd_setImageWithURL:[NSURL URLWithString:model.pic]];
     self.titleLabel.text = model.name;
     self.salePriceLabel.text = model.price;
 }
 
--(void)setIndex:(int)index
-{
+- (void)setIndex:(int)index {
     _index = index;
     self.numLabel.text = [NSString stringWithFormat:@"%d",index];;
 }

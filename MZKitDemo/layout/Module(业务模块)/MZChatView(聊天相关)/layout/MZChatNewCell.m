@@ -78,6 +78,7 @@ UILabel  *new_textLabel;
     }else if([_MZMsgType isEqualToString:MZMsgTypeNotice]){
         
         self.talkView = [[UIView alloc]initWithFrame:CGRectMake(18*self.space, 4.5*self.space, 208*self.space, 106*self.space)];
+        self.talkView.clipsToBounds = YES;
         self.noticeLabel=[[UILabel alloc] initWithFrame:CGRectMake(8*self.space, 8*self.space, self.talkView.width-16*self.space, self.talkView.height-16*self.space)];
 
         self.noticeLabel.numberOfLines = 0;
@@ -105,7 +106,7 @@ UILabel  *new_textLabel;
 
         self.headerBtn.frame = CGRectMake(16*self.space, 4.5*self.space, _iconHeight, _iconHeight);
         
-        self.talkView.frame = CGRectMake(18*self.space, 4.5*self.space, 208*self.space, 100*self.space);
+        self.talkView.frame = CGRectMake(18*self.space, 4.5*self.space, 208*self.space, self.pollingDate.cellHeight);
         self.noticeLabel.frame = CGRectMake(8*self.space, 8*self.space, self.talkView.width-16*self.space, self.talkView.height-16*self.space);
         
         self.nickNameL.font = [UIFont systemFontOfSize:13*self.space];
@@ -117,7 +118,7 @@ UILabel  *new_textLabel;
         self.iconHeight = 32*self.space;
 
         self.headerBtn.frame = CGRectMake(16*self.space, 4.5*self.space, _iconHeight, _iconHeight);
-        self.talkView.frame = CGRectMake(18*self.space, 4.5*self.space, 208*self.space, 106*self.space);
+        self.talkView.frame = CGRectMake(18*self.space, 4.5*self.space, 208*self.space, self.pollingDate.cellHeight);
         self.noticeLabel.frame = CGRectMake(8*self.space, 8*self.space, self.talkView.width-16*self.space, self.talkView.height-16*self.space);
         
         self.nickNameL.font = [UIFont systemFontOfSize:13*self.space];
@@ -201,8 +202,7 @@ UILabel  *new_textLabel;
         return pollingDate.cellHeight;
     }
     
-    if(pollingDate.event == MsgTypeMeChat || pollingDate.event == MsgTypeOtherChat)
-    {
+    if (pollingDate.event == MsgTypeMeChat || pollingDate.event == MsgTypeOtherChat) {//普通消息
         float space = MZ_RATE;
         if (isLand) space = MZ_FULL_RATE;
         
@@ -230,7 +230,31 @@ UILabel  *new_textLabel;
         
         pollingDate.cellHeight = new_textLabel.height + 8*space + 28 + 16*space;
         return pollingDate.cellHeight;
+    }
+    return h;
+}
+
+/// 获取公告的cell高度
++ (float)getNoticeCellHeight:(MZLongPollDataModel *)pollingDate isLand:(BOOL)isLand {
+    float h = 0;
+    if(pollingDate == nil)
+        return h;
+    
+    if (pollingDate.cellHeight > 10) {
+        return pollingDate.cellHeight;
+    }
+    
+    if (pollingDate.event == MsgTypeNotice) {//公告
+        float space = MZ_RATE;
+        if (isLand) space = MZ_FULL_RATE;
         
+        CGFloat noticeMaxWidth = 208*space - 16*space;
+        
+        UIFont *curFont = [UIFont systemFontOfSize:13];
+        CGFloat contentHeight = [pollingDate.data.msgText boundingRectWithSize:CGSizeMake(noticeMaxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObject:curFont forKey:NSFontAttributeName] context:nil].size.height + 5.0;
+        
+        pollingDate.cellHeight = contentHeight + 16*space;
+        return pollingDate.cellHeight;
     }
     return h;
 }

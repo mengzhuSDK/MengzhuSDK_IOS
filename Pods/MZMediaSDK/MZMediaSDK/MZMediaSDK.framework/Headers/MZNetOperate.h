@@ -97,21 +97,32 @@
 #define MZNET_SDK_Versions @"1000000"
 #define MZNET_Host_Info    @"/user/liveUser"//主播信息
 
-#define MZNET_Channel_ChannelInfo    @"/video/play"//新播放器详情
-#define MZNET_WATCH_CHAT_HISTORY   @"/message/history" //推送历史消息
+#define MZNET_Channel_ChannelInfo       @"/video/play"//新播放器详情
+#define MZNET_WATCH_CHAT_HISTORY        @"/message/history" //推送历史消息
 //获取活动商品列表
-#define MZNET_Goods_List  @"/video/goods"
+#define MZNET_Goods_List                @"/video/goods"
 //获取在线用户列表
-#define MZNET_Online_user_list  @"/room/onlines"
+#define MZNET_Online_user_list          @"/room/onlines"
 //SDK验证接口
-#define MZNET_Check_server @"/service/check"
-#define MZNET_Room_Praise @"/room/praise"//点赞
+#define MZNET_Check_server              @"/service/check"
+#define MZNET_Room_Praise               @"/room/praise"//点赞
 
 #define MZNET_Live_StartLive            @"/live/stream"//开始直播
 #define MZNET_Live_StopLive             @"/live/stop"//停止直播
 
 #define MZNET_Live_BannedUser           @"/room/forbidden"//禁言（解禁）用户
 #define MZNET_Webinar_IsAllowPublicChat @"/room/allowChatAll"//是否允许公开聊天
+
+#define MZNET_Document_DocumentList     @"/document/list"//app直播文档列表接口
+#define MZNET_Document_DocumentInfo     @"/document/info"//app直播文档详情接口
+#define MZNET_Document_DocumentDownload @"/document/download"//app直播文档下载接口
+#define MZNET_Document_MyDocumentList   @"/document/my"//app直播文档下载接口
+
+#define MZNET_VoteInfo                  @"/vote/channelVote"//获取投票信息
+#define MZNET_VoteOptions               @"/vote/options"//获取投票选项
+#define MZNET_VoteCreate                @"/vote/create"//开始投票
+
+#define MZNet_GetLoginToken             @"/user/initToken"//获取登录token
 
 #endif
 static BOOL isDebugs;
@@ -134,5 +145,12 @@ static NSString *mPrefix;
 +(NSString *)getLiveStop;
 +(NSString *)bannedUser;
 +(NSString *)allowPublicChat;
-
++(NSString *)documentList;
++(NSString *)documentInfo;
++(NSString *)documentDownload;
++(NSString *)getDocumentList;
++(NSString *)voteInfo;
++(NSString *)voteAllOptional;
++(NSString *)voteToDo;
++(NSString *)getLoginToken;
 @end

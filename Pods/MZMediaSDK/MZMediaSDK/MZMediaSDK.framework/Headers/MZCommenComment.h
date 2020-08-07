@@ -43,55 +43,6 @@ typedef enum {
     MZLiveShare //直播分享
 }MZShareOrInvite;
 
-typedef void (^MZShareCompletion)(BOOL MZShareCompletionFlag);
-#define MZShare_DefaultImage  [UIImage imageNamed:@"channelShare_placeHolder"]
-#define MZShare_DefaultTitle  @"盟主"
-#define MZShare_DefaultUrl    @"https://www.zmengzhu.com"
-
-
-
-
-
-/****************************其他*********************************/
-#pragma mark 其他
-
-#define MZ_UserDefaults [NSUserDefaults standardUserDefaults]
-#define MZ_SETTING      [MZStystemSetting sharedSetting]
-#define MZ_THEME        [MZThemeManager sharedManager]
-
-//启动信息
-#define MZLaunchItem_Cache      @"KLaunchItem"
-#define MZLaunchItem_Clicked    @"KLaunchItemClicked"//点击广告
-#define MZLaunchItem_Timeout    86400*30*12*30
-#define kIsFirstLaunchApp       @"firstLaunchApp"
-
-
-
-//系统弹窗取消按钮标题
-#define MZMSG_CANCEL            @"取消"
-
-
-
-//默认图片
-//头像
-//#define MZ_UserIcon_DefaultImage [UIImage imageNamed:@"personPlaceHold"]
-//活动封面
-#define MZ_FocusDefaultImage     [UIImage imageNamed:@"cover_default"]
-//礼物
-#define MZ_GiftDefaultImage      [UIImage imageNamed:@"gift_placeHolder"]
-//等级
-#define MZ_Level_Image(a)        [UIImage imageNamed:[NSString stringWithFormat:@"v%@",a]]
-//更多--频道
-#define MZ_ChannelDefaultImage   [UIImage imageNamed:@"cover_default"]
-
-//频道分享默认
-#define MZ_ChannelShareDefaultImage  [UIImage imageNamed:@"channelShare_placeHolder"]
-//商品图片默认图
-#define MZ_GoodsPlaceHolder   [UIImage imageNamed:@"商品默认图"]
-//二维码默认图
-#define MZ_QrPlaceHolder      [UIImage imageNamed:@"二维码默认图"]
-
-#define kQuertPayResultSleepTime  0.5 //查询结果统一延时0.5s
 
 #pragma mark 升级状态
 typedef enum {

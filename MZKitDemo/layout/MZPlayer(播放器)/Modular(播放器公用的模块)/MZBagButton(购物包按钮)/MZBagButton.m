@@ -40,6 +40,10 @@
     self.numberLabel.hidden = !number;
 }
 
+- (int)getNumber {
+    return [self.numberLabel.text intValue];
+}
+
 - (UILabel *)numberLabel {
     if (!_numberLabel) {
         _numberLabel = [[UILabel alloc] initWithFrame:CGRectZero];

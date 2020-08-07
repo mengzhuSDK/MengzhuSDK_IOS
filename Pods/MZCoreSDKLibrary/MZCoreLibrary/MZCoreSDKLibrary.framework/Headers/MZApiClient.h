@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 MengZhu. All rights reserved.
 //
 
-#import "MZAFNetworking.h"
-
+#import <AFNetworking/AFNetworking.h>
 
 typedef void(^ApiCompletion)(NSURLSessionDataTask *task, NSDictionary *aResponse, NSError* anError);
 typedef void (^UploadProgress)(long long sent, long long expectSend);
 
-@interface MZApiClient : MZAFHTTPSessionManager
+
+@interface MZApiClient : AFHTTPSessionManager
 
 +(id)sharedClient;
 

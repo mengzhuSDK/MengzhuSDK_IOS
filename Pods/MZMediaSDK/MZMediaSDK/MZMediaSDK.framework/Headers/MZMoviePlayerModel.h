@@ -30,59 +30,48 @@
 @interface MZMoviePlayerVideoModel : NSObject
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *http_url;
-
 @end
 
 
-
-@interface MZRightContenModel:NSObject
-@property (nonatomic, strong) NSString *id;
-@property (nonatomic, strong) NSString *channel_id;
-@property (nonatomic, strong) NSString *uid;
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *image;
-@property (nonatomic, assign) BOOL is_auto_pop;
-@property (nonatomic, strong) NSString *created_at;
-@property (nonatomic, strong) NSString *updated_at;
-@property (nonatomic, strong) NSString *online_gift_id;
-@property (nonatomic, assign) int recive_gift_level;
-@property (nonatomic, assign) int can_recived_level;  // 是否可以领取0-1 BOOL
-@property (nonatomic, strong) NSArray *online_gift_rule;
-@property (nonatomic, strong) NSString *url;
-@property (nonatomic, strong) NSString *answer_bonus_id;
-@property (nonatomic, strong) NSString *app_url;
-
-@property (nonatomic, strong) NSString *status;//0:未开始 1:进行中 2:已结束
-@property (nonatomic, assign) BOOL is_sign;//是否已签到is_expired;
-//@property (nonatomic ,assign)BOOL is_expired;//签到是否过期
-//@property (nonatomic ,assign)int is_force;//是否是强制签到
-@property (nonatomic, assign) BOOL redirect_sign;//是否需要弹web签到（这个包含了is_expired和is_force）
-@property (nonatomic, assign) int force_type;
-@property (nonatomic,   copy) NSString *ticket_id;
-//广告图相关字段
-@property (nonatomic,   copy) NSString *adver_id;
-@property (nonatomic, strong) NSArray *content;
-
+/** 公告配置 */
+@interface MZRoomNotice : NSObject
+@property (nonatomic, assign) BOOL is_top_notice;//公告是否置顶
+@property (nonatomic,   copy) NSString *notice_content;//公告内容
 @end
 
+/** 签到配置 */
+@interface MZSignInfo : NSObject
+@property (nonatomic,   copy) NSString *channel_id;//频道ID
+@property (nonatomic,   copy) NSString *ticket_id;//活动ID
+@property (nonatomic,   copy) NSString *title;//投票标题
+@property (nonatomic, assign) int sign_id;//签到的ID
+@property (nonatomic, assign) int status;//签到的状态，0-未开始，1-已开始， 2-已结束
 
-@interface MZRightModel:NSObject
-@property (nonatomic, strong) NSString *type;
-@property (nonatomic, assign) BOOL is_open;
-@property (nonatomic, strong) MZRightContenModel *content;
+@property (nonatomic, assign) BOOL is_sign;//是否已经签到
+@property (nonatomic, assign) int delay_time;//延迟多久展示投票界面
+
+@property (nonatomic, assign) BOOL is_force;//是否强制显示
+@property (nonatomic, assign) int force_type;//1,填写后才可观看   2，可跳过观看
+
+@property (nonatomic,   copy) NSString *access_url;//签到web地址
+
+@property (nonatomic, assign) int redirect_sign;//是否显示webView签到
+@property (nonatomic, assign) int is_expired;//是否过期
+
 @end
 
 
 @interface MZMoviePlayerModel : NSObject
 @property (nonatomic, strong) NSString * channel_id;//频道ID
 @property (nonatomic, strong) NSString * cover;//活动封面
-@property (nonatomic, assign) int status;// 直播状态 1:直播 2:回放 3:断流
+@property (nonatomic, assign) int status;// 直播状态 0:未开播 1:直播 2:回放 3:断流
 @property (nonatomic, assign) int live_type; // 直播类型 0:视频 1:语音
 @property (nonatomic, strong) NSString *popular;//活动pv
 @property (nonatomic, strong) MZMoviePlayerMsg_conf *msg_config;
 @property (nonatomic, strong) MZMoviePlayerChat_conf *chat_config;
 @property (nonatomic, strong) MZMoviePlayerVideoModel *video;
-@property (nonatomic, strong) NSString *chat_uid;
+@property (nonatomic, strong) NSString *chat_uid;//自己在聊天室里的id
+@property (nonatomic, strong) NSString *unique_id;//第三方传递过来的唯一id
 @property (nonatomic, assign) int view_mode;// 观看权限 1:免费 2:vip 3:付费 4:密码  5:白名单观看 6:F码观看
 @property (nonatomic, strong) NSString *ticket_id;
 @property (nonatomic, assign) int user_status;// 用户状态 1:正常 2:被踢出 3:禁言
@@ -90,9 +79,22 @@
 @property (nonatomic, strong) NSString *uv;
 @property (nonatomic, assign) int live_style;// 直播样式 0:横屏 1:竖屏
 
+@property (nonatomic,   copy) NSString *webinar_onlines;//进入频道的时候的总在线人数
+
 @property (nonatomic, assign) BOOL isChat;//聊天室是否可以聊天
 @property (nonatomic, assign) BOOL isBarrage;//聊天室配置是否可以发送弹幕
 @property (nonatomic, assign) BOOL isRecord_screen;//活动是否开启防录屏
+
+@property (nonatomic, strong) MZRoomNotice *notice;//公告配置
+
+@property (nonatomic, assign) BOOL isHideChatHistory;//是否隐藏历史记录
+
+@property (nonatomic, assign) BOOL isShowVote;//是否显示投票
+
+@property (nonatomic, assign) BOOL isShowDocument;//是否显示文档
+
+@property (nonatomic, assign) BOOL isShowSign;//是否显示签到
+@property (nonatomic, strong) MZSignInfo *signInfo;//签到配置
 
 @end
 

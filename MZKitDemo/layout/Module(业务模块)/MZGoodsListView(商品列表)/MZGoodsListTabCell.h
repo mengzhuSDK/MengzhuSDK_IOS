@@ -12,9 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MZGoodsListTabCell : UITableViewCell
 
-@property (nonatomic ,strong)MZGoodsListModel *model;
+@property (nonatomic, strong) MZGoodsListModel *model;
 
-@property (nonatomic,assign) int index;
+@property (nonatomic, assign) int index;
+
 @end
 
 NS_ASSUME_NONNULL_END

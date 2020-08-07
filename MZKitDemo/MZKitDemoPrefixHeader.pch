@@ -5,53 +5,27 @@
 //  Created by LiWei on 2019/9/26.
 //  Copyright © 2019 mengzhu.com. All rights reserved.
 //
-//#import "Constant.h"
 
-#import "MZDimenComment.h"
-
-#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>//核心组件，必须依赖
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>//核心组件
 
 #import <MZMediaSDK/MZMediaSDK.h>//业务组件
 #import <MZPlayerSDK/MZPlayerSDK.h>//播放器（观看直播和回放）组件
 #import <MZM3U8DownLoaderSDK/MZM3U8DownLoaderSDK.h>//下载器器组件
 #import <MZPushFlowSDK/MZPushFlowSDK.h>//直播推流组件
 
-#import "UIView+MZExtend.h"
-
-#ifndef MZKitDemoPrefixHeader_pch
-#define MZKitDemoPrefixHeader_pch
-
-#define FontSystemSize(a)                   [UIFont systemFontOfSize:a]
-#define ImageName(name)                      [UIImage imageNamed:name]
-#define IPHONE_X \
-({BOOL isPhoneX = NO;\
-if (@available(iOS 11.0, *)) {\
-isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0;\
-}\
-(isPhoneX);})
-
-#define MZ_RATE         (MZWidth/375.0)//以ip6为标准 ip5缩小 ip6p放大 zoom
-#define WeaklySelf(weakSelf)  __weak __typeof(&*self)weakSelf = self
-
-#pragma mark 颜色设置宏
-
-#define MakeColor(r,g,b,a) ([UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a])
-#define MakeColorRGB(hex)  ([UIColor colorWithRed:((hex>>16)&0xff)/255.0 green:((hex>>8)&0xff)/255.0 blue:(hex&0xff)/255.0 alpha:1.0])
-#define MakeColorRGBA(hex,a) ([UIColor colorWithRed:((hex>>16)&0xff)/255.0 green:((hex>>8)&0xff)/255.0 blue:(hex&0xff)/255.0 alpha:a])
-
-
-//（16进制->10进制）
-#define _UIColorFromHexadecimal(rgbValue, alphaValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:alphaValue]
-
-#define UIColorFromHexadecimal(hexadecimalValue) _UIColorFromHexadecimal(hexadecimalValue, 1.0)
-#define UIColorFromHexadecimal_0x(hexadecimalValue) _UIColorFromHexadecimal(0x##hexadecimalValue, 1.0)
-#define UIColorAFromHexadecimal_0x(hexadecimalValue, alphaValue) _UIColorFromHexadecimal(0x##hexadecimalValue, alphaValue)
-
+#import <Masonry.h>
+#import <AFNetworking/AFNetworking.h>
+#import <SDWebImage/SDWebImageManager.h>
+#import <MJRefresh/MJRefresh.h>
+#import <MJExtension.h>
+#import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
 
 //默认图片
 //头像
 #define MZ_UserIcon_DefaultImage [UIImage imageNamed:@"avatar_placeholder"]
 //活动封面
 #define MZ_FocusDefaultImage     [UIImage imageNamed:@"cover_default"]
+//静音（直播/视频）播放的动画json名字
+#define MZ_Audio_AnimationJsonName @"voice_live_am.json"//750x422
 
-#endif /* MZKitDemoPrefixHeader_pch */

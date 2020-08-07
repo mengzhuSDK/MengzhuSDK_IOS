@@ -13,7 +13,7 @@
 
 #define MinPlayerHeight ([UIScreen mainScreen].bounds.size.width / 16 * 9)
 
-@interface PlayerViewController ()<MZMediaPlayerViewToolDelegate,UITextFieldDelegate>
+@interface PlayerViewController ()<MZMediaPlayerViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic, strong)MZMediaPlayerView  *playerView;
 @property (nonatomic, strong)UIView             *headerView;

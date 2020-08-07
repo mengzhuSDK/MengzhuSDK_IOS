@@ -7,7 +7,6 @@
 //
 
 #import "MZSuperPlayerViewController.h"
-#import "UIViewController+MZShowMessage.h"
 #import "MZSuperPlayerView.h"
 
 @interface MZSuperPlayerViewController ()<MZSuperPlayerViewDelegate>
@@ -64,7 +63,7 @@
  * @brief 主播头像点击
  */
 - (void)avatarDidClick:(MZHostModel *)hostModel {
-    [self showTextView:self.view message:@"主播头像点击"];
+    [self.view show:@"主播头像点击"];
 }
 /**
 * @brief 获取到主播信息
@@ -76,19 +75,19 @@
  * @brief 举报点击
  */
 - (void)reportButtonDidClick:(id)playInfo {
-    [self showTextView:self.view message:@"举报按钮点击"];
+    [self.view show:@"举报按钮点击"];
 }
 /**
  * @brief 弹幕开关按钮点击
  */
 - (void)showBarrageDidClick:(BOOL)isShow {
-    [self showTextView:self.view message:(isShow ? @"弹幕已打开" : @"弹幕已关闭")];
+    [self.view show:(isShow ? @"弹幕已打开" : @"弹幕已关闭")];
 }
 /**
  * @brief 分享点击
 */
 - (void)shareButtonDidClick:(id)playInfo {
-    [self showTextView:self.view message:@"分享按钮点击"];
+    [self.view show:@"分享按钮点击"];
 }
 /**
  * @brief 点赞点击
@@ -99,44 +98,44 @@
 /**
  * @brief 在线用户列表点击
 */
-- (void)onlineListButtonDidClick:(NSArray * _Nullable)onlineUsers {
-    [self showTextView:self.view message:@"在线用户列表点击"];
+- (void)onlineListButtonDidClick:(id)playInfo{
+    [self.view show:@"在线用户列表点击"];
 }
 /**
  * @brief 某一个在线用户的信息点击
 */
 - (void)onlineUserInfoDidClick:(id)onlineUserInfo {
-    [self showTextView:self.view message:@"点击一个在线用户"];
+    [self.view show:@"点击一个在线用户"];
 }
 /**
  * @brief 商品袋点击
  */
 - (void)shoppingBagDidClick:(id)playInfo {
-    [self showTextView:self.view message:@"商品袋点击"];
+    [self.view show:@"商品袋点击"];
 }
 /**
  * @brief 关注点击
  */
 - (void)attentionButtonDidClick:(id)playInfo {
-    [self showTextView:self.view message:@"关注按钮点击"];
+    [self.view show:@"关注按钮点击"];
 }
 /**
  * @brief 商品点击
  */
 - (void)goodsItemDidClick:(MZGoodsListModel *)GoodsListModel {
-    [self showTextView:self.view message:@"商品点击"];
+    [self.view show:@"商品点击"];
 }
 /**
  * @brief 聊天头像点击事件
  */
 - (void)chatUserHeaderDidClick:(MZLongPollDataModel *)GoodsListModel {
-    [self showTextView:self.view message:@"聊天用户头像点击"];
+    [self.view show:@"聊天用户头像点击"];
 }
 /**
  * @brief 未登录回调
  */
 - (void)playerNotLogin {
-    [self showTextView:self.view message:@"用户未登录"];
+    [self.view show:@"用户未登录"];
 }
 /**
  * @brief 收到一条新消息
@@ -241,7 +240,7 @@
  */
 - (void)DLNAHelpClick {
     NSLog(@"点击了投屏帮助按钮");
-    [self showTextView:self.view message:@"点击了帮助按钮"];
+    [self.view show:@"点击了帮助按钮"];
 }
 
 /**

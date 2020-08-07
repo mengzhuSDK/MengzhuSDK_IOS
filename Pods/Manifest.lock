@@ -1,36 +1,76 @@
 PODS:
-  - MZCoreSDKLibrary (2.1.0)
-  - MZDownLoaderSDK (2.1.0):
-    - MZCoreSDKLibrary (~> 2.1.0)
-  - MZMediaSDK (2.1.0):
-    - MZCoreSDKLibrary (~> 2.1.0)
-  - MZPlayerSDK (2.1.0):
-    - MZCoreSDKLibrary (~> 2.1.0)
-  - MZPushFlowSDK (2.1.0):
-    - MZCoreSDKLibrary (~> 2.1.0)
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - Masonry (1.1.0)
+  - MJExtension (3.0.17)
+  - MJRefresh (3.1.17)
+  - MZCoreSDKLibrary (2.2.0):
+    - AFNetworking (~> 4.0.1)
+    - Masonry
+    - MJExtension (~> 3.0.13)
+    - MJRefresh (~> 3.1.12)
+    - MZSocketIO
+    - SDWebImage (~> 4.0.0)
+  - MZDownLoaderSDK (2.2.0):
+    - MZCoreSDKLibrary (~> 2.2.0)
+  - MZMediaSDK (2.2.1):
+    - MZCoreSDKLibrary (~> 2.2.0)
+  - MZPlayerSDK (2.2.0):
+    - MZCoreSDKLibrary (~> 2.2.0)
+  - MZPushFlowSDK (2.2.0):
+    - MZCoreSDKLibrary (~> 2.2.0)
+  - MZSocketIO (0.0.1)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
 
 DEPENDENCIES:
-  - MZCoreSDKLibrary (~> 2.1.0)
-  - MZDownLoaderSDK (~> 2.1.0)
-  - MZMediaSDK (~> 2.1.0)
-  - MZPlayerSDK (~> 2.1.0)
-  - MZPushFlowSDK (~> 2.1.0)
+  - MZCoreSDKLibrary (~> 2.2.0)
+  - MZDownLoaderSDK (~> 2.2.0)
+  - MZMediaSDK (~> 2.2.1)
+  - MZPlayerSDK (~> 2.2.0)
+  - MZPushFlowSDK (~> 2.2.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
+    - Masonry
+    - MJExtension
+    - MJRefresh
     - MZCoreSDKLibrary
     - MZDownLoaderSDK
     - MZMediaSDK
     - MZPlayerSDK
     - MZPushFlowSDK
+    - MZSocketIO
+    - SDWebImage
 
 SPEC CHECKSUMS:
-  MZCoreSDKLibrary: cc534fae7611f8562ebd0f2e76769933f664d8b9
-  MZDownLoaderSDK: 0ad235e343aef39642440570ef296c0fd4953527
-  MZMediaSDK: e8f3640f13e878e6e423985894dd9cfaec246a57
-  MZPlayerSDK: 18efaf4dbd9fbdfc43c5c9f52df0e136ea5dcf2b
-  MZPushFlowSDK: 17c1395b3182f30b7929181924584ac5a9260e4d
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJExtension: 74ec83124a68891619fb7ba9c5c811bbf1691076
+  MJRefresh: ee5b68f639775462faba4db0fd243baf4d42c2cf
+  MZCoreSDKLibrary: 33fbe7a9333ecb49756feda1e72b7fa406d3151c
+  MZDownLoaderSDK: da75be2b5b90c12a2eed3ff2d09df43a4b555978
+  MZMediaSDK: 861cd8ec5e026c9dd895437f0ca7df7a73a65af4
+  MZPlayerSDK: 4739506aaad77e3adb9679eb49aacf544861c9c3
+  MZPushFlowSDK: 2b629d1b19098aa5957738d123bcbf99386a2a41
+  MZSocketIO: 55777cd356bd5400ad1a44d98368bd59e3b68a3d
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: e2aab3b503bbdda294f37575f993d53fd001d28f
+PODFILE CHECKSUM: 922b4a46edaa762cc12bbbb31377225d076fb82c
 
 COCOAPODS: 1.9.0.beta.2

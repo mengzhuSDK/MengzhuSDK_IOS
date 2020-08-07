@@ -24,7 +24,6 @@
 //__________________________________业务接口地址________________________________________________________
 #define MZ_SDK_INIT             @"/api/user/check"
 #define MZNET_UserCheck                MZ_NET_Url(MZ_URL_Prefix_online,MZ_SDK_INIT)
-#define MZNET_app_appIP     @""//@"http://webinar.vhall.com/api/appip.php"//appip
 
 
 #define MZNET_VERSION            [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]

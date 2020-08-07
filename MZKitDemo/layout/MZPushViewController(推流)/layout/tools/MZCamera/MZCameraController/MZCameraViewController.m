@@ -8,7 +8,6 @@
 
 #import "MZCameraViewController.h"
 #import "MZCameraHelperView.h"
-#import "UIViewController+MZShowMessage.h"
 
 @interface MZCameraViewController ()<UIGestureRecognizerDelegate>
 {
@@ -67,7 +66,9 @@
     if(self.ratio <= 0){
         self.ratio = 16 / 9;
     }
-    _preView = [[UIView alloc]initWithFrame:CGRectMake(0, 44, MZ_SW, MZ_SH - kTopHeight - 125)];
+    CGFloat topHeight = [[UIApplication sharedApplication] statusBarFrame].size.height + 44.0;
+    
+    _preView = [[UIView alloc]initWithFrame:CGRectMake(0, 44, MZ_SW, MZ_SH - topHeight - 125)];
     [self.view addSubview:_preView];
     _camera = [[MZCameraHelperView alloc]initWithMZCameraHelperView:CGRectMake(0, 0, _preView.width, _preView.height)];
     [_preView insertSubview:_camera atIndex:0];
@@ -273,7 +274,7 @@
     BOOL isIPhone4 = ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO);
     if (isIPhone4)
     {
-        [self showTextView:self.view message:@"该设备不支持变焦"];
+        [self.view show:@"该设备不支持变焦"];
         return;
     }
     _currentScale += [pinch scale] - _mLastScale;

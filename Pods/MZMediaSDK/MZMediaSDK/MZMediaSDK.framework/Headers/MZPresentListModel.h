@@ -5,7 +5,6 @@
 //  Created by vhall on 16/6/25.
 //  Copyright © 2016年 www.mengzhu.com. All rights reserved.
 //
-#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @interface MZPresentListModel : MZBaseNetModel
 @property (nonatomic,strong) NSString * id;

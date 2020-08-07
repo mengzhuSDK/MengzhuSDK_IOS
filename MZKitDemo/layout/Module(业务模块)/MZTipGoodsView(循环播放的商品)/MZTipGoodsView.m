@@ -82,7 +82,7 @@
 
 -(void)showGoodsViewWithModel:(MZGoodsListModel *)model
 {
-    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:model.pic] placeholderImage:MZ_GoodsPlaceHolder];
+    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:model.pic]];
     self.currentShowGoodsModel = model;
     self.goodsTitleL.text = model.name;
     self.priceL.text = [NSString stringWithFormat:@"￥%@",model.price];

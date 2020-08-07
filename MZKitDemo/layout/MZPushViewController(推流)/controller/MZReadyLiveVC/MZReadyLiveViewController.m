@@ -19,9 +19,6 @@
 
 #import "MZImagePickerViewController.h"
 
-#import "UIViewController+MZShowMessage.h"
-
-#import "MZSimpleHud.h"
 #import "MZLiveFinishViewController.h"
 #import "MZLiveSelectBiteRateView.h"
 
@@ -47,6 +44,7 @@ typedef enum {
 @property (nonatomic ,strong) UISwitch *landscapeSwitch;//横竖屏
 @property (nonatomic ,strong) UISwitch *muteSwith;//静音
 @property (nonatomic ,strong) UISwitch *frontCameraSwitch;//前后摄像头
+@property (nonatomic ,strong) UISwitch *onlyAudioSwitch;//是否是语音直播
 @property (nonatomic ,strong) UILabel *coundDownLabel;//倒计时label
 @property (nonatomic ,strong) UILabel *biteRateLabe;//清晰度选择
 
@@ -73,7 +71,7 @@ typedef enum {
     [super viewDidLoad];
     self.model = [[MZChannelManagerModel alloc] init];
     
-    UIImageView* _bgCameraView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, MZ_SW, MZScreenHeight)];
+    UIImageView* _bgCameraView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, MZ_SW, MZSafeScreenHeight)];
     [self.view addSubview:_bgCameraView];
     [MZCameraImageHelper embedPreviewInView:_bgCameraView];
     
@@ -115,6 +113,7 @@ typedef enum {
 
 -(void)setupUI
 {
+    CGFloat fontSize = 13;
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     self.blurEffectBgView = [[UIVisualEffectView alloc] initWithEffect:effect];
     self.blurEffectBgView.frame = CGRectMake(0, 0, self.view.width, self.view.height);
@@ -136,7 +135,7 @@ typedef enum {
     
     UILabel *liveTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, tipLabel.frame.origin.y + tipLabel.frame.size.height, 70, 44.0)];
     liveTipLabel.text = @"live_tk:";
-    liveTipLabel.font = [UIFont systemFontOfSize:15];
+    liveTipLabel.font = [UIFont systemFontOfSize:fontSize];
     liveTipLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:liveTipLabel];
     
@@ -154,7 +153,7 @@ typedef enum {
     
     UILabel *ticketTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, liveTipLabel.frame.origin.y+liveTipLabel.frame.size.height, 70, 44.0)];
     ticketTipLabel.text = @"ticket_id:";
-    ticketTipLabel.font = [UIFont systemFontOfSize:15];
+    ticketTipLabel.font = [UIFont systemFontOfSize:fontSize];
     ticketTipLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:ticketTipLabel];
     
@@ -172,7 +171,7 @@ typedef enum {
     
     UILabel *meiyanLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, ticketTipLabel.frame.origin.y+ticketTipLabel.frame.size.height, 70, 44.0)];
     meiyanLabel.text = @"美颜";
-    meiyanLabel.font = [UIFont systemFontOfSize:15];
+    meiyanLabel.font = [UIFont systemFontOfSize:fontSize];
     meiyanLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:meiyanLabel];
     
@@ -185,7 +184,7 @@ typedef enum {
     
     UILabel *landscapeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, meiyanLabel.frame.origin.y+meiyanLabel.frame.size.height, 110, 44.0)];
     landscapeLabel.text = @"是否横屏直播";
-    landscapeLabel.font = [UIFont systemFontOfSize:15];
+    landscapeLabel.font = [UIFont systemFontOfSize:fontSize];
     landscapeLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:landscapeLabel];
     
@@ -198,7 +197,7 @@ typedef enum {
     
     UILabel *muteLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, landscapeLabel.frame.origin.y+landscapeLabel.frame.size.height, 110, 44.0)];
     muteLabel.text = @"是否静音";
-    muteLabel.font = [UIFont systemFontOfSize:15];
+    muteLabel.font = [UIFont systemFontOfSize:fontSize];
     muteLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:muteLabel];
     
@@ -211,7 +210,7 @@ typedef enum {
     
     UILabel *frontCameraLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, muteLabel.frame.origin.y+muteLabel.frame.size.height, 110, 44.0)];
     frontCameraLabel.text = @"是否前置摄像头";
-    frontCameraLabel.font = [UIFont systemFontOfSize:15];
+    frontCameraLabel.font = [UIFont systemFontOfSize:fontSize];
     frontCameraLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:frontCameraLabel];
     
@@ -222,9 +221,23 @@ typedef enum {
     self.frontCameraSwitch = frontCameraSwitch;
     [self.frontCameraSwitch setOn:YES];
     
-    UILabel *countDownTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, frontCameraLabel.frame.origin.y+frontCameraLabel.frame.size.height, 180, 44.0)];
+    UILabel *isOnlyAudioLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, frontCameraLabel.frame.origin.y+frontCameraLabel.frame.size.height, 210, 44.0)];
+    isOnlyAudioLabel.text = @"是否语音直播（只支持竖屏）";
+    isOnlyAudioLabel.font = [UIFont systemFontOfSize:fontSize];
+    isOnlyAudioLabel.textColor = [UIColor whiteColor];
+    [self.view addSubview:isOnlyAudioLabel];
+    
+    UISwitch *onlyAudioSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 90, isOnlyAudioLabel.frame.origin.y, 60, 44.0)];
+    [self.view addSubview:onlyAudioSwitch];
+    onlyAudioSwitch.backgroundColor = [UIColor whiteColor];
+    [onlyAudioSwitch addTarget:self action:@selector(aSwitchChange:) forControlEvents:UIControlEventValueChanged];
+    [onlyAudioSwitch roundChangeWithRadius:31/2.0];
+    self.onlyAudioSwitch = onlyAudioSwitch;
+    [self.onlyAudioSwitch setOn:NO];
+    
+    UILabel *countDownTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, isOnlyAudioLabel.frame.origin.y+isOnlyAudioLabel.frame.size.height, 180, 44.0)];
     countDownTipLabel.text = @"开始倒计时(默认为3秒)";
-    countDownTipLabel.font = [UIFont systemFontOfSize:15];
+    countDownTipLabel.font = [UIFont systemFontOfSize:fontSize];
     countDownTipLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:countDownTipLabel];
     self.countDownNumber = 3;
@@ -244,7 +257,7 @@ typedef enum {
     
     UILabel *biteRateTipLabel = [[UILabel alloc]init];
     biteRateTipLabel.text = @"清晰度选择(默认为超清)";
-    biteRateTipLabel.font = [UIFont systemFontOfSize:15];
+    biteRateTipLabel.font = [UIFont systemFontOfSize:fontSize];
     biteRateTipLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:biteRateTipLabel];
     biteRateTipLabel.frame = CGRectMake(20, countDownTipLabel.frame.origin.y+countDownTipLabel.frame.size.height, 180, 44.0);
@@ -278,6 +291,32 @@ typedef enum {
     startLiveButton.frame = CGRectMake(12, self.view.frame.size.height - bottomSpace - 64*MZ_RATE, self.view.frame.size.width - 24, 64*MZ_RATE); 
 }
 
+/// Switch开关
+- (void)aSwitchChange:(UISwitch *)aSwitch {
+    if (aSwitch == self.onlyAudioSwitch) {//语音直播开关
+        if (aSwitch.isOn) {
+            NSLog(@"开启语音直播，横屏改成竖屏");
+            [self.landscapeSwitch setOn:NO animated:YES];
+            self.landscapeSwitch.enabled = NO;
+            
+            [self.muteSwith setOn:NO animated:YES];
+            self.muteSwith.enabled = NO;
+            
+            [self.meiyanSwith setOn:NO animated:YES];
+            self.meiyanSwith.enabled = NO;
+            
+            [self.frontCameraSwitch setOn:NO animated:YES];
+            self.frontCameraSwitch.enabled = NO;
+
+        } else {
+            self.landscapeSwitch.enabled = YES;
+            self.muteSwith.enabled = YES;
+            self.meiyanSwith.enabled = YES;
+            self.frontCameraSwitch.enabled = YES;
+        }
+    }
+}
+
 - (void)labelClick:(UITapGestureRecognizer *)tap {
     if (tap.view == self.coundDownLabel) {
         // 自定义倒计时
@@ -298,7 +337,7 @@ typedef enum {
                 self.countDownNumber = [inputTextField.text intValue];
                 self.coundDownLabel.text = [NSString stringWithFormat:@"%d",self.countDownNumber];
             } else {
-                [self showTextView:self.view message:@"请输入大于0的数字"];
+                [self.view show:@"请输入大于0的数字"];
             }
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
@@ -384,18 +423,28 @@ typedef enum {
 
 -(void)createNewLiveActivity
 {
-
-#warning 这里是我自己模拟的创建活动,为了获取 live_tk 和 ticket_id ,数据是写死的。（你用的时候自己从自己服务器获取 live_tk 和 ticket_id,不需要使用这个接口）
     
 #ifdef DEBUG
-    [MZSimpleHud show];
+    [MZSDKSimpleHud show];
     
     // 直播封面地址（测试数据）
     NSString *live_coverURLString = @"http://s1.t.zmengzhu.com/upload/img/6e/77/6e77552721067fbc87ee0b00664556d1.png";
     // 直播名字（测试数据）
     NSString *live_name = @"直播测试";
+    
+    int live_type = 0;//默认视频直播
+    if (self.onlyAudioSwitch.isOn) {
+        live_type = 1;
+    }
+    
+    int live_style = 1;//默认竖屏
+    if (self.landscapeSwitch.isOn) {
+        live_style = 0;
+    }
 
-    [MZNewLiveActivityTest test_createNewLiveWithLiveCover:live_coverURLString liveName:live_name success:^(id _Nonnull response) {
+#warning 此接口只用于debug模式测试使用，为了获取 live_tk 和 ticket_id ,数据是写死的。（你用的时候自己从自己服务器获取 live_tk 和 ticket_id,不需要使用这个接口）
+
+    [MZNewLiveActivityTest test_createNewLiveWithLiveCover:live_coverURLString liveName:live_name live_style:live_style live_type:live_type success:^(id _Nonnull response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"live_tk-----------  %@",[response valueForKey:@"live_tk"]);
             self.live_tk = [response valueForKey:@"live_tk"];
@@ -409,7 +458,7 @@ typedef enum {
             }];
 
             self.startLiveButton.userInteractionEnabled = YES;
-            [MZSimpleHud hide];
+            [MZSDKSimpleHud hide];
         });
     }];
 
@@ -424,43 +473,34 @@ typedef enum {
 
 -(void)getLiveData
 {
-    WeaklySelf(weakSelf);
-    NSString *codeName = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                   (CFStringRef)[MZUserServer currentUser].nickName,
-                                                                                  NULL,
-                                                                                  (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                  kCFStringEncodingUTF8));
-    NSString *codeAvatar = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                   (CFStringRef)[MZUserServer currentUser].avatar,
-                                                                                   NULL,
-                                                                                   (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                   kCFStringEncodingUTF8));
-    
-    [MZSDKBusinessManager startLiveWithUsername:codeName userAvatar:codeAvatar userId:[MZUserServer currentUser].userId ticketId:self.ticket_id live_tk:self.live_tk success:^(id response) {
-        weakSelf.startLiveInfoDict = ((NSDictionary *)response).mutableCopy;
-        weakSelf.model.ticket_id = weakSelf.startLiveInfoDict[@"ticket_id"];
-        weakSelf.model.msg_conf = [MZMoviePlayerMsg_conf mz_objectWithKeyValues:weakSelf.startLiveInfoDict[@"msg_conf"]];
-        weakSelf.model.chat_conf = [MZMoviePlayerChat_conf mz_objectWithKeyValues:weakSelf.startLiveInfoDict[@"chat_conf"]];
-        weakSelf.model.push_url = weakSelf.startLiveInfoDict[@"push_url"];
+    NSString *codeName = [MZUserServer currentUser].nickName;
+    NSString *codeAvatar = [MZUserServer currentUser].avatar;
+
+    [MZSDKBusinessManager startLiveWithUsername:codeName userAvatar:codeAvatar uniqueId:[MZUserServer currentUser].uniqueID ticketId:self.ticket_id live_tk:self.live_tk success:^(id response) {
+        self.startLiveInfoDict = ((NSDictionary *)response).mutableCopy;
+        self.model.ticket_id = self.startLiveInfoDict[@"ticket_id"];
+        self.model.msg_conf = [MZMoviePlayerMsg_conf mj_objectWithKeyValues:self.startLiveInfoDict[@"msg_conf"]];
+        self.model.chat_conf = [MZMoviePlayerChat_conf mj_objectWithKeyValues:self.startLiveInfoDict[@"chat_conf"]];
+        self.model.push_url = self.startLiveInfoDict[@"push_url"];
         
-        weakSelf.model.channelId = weakSelf.startLiveInfoDict[@"channel_id"];
-        weakSelf.model.channelName = weakSelf.startLiveInfoDict[@"stream_name"];
-        weakSelf.model.webinar_id = weakSelf.startLiveInfoDict[@"webinar_id"];
+        self.model.channelId = self.startLiveInfoDict[@"channel_id"];
+        self.model.channelName = self.startLiveInfoDict[@"stream_name"];
+        self.model.webinar_id = self.startLiveInfoDict[@"webinar_id"];
         
-        
-        NSLog(@"push_url = %@",weakSelf.model.push_url);
+        NSLog(@"push_url = %@",self.model.push_url);
         MZLiveUserModel *LiveUser = [[MZLiveUserModel alloc] init];
         LiveUser.nickname = [MZUserServer currentUser].nickName;
-        LiveUser.uid = [MZUserServer currentUser].userId;
+        LiveUser.uid = self.model.chat_conf.chat_uid;
         LiveUser.avatar = [MZUserServer currentUser].avatar;
-        [MZSimpleHud hide];
+
+        [MZSDKSimpleHud hideAfterDelay:0];
         
         [self pushToLive:LiveUser];
     } failure:^(NSError *error) {
         NSLog(@"error = %@",error.localizedDescription);
-        [weakSelf showTextView:weakSelf.view message:error.domain];
+        [self.view show:error.domain];
         self.startLiveButton.userInteractionEnabled = YES;
-        [MZSimpleHud hide];
+        [MZSDKSimpleHud hide];
     }];
 }
 
@@ -509,9 +549,14 @@ typedef enum {
         // 设置清晰度，默认高清
         live.videoSessionPreset = self.videoSessionPreset;
         
+        // 设置是否只是语音直播
+        live.isOnlyAudio = self.onlyAudioSwitch.isOn;
+        
         self.startLiveButton.userInteractionEnabled = YES;
         live.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self presentViewController:live animated:YES completion:nil];
+        
+        [self presentViewController:live animated:!self.landscapeSwitch.isOn completion:nil];
+
     });
 }
 
@@ -523,6 +568,11 @@ typedef enum {
 //支持的方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
+}
+
+//一开始的方向
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
 }
 
 @end

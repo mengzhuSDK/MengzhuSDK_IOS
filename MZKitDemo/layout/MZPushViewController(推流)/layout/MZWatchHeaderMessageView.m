@@ -8,7 +8,7 @@
 
 #import "MZWatchHeaderMessageView.h"
 #import "MZLiveViewController.h"
-#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
+
 @interface MZWatchHeaderMessageView()
 {
     UIButton *_contentView;
@@ -169,14 +169,12 @@
 -(void)setOtherUserInfoModel:(MZLiveUserModel *)otherUserInfoModel
 {
     _otherUserInfoModel = otherUserInfoModel;
-    if(otherUserInfoModel.uid.intValue == [MZUserServer currentUser].userId.intValue){//主播自己
-        self.isMySelf = YES;
+    if (self.isMySelf) {
         [self reloadUI];
-    }else{
-        self.isMySelf = NO;
+    } else {
         [self.bannedBtn setTitle:otherUserInfoModel.is_banned ? @"解禁":@"禁言" forState:UIControlStateNormal];
-        
     }
+
     [_header sd_setImageWithURL:[self customUrlWithStr:otherUserInfoModel.avatar] placeholderImage:[UIImage imageNamed:@"personPlaceHold"]];
     _nameL.text =EmptyForNil([MZGlobalTools cutStringWithString:otherUserInfoModel.nickname SizeOf:16]);
     _mengzhuIDLabel.text = [NSString stringWithFormat:@"ID：%@",otherUserInfoModel.uid];

@@ -149,6 +149,7 @@
             user.appID = @"";//线上模拟环境(这里需要自己填一下)
             user.secretKey = @"";
             [MZUserServer updateCurrentUser:user];
+            
             MZVerticalPlayerViewController *liveVC = [[MZVerticalPlayerViewController alloc]init];
             liveVC.mvURLString = m3u8URLString;
             [[self viewController].navigationController pushViewController:liveVC animated:YES];

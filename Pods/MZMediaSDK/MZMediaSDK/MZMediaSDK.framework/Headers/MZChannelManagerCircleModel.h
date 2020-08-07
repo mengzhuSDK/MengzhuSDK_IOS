@@ -5,7 +5,6 @@
 //  Created by 孙显灏 on 2018/5/9.
 //  Copyright © 2018年 www.mengzhu.com. All rights reserved.
 //
-#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
 @interface MZChannelManagerCircleModel : MZBaseNetModel
 @property(nonatomic,strong)NSString     *id;

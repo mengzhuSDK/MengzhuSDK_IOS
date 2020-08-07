@@ -16,6 +16,9 @@ FOUNDATION_EXPORT const unsigned char MZMediaSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MZMediaSDK/PublicHeader.h>
 
+#pragma mark - MZHud
+#import "MZSDKSimpleHud.h"
+
 #pragma mark - MZNetOperate
 #import "MZNetOperate.h"
 
@@ -66,3 +69,15 @@ FOUNDATION_EXPORT const unsigned char MZMediaSDKVersionString[];
 #import "MZWebinar_info.h"
 #import "MZShareModel.h"
 #import "MZPresentListModel.h"
+#import "MZAudienceListModel.h"
+
+#pragma mark - 签到
+#import "MZSignView.h"
+
+#pragma mark - 文档
+#import "MZDocumentView.h"
+#import "MZDocumentDownloader.h"
+#import "MZDocumentInfo.h"
+
+#import "MZDocumentListView.h"
+#import "MZDocumentListCell.h"

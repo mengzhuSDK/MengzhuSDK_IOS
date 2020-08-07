@@ -26,6 +26,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSString *ticket_id;
 @property (nonatomic, strong) MZMoviePlayerModel *activity;//播放器的详情model
 
+@property (nonatomic, assign) BOOL isHideChatHistory;//是否显示历史数据
+
 - (instancetype)initWithFrame:(CGRect)frame cellType:(MZChatCellType)cellType;
 - (void)addChatData:(MZLongPollDataModel *)dataModel;
 - (void)reloadData;
@@ -35,6 +37,9 @@ typedef enum : NSUInteger {
 
 ///上线按钮是否覆盖到聊天界面上
 - (void)onlineButtonIsCoverAtChatView:(BOOL)isCoverAtChatView;
+
+///添加一条公告信息
+- (BOOL)addNotice:(NSString *)notice;
 
 @end
 

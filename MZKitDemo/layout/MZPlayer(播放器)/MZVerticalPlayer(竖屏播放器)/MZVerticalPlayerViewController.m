@@ -132,7 +132,7 @@
     NSLog(@"%s",__func__);
 }
 
-- (void)onlineListButtonDidClick:(NSArray * _Nullable)onlineUsers {
+- (void)onlineListButtonDidClick:(id)playInfo {
     [self sv_showMessage:@"在线用户列表点击"];
 }
 

@@ -22,7 +22,7 @@
  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- POSSIBILITY OF SUCH DAMAGE. 
+ POSSIBILITY OF SUCH DAMAGE.
  */
 
 #import <Foundation/Foundation.h>
@@ -38,7 +38,7 @@
 /**
  * Does ARC support GCD objects?
  * It does if the minimum deployment target is iOS 6+ or Mac OS X 8+
- * 
+ *
  * @see http://opensource.apple.com/source/libdispatch/libdispatch-228.18/os/object.h
  **/
 #if OS_OBJECT_USE_OBJC
@@ -47,7 +47,7 @@
 #define NEEDS_DISPATCH_RETAIN_RELEASE 1
 #endif
 
-/** 
+/**
  * Create NS_ENUM macro if it does not exist on the targeted version of iOS or OS X.
  *
  * @see http://nshipster.com/ns_enum-ns_options/

@@ -18,7 +18,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.isLive = NO;
+        self.live_status = 0;
         [self setupUI];
     }
     return self;
@@ -123,7 +123,7 @@
 - (NSMutableAttributedString *)getSpot {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setObject:FontSystemSize(11) forKey:NSFontAttributeName];
-    if (self.isLive) {
+    if (self.live_status == 1 || self.live_status == 3) {
         [dict setObject:[UIColor colorWithRed:255/255.0 green:33/255.0 blue:69/255.0 alpha:1] forKey:NSForegroundColorAttributeName];
     } else {
         [dict setObject:[[UIColor whiteColor] colorWithAlphaComponent:1.0] forKey:NSForegroundColorAttributeName];
@@ -135,7 +135,8 @@
     [dict1 setObject:[[UIColor whiteColor] colorWithAlphaComponent:1.0] forKey:NSForegroundColorAttributeName];
     
     NSString *title = @" 回放 | ";
-    if (self.isLive) title = @" 直播 | ";
+    if (self.live_status == 1 || self.live_status == 3) title = @" 直播 | ";
+    else if (self.live_status == 0) title = @"未开播| ";
     
     NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:title attributes:dict1];
 

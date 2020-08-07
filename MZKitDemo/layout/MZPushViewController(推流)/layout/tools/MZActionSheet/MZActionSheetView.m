@@ -7,7 +7,7 @@
 //
 
 #import "MZActionSheetView.h"
-#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
+
 #define kBtnsH 40
 #define kActonTitleBtnsH 35
 #define kCancelBtnsH 50

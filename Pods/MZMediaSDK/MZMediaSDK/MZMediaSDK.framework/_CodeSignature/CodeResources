@@ -6,11 +6,15 @@
 	<dict>
 		<key>Headers/MZActMsg.h</key>
 		<data>
-		ufov/YEwQh9dy+4n63MQBou6Z2g=
+		qdjYNNjWTyGCAYFifZGT1aPNFJs=
 		</data>
 		<key>Headers/MZActivityComment.h</key>
 		<data>
-		Ll1D2pM42pY3AI8GdR9+vOsTmN4=
+		IZ3Y5aPzfnuFO1KjbFM3g+W6pjs=
+		</data>
+		<key>Headers/MZAudienceListModel.h</key>
+		<data>
+		sFF4SyLw34yaL2oPkBN0xAz0gtY=
 		</data>
 		<key>Headers/MZBlackListModel.h</key>
 		<data>
@@ -18,19 +22,39 @@
 		</data>
 		<key>Headers/MZChannelManagerCircleModel.h</key>
 		<data>
-		56cU2wloYlepZqV+HkQS1XqJ13s=
+		swSIUapU0uHWVePl9Q8e1/KxWZ8=
 		</data>
 		<key>Headers/MZChannelManagerModel.h</key>
 		<data>
-		LssnzFdJ4DNf2iRfB9tH6lOR4C4=
+		P4xmJ7M1taShoPF5NLnGngECySg=
 		</data>
 		<key>Headers/MZChatKitManager.h</key>
 		<data>
-		BJj47mzUjm620+qU4dhQa94q5gY=
+		lBtn5+VFvpp2+XzXNm3p8H8GTBk=
 		</data>
 		<key>Headers/MZCommenComment.h</key>
 		<data>
-		fcBnVd8jPJY0rZCQAbp+9UqIAkE=
+		zq2CXRgioivP7K1JxWzfzkSZ2Bs=
+		</data>
+		<key>Headers/MZDocumentDownloader.h</key>
+		<data>
+		yY6Xemr5Iv+RF5rOpgAjfvHiaBI=
+		</data>
+		<key>Headers/MZDocumentInfo.h</key>
+		<data>
+		D8PVaMv7AFrH6Bpbm6x+vvdsBmQ=
+		</data>
+		<key>Headers/MZDocumentListCell.h</key>
+		<data>
+		XD2YE8+pddMydc5d6K46+Iks0FM=
+		</data>
+		<key>Headers/MZDocumentListView.h</key>
+		<data>
+		J9iFQ9+32PA6uI+vyfWaIyy4kMU=
+		</data>
+		<key>Headers/MZDocumentView.h</key>
+		<data>
+		GknYFA08pIiqAZNOPtkrG1vP/xw=
 		</data>
 		<key>Headers/MZEventTag.h</key>
 		<data>
@@ -38,7 +62,7 @@
 		</data>
 		<key>Headers/MZGoodsListModel.h</key>
 		<data>
-		WaEQPhU/JWv+ry11XS9AbTW3XwA=
+		R2tss+MtDOnoligInItUJYXmTl8=
 		</data>
 		<key>Headers/MZGoodsListOuterModel.h</key>
 		<data>
@@ -50,7 +74,7 @@
 		</data>
 		<key>Headers/MZHost.h</key>
 		<data>
-		eu2AX17Ljp4ED224NbHAILjLORY=
+		DwZ1v5f/aNI0j7qxdu7bDOMyoh0=
 		</data>
 		<key>Headers/MZHostModel.h</key>
 		<data>
@@ -74,15 +98,15 @@
 		</data>
 		<key>Headers/MZLongPolling.h</key>
 		<data>
-		KkN/m6MAo9h5xRFrVGzZ3BXuqVk=
+		PhmeaR62FXNYe/gde2eKB+kCUig=
 		</data>
 		<key>Headers/MZMediaSDK.h</key>
 		<data>
-		gUX/AwGnYx/gO5A/ABDm/9UOVf8=
+		v8T2W4XQYMDiz8YdRg2+xnjp6kY=
 		</data>
 		<key>Headers/MZMoviePlayerModel.h</key>
 		<data>
-		HJ6t+ShLokg454UMLzkUtpJ+md8=
+		lJ/AjN+Bq6StE9c5seE1NEtaybk=
 		</data>
 		<key>Headers/MZMyselfListModel.h</key>
 		<data>
@@ -90,7 +114,7 @@
 		</data>
 		<key>Headers/MZNetOperate.h</key>
 		<data>
-		yGgwIqokpJAChmhyUgUHQW8hahc=
+		nKnS9TPasT6VueJZFGsNkcksiOQ=
 		</data>
 		<key>Headers/MZNetSeverUrlManager.h</key>
 		<data>
@@ -102,7 +126,7 @@
 		</data>
 		<key>Headers/MZNewLiveActivityTest.h</key>
 		<data>
-		ji+r5STmvqGADkLX3GofZQK9Sto=
+		ZGzNwbETfWpjb2zXq2T59bSpYFc=
 		</data>
 		<key>Headers/MZOnlineUserListModel.h</key>
 		<data>
@@ -114,15 +138,19 @@
 		</data>
 		<key>Headers/MZPresentListModel.h</key>
 		<data>
-		soZlWpnQtJ1EwGaG0sNobwy7G1M=
+		ek72hFlqPSiWX9az/gnBaAEw9xg=
 		</data>
 		<key>Headers/MZSDKBusinessManager.h</key>
 		<data>
-		G1d+MtJ4bIeCNuAzNPLVyK4KuM8=
+		xmIDvRDLqCP6eYNzVKxnQLnBG64=
 		</data>
 		<key>Headers/MZSDKInitManager.h</key>
 		<data>
 		ntV+KFo/1OTTSYfFm4qoMCbEDjU=
+		</data>
+		<key>Headers/MZSDKSimpleHud.h</key>
+		<data>
+		39t3jmuu5A6g7jO89g4jLVp/pzk=
 		</data>
 		<key>Headers/MZShareModel.h</key>
 		<data>
@@ -130,19 +158,95 @@
 		</data>
 		<key>Headers/MZShare_info.h</key>
 		<data>
-		hLgduwHpsOM1jywqUADWYPze9Gw=
+		sOYPQlbfxhtiV2f0p5kRZIxijJM=
+		</data>
+		<key>Headers/MZSignView.h</key>
+		<data>
+		II53YunVsOnqlzYwtGK6CPMm8CQ=
 		</data>
 		<key>Headers/MZUser_info.h</key>
 		<data>
-		ESexIt8bm4Uz1gSQNdDZ+hWmNRY=
+		KyUDt7OcgLPrEioqG8ldnTvg0qI=
 		</data>
 		<key>Headers/MZWebinar_info.h</key>
 		<data>
-		ox1gB9yq0wMpU+ECnk2zLXVudok=
+		pKPTcvDnEypsFaXWklxx8KBIpgc=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		mYOWWnTqNgijzPB4TAMAi+66aG0=
+		WVerqPdDVyJonMTdtDkIO8juUg8=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Download@2x.png</key>
+		<data>
+		MGlurHdywrMpBlsG1spxGk3L1yg=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Download@3x.png</key>
+		<data>
+		2CGSm4D7qq1ShLVsVr3+1fFkRTE=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_DownloadFinish@2x.png</key>
+		<data>
+		lFjQS3Jm7mCxUinkedDCBMDGOrc=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_DownloadFinish@3x.png</key>
+		<data>
+		Su7Mxh1tHT0k3Iw/3crSn0zoVM4=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Left@2x.png</key>
+		<data>
+		YF7/yfFDBGF4scDk5ieon1gkoas=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Left@3x.png</key>
+		<data>
+		HmxMJD5Zh89nAqYa903ul6zRXU0=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Max@2x.png</key>
+		<data>
+		/7cLuJKE5RtPf/gw6usV7PlTLII=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Max@3x.png</key>
+		<data>
+		tRn0mv3wgrTO16DdoOt+vGHDQ5Q=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Menu@2x.png</key>
+		<data>
+		60AoSa6I9JuPcipqKc5AwrKlA+g=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Menu@3x.png</key>
+		<data>
+		uq7RNDwdllmTdaDvPy7iZPiHsGM=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Min@2x.png</key>
+		<data>
+		CYtmhqhVmZkk+Eu5+DedYlxUzQs=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Min@3x.png</key>
+		<data>
+		gN6vMg6p1X1aPEpzoUJvx5wtvaY=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Right@2x.png</key>
+		<data>
+		AOKcRupP+5f3qbeGiTjuDsu6m+Q=
+		</data>
+		<key>MZMediaSDK.bundle/MZ_Document_Right@3x.png</key>
+		<data>
+		z+fxTPAYzAsjM+MZeyanNyUMVw4=
+		</data>
+		<key>MZMediaSDK.bundle/player_cover_default@2x.png</key>
+		<data>
+		8AhmuyFFBIpUTemVOZMebU5O0ns=
+		</data>
+		<key>MZMediaSDK.bundle/player_cover_default@3x.png</key>
+		<data>
+		PrTyOLfsktzkDVxKpAzzdBbxBpk=
+		</data>
+		<key>MZMediaSDK.bundle/player_store_close@2x.png</key>
+		<data>
+		3a3aaPn3u4FpHXLgQnpKqvECv/g=
+		</data>
+		<key>MZMediaSDK.bundle/player_store_close@3x.png</key>
+		<data>
+		2sL1xbP+a0KKTQ9+epO4JR1vIm8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -247,22 +351,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ufov/YEwQh9dy+4n63MQBou6Z2g=
+			qdjYNNjWTyGCAYFifZGT1aPNFJs=
 			</data>
 			<key>hash2</key>
 			<data>
-			je8pKJk9ERyFMcdXLL9PZvJeEa9th3OtthzO+n6EL4k=
+			9wULFI69dTULuXZJ9HsiPqeKfs/ygdzmgSR5/n6hBi8=
 			</data>
 		</dict>
 		<key>Headers/MZActivityComment.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Ll1D2pM42pY3AI8GdR9+vOsTmN4=
+			IZ3Y5aPzfnuFO1KjbFM3g+W6pjs=
 			</data>
 			<key>hash2</key>
 			<data>
-			Xe+R76r2bgvxruI+7S7JStAE3zE+7TkKtlAaP5E8V7A=
+			62VdihTe24vLlEePJEsQfajGMcqxsW4clwxUWkt3c74=
+			</data>
+		</dict>
+		<key>Headers/MZAudienceListModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			sFF4SyLw34yaL2oPkBN0xAz0gtY=
+			</data>
+			<key>hash2</key>
+			<data>
+			On1XObwW8012dcpjkabVQfKM5v8H9GBGj+7akX3kHrE=
 			</data>
 		</dict>
 		<key>Headers/MZBlackListModel.h</key>
@@ -280,44 +395,99 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			56cU2wloYlepZqV+HkQS1XqJ13s=
+			swSIUapU0uHWVePl9Q8e1/KxWZ8=
 			</data>
 			<key>hash2</key>
 			<data>
-			ep54Re+EWaMC3Ty16sJG4D9aMdApoMx3j0KZ2Kl4Dh0=
+			DGAvi7fQlgSTtPiTitlkMJfteKRuPc3QNWjVKPJ+huI=
 			</data>
 		</dict>
 		<key>Headers/MZChannelManagerModel.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LssnzFdJ4DNf2iRfB9tH6lOR4C4=
+			P4xmJ7M1taShoPF5NLnGngECySg=
 			</data>
 			<key>hash2</key>
 			<data>
-			a5Ba+l3zpdJcX0uZWUKCyWuZxUlfKaiS+KVJuI3jkMM=
+			Oy2GAgjFHy7oWwVD2xHbmfvZT9WWVceC75GNR2Sn/N4=
 			</data>
 		</dict>
 		<key>Headers/MZChatKitManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BJj47mzUjm620+qU4dhQa94q5gY=
+			lBtn5+VFvpp2+XzXNm3p8H8GTBk=
 			</data>
 			<key>hash2</key>
 			<data>
-			++sjRZ0oT7Vg5TMfjMe09LnbYB5HpMYMr2oIO9NfV2Q=
+			TixpXLU8Dc98QzbsrVVBorHikFJPsQaSYXUZLr0aLFM=
 			</data>
 		</dict>
 		<key>Headers/MZCommenComment.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fcBnVd8jPJY0rZCQAbp+9UqIAkE=
+			zq2CXRgioivP7K1JxWzfzkSZ2Bs=
 			</data>
 			<key>hash2</key>
 			<data>
-			VrohfK7zY9ZjZ/8fiX38XkcpOIBHgnin7UEaknHiccc=
+			zo+PZ1FkHwS6lJilLyGV5GDYBpur+XBAukFfG2azl1U=
+			</data>
+		</dict>
+		<key>Headers/MZDocumentDownloader.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yY6Xemr5Iv+RF5rOpgAjfvHiaBI=
+			</data>
+			<key>hash2</key>
+			<data>
+			Q7Ap+KjeJ6pLx0Y2OUZ04Lq1SnWH+MnDfN5DXVdcBdQ=
+			</data>
+		</dict>
+		<key>Headers/MZDocumentInfo.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			D8PVaMv7AFrH6Bpbm6x+vvdsBmQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			1xSgDyN7kDpNZi/PHlmRAutJc2CJr5dY2IsgtNw3+NY=
+			</data>
+		</dict>
+		<key>Headers/MZDocumentListCell.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XD2YE8+pddMydc5d6K46+Iks0FM=
+			</data>
+			<key>hash2</key>
+			<data>
+			2fUDDvozgZ9I377UkgsQQMJBX/TO6OshPnygHOw1MBw=
+			</data>
+		</dict>
+		<key>Headers/MZDocumentListView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			J9iFQ9+32PA6uI+vyfWaIyy4kMU=
+			</data>
+			<key>hash2</key>
+			<data>
+			pdKdyhMBkTYAF6CqhNp2hZdKODQdNOcEAO7zL35hJpc=
+			</data>
+		</dict>
+		<key>Headers/MZDocumentView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GknYFA08pIiqAZNOPtkrG1vP/xw=
+			</data>
+			<key>hash2</key>
+			<data>
+			fODBWleKzNyGtlCmCVBLO6078U6uz3Or7QTjQG+LzWw=
 			</data>
 		</dict>
 		<key>Headers/MZEventTag.h</key>
@@ -335,11 +505,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			WaEQPhU/JWv+ry11XS9AbTW3XwA=
+			R2tss+MtDOnoligInItUJYXmTl8=
 			</data>
 			<key>hash2</key>
 			<data>
-			8AnwewYUJ0QmolqPImfhbry6LWEdMj/zbTHAv8EDsbw=
+			eKxy5daUa7dY3D7/GIMMyQ7S5QMYa+pyuThweVx/+iA=
 			</data>
 		</dict>
 		<key>Headers/MZGoodsListOuterModel.h</key>
@@ -368,11 +538,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			eu2AX17Ljp4ED224NbHAILjLORY=
+			DwZ1v5f/aNI0j7qxdu7bDOMyoh0=
 			</data>
 			<key>hash2</key>
 			<data>
-			CKzi0AtaEVDkoQoiofJqRAArBcClYBfZkHLzMTGvOic=
+			h2LzRmZWR/nRSj03TFeYcDUB/zXHATuO1FZFxJZDm1s=
 			</data>
 		</dict>
 		<key>Headers/MZHostModel.h</key>
@@ -434,33 +604,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KkN/m6MAo9h5xRFrVGzZ3BXuqVk=
+			PhmeaR62FXNYe/gde2eKB+kCUig=
 			</data>
 			<key>hash2</key>
 			<data>
-			JSKFNS9n3gQI7MpOXCpU/Zyqefuat7gBlUsj0vsGpy0=
+			BbClAJtIRecRBPYjg+9RTNOb7RyPzyFxy7b91XunbpQ=
 			</data>
 		</dict>
 		<key>Headers/MZMediaSDK.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			gUX/AwGnYx/gO5A/ABDm/9UOVf8=
+			v8T2W4XQYMDiz8YdRg2+xnjp6kY=
 			</data>
 			<key>hash2</key>
 			<data>
-			IbYnQyk7oe+zcwsNndR2ZGSbVBkNstNJEjhc2FY+VFg=
+			IPrAOj/HLS7mbLUAhiFzZ3aCcnrT3ZBb16b9mvn9qrE=
 			</data>
 		</dict>
 		<key>Headers/MZMoviePlayerModel.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HJ6t+ShLokg454UMLzkUtpJ+md8=
+			lJ/AjN+Bq6StE9c5seE1NEtaybk=
 			</data>
 			<key>hash2</key>
 			<data>
-			GNibl0t1eiSE32U+1H1C4oBh95JPoppCKH97ii6AYLw=
+			qSyczA4Z733Zn1+4DsWQfJjyBwddrXCEItD46XWikd0=
 			</data>
 		</dict>
 		<key>Headers/MZMyselfListModel.h</key>
@@ -478,11 +648,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yGgwIqokpJAChmhyUgUHQW8hahc=
+			nKnS9TPasT6VueJZFGsNkcksiOQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			mh0sibas5VP/cys0BXObVpN2l3zQKjkwOlVV8+pbV3I=
+			pX6zs+uGMj4g9AXRy8X2+2RHv9XHynLdH2O3LcObR6k=
 			</data>
 		</dict>
 		<key>Headers/MZNetSeverUrlManager.h</key>
@@ -511,11 +681,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ji+r5STmvqGADkLX3GofZQK9Sto=
+			ZGzNwbETfWpjb2zXq2T59bSpYFc=
 			</data>
 			<key>hash2</key>
 			<data>
-			9LJQdYvm7w11GVOnmdThOI/HDu9fXE/gee5n33KJKTs=
+			sximx0drt9wo8noTel8D04MtTfvUsojKs6ZdIdh3MJk=
 			</data>
 		</dict>
 		<key>Headers/MZOnlineUserListModel.h</key>
@@ -544,22 +714,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			soZlWpnQtJ1EwGaG0sNobwy7G1M=
+			ek72hFlqPSiWX9az/gnBaAEw9xg=
 			</data>
 			<key>hash2</key>
 			<data>
-			/SZ/s4H7y5hhHgPvJuLN4+ZcP5dTX3M5pqykKMm4C7w=
+			FiqCbBoUbVo/6NQ4qLKsGnbJDMrnpC1R5chU/Tk5YS0=
 			</data>
 		</dict>
 		<key>Headers/MZSDKBusinessManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			G1d+MtJ4bIeCNuAzNPLVyK4KuM8=
+			xmIDvRDLqCP6eYNzVKxnQLnBG64=
 			</data>
 			<key>hash2</key>
 			<data>
-			uOhXwOJlp05SNfVhWUHroRJDToadevv+tbWJUSiWIKU=
+			gcNXk9P/1mgo5GULYRxi6N3be4urL0IshOPYXlZANLI=
 			</data>
 		</dict>
 		<key>Headers/MZSDKInitManager.h</key>
@@ -571,6 +741,17 @@
 			<key>hash2</key>
 			<data>
 			jfGWzu/l7y6MrtJPuyb/avnYG49VcxLhbqbmBnVqNpY=
+			</data>
+		</dict>
+		<key>Headers/MZSDKSimpleHud.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			39t3jmuu5A6g7jO89g4jLVp/pzk=
+			</data>
+			<key>hash2</key>
+			<data>
+			b2QzOg3yHmSNrldJpUozPchtZck9BCVglY9ki609f4k=
 			</data>
 		</dict>
 		<key>Headers/MZShareModel.h</key>
@@ -588,33 +769,242 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hLgduwHpsOM1jywqUADWYPze9Gw=
+			sOYPQlbfxhtiV2f0p5kRZIxijJM=
 			</data>
 			<key>hash2</key>
 			<data>
-			uHOjY/QeXqEQQ+KAtK20aHd+zfgxPCI4ZwUUxKxylBg=
+			bSr+ZuZNyJaiSclmDm3aAm25NeLWZEAoUof/uPPEcv0=
+			</data>
+		</dict>
+		<key>Headers/MZSignView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			II53YunVsOnqlzYwtGK6CPMm8CQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			bhzXtsnFIQ7xzcwI8PHQEmMcKpz2kWDCL/hsXbi6ld0=
 			</data>
 		</dict>
 		<key>Headers/MZUser_info.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ESexIt8bm4Uz1gSQNdDZ+hWmNRY=
+			KyUDt7OcgLPrEioqG8ldnTvg0qI=
 			</data>
 			<key>hash2</key>
 			<data>
-			OC3LHpO1iSPRneXpnjQcUYCcLw3GRR8TjVNOTNnOXa0=
+			SjCfAis5LoFs4XAJZ+bzWrUk1qUPf84XzT/rqF8d9aI=
 			</data>
 		</dict>
 		<key>Headers/MZWebinar_info.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ox1gB9yq0wMpU+ECnk2zLXVudok=
+			pKPTcvDnEypsFaXWklxx8KBIpgc=
 			</data>
 			<key>hash2</key>
 			<data>
-			N3dLigm0T3162FO+/DbIP9Ny13HVfEeVTgnRqctm2t4=
+			W4z4F/GB+bDW2V2CnhMR78byLjeacRsT2UpjcpxCCxM=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Download@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			MGlurHdywrMpBlsG1spxGk3L1yg=
+			</data>
+			<key>hash2</key>
+			<data>
+			Uju3wjkRECe7X79Zvh2C97qbDSZh5dnpdQf9Nm6WZ8I=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Download@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2CGSm4D7qq1ShLVsVr3+1fFkRTE=
+			</data>
+			<key>hash2</key>
+			<data>
+			TR5O5fdgJxBUqmYZOs0vP6Envn6SjqL8HE9PeI3NQVE=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_DownloadFinish@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lFjQS3Jm7mCxUinkedDCBMDGOrc=
+			</data>
+			<key>hash2</key>
+			<data>
+			BKBEkYgrQmx05r7efzNYxYEtbz6WjcOOH+YLWbiPJfo=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_DownloadFinish@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Su7Mxh1tHT0k3Iw/3crSn0zoVM4=
+			</data>
+			<key>hash2</key>
+			<data>
+			VNgFS5ykcCx894m7Go7FVLfkdVZyeFDo8hKaeK3z0/k=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Left@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YF7/yfFDBGF4scDk5ieon1gkoas=
+			</data>
+			<key>hash2</key>
+			<data>
+			EwasdUwvyeMvwaP9TLFP8smo9ramQ5UExSgxsz5lM+k=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Left@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HmxMJD5Zh89nAqYa903ul6zRXU0=
+			</data>
+			<key>hash2</key>
+			<data>
+			9wfXiltesPIcuC2TMJhzZ5E7j3LjJ+JwkIg8LYTi/Dg=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Max@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/7cLuJKE5RtPf/gw6usV7PlTLII=
+			</data>
+			<key>hash2</key>
+			<data>
+			MujZ+TGr2JdTPUl7x4pSZlsyQy1IjOvtnxa3Rd3mv3E=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Max@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			tRn0mv3wgrTO16DdoOt+vGHDQ5Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			IqyGF4mYinUtznnAZfsqEQPDXhNzAr3vUimhNXbkN/I=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Menu@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			60AoSa6I9JuPcipqKc5AwrKlA+g=
+			</data>
+			<key>hash2</key>
+			<data>
+			OGqxw5Ol58BwoZrhAlcRWZZnwqymAHy6YJX1Z4dkBD8=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Menu@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uq7RNDwdllmTdaDvPy7iZPiHsGM=
+			</data>
+			<key>hash2</key>
+			<data>
+			XMNpCmK9W7h0TcIjsDo6TgARpaM0nwfJtlwj06da+9M=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Min@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			CYtmhqhVmZkk+Eu5+DedYlxUzQs=
+			</data>
+			<key>hash2</key>
+			<data>
+			pB0SNqve2lxNW08gd8KNFzFF71mxWCtgg+2VR5c1i44=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Min@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			gN6vMg6p1X1aPEpzoUJvx5wtvaY=
+			</data>
+			<key>hash2</key>
+			<data>
+			EksHwFvzCKPIunL/y5ChlZIk0g9QJxs7Mx8N+Oe5Upg=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Right@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			AOKcRupP+5f3qbeGiTjuDsu6m+Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			klbla142purIDUQs+dQADLF5D19eq+KDg3Devt40u0E=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/MZ_Document_Right@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			z+fxTPAYzAsjM+MZeyanNyUMVw4=
+			</data>
+			<key>hash2</key>
+			<data>
+			6ntGecD4C6RsNuby8DpqyH4iTjRr7mzjZ0Ay6goUmw0=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/player_cover_default@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8AhmuyFFBIpUTemVOZMebU5O0ns=
+			</data>
+			<key>hash2</key>
+			<data>
+			J083PMdeFxxjT5yJKisBpH+N6Xv31ij1wqFlJxTd3Lc=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/player_cover_default@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			PrTyOLfsktzkDVxKpAzzdBbxBpk=
+			</data>
+			<key>hash2</key>
+			<data>
+			ENs1C1oQxy/JKIeQUq7kM4r+SU38LdXF7u1MeofSDmM=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/player_store_close@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			3a3aaPn3u4FpHXLgQnpKqvECv/g=
+			</data>
+			<key>hash2</key>
+			<data>
+			01VELtNZ/wvMnU7waxsLMZ23CKadBa0iy1zEz72X6wQ=
+			</data>
+		</dict>
+		<key>MZMediaSDK.bundle/player_store_close@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2sL1xbP+a0KKTQ9+epO4JR1vIm8=
+			</data>
+			<key>hash2</key>
+			<data>
+			dxbNncuZgDLYvCAWqIzKQswSQGKILdwQt1rESuCbNhI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

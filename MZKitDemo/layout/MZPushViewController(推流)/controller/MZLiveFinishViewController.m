@@ -46,6 +46,7 @@ typedef enum {
     self.extendedLayoutIncludesOpaqueBars = YES;
 }
 
+
 // 支持设备自动旋转
 - (BOOL)shouldAutorotate{
     return NO;
@@ -53,8 +54,12 @@ typedef enum {
 
 //支持的方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    
     return UIInterfaceOrientationMaskPortrait;
+}
+
+//一开始的方向
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
 }
 
 - (void)layoutUI
@@ -204,8 +209,8 @@ typedef enum {
     [super viewWillAppear:YES];
     [self.navigationController.navigationBar setHidden:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -256,7 +261,7 @@ typedef enum {
     self.nameLabel.text = [MZUserServer currentUser].nickName;
     
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[MZUserServer currentUser].avatar] placeholderImage:[UIImage imageNamed:@"liveFinish_avator"]];
-    self.UIDLabel.text =[NSString stringWithFormat:@"ID:%@",[MZUserServer currentUser].userId] ;
+    self.UIDLabel.text =[NSString stringWithFormat:@"uniqueId:%@",[MZUserServer currentUser].uniqueID] ;
     long seconds = [model.duration longLongValue] % 60;
     long minutes = ([model.duration longLongValue] / 60) % 60;
     long hours = [model.duration longLongValue] / 3600;
@@ -264,4 +269,5 @@ typedef enum {
     
     self.UVLabel.text = model.uv;
 }
+
 @end
