@@ -54,8 +54,8 @@ typedef enum {
 @property (nonatomic, strong) UILabel *live_tk_label;//live_tk的Label
 @property (nonatomic, strong) UILabel *ticket_id_label;//ticket_id的Label
 
-@property (nonatomic ,strong)NSString *live_tk;//直播活动live_tk
-@property (nonatomic ,strong)NSString *ticket_id;//直播活动ticket_id
+@property (nonatomic ,strong) NSString *live_tk;//直播活动live_tk
+@property (nonatomic ,strong) NSString *ticket_id;//直播活动ticket_id
 
 @property (nonatomic ,strong) UIButton *startLiveButton;//直播按钮
 
@@ -66,6 +66,15 @@ typedef enum {
 @implementation MZReadyLiveViewController
 
 #pragma mark - View LifeCycle
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.fromTicket_id = @"点击更改";
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -89,7 +98,7 @@ typedef enum {
     self.live_tk_label.text = @"点击更改";
     self.live_tk = self.live_tk_label.text;
     
-    self.ticket_id_label.text = @"点击更改";
+    self.ticket_id_label.text = self.fromTicket_id;
     self.ticket_id = self.ticket_id_label.text;
 }
 
@@ -98,7 +107,10 @@ typedef enum {
     [super viewWillDisappear:YES];
     [MZCameraImageHelper stopRunning];
     [self.view endEditing:YES];
+    self.navigationController.navigationBar.hidden = NO;
+
 }
+
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -159,7 +171,7 @@ typedef enum {
     
     self.ticket_id_label = [[UILabel alloc] initWithFrame:CGRectMake(90, ticketTipLabel.frame.origin.y, self.view.frame.size.width - 120, 44.0)];
     self.ticket_id_label.userInteractionEnabled = YES;
-    self.ticket_id_label.text = @"点击更改";
+    self.ticket_id_label.text = self.fromTicket_id;
     self.ticket_id_label.adjustsFontSizeToFitWidth = YES;
     self.ticket_id_label.textAlignment = NSTextAlignmentRight;
     self.ticket_id_label.textColor = [UIColor whiteColor];
@@ -388,6 +400,7 @@ typedef enum {
             
             UITextField *inputTextField = weakAlert.textFields.firstObject;
             if (inputTextField.text.length) {
+                self.fromTicket_id = inputTextField.text;
                 self.ticket_id_label.text = inputTextField.text;
                 self.ticket_id = self.ticket_id_label.text;
             }

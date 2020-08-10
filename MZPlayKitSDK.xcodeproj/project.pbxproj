@@ -15,6 +15,7 @@
 		155B397E21774F7C00A7AD9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 155B397D21774F7C00A7AD9D /* main.m */; };
 		15F7EC8D237C27A500FB4609 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F7EC8C237C27A500FB4609 /* PlayerViewController.m */; };
 		917DFDFED83C4FA172CABAB2 /* Pods_MZKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA325422B7FDC74F9315113 /* Pods_MZKitDemo.framework */; };
+		C05CD01624E1295A00173E72 /* MZInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C05CD01524E1295A00173E72 /* MZInputViewController.m */; };
 		C0A58E5D24DD293700EF92DB /* MZBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A58D9B24DD293700EF92DB /* MZBaseView.m */; };
 		C0A58E5E24DD293700EF92DB /* MZBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A58D9C24DD293700EF92DB /* MZBaseNavigationController.m */; };
 		C0A58E5F24DD293700EF92DB /* MZBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A58DA124DD293700EF92DB /* MZBagButton.m */; };
@@ -154,6 +155,8 @@
 		1CA325422B7FDC74F9315113 /* Pods_MZKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MZKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		482F66C8FBD3B84E6E4FEE28 /* Pods-MZKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZKitDemo.release.xcconfig"; path = "Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		9B20DC7CA2963627E89D3C7E /* Pods-MZKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZKitDemo.debug.xcconfig"; path = "Target Support Files/Pods-MZKitDemo/Pods-MZKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		C05CD01424E1295A00173E72 /* MZInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZInputViewController.h; sourceTree = "<group>"; };
+		C05CD01524E1295A00173E72 /* MZInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZInputViewController.m; sourceTree = "<group>"; };
 		C0A58D9924DD293700EF92DB /* MZBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBaseView.h; sourceTree = "<group>"; };
 		C0A58D9A24DD293700EF92DB /* MZBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBaseNavigationController.h; sourceTree = "<group>"; };
 		C0A58D9B24DD293700EF92DB /* MZBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZBaseView.m; sourceTree = "<group>"; };
@@ -375,6 +378,8 @@
 				155B396F21774F7C00A7AD9D /* AppDelegate.m */,
 				155B397121774F7C00A7AD9D /* ViewController.h */,
 				155B397221774F7C00A7AD9D /* ViewController.m */,
+				C05CD01424E1295A00173E72 /* MZInputViewController.h */,
+				C05CD01524E1295A00173E72 /* MZInputViewController.m */,
 				D050527A233CEA4B00D7F33C /* MZKitDemoPrefixHeader.pch */,
 				155B397421774F7C00A7AD9D /* Main.storyboard */,
 				155B397721774F7C00A7AD9D /* Assets.xcassets */,
@@ -1042,6 +1047,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C05CD01624E1295A00173E72 /* MZInputViewController.m in Sources */,
 				C0A58E9024DD293700EF92DB /* MZUserTipView.m in Sources */,
 				C0A58E6824DD293700EF92DB /* MZVerticalPlayerViewController.m in Sources */,
 				C0A58E6524DD293700EF92DB /* MZSuperPlayerViewController.m in Sources */,
