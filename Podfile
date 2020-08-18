@@ -6,7 +6,7 @@ target'MZKitDemo'do
 
 pod 'MZCoreSDKLibrary','~>2.2.0' #盟主SDK的核心依赖库，最新版本2.2.0
 
-pod 'MZDownLoaderSDK','~>2.2.0' #盟主的下载器SDK，最新版本2.2.0
+pod 'MZDownLoaderSDK','~>2.2.2' #盟主的下载器SDK，最新版本2.2.2
 
 pod 'MZMediaSDK','~>2.2.1' #盟主业务组件，最新版2.2.1
 

@@ -54,11 +54,10 @@
 		};
 		861952E3D42B24CC39416E4F2D37BE88 /* MZDownLoaderSDK */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 750D8791BC635519CC0A5A148ABCC72A /* Build configuration list for PBXAggregateTarget "MZDownLoaderSDK" */;
+			buildConfigurationList = 39E0B8945408CAD6138FC2BC50084178 /* Build configuration list for PBXAggregateTarget "MZDownLoaderSDK" */;
 			buildPhases = (
 			);
 			dependencies = (
-				8556D11A203FC28B651574A78ED7335B /* PBXTargetDependency */,
 			);
 			name = MZDownLoaderSDK;
 		};
@@ -372,13 +371,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3847153A6E5EEFB86565BA840768F429;
 			remoteInfo = SDWebImage;
-		};
-		BC340E4245BB3D3D183EF3FC6BF03C11 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4451BB4D15BA30982EB237617FF0320F;
-			remoteInfo = MZCoreSDKLibrary;
 		};
 		D18B72355B399DD08BEC24FB8C3DF62E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1889,12 +1881,6 @@
 			target = 0130B3724283586C0E9D2A112D4F2AA1 /* AFNetworking */;
 			targetProxy = 12D1A183F5AFDDBE5A80BF32B201218E /* PBXContainerItemProxy */;
 		};
-		8556D11A203FC28B651574A78ED7335B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MZCoreSDKLibrary;
-			target = 4451BB4D15BA30982EB237617FF0320F /* MZCoreSDKLibrary */;
-			targetProxy = BC340E4245BB3D3D183EF3FC6BF03C11 /* PBXContainerItemProxy */;
-		};
 		9B822C8AC763CD99631D09C41C94578B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Masonry;
@@ -2042,22 +2028,6 @@
 			};
 			name = Release;
 		};
-		524443FE6757F7C6BE8C55EFE0D50422 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30A9EE2CA148BB1C9B4E067448BCE0CC /* MZDownLoaderSDK.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 		5396E8FFD82A939BC5BEED52D6BFF724 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 60565D1C6B99978F0F19AE859E78DAEF /* MZSocketIO.release.xcconfig */;
@@ -2162,23 +2132,6 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		6D0A8537A543571A65BE417A17254920 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3F62D3157C01D4464353AD1E5DCB170 /* MZDownLoaderSDK.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -2442,6 +2395,23 @@
 			};
 			name = Release;
 		};
+		A992F65555CCF7E6573F7585039FE38F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3F62D3157C01D4464353AD1E5DCB170 /* MZDownLoaderSDK.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		A9B849289570CFEFCE0178095A073287 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1A9CAF060BAABC12E24351ED028518C1 /* MZPlayerSDK.debug.xcconfig */;
@@ -2576,6 +2546,22 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		C7535268B5EEAC8B828F941358F91577 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30A9EE2CA148BB1C9B4E067448BCE0CC /* MZDownLoaderSDK.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		CD96F55AA55336F8551AD138BB26826C /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2760,6 +2746,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		39E0B8945408CAD6138FC2BC50084178 /* Build configuration list for PBXAggregateTarget "MZDownLoaderSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7535268B5EEAC8B828F941358F91577 /* Debug */,
+				A992F65555CCF7E6573F7585039FE38F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		479CDFFC2BA6F4794AC4038CC1F95EF0 /* Build configuration list for PBXAggregateTarget "MZMediaSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2783,15 +2778,6 @@
 			buildConfigurations = (
 				B8727AE0BCFC028F864893C133D2F060 /* Debug */,
 				5F73FAFE8B8967E89A0F1B2A0C6A2E64 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		750D8791BC635519CC0A5A148ABCC72A /* Build configuration list for PBXAggregateTarget "MZDownLoaderSDK" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				524443FE6757F7C6BE8C55EFE0D50422 /* Debug */,
-				6D0A8537A543571A65BE417A17254920 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

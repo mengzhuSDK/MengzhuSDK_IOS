@@ -10,6 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define kPathDownload @"Download"
+
 typedef enum : NSUInteger {
     MZDownLoaderState_Wait = 0,//等待
     MZDownLoaderState_Downloading,//下载
@@ -217,6 +219,13 @@ NS_ASSUME_NONNULL_BEGIN
  @return 返回模型列表，为空则返回空
  */
 - (NSMutableArray <MZDownLoader *>*)getAllTaskWithPage:(NSInteger)page number:(NSInteger)number;
+
+/**
+ 是否支持后台下载
+ 
+ @param isSupportDownLoad 进入后台是否支持下载，默认是支持
+ */
+- (void)setBackgroundModeSupportDownLoad:(BOOL)isSupportDownLoad;
 
 /**
  下载任务是否存在
