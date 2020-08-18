@@ -70,7 +70,7 @@
     pod 'MZMediaSDK','~>2.2.1' #盟主业务组件，如需使用业务请求功能，请添加此行代码
     pod 'MZPlayerSDK','~>2.2.0' #盟主播放器组件，如需播放器功能，请添加此行代码
     pod 'MZPushFlowSDK','~>2.2.0' #盟主推流组件，如需直播功能，请添加此行代码
-    pod 'MZDownLoaderSDK','~>2.2.0' #盟主下载器的SDK，如需下载功能，请添加此行代码
+    pod 'MZDownLoaderSDK','~>2.2.2' #盟主下载器的SDK，如需下载功能，请添加此行代码
 执行pod install或pod update，如若找不到库，请执行pod repo update，进行本地库更新。
 
 # **5.固定UI版快速集成 **
