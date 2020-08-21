@@ -66,11 +66,11 @@
 本文是根据附加demo来介绍SDK集成，可在已下载的SDK文件路径下引入demo项目。通过查看demo可了解更多详细功能。
 ## **4. 1 cocoapods集成**
 ### **- 本项目支持cocoapods安装，只需要将如下代码添加到Podfile中:** 
-    pod 'MZCoreSDKLibrary','<=2.2.5' #盟主SDK的核心依赖库，使用其他组件时，会自动下载该组件
-    pod 'MZMediaSDK','<=2.2.4' #盟主业务组件，如需使用业务请求功能，请添加此行代码
-    pod 'MZPlayerSDK','<=2.2.5' #盟主播放器组件，如需播放器功能，请添加此行代码
-    pod 'MZPushFlowSDK','<=2.2.0' #盟主推流组件，如需直播功能，请添加此行代码
-    pod 'MZDownLoaderSDK','<=2.2.2' #盟主下载器的SDK，如需下载功能，请添加此行代码
+    pod 'MZCoreSDKLibrary','2.2.5' #盟主SDK的核心依赖库，使用其他组件时，会自动下载该组件
+    pod 'MZMediaSDK','2.2.4' #盟主业务组件，如需使用业务请求功能，请添加此行代码
+    pod 'MZPlayerSDK','2.2.5' #盟主播放器组件，如需播放器功能，请添加此行代码
+    pod 'MZPushFlowSDK','2.2.0' #盟主推流组件，如需直播功能，请添加此行代码
+    pod 'MZDownLoaderSDK','2.2.2' #盟主下载器的SDK，如需下载功能，请添加此行代码
 执行pod install或pod update，如若找不到库，请执行pod repo update，进行本地库更新。
 
 # **5.固定UI版快速集成 **
