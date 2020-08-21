@@ -1,2 +1,0 @@
-# MZSocketIO-iOS
-MZSocketIO-iOS

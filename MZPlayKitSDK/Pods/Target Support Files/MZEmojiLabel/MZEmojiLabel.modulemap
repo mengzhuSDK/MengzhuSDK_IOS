@@ -1,0 +1,6 @@
+framework module MZEmojiLabel {
+  umbrella header "MZEmojiLabel-umbrella.h"
+
+  export *
+  module * { export * }
+}

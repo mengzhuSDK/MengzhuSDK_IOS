@@ -1,0 +1,6 @@
+framework module MZM3U8DownLoaderSDK {
+  umbrella header "MZM3U8DownLoaderSDK.h"
+
+  export *
+  module * { export * }
+}

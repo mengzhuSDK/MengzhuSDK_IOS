@@ -1,0 +1,6 @@
+framework module MZCoreSDKLibrary {
+  umbrella header "MZCoreSDKLibrary.h"
+
+  export *
+  module * { export * }
+}
