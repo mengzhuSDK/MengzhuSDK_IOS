@@ -69,7 +69,6 @@
     self.ticket_IDTextView.text = @"10014121";//横屏
     self.ticket_IDTextView.text = @"10014334";//语音直播
     self.ticket_IDTextView.text = @"10014584";//竖屏
-    self.ticket_IDTextView.text = @"10015111";//竖屏
 
     UILabel *tipL2 = [[UILabel alloc] initWithFrame:CGRectMake(0, self.ticket_IDTextView.frame.origin.y+self.ticket_IDTextView.frame.size.height, self.view.bounds.size.width, 20)];
     [self.view addSubview:tipL2];
