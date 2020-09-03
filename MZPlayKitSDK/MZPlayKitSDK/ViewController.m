@@ -6,7 +6,6 @@
 //  Copyright © 2018年 孙显灏. All rights reserved.
 //
 #import "ViewController.h"
-#import "PlayerViewController.h"
 #import "MZM3U8DownLoadViewController.h"
 #import "MZInputViewController.h"
 

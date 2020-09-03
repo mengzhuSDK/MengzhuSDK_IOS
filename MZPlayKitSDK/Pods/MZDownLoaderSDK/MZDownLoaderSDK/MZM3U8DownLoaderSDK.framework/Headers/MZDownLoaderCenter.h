@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setLogEnable:(BOOL)isEnable;
 
 /**
- 设置同时下载最大任务数（建议为2,默认为2）
+ 设置同时下载最大任务数（默认为5）
  
  @param maxCount 最大同时下载任务数
  */

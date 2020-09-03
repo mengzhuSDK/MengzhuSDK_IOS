@@ -20,7 +20,7 @@ PODS:
   - MBProgressHUD (1.0.0)
   - MJExtension (3.0.17)
   - MJRefresh (3.1.17)
-  - MZCoreSDKLibrary (2.2.5):
+  - MZCoreSDKLibrary (2.3.0):
     - AFNetworking (~> 4.0.1)
     - EGOCache (~> 2.1.3)
     - GTMBase64 (~> 1.0.0)
@@ -31,15 +31,14 @@ PODS:
     - MZSocketIO
     - Reachability (~> 3.2)
     - SDWebImage (~> 4.0.0)
-  - MZDownLoaderSDK (2.2.2)
-  - MZEmojiLabel (1.1.3):
+  - MZDownLoaderSDK (2.3.0)
+  - MZEmojiLabel (1.1.4):
     - TTTAttributedLabel (~> 1.13.4)
-  - MZMediaSDK (2.2.4)
-  - MZPlayerSDK (2.2.5):
-    - MZEmojiLabel (~> 1.1.3)
+  - MZMediaSDK (2.3.0)
+  - MZPlayerSDK (2.3.0):
+    - MZEmojiLabel (~> 1.1.4)
     - SDCycleScrollView (~> 1.75)
-  - MZPushFlowSDK (2.2.0):
-    - MZCoreSDKLibrary (~> 2.2.0)
+  - MZPushFlowSDK (2.3.0)
   - MZSocketIO (0.0.1)
   - Reachability (3.2)
   - SDCycleScrollView (1.75):
@@ -50,11 +49,11 @@ PODS:
   - TTTAttributedLabel (1.13.4)
 
 DEPENDENCIES:
-  - MZCoreSDKLibrary (= 2.2.5)
-  - MZDownLoaderSDK (= 2.2.2)
-  - MZMediaSDK (= 2.2.4)
-  - MZPlayerSDK (= 2.2.5)
-  - MZPushFlowSDK (= 2.2.0)
+  - MZCoreSDKLibrary (= 2.3.0)
+  - MZDownLoaderSDK (= 2.3.0)
+  - MZMediaSDK (= 2.3.0)
+  - MZPlayerSDK (= 2.3.0)
+  - MZPushFlowSDK (= 2.3.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -85,18 +84,18 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJExtension: 74ec83124a68891619fb7ba9c5c811bbf1691076
   MJRefresh: ee5b68f639775462faba4db0fd243baf4d42c2cf
-  MZCoreSDKLibrary: ebe342a81ca472c6753ba0f9e8a7fec9d4080064
-  MZDownLoaderSDK: 5c5d582d97cfde808b3d4ae36b5047671eeb996d
-  MZEmojiLabel: 5173c238172e7bb271384e436a46713c03de5f91
-  MZMediaSDK: ab07cf5bc3b5284cac53f270696fc1e6c1fcd176
-  MZPlayerSDK: ba7fc2cea43159d522ac566b6e7b2ee62e7cd6c3
-  MZPushFlowSDK: 2b629d1b19098aa5957738d123bcbf99386a2a41
+  MZCoreSDKLibrary: 1a2673b629be49cbad73a13b64e9f28692a6cf07
+  MZDownLoaderSDK: d457cdd4cdd6ad99b46a1346cfafe9b212783f4d
+  MZEmojiLabel: a7fd42596e6dfb541cc0f69878d7d93399948bc9
+  MZMediaSDK: ed6c70f0c3a694c7bd1ba3bfe25fe960f68f745f
+  MZPlayerSDK: f786da51c530f2a1894f81dd3b7f115c27515ee9
+  MZPushFlowSDK: 39872a2273016148fcf595ac1af7ab8206e38d3c
   MZSocketIO: 55777cd356bd5400ad1a44d98368bd59e3b68a3d
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
-PODFILE CHECKSUM: 01ab905658d73cb9a11a989ed73e40b676e176e1
+PODFILE CHECKSUM: 31202f609b966a65301af482a1820936b144096a
 
-COCOAPODS: 1.9.0.beta.2
+COCOAPODS: 1.10.0.beta.2

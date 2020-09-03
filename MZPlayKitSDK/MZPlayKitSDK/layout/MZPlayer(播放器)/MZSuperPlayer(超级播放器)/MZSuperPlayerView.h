@@ -81,6 +81,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(void)newMsgCallback:(MZLongPollDataModel * )msg;
 /**
+ * @brief 收到一条某个用户被踢出的消息
+ */
+- (void)newMsgForKickoutOneUser:(MZLongPollDataModel *)msg;
+/**
  * @brief 点击了投屏帮助按钮
  */
 - (void)DLNAHelpClick;

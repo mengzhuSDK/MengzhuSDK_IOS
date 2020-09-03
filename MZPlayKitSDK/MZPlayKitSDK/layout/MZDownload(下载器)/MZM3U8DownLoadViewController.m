@@ -91,7 +91,9 @@
 
 - (void)addDownLoadData:(UIButton *)sender {
     
-    NSArray *list = @[@"http://vod01-o.zmengzhu.com/record/base/91e4100118dd26cb00209055_200809105723.m3u8",
+    NSArray *list = @[@"http://vod01-o.zmengzhu.com/record/base/984a3888d1f1394300218740_200902105033.m3u8",
+        @"http://vod01-o.zmengzhu.com/record/base/91e4100118dd26cb00209055_200809105723.m3u8",
+                      @"http://vod01.zmengzhu.com/record/base/hls-sd/7a670abd1acabacc00127670_200106101116.m3u8",
         @"http://vod-o.t.zmengzhu.com/record/base/22a9457a1d14332d00085481.m3u8",
         @"http://vod01.zmengzhu.com/record/base/hls-sd/495eaffaca9bca2100127861_200111052003.m3u8",
                       @"http://vod01-o.zmengzhu.com/record/base/bafbd9a06339e83a00149677.m3u8",

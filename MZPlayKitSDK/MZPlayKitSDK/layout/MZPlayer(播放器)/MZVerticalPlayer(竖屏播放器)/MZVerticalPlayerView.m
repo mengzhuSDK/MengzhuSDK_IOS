@@ -20,6 +20,7 @@
 #import "MZAudienceView.h"
 #import "MZGoodsListPresenter.h"
 #import "MZVerticalPlayerView+UI.h"
+#import "MZGiftView.h"
 
 #define kViewFramePath      @"frame"
 
@@ -56,6 +57,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 @property (nonatomic, assign) BOOL isPraise;//点赞过滤
 @property (nonatomic, strong) MZPraiseButton *praiseButton;//点赞按钮
 @property (nonatomic, strong) MZTimer *timer;//持续点赞定时器
+
+@property (nonatomic, strong) UIButton *giftButton;//礼物按钮
+@property (nonatomic, strong) MZGiftView *giftView;//礼物View
 
 @property (nonatomic, strong) NSMutableArray *goodsListArr;//商品共用的数据源
 @property (nonatomic, strong) MZGoodsListView *goodsListView;//商品View
@@ -199,7 +203,10 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     self.multiMenu.delegate = self;
     [self addSubview:self.multiMenu];
     [self.multiMenu setHidden:YES];
-        
+    
+    [stackContainerView addArrangedSubview:self.giftButton];
+    self.giftButton.frame = commonRect;
+    
     UIButton *shareButton = [[UIButton alloc] initWithFrame:commonRect];
     [shareButton setImage:ImageName(@"bottomButton_share") forState:UIControlStateNormal];
     [stackContainerView addArrangedSubview:shareButton];
@@ -246,6 +253,11 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
 
 #pragma mark - 本类方法
+// 礼物按钮点击
+- (void)giftButtonDidClick:(UIButton *)sender {
+    [self.giftView show];
+}
+
 /// 添加点赞动画的计时器
 - (void)addTimerForScroll {
     self.timer = [MZTimer timerWithTimeInterval:1 target:self selector:@selector(timerAction) repeats:YES];
@@ -401,7 +413,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         };
         self.circleTipGoodsView.isCirclePlay = YES;
         self.circleTipGoodsView.alpha = 0;
-        [self addSubview:self.circleTipGoodsView];
+        [self insertSubview:self.circleTipGoodsView belowSubview:self.multiMenu];
     }else{
         self.circleTipGoodsView.frame=CGRectMake(18*MZ_RATE, self.chatView.frame.origin.y+self.chatView.frame.size.height + 3*MZ_RATE, 175*MZ_RATE, 60*MZ_RATE);
         [self.chatView scrollToBottom];
@@ -702,8 +714,15 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
                 [self.playerView showPreviewImage:self.playInfo.cover];
             }
             
-            // 判断是否被禁言
-            self.bottomTalkBtn.isBanned = self.playInfo.user_status == 1? NO : YES;
+//            @property (nonatomic, assign) int user_status;// 用户状态 1:正常 2:被踢出 3:禁言
+            self.bottomTalkBtn.isBanned = self.playInfo.user_status == 1 ? NO : YES;
+            if (self.playInfo.user_status == 1) {//正常
+                [self show:@"状态：正常"];
+            } else if (self.playInfo.user_status == 2) {//被踢出
+                [self show:@"状态：被踢出"];
+            } else if (self.playInfo.user_status == 3) {//禁言
+                [self show:@"状态：禁言"];
+            }
             
             self.isCanBarrage = self.playInfo.isBarrage;
             self.isChat = self.playInfo.isChat;
@@ -984,9 +1003,24 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     
 }
 
-/*!
- 直播时收到一条新消息
- */
+/// 收到一条全局礼物消息
+- (void)activityGetGiftMsg:(MZLongPollDataModel *)msg {
+    [_chatView addChatData:msg];
+}
+
+/// 收到被踢出信息
+-(void)activityGetKickoutMsg:(MZLongPollDataModel *)msg {
+    NSLog(@"用户id为%@的用户被踢出",msg.data.tickOutUserID);
+    if ([self.playInfo.chat_uid isEqualToString:msg.data.tickOutUserID]) {
+        self.bottomTalkBtn.isBanned = YES;
+        [self show:@"您已被踢出"];
+    }
+    if (_delegate && [_delegate respondsToSelector:@selector(newMsgForKickoutOneUser:)]) {
+        [_delegate newMsgForKickoutOneUser:msg];
+    }
+}
+
+/// 直播时收到一条新消息
 - (void)activityGetNewMsg:(MZLongPollDataModel * )msg {
     switch (msg.event) {
         case MsgTypeOnline: {//上线一个用户
@@ -1355,6 +1389,15 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     return _praiseButton;
 }
 
+- (UIButton *)giftButton {
+    if (!_giftButton) {
+        _giftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_giftButton setImage:ImageName(@"mz_gift_icon") forState:UIControlStateNormal];
+        [_giftButton addTarget:self action:@selector(giftButtonDidClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _giftButton;
+}
+
 - (MZMediaPlayerView *)playerView {
     if (!_playerView) {
         _playerView = [[MZMediaPlayerView alloc] init];
@@ -1364,6 +1407,19 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     return _playerView;
 }
 
+- (MZGiftView *)giftView {
+    if (!_giftView) {
+        WeaklySelf(weakSelf);
+        _giftView = [[MZGiftView alloc] initWithTicketId:self.ticket_id selectHandler:^(NSString * _Nonnull giftId, int quantity) {
+            NSLog(@"模拟礼物去支付，选中的礼物ID = %@，礼物个数= %d",giftId,quantity);
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                NSLog(@"礼物支付成功,去发送礼物赠送成功的消息");
+                [weakSelf.giftView pushGiftMessageWithGiftId:giftId quantity:quantity];
+            });
+        }];
+    }
+    return _giftView;
+}
 
 - (UIButton *)hideKeyBoardBtn {
     if (!_hideKeyBoardBtn) {

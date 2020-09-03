@@ -10,14 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** 注意：
-使用本类解析表情的时候，需要将 MZEmojiLabel.bundle添加到工程里。
-
-1. 选择 target - Build Phases - Copy Bundle Resources
-2. 选择加号，添加选中 MZEmojiLabel.bundle
-
-*/
-
 typedef NS_OPTIONS(NSUInteger, MZEmojiLabelLinkType) {
     MZEmojiLabelLinkTypeURL = 0,
     MZEmojiLabelLinkTypeEmail,

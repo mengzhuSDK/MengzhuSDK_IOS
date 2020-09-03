@@ -10,7 +10,7 @@
 
 @interface MZLiveViewController : UIViewController
 
-@property (nonatomic, assign) BOOL isBeautyFace;//是否美颜,默认关闭
+@property (nonatomic, assign) MZBeautyFaceLevel beautyFaceLevel;//美颜等级
 @property (nonatomic, assign) BOOL isLandscape;//是否横屏直播，默认关闭
 @property (nonatomic, assign) int countDownNum;//开始倒计时，默认为3
 @property (nonatomic, assign) MZCaptureSessionPreset videoSessionPreset;//视频分辨率

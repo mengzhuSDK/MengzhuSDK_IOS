@@ -190,6 +190,11 @@
      }
 }
 
+/// 收到某个用户被踢出的消息
+- (void)newMsgForKickoutOneUser:(MZLongPollDataModel *)msg {
+
+}
+
 /**
  * @brief 点击了投屏帮助按钮
  */

@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MZVerticalPlayerViewProtocol <NSObject>
+@optional
 /**
  * @brief 主播头像点击
  */
@@ -88,8 +89,10 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief 收到一条新消息
  */
 - (void)newMsgCallback:(MZLongPollDataModel * )msg;
-
-@optional
+/**
+ * @brief 收到一条某个用户被踢出的消息
+ */
+- (void)newMsgForKickoutOneUser:(MZLongPollDataModel *)msg;
 /**
  * @brief 点击了投屏帮助按钮
  */

@@ -548,8 +548,8 @@ typedef enum {
         // 设置闪光灯开关（后置摄像头才有用），默认不使用
         live.isTorchType = NO;
         
-        // 设置是否开启美颜，默认关闭
-        live.isBeautyFace = self.meiyanSwith.isOn;
+        // 设置美颜等级
+        live.beautyFaceLevel = (self.meiyanSwith.isOn ? MZBeautyFaceLevel_Medium : MZBeautyFaceLevel_None);
         
         // 设置（横/竖）屏直播，默认竖屏
         live.isLandscape = self.landscapeSwitch.isOn;

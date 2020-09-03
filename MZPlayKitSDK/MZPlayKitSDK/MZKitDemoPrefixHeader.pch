@@ -13,16 +13,16 @@
 #import <MZM3U8DownLoaderSDK/MZM3U8DownLoaderSDK.h>//下载器器组件
 #import <MZPushFlowSDK/MZPushFlowSDK.h>//直播推流组件
 
+#import <Masonry.h>
 #import <AFNetworking/AFNetworking.h>
 #import <SDWebImage/SDWebImageManager.h>
 #import <MJRefresh/MJRefresh.h>
 #import <MJExtension.h>
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
-#import <Masonry.h>
-
 #import <MZEmojiLabel/MZEmojiLabel.h>
 
 //默认图片
 //静音（直播/视频）播放的动画json名字
 #define MZ_Audio_AnimationJsonName @"voice_live_am.json"//750x422
+

@@ -71,6 +71,8 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - 一个简单的基于MZMediaPlayerView播放View上开发的例子
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];

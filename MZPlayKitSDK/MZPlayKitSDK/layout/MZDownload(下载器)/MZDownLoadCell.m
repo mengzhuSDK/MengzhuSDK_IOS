@@ -8,7 +8,6 @@
 
 #import "MZDownLoadCell.h"
 #import <AVKit/AVKit.h>
-#import "PlayerViewController.h"
 #import "MZVerticalPlayerViewController.h"
 
 @interface MZDownLoadCell()

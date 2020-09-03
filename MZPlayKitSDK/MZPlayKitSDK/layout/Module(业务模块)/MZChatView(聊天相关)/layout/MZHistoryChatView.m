@@ -10,6 +10,8 @@
 #import "MZChatTableViewCell.h"
 #import "MZChatNewCell.h"
 #import "MZOnlineTipView.h"
+#import "MZChatGiftCell.h"
+#import "MZChatGiftNewCell.h"
 
 static double onlineButtonOffsetY = 5;
 
@@ -462,10 +464,16 @@ static double onlineButtonOffsetY = 5;
     }else{
         switch (self.cellType) {
             case MZChatCellType_New: {
+                if (model.event == MsgTypeGetGift) {
+                    return [MZChatGiftNewCell getCellHeightIsLand:isLand];
+                }
                 return [MZChatNewCell getCellHeight:_dataArray[indexPath.row] cellWidth:self.frame.size.width isLand:isLand];
                 break;
             }
             default: {
+                if (model.event == MsgTypeGetGift) {
+                    return [MZChatGiftCell getCellHeightIsLand:isLand];
+                }
                 return [MZChatTableViewCell getCellHeight:_dataArray[indexPath.row] cellWidth:self.frame.size.width isLand:isLand];
                 break;
             }
@@ -487,22 +495,43 @@ static double onlineButtonOffsetY = 5;
         //        取出当前cell需要的model
         MZLongPollDataModel *msg = _dataArray[indexPath.row];
         NSString *identitystr = [NSString string];
-        if(msg.event == MsgTypeMeChat)
-        {
+        if(msg.event == MsgTypeMeChat) {
             identitystr = MZMsgTypeMeChat;
-        }else if (msg.event == MsgTypeOtherChat){
+        } else if (msg.event == MsgTypeOtherChat) {
             identitystr = MZMsgTypeOtherChat;
-        } else if(msg.event == MsgTypeNotice){
-            identitystr= MZMsgTypeNotice;
+        } else if (msg.event == MsgTypeNotice) {
+            identitystr = MZMsgTypeNotice;
+        } else if (msg.event == MsgTypeGetGift) {
+            identitystr = MZMsgTypeGetGift;
         }
         
         switch (self.cellType) {
             case MZChatCellType_New: {
+                if (msg.event == MsgTypeGetGift) {
+                    MZChatGiftNewCell *cell = [tableView dequeueReusableCellWithIdentifier:identitystr];
+                    if (cell == nil){
+                        cell = [[MZChatGiftNewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identitystr];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    }
+                    cell.isMeSengGift = NO;
+                    if ([self.activity.chat_uid isEqualToString:msg.userId]) {
+                        cell.isMeSengGift = YES;
+                    }
+                    cell.pollingDate = msg;
+                    
+                    cell.headerViewAction = ^(MZLongPollDataModel *msgModel){
+                        [weakSelf.chatDelegate historyChatViewUserHeaderClick:msgModel];
+                    };
+                    return cell;
+                    break;
+                }
+                
                 MZChatNewCell  *cell = [tableView dequeueReusableCellWithIdentifier:identitystr];
                 if (cell ==nil){
                     cell = [[MZChatNewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identitystr];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 }
+                
                 cell.pollingDate = msg;
                 
                 cell.headerViewAction = ^(MZLongPollDataModel *msgModel){
@@ -512,6 +541,24 @@ static double onlineButtonOffsetY = 5;
                 break;
             }
             default: {
+                if (msg.event == MsgTypeGetGift) {
+                    MZChatGiftCell *cell = [tableView dequeueReusableCellWithIdentifier:identitystr];
+                    if (cell == nil){
+                        cell = [[MZChatGiftCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identitystr];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    }
+                    if ([self.activity.chat_uid isEqualToString:msg.userId]) {
+                        cell.isMeSengGift = YES;
+                    }
+                    cell.pollingDate = msg;
+                    
+                    cell.headerViewAction = ^(MZLongPollDataModel *msgModel){
+                        [weakSelf.chatDelegate historyChatViewUserHeaderClick:msgModel];
+                    };
+                    return cell;
+                    break;
+                }
+                
                 MZChatTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:identitystr];
                 if (cell ==nil){
                     cell = [[MZChatTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identitystr];

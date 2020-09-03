@@ -31,6 +31,8 @@
 #import "MZAlertController.h"
 
 #import "MZLiveFinishViewController.h"
+#import "MZSessionPresetView.h"
+#import "MZBeautyFaceOptionView.h"
 
 #define StreamName     @"86ff6b3712d6f8c6ccd14980fc6319e2"
 #define Token          @"123456"
@@ -60,7 +62,8 @@ typedef enum {
     MZLiveViewMirrorTag,
     MZLiveViewBitRateTag,
     MZLiveViewMenuTag,
-    MZLiveViewBeautyFaceTag,
+    MZLiveViewBeautyFaceTag,//美颜
+    MZLiveViewSessionPresetTag,//分辨率
 }MZLiveViewBtnTag;
 
 typedef enum {
@@ -107,12 +110,10 @@ CGFloat BtnSpace = 28 + 12;
     //自己结束的
     BOOL    selfStopped;
     BOOL _isConnecting;
-
-    //直播SDK新变量
-    MZPushStreamManager * _pushManager;
-
 }
 
+//直播SDK新变量
+@property (nonatomic, strong) MZPushStreamManager *pushManager;
 // 聊天kit
 @property (nonatomic, strong) MZChatKitManager *chatKitManager;
 
@@ -127,7 +128,6 @@ CGFloat BtnSpace = 28 + 12;
 @property (nonatomic, strong) UIView *liveBottonContentView;//下部的控件view
 @property (nonatomic, strong) UIView *bitTopView;
 @property (nonatomic, assign) BOOL isFuctionHidden;
-@property (nonatomic, strong) MZShareModel *shareModel;
 @property (nonatomic, strong) UIImageView *shareImageView;
 
 //开始推流（这个参数是防止还没有开始推流，切换到后台或者其他操作走了appResignActive方法，然后回来后走appBecomeActive，这种情况不能走重连的方法）
@@ -147,6 +147,7 @@ CGFloat BtnSpace = 28 + 12;
 @property (nonatomic, strong) UIButton *mirrorBtn;//镜像按钮
 @property (nonatomic, strong) UIButton *beautyFaceBtn;//美颜按钮
 @property (nonatomic, strong) UIButton *blockAllButton;//全体禁言，解禁
+@property (nonatomic, strong) UIButton *sessionPresetButton;//分辨率按钮
 
 @property (nonatomic, strong) MZLiveAlertView *liveAlertView;//断流提示的view
 
@@ -168,6 +169,10 @@ CGFloat BtnSpace = 28 + 12;
 
 @property (nonatomic, strong) MZFacialView *portraitFacialView;//竖屏表情键盘View
 @property (nonatomic, strong) MZFacialView *landspaceFacialView;//横屏表情键盘View
+
+@property (nonatomic, strong) MZBeautyFaceOptionView *beautyFaceOptionView;//美颜等级选择View
+
+@property (nonatomic, strong) MZSessionPresetView *sessionPresetView;//分辨率选择View
 
 @end
 
@@ -226,13 +231,15 @@ CGFloat BtnSpace = 28 + 12;
         self.muteBtn.frame = CGRectMake(self.flashLightBtn.frame.origin.x - 44*landScapeRate - 8, self.cameraChangeBtn.frame.origin.y, self.cameraChangeBtn.frame.size.width, self.cameraChangeBtn.frame.size.height);
         
         self.blockAllButton.frame = CGRectMake(self.muteBtn.frame.origin.x - 44*landScapeRate - 8, self.cameraChangeBtn.frame.origin.y, self.cameraChangeBtn.frame.size.width, self.cameraChangeBtn.frame.size.height);
+        
+        self.sessionPresetButton.frame = CGRectMake(self.blockAllButton.frame.origin.x - 44*landScapeRate - 8, self.cameraChangeBtn.frame.origin.y, self.cameraChangeBtn.frame.size.width, self.cameraChangeBtn.frame.size.height);
 
         self.tipView.frame = _preView.bounds;
         
         if(_chatToolBar==nil)
         {
             [self initHideKeyBoardBtn];
-            _chatToolBar = [[MZMessageToolView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - [MZMessageToolView defaultHeight],  self.view.frame.size.width, [MZMessageToolView defaultHeight]) type:MZMessageToolBarTypeOnlyEmoji];
+            _chatToolBar = [[MZMessageToolView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - [MZMessageToolView defaultHeight],  self.view.frame.size.width, [MZMessageToolView defaultHeight]) type:MZMessageToolBarTypeAllBtn];
             _chatToolBar.maxLength = 100;
             _chatToolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
             _chatToolBar.delegate = self;
@@ -253,7 +260,7 @@ CGFloat BtnSpace = 28 + 12;
     if (self) {
         self.handle = finishHandle;
         
-        self.isBeautyFace = NO;
+        self.beautyFaceLevel = MZBeautyFaceLevel_None;
         self.isLandscape = NO;
         self.countDownNum = 3;
         self.videoSessionPreset = MZCaptureSessionPreset720x1280;
@@ -546,6 +553,18 @@ CGFloat BtnSpace = 28 + 12;
     [_preView addSubview:self.blockAllButton];
     self.blockAllButton.hidden = YES;
     self.blockAllButton.alpha = 0;
+
+    self.sessionPresetButton = [[UIButton alloc]initWithFrame:CGRectMake(self.blockAllButton.frame.origin.x, self.blockAllButton.frame.origin.y - 44*MZ_RATE - 12, self.blockAllButton.frame.size.width, self.blockAllButton.frame.size.height)];
+    self.sessionPresetButton.tag = MZLiveViewSessionPresetTag;
+    [self.sessionPresetButton addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_preView addSubview:self.sessionPresetButton];
+    self.sessionPresetButton.hidden = YES;
+    self.sessionPresetButton.alpha = 0;
+    [self updateSessionPresetButton];
+
+    
+    [_preView addSubview:self.beautyFaceOptionView];
+    [_preView addSubview:self.sessionPresetView];
     
     if (self.isOnlyAudio) {//只是音频直播，重置所有菜单的frame
         // 分享按钮
@@ -556,12 +575,25 @@ CGFloat BtnSpace = 28 + 12;
         self.muteBtn.frame = self.beautyFaceBtn.frame;
         // 禁言按钮
         self.blockAllButton.frame = self.mirrorBtn.frame;
+        // 分辨率按钮
+        self.sessionPresetButton.frame = CGRectZero;
         // 美颜按钮
         self.beautyFaceBtn.frame = CGRectZero;
         // 镜像按钮
         self.mirrorBtn.frame = CGRectZero;
         // 闪光灯按钮
         self.flashLightBtn.frame = CGRectZero;
+    }
+}
+
+/// 更新分辨率的按钮图片
+- (void)updateSessionPresetButton {
+    if (self.videoSessionPreset == MZCaptureSessionPreset360x640) {
+        [self.sessionPresetButton setImage:ImageName(@"mz_biaoqing_icon_xuanzhong") forState:UIControlStateNormal];
+    } else if (self.videoSessionPreset == MZCaptureSessionPreset540x960) {
+        [self.sessionPresetButton setImage:ImageName(@"mz_gaoqing_icon_xuanzhong") forState:UIControlStateNormal];
+    } else if (self.videoSessionPreset == MZCaptureSessionPreset720x1280) {
+        [self.sessionPresetButton setImage:ImageName(@"mz_chaoqing_icon_xuanzhong") forState:UIControlStateNormal];
     }
 }
 
@@ -692,8 +724,8 @@ CGFloat BtnSpace = 28 + 12;
             // 在添加_pushManager.preview之前，可以进行相关配置
 
             // 设置美颜开关
-            [_pushManager setBeautyFace:self.isBeautyFace];
-            [self.beautyFaceBtn setSelected:self.isBeautyFace];
+            [_pushManager setBeautyFaceLevel:self.beautyFaceLevel];
+            [self.beautyFaceBtn setSelected:(self.beautyFaceLevel == MZBeautyFaceLevel_None ? NO : YES)];
             
             // 设置（前置/后置）摄像头
             [_pushManager switchCameraIsFront:_isFrontCameraType];
@@ -803,6 +835,19 @@ CGFloat BtnSpace = 28 + 12;
 }
 
 - (void)clickBtn:(UIButton *)button{
+    if (button.tag == MZLiveViewSessionPresetTag) {//点击分辨率
+        [self.sessionPresetView showWithDirection:self.isLandscape ? MZSessionPresetShowDirection_Up : MZSessionPresetShowDirection_Left from:self.sessionPresetButton normalSessionPreset:self.videoSessionPreset];
+        [self.beautyFaceOptionView hide];
+        return;
+    }
+    [self.sessionPresetView hide];
+    
+    if (button.tag == MZLiveViewBeautyFaceTag) {//点击美颜
+        [self.beautyFaceOptionView showWithDirection:self.isLandscape ? MZBeautyFaceShowDirection_Up : MZBeautyFaceShowDirection_Left from:self.beautyFaceBtn normalBeautyLevel:self.beautyFaceLevel];
+        return;
+    }
+    [self.beautyFaceOptionView hide];
+
     switch (button.tag) {
         case MZLiveViewCloseBtnTag:{//正常结束按钮
             if(self.isStartPush){
@@ -911,13 +956,8 @@ CGFloat BtnSpace = 28 + 12;
                 self.mirrorBtn.alpha = button.selected;
                 self.beautyFaceBtn.alpha = button.selected;
                 self.blockAllButton.alpha = button.selected;
+                self.sessionPresetButton.alpha = button.selected;
             }];
-        }
-            break;
-        case MZLiveViewBeautyFaceTag:{//美颜
-            button.selected = !button.selected;
-            self.isBeautyFace = button.selected;
-            [_pushManager setBeautyFace:self.isBeautyFace];
         }
             break;
         default:
@@ -1193,39 +1233,6 @@ CGFloat BtnSpace = 28 + 12;
     return [NSURL URLWithString:str];
 }
 
-
--(void)shareMenuWithType:(int)type
-{
-    MZShareType shareType;
-    NSString * shareTypeStr;
-    switch (type) {
-        case 0:
-            shareType = MZShare_WeiXin;
-            shareTypeStr = @"friend";
-            break;
-        case 1:
-            shareType = MZShare_WeiXinPYQ;
-            shareTypeStr = @"timeline";
-            break;
-        case 2:
-            shareType = MZShare_WeiBo;
-            shareTypeStr = @"weibo";
-            break;
-        case 3:
-            shareType = MZShare_QQ;
-            shareTypeStr = @"qq";
-            break;
-            
-        default:
-            shareType = MZShare_WeiXin;
-            shareTypeStr = @"friend";
-            break;
-    }
-    
-    NSLog(@"分享了内容 title = %@, shareDesc = %@, image = %@, shortUrl = %@", self.shareModel.shareTitle,self.shareModel.shareDesc,self.shareImageView,self.shareModel.shortUrl);
-}
-
-
 #pragma mark - CameraEngineDelegate
 
 -(void)firstCaptureImage:(UIImage *)image{
@@ -1336,6 +1343,7 @@ CGFloat BtnSpace = 28 + 12;
                 self.flashLightBtn.alpha = 1;
                 self.muteBtn.alpha = 1;
                 self.blockAllButton.alpha = 1;
+                self.sessionPresetButton.alpha = 1;
                 
                 [self.view setNeedsLayout];
             } else {
@@ -1345,6 +1353,7 @@ CGFloat BtnSpace = 28 + 12;
             self.shareBtn.hidden = NO;
             self.muteBtn.hidden = NO;
             self.blockAllButton.hidden = NO;
+            self.sessionPresetButton.hidden = NO;
             self.flashLightBtn.hidden = NO;
             self.mirrorBtn.hidden = NO;
             self.beautyFaceBtn.hidden = NO;
@@ -1512,9 +1521,17 @@ CGFloat BtnSpace = 28 + 12;
 - (void)activityOnlineNumGiftchange:(NSString *)onlineGiftMoney{
 }
 
-/*!
- 直播时收到一条新消息
- */
+/// 收到一条全局礼物消息
+- (void)activityGetGiftMsg:(MZLongPollDataModel *)msg {
+    [_chatView addChatData:msg];
+}
+
+/// 收到被踢出信息
+-(void)activityGetKickoutMsg:(MZLongPollDataModel *)msg {
+    NSLog(@"用户id为%@的用户被踢出",msg.data.tickOutUserID);
+}
+
+/// 直播时收到一条新消息
 -(void)activityGetNewMsg:(MZLongPollDataModel * )msg
 {
     if(msg.event == MsgTypeOnline){
@@ -1646,7 +1663,7 @@ CGFloat BtnSpace = 28 + 12;
             if(_chatToolBar==nil)
             {
                 [self initHideKeyBoardBtn];
-                _chatToolBar = [[MZMessageToolView alloc] initWithFrame:CGRectMake(0, MZTotalScreenHeight - [MZMessageToolView defaultHeight],  MZ_SW, [MZMessageToolView defaultHeight]) type:MZMessageToolBarTypeOnlyEmoji];
+                _chatToolBar = [[MZMessageToolView alloc] initWithFrame:CGRectMake(0, MZTotalScreenHeight - [MZMessageToolView defaultHeight],  MZ_SW, [MZMessageToolView defaultHeight]) type:MZMessageToolBarTypeAllBtn];
                 _chatToolBar.maxLength = 100;
                 _chatToolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
                 _chatToolBar.delegate = self;
@@ -1713,6 +1730,36 @@ CGFloat BtnSpace = 28 + 12;
         _audioAnimationView.userInteractionEnabled = NO;
     }
     return _audioAnimationView;
+}
+
+- (MZBeautyFaceOptionView *)beautyFaceOptionView {
+    if (!_beautyFaceOptionView) {
+        WeaklySelf(weakSelf);
+        _beautyFaceOptionView = [[MZBeautyFaceOptionView alloc] init];
+        _beautyFaceOptionView.result = ^(BOOL isCancel, MZBeautyFaceLevel beautyLevel) {
+            if (!isCancel) {
+                weakSelf.beautyFaceLevel = beautyLevel;
+                [weakSelf.beautyFaceBtn setSelected:(beautyLevel == MZBeautyFaceLevel_None ? NO : YES)];
+                [weakSelf.pushManager setBeautyFaceLevel:beautyLevel];
+            }
+        };
+    }
+    return _beautyFaceOptionView;
+}
+
+- (MZSessionPresetView *)sessionPresetView {
+    if (!_sessionPresetView) {
+        WeaklySelf(weakSelf);
+        _sessionPresetView = [[MZSessionPresetView alloc] init];
+        _sessionPresetView.result = ^(BOOL isCancel, MZCaptureSessionPreset sessionPreset) {
+            if (!isCancel) {
+                weakSelf.videoSessionPreset = sessionPreset;
+                [weakSelf updateSessionPresetButton];
+                [weakSelf.pushManager setCaptureSessionPreset:sessionPreset];
+            }
+        };
+    }
+    return _sessionPresetView;
 }
 
 - (void)removePushItemCache{

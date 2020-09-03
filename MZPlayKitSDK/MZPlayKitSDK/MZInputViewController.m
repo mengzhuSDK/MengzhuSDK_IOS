@@ -223,17 +223,21 @@
 
 /// 进入推流界面（直播界面）
 -(void)pusherClick:(UIButton *)sender{
-    [MZSDKBusinessManager setDebug:self.isDebugSwitch.isOn];
-    
-    [self serUserInfoSuccess:^(BOOL result, NSString *errorString) {
-        if (result) {
-            MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
-            vc.fromTicket_id = @"点击更改";
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            [self.view show:errorString];
-        }
-    }];
+    if (TARGET_IPHONE_SIMULATOR == 1 && TARGET_OS_IPHONE == 1) {
+        [self.view show:@"推流不支持模拟器"];
+    } else {
+        [MZSDKBusinessManager setDebug:self.isDebugSwitch.isOn];
+        
+        [self serUserInfoSuccess:^(BOOL result, NSString *errorString) {
+            if (result) {
+                MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
+                vc.fromTicket_id = @"点击更改";
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                [self.view show:errorString];
+            }
+        }];
+    }
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

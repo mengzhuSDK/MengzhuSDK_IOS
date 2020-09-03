@@ -160,6 +160,11 @@
     }
 }
 
+/// 收到某个用户被踢出的消息
+- (void)newMsgForKickoutOneUser:(MZLongPollDataModel *)msg {
+
+}
+
 /**
  * @brief 播放按钮点击
  */
