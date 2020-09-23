@@ -7,12 +7,72 @@
 //
 
 #import "MZMessageToolView.h"
-//#import "MZCustomInputView.h"
 #define MessageTool_SendBtnColor [UIColor whiteColor]
+
+typedef void(^ListenOnlyHostMessage)(BOOL isOnlyHostMessage);
+
+/**
+ * @brief 只看主播的View
+ */
+@interface MZOnlyHostMessageView : UIView
+@property (nonatomic, strong) UILabel *noteLabel;//只看主播标题
+@property (nonatomic, strong) UISwitch *onlySwitch;//只看主播开关
+@end
+
+@implementation MZOnlyHostMessageView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self makeView];
+    }
+    return self;
+}
+
+- (void)makeView  {
+    self.onlySwitch = [[UISwitch alloc] init];
+    [self.onlySwitch setOn:NO];
+    self.onlySwitch.thumbTintColor = [UIColor whiteColor];
+    [self.onlySwitch setOnTintColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1]];
+    [self addSubview:self.onlySwitch];
+    
+    
+    [self.onlySwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self);
+        make.centerY.equalTo(self.mas_centerY);
+    }];
+    
+    self.noteLabel = [[UILabel alloc] init];
+    self.noteLabel.textAlignment = NSTextAlignmentRight;
+    self.noteLabel.font = [UIFont systemFontOfSize:12];
+    self.noteLabel.adjustsFontSizeToFitWidth = YES;
+    self.noteLabel.backgroundColor = [UIColor clearColor];
+    self.noteLabel.text = @"只看主播";
+    self.noteLabel.textColor = [UIColor colorWithRed:122/255.0 green:122/255.0 blue:122/255.0 alpha:1];
+    [self addSubview:self.noteLabel];
+    [self.noteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.equalTo(self);
+        make.right.equalTo(self.onlySwitch.mas_left).offset(-3);
+    }];
+    
+    self.backgroundColor = [UIColor whiteColor];
+}
+
+@end
+
+/**
+ * @brief 输入的tool
+ */
 
 @interface MZMessageToolView()
 
-@property (nonatomic ,strong)UIView *lintView;
+@property (nonatomic, strong) UIView *lintView;
+
+@property (nonatomic, assign) BOOL isShowHostButton;//当前的输入框是否显示 只看主播 按钮
+@property (nonatomic, strong) MZOnlyHostMessageView *onlyHostView;//只看主播的View
+@property (nonatomic, assign) CGFloat onlyHostViewWidth;//只看主播View的宽度
+@property (nonatomic, assign) BOOL isOnlyHostMessage;//是否 只展示主播的聊天信息
+@property (nonatomic,   copy) ListenOnlyHostMessage onlyHostStateChangeListen;//只看主播按钮状态更改的回调
 
 @end
 @implementation MZMessageToolView
@@ -32,25 +92,31 @@
     }
     
     self.sendButton.frame = CGRectMake(self.width - 76*relativeSafeRate, kVerticalPadding, 60*relativeSafeRate, kInputTextViewMinHeight);
+
+    CGFloat leftSpace = 15;
+    if (self.isShowHostButton) {
+        leftSpace = 0;
+        self.onlyHostView.frame = CGRectMake(0+(saveLeft >= 44 ? 28 : 0), self.onlyHostView.frame.origin.y, self.onlyHostView.frame.size.width, self.onlyHostView.frame.size.height);
+    }
     
     switch (self.type) {
         case MZMessageToolBarTypeAllBtn://所有按钮
-            self.smallButton.frame = CGRectMake(self.width - 76*relativeSafeRate - 15 - kInputTextViewMinHeight, kVerticalPadding, kInputTextViewMinHeight, kInputTextViewMinHeight);
+            self.smallButton.frame = CGRectMake(self.width - 76*relativeSafeRate - 17 - kInputTextViewMinHeight, kVerticalPadding, kInputTextViewMinHeight, kInputTextViewMinHeight);
             _emojiCenterView.frame = CGRectMake((kInputTextViewMinHeight-24*relativeSafeRate)/2.0, (kInputTextViewMinHeight-24*relativeSafeRate)/2.0, 24*relativeSafeRate, 24*relativeSafeRate);
 
-            self.msgTextView.frame = CGRectMake(15, kVerticalPadding, self.width - kInputTextViewMinHeight - 76*relativeSafeRate - 15, kInputTextViewMinHeight);
+            self.msgTextView.frame = CGRectMake(saveLeft+leftSpace+self.onlyHostViewWidth, kVerticalPadding, self.width - kInputTextViewMinHeight - 76*relativeSafeRate - leftSpace - self.onlyHostViewWidth - saveLeft, kInputTextViewMinHeight);
             break;
         case MZMessageToolBarTypeOnlyEmoji://只有表情+输入框
-            self.smallButton.frame = CGRectMake(self.width - 15 - kInputTextViewMinHeight, kVerticalPadding, kInputTextViewMinHeight, kInputTextViewMinHeight);
+            self.smallButton.frame = CGRectMake(self.width - 17 - kInputTextViewMinHeight, kVerticalPadding, kInputTextViewMinHeight, kInputTextViewMinHeight);
             _emojiCenterView.frame = CGRectMake((kInputTextViewMinHeight-24*relativeSafeRate)/2.0, (kInputTextViewMinHeight-24*relativeSafeRate)/2.0, 24*relativeSafeRate, 24*relativeSafeRate);
 
-            self.msgTextView.frame = CGRectMake(15, kVerticalPadding, self.width - kInputTextViewMinHeight - 15 - 13, kInputTextViewMinHeight);
+            self.msgTextView.frame = CGRectMake(saveLeft+leftSpace+self.onlyHostViewWidth, kVerticalPadding, self.width - kInputTextViewMinHeight - leftSpace - 13 - self.onlyHostViewWidth - saveLeft, kInputTextViewMinHeight);
             break;
         case MZMessageToolBarTypeOnlySend://只有发送+输入框
-            self.msgTextView.frame = CGRectMake(saveLeft, kVerticalPadding, self.width - 76*relativeSafeRate - 30, kInputTextViewMinHeight);
+            self.msgTextView.frame = CGRectMake(leftSpace+saveLeft+self.onlyHostViewWidth, kVerticalPadding, self.width - 76*relativeSafeRate - leftSpace - 15 - self.onlyHostViewWidth, kInputTextViewMinHeight);
             break;
         case MZMessageToolBarTypeOnlyTextView://只有输入框
-            self.msgTextView.frame = CGRectMake(saveLeft, kVerticalPadding, self.width - 30, kInputTextViewMinHeight);
+            self.msgTextView.frame = CGRectMake(leftSpace+saveLeft+self.onlyHostViewWidth, kVerticalPadding, self.width - 15 - leftSpace - self.onlyHostViewWidth - saveLeft, kInputTextViewMinHeight);
             break;
         default:
             break;
@@ -64,9 +130,21 @@
     }
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        
+        _isShowHostButton = NO;
         _type = type;
+        [self setupConfigure];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame type:(MZMessageToolBarType)type isShowHostButton:(BOOL)isShowHostButton {
+    if (frame.size.height < (kVerticalPadding * 2 + kInputTextViewMinHeight)) {
+        frame.size.height = kVerticalPadding * 2 + kInputTextViewMinHeight;
+    }
+    self = [super initWithFrame:frame];
+    if (self) {
+        _type = type;
+        _isShowHostButton = isShowHostButton;
         [self setupConfigure];
     }
     return self;
@@ -79,9 +157,8 @@
     }
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        
         _type = type;
+        _isShowHostButton = NO;
         _msgTextView = textView;
         _msgTextView.layoutManager.allowsNonContiguousLayout = false;
         //连续布局属性 默认是true的，如果不设置false 每次都会出现一闪一闪的
@@ -101,6 +178,9 @@
 
 - (void)setupConfigure
 {
+    self.onlyHostViewWidth = 0;
+    if (self.isShowHostButton) self.onlyHostViewWidth = 106;
+    
     self.activityButtomView = nil;
     self.isShowButtomView = NO;
     CGFloat textViewWidth= 233*MZ_RATE;
@@ -114,10 +194,10 @@
         
         if(orientation != UIInterfaceOrientationPortrait){
             _msgTextView = nil;
-            _msgTextView = [[MZSDKMessageTextView alloc] initWithFrame:CGRectMake(kHorizontalPadding, kVerticalPadding, textViewWidth, kInputTextViewMinHeight)];
+            _msgTextView = [[MZSDKMessageTextView alloc] initWithFrame:CGRectMake(kHorizontalPadding+self.onlyHostViewWidth, kVerticalPadding, textViewWidth, kInputTextViewMinHeight)];
             self.maxTextInputViewHeight = kInputTextViewMaxHeight;
         }else {
-            _msgTextView = [[MZSDKMessageTextView alloc] initWithFrame:CGRectMake(kHorizontalPadding, kVerticalPadding, textViewWidth, kInputTextViewMinHeight)];
+            _msgTextView = [[MZSDKMessageTextView alloc] initWithFrame:CGRectMake(kHorizontalPadding+self.onlyHostViewWidth, kVerticalPadding, textViewWidth, kInputTextViewMinHeight)];
             self.maxTextInputViewHeight = kInputTextViewMaxHeight;
         }
         _msgTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -142,10 +222,10 @@
     CGFloat space;
     if([UIScreen mainScreen].bounds.size.width > [UIScreen mainScreen].bounds.size.height){
         space = IPHONE_X ? 40 : 0;
-        textViewWidth = self.width - 150*MZ_RATE;
+        textViewWidth = self.width - 150*MZ_RATE - self.onlyHostViewWidth;
     }else{
         space = 0;
-        textViewWidth = self.width - 150*MZ_RATE;
+        textViewWidth = self.width - 150*MZ_RATE - self.onlyHostViewWidth;
     }
     self.toolBackGroundView.frame = CGRectMake(space, 0,self.frame.size.width ,kVerticalPadding*2+kInputTextViewMinHeight);
     if(!self.lintView){
@@ -153,7 +233,7 @@
         lintView.backgroundColor=MakeColorRGB(0xefeff4);
         [self.toolBackGroundView addSubview:lintView];
     }
-    _msgTextView.frame = CGRectMake(kHorizontalPadding, kVerticalPadding, textViewWidth, kInputTextViewMinHeight);
+    _msgTextView.frame = CGRectMake(kHorizontalPadding+self.onlyHostViewWidth, kVerticalPadding, textViewWidth, kInputTextViewMinHeight);
     [self reSetSubView];
 }
 
@@ -196,6 +276,14 @@
         [self.toolBackGroundView addSubview:_smallButton];
     }
     
+    if (self.isShowHostButton) {
+        if(!_onlyHostView){
+            _onlyHostView = [[MZOnlyHostMessageView alloc] initWithFrame:CGRectMake(0, 0, 104, self.frame.size.height)];
+            [_onlyHostView.onlySwitch addTarget:self action:@selector(onlyHostChange:) forControlEvents:UIControlEventValueChanged];
+            [self.toolBackGroundView addSubview:_onlyHostView];
+        }
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillChangeFrame:)
                                                  name:UIKeyboardWillChangeFrameNotification
@@ -212,10 +300,10 @@
         }else{
             space = 0;
         }
-        textViewWidth = self.width - 150*MZ_RATE - space;
+        textViewWidth = self.width - 150*MZ_RATE - space - self.onlyHostViewWidth;
         self.toolBackGroundView.frame = CGRectMake(space, 0,self.frame.size.width ,kVerticalPadding*2+kInputTextViewMinHeight);
-        self.msgTextView.frame = CGRectMake(15, kVerticalPadding, self.width - kInputTextViewMinHeight - 76*MZ_RATE - 15, kInputTextViewMinHeight);
-        self.smallButton.frame = CGRectMake(self.width - 76*MZ_RATE - 15 - kInputTextViewMinHeight, kVerticalPadding, kInputTextViewMinHeight, kInputTextViewMinHeight);
+        self.msgTextView.frame = CGRectMake(15+self.onlyHostViewWidth, kVerticalPadding, self.width - kInputTextViewMinHeight - 76*MZ_RATE - 15 - self.onlyHostViewWidth, kInputTextViewMinHeight);
+        self.smallButton.frame = CGRectMake(self.width - 76*MZ_RATE - 15 - self.onlyHostViewWidth - kInputTextViewMinHeight, kVerticalPadding, kInputTextViewMinHeight, kInputTextViewMinHeight);
         _sendButton.frame = CGRectMake(self.width - 76*MZ_RATE ,kVerticalPadding,60*MZ_RATE,kInputTextViewMinHeight);
         _emojiCenterView.frame = CGRectMake((kInputTextViewMinHeight-24*MZ_RATE)/2.0, (kInputTextViewMinHeight-24*MZ_RATE)/2.0, 24*MZ_RATE, 24*MZ_RATE);
         _sendButton.hidden = NO;
@@ -223,14 +311,14 @@
     }else if (self.type == MZMessageToolBarTypeOnlyTextView){
         _smallButton.hidden = YES;
         _sendButton.hidden = YES;
-        _msgTextView.frame = CGRectMake(15, 8, self.width - 30, 32);
+        _msgTextView.frame = CGRectMake(15+self.onlyHostViewWidth, 8, self.width - 30 - self.onlyHostViewWidth, 32);
         _msgTextView.centerPlaceHolder = @"聊点什么？";
         _msgTextView.centerPlaceHolderColor = MakeColorRGB(0xbbbbbb);
     } else if (self.type == MZMessageToolBarTypeOnlyEmoji) {
         _smallButton.hidden = NO;
         _smallButton.frame = CGRectMake(self.frame.size.width - 15 - kInputTextViewMinHeight, kVerticalPadding, kInputTextViewMinHeight, kInputTextViewMinHeight);
         _sendButton.hidden = YES;
-        _msgTextView.frame = CGRectMake(15, 8, self.width - kInputTextViewMinHeight - 15, 32);
+        _msgTextView.frame = CGRectMake(15+self.onlyHostViewWidth, 8, self.width - kInputTextViewMinHeight - 15 - self.onlyHostViewWidth, 32);
         _msgTextView.centerPlaceHolder = @"聊点什么？";
         _msgTextView.centerPlaceHolderColor = MakeColorRGB(0xbbbbbb);
     } else if (self.type == MZMessageToolBarTypeOnlySend) {
@@ -239,6 +327,14 @@
     }
 }
 
+- (void)onlyHostChange:(UISwitch *)aSwitch {
+    if (self.onlyHostStateChangeListen) self.onlyHostStateChangeListen(self.isOnlyHostMessage = aSwitch.isOn);
+}
+
+// 监听 是否 只展示主播的聊天信息 状态的更改
+- (void)listenOnlyHostState:(void(^)(BOOL isOnlyHostMessage))listenState {
+    self.onlyHostStateChangeListen = listenState;
+}
 
 - (void)buttonAction:(UIButton *)button
 {
@@ -415,11 +511,11 @@
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     UIViewAnimationCurve curve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
     
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;  
-    if([MZ_IOS_ver floatValue] < 8.0 && orientation != UIInterfaceOrientationPortrait)
-    {
-        endFrame = CGRectMake(endFrame.origin.y, endFrame.origin.x, endFrame.size.height, endFrame.size.width);
-        beginFrame = CGRectMake(beginFrame.origin.y, beginFrame.origin.x, beginFrame.size.height, beginFrame.size.width);
+    if (@available(iOS 14.0, *)) {
+        if (self.isLive && UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
+            NSLog(@"横屏 && iOS14系统 && 是直播");//ios14横屏下，直播的present强制横屏状态下，获取键盘的frame是竖屏的frame。这里强制减59
+            endFrame.size.height = endFrame.size.height - 59;
+        }
     }
     
     void(^animations)() = ^{
@@ -430,10 +526,14 @@
     };
     
     [UIView animateWithDuration:duration delay:0.0f options:(curve << 16 | UIViewAnimationOptionBeginFromCurrentState) animations:animations completion:completion];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.33 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self setNeedsLayout];
+    });
 }
 
 - (void)willShowKeyboardFromFrame:(CGRect)beginFrame toFrame:(CGRect)toFrame
 {
+    // 414-265 209
     if (beginFrame.origin.y == [[UIScreen mainScreen] bounds].size.height)
     {
         NSLog(@"弹出");
@@ -458,7 +558,7 @@
 
 - (void)willShowBottomHeight:(CGFloat)bottomHeight
 {
-
+// 265 bottomHeight 105-y 309-height
     CGRect fromFrame = self.frame;
     CGFloat toHeight = self.toolBackGroundView.frame.size.height + bottomHeight;
     CGRect toFrame = CGRectMake(fromFrame.origin.x, fromFrame.origin.y + (fromFrame.size.height - toHeight), fromFrame.size.width, toHeight);

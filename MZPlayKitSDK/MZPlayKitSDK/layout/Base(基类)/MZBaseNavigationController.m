@@ -16,7 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationBar setBarTintColor:[UIColor blackColor]];
+    [self.navigationBar setTintColor:[UIColor whiteColor]];
+    self.navigationBar.shadowImage= [UIImage new];
+    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                 NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:17]}];
+    
 }
 
 - (BOOL)shouldAutorotate {
@@ -32,6 +38,13 @@
     return self.topViewController.supportedInterfaceOrientations;
 }
 
+
+// 返回最顶部控制器的状态栏样式
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+//    UIViewController *topVC = self.topViewController;
+//    return [topVC preferredStatusBarStyle];
+}
 
 /**
     这个是横竖屏控制，直接添加到需要控制的viewcontroller就好

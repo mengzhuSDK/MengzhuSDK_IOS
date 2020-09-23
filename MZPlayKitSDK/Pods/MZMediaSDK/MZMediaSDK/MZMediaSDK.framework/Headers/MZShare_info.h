@@ -6,6 +6,8 @@
 //  Copyright © 2016年 www.mengzhu.com. All rights reserved.
 //
 
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
+
 @interface MZShare_info : MZBaseModel
 
 @property(nonatomic,strong)NSString *share_desc;

@@ -7,6 +7,7 @@
 #import "MZMediaControl.h"
 #import "MZNewMediaControl.h"
 #import "MZOnlyVerticalMediaControl.h"
+#import "MZAdvertisementPlayerView.h"
 
 @class MZMediaPlayerView;
 
@@ -51,7 +52,18 @@ NS_ASSUME_NONNULL_BEGIN
  投屏按钮点击
 */
 - (void)dlnaButtonClick:(id)sender;
-
+/**
+ 片前广告开始播放
+ */
+- (void)videoAdvertStartPlay:(MZAdvertisementModel *)advertModel;
+/**
+ 点击了片前广告
+ */
+- (void)clickVideoAdvert:(MZAdvertisementModel *)advertModel;
+/**
+ 片前广告播放完成，包括点击了跳过
+ */
+- (void)finishVideoAdvert:(MZAdvertisementModel *)advertModel;
 /**
  开始播放状态回调
  */
@@ -97,6 +109,11 @@ typedef enum : NSUInteger {//播放器控制栏的UI版本
 @property (nonatomic, strong) MZNewMediaControl           *newMediaControl;//默认（横屏/二分屏）播放器控制栏第二版view，可更改ui，
 @property (nonatomic, strong) MZOnlyVerticalMediaControl  *onlyVerticalMediaControl;//只支持竖版的播放器控制栏
 
+/// 广告播放完毕后是否自动播放主视频 默认是 YES
+@property (nonatomic, assign) BOOL isAutoPlayVideoAfterAdvert;
+/// 广告播放视图,广告的数据，控制通过此类操作
+@property (nonatomic, strong) MZAdvertisementPlayerView *advertPlayerView;
+
 /**
  * @brief 播放
  *
@@ -109,6 +126,20 @@ typedef enum : NSUInteger {//播放器控制栏的UI版本
  *
  */
 - (void)playWithURLString:(NSString *)URLString isLive:(BOOL)isLive showView:(UIView*)showView delegate:(id)delegate interfaceOrientation:(MZMediaControlInterfaceOrientation)interfaceOrientation movieModel:(MZMPMovieScalingMode)movieModel;
+
+/**
+ * @brief 播放 - 添加了ticketId参数，可以自动播放该活动绑定的片前视频广告
+ *
+ * @param URLString 直播地址/视频地址
+ * @param isLive 是否是直播
+ * @param showView 展示在哪个view上
+ * @param delegate 代理
+ * @param interfaceOrientation 使用哪套播放器控制UI，详见 MZMediaControlInterfaceOrientation
+ * @param movieModel 播放模型
+ * @param ticketId 直播活动Id，可以通过此ID播放绑定该活动的视频广告
+ *
+ */
+- (void)playWithURLString:(NSString *)URLString isLive:(BOOL)isLive showView:(UIView*)showView delegate:(id)delegate interfaceOrientation:(MZMediaControlInterfaceOrientation)interfaceOrientation movieModel:(MZMPMovieScalingMode)movieModel ticketId:(NSString *)ticketId;
 
 /// 兼容旧版本的播放方法，不推荐使用
 - (void)playerViewWithUrl:(NSString *)mvUrl isLive:(BOOL)isLive WithView:(UIView *)withView WithDelegate:(id)delegate;

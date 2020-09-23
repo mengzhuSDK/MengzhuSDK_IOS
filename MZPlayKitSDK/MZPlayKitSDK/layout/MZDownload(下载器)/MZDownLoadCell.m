@@ -9,12 +9,18 @@
 #import "MZDownLoadCell.h"
 #import <AVKit/AVKit.h>
 #import "MZVerticalPlayerViewController.h"
+#import "MZDownLoadProgressView.h"
 
 @interface MZDownLoadCell()
-@property (nonatomic, strong) UIButton *menuButton;
-@property (nonatomic, strong) UILabel *progressLabel;
+@property (nonatomic, strong) UIButton *menuButton;//菜单
+@property (nonatomic, strong) UILabel *progressLabel;//进度百分比
+@property (nonatomic, strong) MZDownLoadProgressView *progressView;//进度条
 
-@property (nonatomic, strong) MZDownLoader *loader;
+@property (nonatomic, strong) UIImageView *iconImageView;//任务图标
+@property (nonatomic, strong) UILabel *nameLabel;//任务名字
+
+@property (nonatomic, strong) MZDownLoader *loader;//任务模型
+
 @end
 
 @implementation MZDownLoadCell
@@ -27,24 +33,50 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier]) {
-        self.textLabel.numberOfLines = 0;
-        self.textLabel.font = [UIFont systemFontOfSize:17];
-
-        self.detailTextLabel.textColor = [UIColor redColor];
+        self.contentView.backgroundColor = [UIColor colorWithRed:38/255.0 green:38/255.0 blue:38/255.0 alpha:1];
+        
+        self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(16, 12, 97, 55)];
+        self.iconImageView.image = [UIImage imageNamed:@"cover_default"];
+        self.iconImageView.layer.cornerRadius = 7.0;
+        self.iconImageView.layer.masksToBounds = YES;
+        [self.contentView addSubview:self.iconImageView];
+        
+        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.iconImageView.right + 9, 10, UIScreen.mainScreen.bounds.size.width - 16 - 97 - 18, 34)];
+        self.nameLabel.numberOfLines = 0;
+        self.nameLabel.font = [UIFont systemFontOfSize:14];
+        self.nameLabel.textColor = [UIColor whiteColor];
+        self.nameLabel.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:self.nameLabel];
+        
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(16, 135 - 10 - 44 - 1, UIScreen.mainScreen.bounds.size.width - 16, 1)];
+        line.backgroundColor = [UIColor colorWithRed:74/255.0 green:74/255.0 blue:74/255.0 alpha:1];
+        [self.contentView addSubview:line];
         
         self.menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.menuButton.frame = CGRectMake(UIScreen.mainScreen.bounds.size.width - 100, 40, 80, 64);
+        self.menuButton.frame = CGRectMake(UIScreen.mainScreen.bounds.size.width - 90, 135 - 10 - 6 - 32, 70, 32);
         [self.menuButton setTitle:@"下载" forState:UIControlStateNormal];
-        [self.menuButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [self.menuButton setTitleColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1] forState:UIControlStateNormal];
         [self.menuButton addTarget:self action:@selector(menuClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.menuButton];
+        self.menuButton.layer.borderColor = [UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor;
+        self.menuButton.layer.borderWidth = 1.0;
+        self.menuButton.layer.cornerRadius = 8;
+        self.menuButton.layer.masksToBounds = YES;
         
-        self.progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 150, 44)];
-        self.progressLabel.backgroundColor = [UIColor redColor];
-        self.progressLabel.textColor = [UIColor whiteColor];
-//        [self.contentView addSubview:self.progressLabel];
+        self.progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.nameLabel.left, line.top - 17, UIScreen.mainScreen.bounds.size.width - self.nameLabel.left - 9, 12)];
+        self.progressLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:10];//普通
+        self.progressLabel.backgroundColor = [UIColor clearColor];
+        self.progressLabel.textColor = [UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1];
+        [self.contentView addSubview:self.progressLabel];
         
-        self.detailTextLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14];//普通
+        self.progressView = [[MZDownLoadProgressView alloc] initWithFrame:CGRectMake(self.nameLabel.left, self.progressLabel.top - 4 - 5,  UIScreen.mainScreen.bounds.size.width - self.nameLabel.left - 9, 4) color:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1]];
+        self.progressView.progress = 0;
+        [self.contentView addSubview:self.progressView];
+        
+        UIView *spaceView = [[UIView alloc] initWithFrame:CGRectMake(0, 135 - 10, UIScreen.mainScreen.bounds.size.width, 10)];
+        spaceView.backgroundColor = [UIColor blackColor];
+        [self.contentView addSubview:spaceView];
+        
     }
     return self;
 }
@@ -54,27 +86,26 @@
     // 给cell添加当前任务的监听
     [[MZDownLoaderCenter shareInstanced] addDelegateWithTarget:self loader:self.loader];
     // 获取任务的下载地址
-    self.textLabel.text = [[MZDownLoaderCenter shareInstanced] getTaskM3U8DownLoadURLString:self.loader];
+    self.nameLabel.text = [[MZDownLoaderCenter shareInstanced] getTaskM3U8DownLoadURLString:self.loader];
     // 获取任务的缓存的进度
-    NSString *str = [NSString stringWithFormat:@"%.2f%%",([[MZDownLoaderCenter shareInstanced] getTaskCacheProgress:self.loader] * 100)];
+    CGFloat progress = ([[MZDownLoaderCenter shareInstanced] getTaskCacheProgress:self.loader] * 100);
+    NSString *str = [NSString stringWithFormat:@"%.2f%%",progress];
 
-    self.detailTextLabel.text = str;
+    self.progressLabel.text = str;
+    self.progressView.progress = progress/100;
     // 获取任务的状态
     MZDownLoaderState state = [[MZDownLoaderCenter shareInstanced] getTaskState:self.loader];
     
     if (state == MZDownLoaderState_Finish) {
         [self.menuButton setTitle:@"播放" forState:UIControlStateNormal];
         self.progressLabel.text = [NSString stringWithFormat:@"total：%@",[[MZDownLoaderCenter shareInstanced] getFileSize:self.loader]];
+        self.progressView.progress = 1.0;
     } else if (state == MZDownLoaderState_Stop || state == MZDownLoaderState_Pause || state == MZDownLoaderState_Fail) {
         [self.menuButton setTitle:@"继续" forState:UIControlStateNormal];
     } else if (state == MZDownLoaderState_Wait) {
         [self.menuButton setTitle:@"等待" forState:UIControlStateNormal];
     } else if (state == MZDownLoaderState_Downloading) {
         [self.menuButton setTitle:@"暂停" forState:UIControlStateNormal];
-    }
-    
-    if (state != MZDownLoaderState_Finish) {
-        self.progressLabel.text = @"下载中";
     }
 }
 
@@ -94,6 +125,8 @@
     NSLog(@"这个任务下载完成了，按钮变成播放吧");
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.menuButton setTitle:@"播放" forState:UIControlStateNormal];
+        self.progressLabel.text = [NSString stringWithFormat:@"total：%@",[[MZDownLoaderCenter shareInstanced] getFileSize:self.loader]];
+        self.progressView.progress = 1.0f;
     });
 }
 
@@ -105,7 +138,8 @@
 //    NSLog(@"progress = %f",progess);
     NSString *str = [NSString stringWithFormat:@"%.2f%%",progess*100];
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.detailTextLabel.text = str;
+        self.progressLabel.text = str;
+        self.progressView.progress = progess;
     });
 }
 
@@ -134,9 +168,6 @@
 }
 
 - (void)play {
-    
-
-    
     // 获取任务的本地播放地址
     [[MZDownLoaderCenter shareInstanced] getLocalPlayM3U8URLString:self.loader handle:^(NSString * _Nonnull m3u8URLString, NSString * _Nonnull errorString) {
         if (errorString.length) {
@@ -145,9 +176,9 @@
             
             [MZSDKBusinessManager setDebug:YES];
 
-            MZUser *user=[[MZUser alloc]init];
-            user.appID = @"";//线上模拟环境(这里需要自己填一下)
-            user.secretKey = @"";
+            MZUser *user=[[MZUser alloc] init];
+            user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
+            user.secretKey = MZSDK_SecretKey;
             [MZBaseUserServer updateCurrentUser:user];
             
             MZVerticalPlayerViewController *liveVC = [[MZVerticalPlayerViewController alloc]init];

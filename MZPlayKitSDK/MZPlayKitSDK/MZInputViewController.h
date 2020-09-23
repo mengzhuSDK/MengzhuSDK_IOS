@@ -10,15 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum : NSUInteger {
-    MZInputFromPortrait = 0,//竖屏播放器
-    MZInputFromSuper,//超级播放器
-    MZInputFromLive,//推流测试
-} MZInputFrom;
-
 @interface MZInputViewController : UIViewController
-
-- (instancetype)initWithFrom:(MZInputFrom)from;
 
 @end
 

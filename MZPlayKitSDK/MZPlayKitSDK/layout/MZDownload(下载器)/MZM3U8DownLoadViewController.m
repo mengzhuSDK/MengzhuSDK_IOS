@@ -31,33 +31,60 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     self.navigationItem.title = @"下载";
     self.dataArray = @[].mutableCopy;
-        
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    [self.tableView registerClass:[MZDownLoadCell class] forCellReuseIdentifier:@"MZDownLoadCell"];
-    [self.view addSubview:self.tableView];
     
-    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 44.0)];
-    topView.backgroundColor = [UIColor whiteColor];
-    self.tableView.tableHeaderView = topView;
+    CGFloat navBarHeight = self.navigationController.navigationBar.frame.size.height+[UIApplication sharedApplication].statusBarFrame.size.height;
+    
+    UIView *sortView = [[UIView alloc] initWithFrame:CGRectMake(0, navBarHeight, UIScreen.mainScreen.bounds.size.width, 44.0)];
+    sortView.backgroundColor = [UIColor colorWithRed:38/255.0 green:38/255.0 blue:38/255.0 alpha:1];
+    [self.view addSubview:sortView];
+    
+    UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [sortButton setTitle:@"降序" forState:UIControlStateNormal];
+    [sortButton setTitleColor:[UIColor colorWithRed:255/255.0 green:36/255.0 blue:91/255.0 alpha:1] forState:UIControlStateNormal];
+    [sortButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [sortButton addTarget:self action:@selector(sortButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    sortButton.frame = CGRectMake(self.view.frame.size.width - 64, 0, 64, 44);
+    [sortView addSubview:sortButton];
+
+    CGFloat bottomSpace = 15;
+    if (IPHONE_X) {
+        bottomSpace = 34 + 15;
+    }
+    
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60 - bottomSpace, UIScreen.mainScreen.bounds.size.width, 60.0)];
+    bottomView.backgroundColor = [UIColor colorWithRed:38/255.0 green:38/255.0 blue:38/255.0 alpha:1];
+    [self.view addSubview:bottomView];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTitle:@"添加" forState:UIControlStateNormal];
+    [button setTitle:@"清空" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(addDownLoadData:) forControlEvents:UIControlEventTouchUpInside];
-    button.frame = CGRectMake(self.view.frame.size.width - 64, 0, 44, 44);
-    [topView addSubview:button];
+    [button addTarget:self action:@selector(clearAll:) forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(16*MZ_RATE, 10*MZ_RATE, 160*MZ_RATE, 40*MZ_RATE);
+    [button.layer setCornerRadius:20*MZ_RATE];
+    [button.layer setMasksToBounds:YES];
+    [button.layer setBorderColor:[UIColor colorWithRed:255/255.9 green:36/255.0 blue:91/255.0 alpha:1].CGColor];
+    [button.layer setBorderWidth:1.0];
+    [bottomView addSubview:button];
     
     UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button1 setTitle:@"全部开始" forState:UIControlStateNormal];
-    [button1 setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [button1 addTarget:self action:@selector(allPause:) forControlEvents:UIControlEventTouchUpInside];
-    button1.frame = CGRectMake(self.view.frame.size.width - 64 - 110, 0, 110, 44);
-    [topView addSubview:button1];
+    [button1 setTitle:@"新建任务" forState:UIControlStateNormal];
+    [button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button1 setBackgroundColor:[UIColor colorWithRed:255/255.9 green:36/255.0 blue:91/255.0 alpha:1]];
+    [button1 addTarget:self action:@selector(addDownLoadData:) forControlEvents:UIControlEventTouchUpInside];
+    button1.frame = CGRectMake(self.view.frame.size.width - 176*MZ_RATE, 10*MZ_RATE, 160*MZ_RATE, 40*MZ_RATE);
+    [button1.layer setCornerRadius:20*MZ_RATE];
+    [button1.layer setMasksToBounds:YES];
+    [bottomView addSubview:button1];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, sortView.frame.size.height+sortView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-sortView.frame.size.height-sortView.frame.origin.y - bottomSpace - 60) style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    [self.tableView registerClass:[MZDownLoadCell class] forCellReuseIdentifier:@"MZDownLoadCell"];
+    [self.view addSubview:self.tableView];
     
     // 获取缓存的下载列表数据
     __block UILabel *loadingView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
@@ -81,12 +108,25 @@
     }
 }
 
+- (void)sortButtonClick:(UIButton *)sender {
+    [sender setTitle:([sender.titleLabel.text isEqualToString:@"降序"] ? @"升序" : @"降序") forState:UIControlStateNormal];
+    
+    self.dataArray = [[self.dataArray reverseObjectEnumerator] allObjects].mutableCopy;
+    [self.tableView reloadData];
+}
+
 - (void)backButtonClick:(UIButton *)sender {
     if (self.navigationController) {
         [self.navigationController popViewControllerAnimated:YES];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+- (void)clearAll:(UIButton *)sender {
+    [[MZDownLoaderCenter shareInstanced] cancelAll];
+    [self.dataArray removeAllObjects];
+    [self.tableView reloadData];
 }
 
 - (void)addDownLoadData:(UIButton *)sender {
@@ -174,7 +214,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 135;
 }
 
 

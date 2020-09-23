@@ -6,6 +6,9 @@
 //  Copyright (c) 2015年 www.mengzhu.com. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
 @protocol VHPullingRefreshTableViewDelegate;
 
 

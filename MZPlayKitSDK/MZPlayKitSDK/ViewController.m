@@ -8,11 +8,11 @@
 #import "ViewController.h"
 #import "MZM3U8DownLoadViewController.h"
 #import "MZInputViewController.h"
+#import "MZReadyLiveViewController.h"
 
 @interface ViewController ()
 
-@property (nonatomic, strong) UIButton *portraitButton;
-@property (nonatomic, strong) UIButton *superButton;
+@property (nonatomic, strong) UIButton *playButton;
 @property (nonatomic, strong) UIButton *pusherButton;
 @property (nonatomic, strong) UIButton *downloadButton;
 
@@ -25,12 +25,11 @@
 }
 
 - (void)setNavigationbar{
-    self.navigationItem.title = @"SDKdemo";
+//    self.navigationItem.title = @"SDKdemo";
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     [self customAddSubviews];  
 }
 
@@ -40,38 +39,53 @@
 }
 
 - (void)customAddSubviews{
+    self.view.backgroundColor = [UIColor blackColor];
     
-    _portraitButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 150, self.view.bounds.size.width, 40)];
-    [_portraitButton setTitle:@"竖屏播放器" forState:UIControlStateNormal];
-    [_portraitButton setBackgroundColor:[UIColor blueColor]];
-    [_portraitButton addTarget:self action:@selector(intoInpuInfoVC:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:_portraitButton];
-    _superButton=[[UIButton alloc]initWithFrame:CGRectMake(_portraitButton.frame.origin.x, _portraitButton.frame.origin.y+_portraitButton.frame.size.height+20, self.view.bounds.size.width, 40)];
-    [_superButton setTitle:@"超级播放器" forState:UIControlStateNormal];
-    [_superButton setBackgroundColor:[UIColor blueColor]];
-    [_superButton addTarget:self action:@selector(intoInpuInfoVC:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:_superButton];
-    _pusherButton=[[UIButton alloc]initWithFrame:CGRectMake(_superButton.frame.origin.x, _superButton.frame.origin.y+_superButton.frame.size.height+20, self.view.bounds.size.width, 40)];
-    [_pusherButton setTitle:@"推流测试" forState:UIControlStateNormal];
-    [_pusherButton setBackgroundColor:[UIColor blueColor]];
-    [_pusherButton addTarget:self action:@selector(intoInpuInfoVC:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:_pusherButton];
-    _downloadButton=[[UIButton alloc]initWithFrame:CGRectMake(_pusherButton.frame.origin.x, _pusherButton.frame.origin.y+_pusherButton.frame.size.height+20, self.view.bounds.size.width, 40)];
+    UIImageView *logoIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mz_home_logo"]];
+    logoIV.frame = CGRectMake((self.view.frame.size.width - 100*MZ_RATE)/2.0, 110, 100*MZ_RATE, 146*MZ_RATE);
+    [self.view addSubview:logoIV];
+    
+    _downloadButton=[[UIButton alloc]initWithFrame:CGRectMake(48, self.view.frame.size.height - 90 - 48, self.view.bounds.size.width - 96, 48)];
     [_downloadButton setTitle:@"下载测试" forState:UIControlStateNormal];
-    [_downloadButton setBackgroundColor:[UIColor blueColor]];
+    [_downloadButton setTitleColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1] forState:UIControlStateNormal];
+    [_downloadButton setBackgroundColor:[UIColor clearColor]];
     [_downloadButton addTarget:self action:@selector(downloadClick) forControlEvents:UIControlEventTouchDown];
+    [_downloadButton.layer setCornerRadius:25];
+    [_downloadButton.layer setMasksToBounds:YES];
+    [_downloadButton.layer setBorderColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor
+     ];
+    [_downloadButton.layer setBorderWidth:1.0];
     [self.view addSubview:_downloadButton];
+    
+    _pusherButton=[[UIButton alloc]initWithFrame:CGRectMake(_downloadButton.frame.origin.x, _downloadButton.frame.origin.y - 20 - 48, _downloadButton.frame.size.width, _downloadButton.frame.size.height)];
+    [_pusherButton setTitle:@"推流测试" forState:UIControlStateNormal];
+    [_pusherButton setTitleColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1] forState:UIControlStateNormal];
+    [_pusherButton setBackgroundColor:[UIColor clearColor]];
+    [_pusherButton addTarget:self action:@selector(intoInpuInfoVC:) forControlEvents:UIControlEventTouchDown];
+    [_pusherButton.layer setCornerRadius:25];
+    [_pusherButton.layer setMasksToBounds:YES];
+    [_pusherButton.layer setBorderColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor
+     ];
+    [_pusherButton.layer setBorderWidth:1.0];
+    [self.view addSubview:_pusherButton];
+    
+    _playButton=[[UIButton alloc]initWithFrame:CGRectMake(_downloadButton.frame.origin.x, _pusherButton.frame.origin.y - 20 - 48, _downloadButton.frame.size.width, _downloadButton.frame.size.height)];
+    [_playButton setTitle:@"直播/回放" forState:UIControlStateNormal];
+    [_playButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_playButton setBackgroundColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1]];
+    [_playButton addTarget:self action:@selector(intoInpuInfoVC:) forControlEvents:UIControlEventTouchDown];
+    [_playButton.layer setCornerRadius:25];
+    [_playButton.layer setMasksToBounds:YES];
+    [self.view addSubview:_playButton];
 }
 
 - (void)intoInpuInfoVC:(UIButton *)sender  {
-    if (sender == _portraitButton) {
-        MZInputViewController *vc = [[MZInputViewController alloc] initWithFrom:MZInputFromPortrait];
+    [MZSDKBusinessManager setDebug:YES];
+    if (sender == _pusherButton) {
+        MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (sender == _superButton) {
-        MZInputViewController *vc = [[MZInputViewController alloc] initWithFrom:MZInputFromSuper];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if (sender == _pusherButton) {
-        MZInputViewController *vc = [[MZInputViewController alloc] initWithFrom:MZInputFromLive];
+    } else {
+        MZInputViewController *vc = [[MZInputViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

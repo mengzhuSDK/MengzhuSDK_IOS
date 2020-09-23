@@ -8,6 +8,7 @@
 
 #import "MZVerticalPlayerViewController.h"
 #import "MZVerticalPlayerView.h"
+#import "UIView+MZPlayPermission.h"
 
 @interface MZVerticalPlayerViewController ()<MZVerticalPlayerViewProtocol>
 @property (nonatomic ,strong) MZVerticalPlayerView *verticalPlayerView;
@@ -18,26 +19,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setBaseProperty];
+    self.view.backgroundColor = [UIColor blackColor];
+    [self setupUI];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
 }
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [self setupUI];
-   
-}
-- (void)setBaseProperty{
-    self.view.backgroundColor = [UIColor grayColor];
-}
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-//   5 销毁播放器
-}
+
 #pragma mark - View Helper
 
 - (void)viewWillLayoutSubviews {
@@ -45,22 +35,27 @@
     self.verticalPlayerView.frame = self.view.bounds;
 }
 
--(void)setupUI
-{
-//    初始化带UI的竖屏竖屏播放器View
+- (void)setupUI  {
+    //    初始化带UI的竖屏竖屏播放器View
     self.verticalPlayerView = [[MZVerticalPlayerView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:self.verticalPlayerView];
     //    设置代理接收回调
     self.verticalPlayerView.delegate = self;
     
-    if (self.ticket_id.length) {// 通过活动ID进行播放
-        [self.verticalPlayerView playVideoWithLiveIDString:self.ticket_id];
-    } else if (self.mvURLString.length) {// 通过播放地址进行播放本地视频
+    if (self.ticket_id.length) {//通过直播ID播放视频
+        // 检测是否有权限观看此视频
+        [self.view checkPlayPermissionWithTicketId:self.ticket_id phone:[MZBaseUserServer currentUser].phone success:^(BOOL isPermission) {
+            if (isPermission) {
+                [self.view addSubview:self.verticalPlayerView];
+                [self.verticalPlayerView playVideoWithLiveIDString:self.ticket_id];
+            }
+        } cancelButtonClick:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    } else if (self.mvURLString.length) {
+        [self.view addSubview:self.verticalPlayerView];
         [self.verticalPlayerView playVideoWithLocalMVURLString:self.mvURLString];
     }
 }
-
-
 
 //toast提示 测试使用
 -(void)sv_showMessage:(NSString*)message;{

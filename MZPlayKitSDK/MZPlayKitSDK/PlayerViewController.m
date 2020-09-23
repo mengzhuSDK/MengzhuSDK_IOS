@@ -98,7 +98,7 @@
     _field.borderStyle = UITextBorderStyleRoundedRect;
     _field.delegate = self;
     _field.backgroundColor=[UIColor redColor];
-    [_btnView addSubview:_field];
+    [_btnView addSubview:_field];//
     _playBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, _field.frame.origin.y+_field.frame.size.height+20, 50, 30)];
     [_playBtn setTitle:@"播放" forState:UIControlStateNormal];
     _playBtn.backgroundColor=[UIColor blueColor];

@@ -4,14 +4,11 @@ inhibit_all_warnings!
 use_frameworks!
 target'MZPlayKitSDK'do
 
-pod 'MZCoreSDKLibrary','2.3.0' #盟主SDK的核心依赖库，最新版本2.3.0
-
-pod 'MZDownLoaderSDK','2.3.0' #盟主的下载器SDK，最新版本2.3.0
-
-pod 'MZMediaSDK','2.3.0' #盟主业务组件，最新版2.3.0
-
-pod 'MZPlayerSDK','2.3.0' #盟主播放器SDK，最新版本2.3.0
-
-pod 'MZPushFlowSDK','2.3.0' #盟主直播推流SDK，最新版本2.3.0
+pod 'MZPushFlowSDK','2.3.0'
+pod 'MZCoreSDKLibrary','2.4.0'
+pod 'MZMediaSDK','2.4.0'
+pod 'MZPlayerSDK','2.4.0'
+pod 'MZDownLoaderSDK','2.4.0'
+pod 'MZChatSDK','2.4.0'
 
 end

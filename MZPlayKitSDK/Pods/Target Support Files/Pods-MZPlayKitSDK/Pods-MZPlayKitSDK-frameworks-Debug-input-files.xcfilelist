@@ -5,6 +5,7 @@ ${BUILT_PRODUCTS_DIR}/GTMBase64/GTMBase64.framework
 ${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework
 ${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework
+${PODS_ROOT}/MZChatSDK/MZChatSDK/MZChatSDK.framework
 ${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary/MZCoreSDKLibrary.framework
 ${BUILT_PRODUCTS_DIR}/MZEmojiLabel/MZEmojiLabel.framework
 ${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.framework

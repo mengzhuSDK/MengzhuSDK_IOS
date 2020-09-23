@@ -162,7 +162,7 @@ typedef enum {
 
 //默认请求超时时间
 #define MZTimeout  60
-#define KCacheNetSeverItem MZ_APP_ver
+#define KCacheNetSeverItem [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 #define KCacheNetSeverItem_Timeout 3600*24*14
 
 //首页数据缓存参数

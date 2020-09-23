@@ -39,6 +39,11 @@
 #pragma mark - 防录屏组件
 #import "MZPreventRecordScreenLabel.h"
 
+#pragma mark - 广告播放器
+#import "MZAdvertisementPlayerView.h"
+
+
+
 #pragma mark - 盟主自己播放器
 #import "MZVideoBaseView.h"
 #import "MZSlider.h"

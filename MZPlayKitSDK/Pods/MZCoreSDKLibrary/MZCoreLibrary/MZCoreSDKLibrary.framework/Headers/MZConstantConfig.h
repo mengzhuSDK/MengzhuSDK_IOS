@@ -5,6 +5,7 @@
 //  Created by sunxianhao on 2020/6/28.
 //  Copyright © 2020 mengzhu.com. All rights reserved.
 //
+#import "MZBaseGlobalTools.h"
 
 #ifndef MZConstantConfig_h
 #define MZConstantConfig_h
@@ -34,7 +35,7 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 
 #define isiPhone      (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
-#define MZ_RATE         ([UIScreen mainScreen].bounds.size.width/375.0)//以ip6为标准 ip5缩小 ip6p放大 zoom
+#define MZ_RATE         (MZ_SW/375.0)//以ip6为标准 ip5缩小 ip6p放大 zoom
 #define WeaklySelf(weakSelf)  __weak __typeof(&*self)weakSelf = self
 
 #pragma mark 颜色设置宏

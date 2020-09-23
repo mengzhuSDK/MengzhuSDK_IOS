@@ -133,7 +133,7 @@ typedef NS_ENUM(NSUInteger, MsgType) {
     MsgTypeSeckillStartMsg,//秒杀组开始秒杀的通知
     MsgTypeSeckillEndMsg,//秒杀组秒杀结束的通知
     MsgTypeGoodsAdUpdate,//商品广告消息推送
-
+    MsgTypeGoodsDropOffUpdate,//商品下架消息推送
     MsgTypeNewReplyMsg,//我的问答有一条新回复
     MsgTypePlay,//点击开始播放或者自动开始播放（{tid:1001526, speed:1.25} 直播的speed恒为1）
     MsgTypeEnd,//点击暂停或者（视频/直播）结束 1001526

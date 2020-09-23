@@ -39,6 +39,14 @@
 @property (nonatomic,   copy) NSString *notice_content;//公告内容
 @end
 
+/** 公告配置 */
+@interface MZPrizeInfo : NSObject
+@property (nonatomic, strong) NSString *access_url;//抽奖链接
+@property (nonatomic, strong) NSString *prize_modify_address;//完善地址链接
+@property (nonatomic, strong) NSString *id;//抽奖ID
+@property (nonatomic,assign) BOOL show_tips;
+@end
+
 /** 签到配置 */
 @interface MZSignInfo : NSObject
 @property (nonatomic,   copy) NSString *channel_id;//频道ID
@@ -94,7 +102,11 @@
 @property (nonatomic, assign) BOOL isShowDocument;//是否显示文档
 
 @property (nonatomic, assign) BOOL isShowSign;//是否显示签到
+@property (nonatomic, assign) BOOL isShowPrize;//是否显示抽奖
+@property (nonatomic, assign) BOOL isShowVideoBeforeAD;//是否暖场图
 @property (nonatomic, strong) MZSignInfo *signInfo;//签到配置
+@property (nonatomic, strong) MZPrizeInfo *prizeInfo;//抽奖配置
 
+@property (nonatomic, assign) BOOL video_advert;//是否有视频前广告
 @end
 

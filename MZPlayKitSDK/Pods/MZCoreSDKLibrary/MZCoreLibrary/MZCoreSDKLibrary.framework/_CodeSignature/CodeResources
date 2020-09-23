@@ -8,9 +8,21 @@
 		<data>
 		vl8UK77Up7tzvHS4ifmshVxgNUU=
 		</data>
+		<key>Headers/HDAutoADModel.h</key>
+		<data>
+		w5w6WmiPAb1ugla7UpzQV2AdzaI=
+		</data>
+		<key>Headers/HDCustomTextADModel.h</key>
+		<data>
+		M6pM3M1nDIwVAz1c2B+RjCAER5w=
+		</data>
 		<key>Headers/MZAPPApiClient.h</key>
 		<data>
 		e3qB7wuJcjYLUUMk79vXjzO6Dqw=
+		</data>
+		<key>Headers/MZActMsg.h</key>
+		<data>
+		TvGTFrICPLwA8rFl3dQwtacEYQ8=
 		</data>
 		<key>Headers/MZActionSheetView.h</key>
 		<data>
@@ -18,7 +30,7 @@
 		</data>
 		<key>Headers/MZActivityComment.h</key>
 		<data>
-		RzF5C2NIC+C1MV3msg45zYrwVdU=
+		bNxIPQBcZlVM0n9mRksu6fS38EE=
 		</data>
 		<key>Headers/MZActivityConfig.h</key>
 		<data>
@@ -62,7 +74,7 @@
 		</data>
 		<key>Headers/MZBaseImageTools.h</key>
 		<data>
-		lKEpYAhh4/p9986lvGbjUIl7KMs=
+		UYiJTzHbPtwLHoPDEnU70hqn9wc=
 		</data>
 		<key>Headers/MZBaseLayout.h</key>
 		<data>
@@ -86,7 +98,7 @@
 		</data>
 		<key>Headers/MZBasePresenter.h</key>
 		<data>
-		6fW/D9k/X0yK+Of0BtZg3L3TjyA=
+		Avh6hdlmowoTyuRrRVBeOljgKog=
 		</data>
 		<key>Headers/MZBasePresenterProtocol.h</key>
 		<data>
@@ -110,7 +122,7 @@
 		</data>
 		<key>Headers/MZCommenComment.h</key>
 		<data>
-		gwREQRVaYtZQatMC36nvpSoaT+w=
+		iCLcGNus+OB0ecJNLIgV0ryWZds=
 		</data>
 		<key>Headers/MZComposition.h</key>
 		<data>
@@ -118,15 +130,19 @@
 		</data>
 		<key>Headers/MZConstantConfig.h</key>
 		<data>
-		nSwSA6+W5TC1HSGCOLy7iyYcw7o=
+		kM3SvWuaM/X4HVzaRVGd2PHUZbc=
 		</data>
 		<key>Headers/MZCoreNetOperate.h</key>
 		<data>
-		eabmM7aPbTeheXjicSRNN8Ufuhc=
+		583TZg3Kq9NMIBdF5i6tqkXncZk=
 		</data>
 		<key>Headers/MZCoreSDKLibrary.h</key>
 		<data>
-		nBeXk5lSzQApUaDJUPpmRoxik8Y=
+		4NvRw5b9YXENEttAIBjgSrbTHGU=
+		</data>
+		<key>Headers/MZCoreSDKNetWork.h</key>
+		<data>
+		nQ/n45+a1yi/U4tLyrRWs2SUnFQ=
 		</data>
 		<key>Headers/MZCreatPredictTipsModel.h</key>
 		<data>
@@ -144,6 +160,18 @@
 		<data>
 		MAKDcnUsuH2pxYJg49+vMWzvnHo=
 		</data>
+		<key>Headers/MZGlobalContentModel.h</key>
+		<data>
+		RnuK5i/niueJY4EH+NQS2AEFKsQ=
+		</data>
+		<key>Headers/MZGoodsListModel.h</key>
+		<data>
+		lLktoTEUqjCsKIjpqTZ2sVYeNmM=
+		</data>
+		<key>Headers/MZGoodsListOuterModel.h</key>
+		<data>
+		tcxeTR6+CsrKCcvVh8U9mGjK1Kg=
+		</data>
 		<key>Headers/MZImageUpload.h</key>
 		<data>
 		5PDHmuoUM8i2TTIQFtzE1Og8l2M=
@@ -160,6 +188,10 @@
 		<data>
 		ecNiCZooPgIZU5jRihMYpjl+Lo8=
 		</data>
+		<key>Headers/MZLongPollDataModel.h</key>
+		<data>
+		fA49PnyX7sptfiQoW/jiQe95w2M=
+		</data>
 		<key>Headers/MZLottie.h</key>
 		<data>
 		WNhc7ht6Ih5FjHEdKFAAzQ1fuGg=
@@ -174,7 +206,7 @@
 		</data>
 		<key>Headers/MZNetSeverUrlModel.h</key>
 		<data>
-		ojDpOVpuVeXlmQyLnq+BHPV9oUQ=
+		yfcsS6ihQTJNKVfqal7P6Q/1zko=
 		</data>
 		<key>Headers/MZParameterCommon.h</key>
 		<data>
@@ -186,7 +218,7 @@
 		</data>
 		<key>Headers/MZPredictManageCreatRecommendView.h</key>
 		<data>
-		5PdfZ7xD6KHxxI4Inm9cRQ7+tc4=
+		9UZvEgFH19jjJ+BYDDZgCurOOlk=
 		</data>
 		<key>Headers/MZRefresh.h</key>
 		<data>
@@ -256,9 +288,21 @@
 		<data>
 		uy/JSycORU3y0cyJb5M6DBRHBa4=
 		</data>
+		<key>Headers/MZRightContenModel.h</key>
+		<data>
+		PVBY973P3BYvYob5qlQxVatKP/4=
+		</data>
+		<key>Headers/MZRightModel.h</key>
+		<data>
+		JWdAX35gM00HRXluCJgxYwHsuSk=
+		</data>
 		<key>Headers/MZSDKMessageTextView.h</key>
 		<data>
 		kEQzkEVLJLRnZnYwG6k/ISFvV7Y=
+		</data>
+		<key>Headers/MZSingleContentModel.h</key>
+		<data>
+		t/3MRcmibswE7I47JgmNNhRGFNE=
 		</data>
 		<key>Headers/MZStatisticsStystem.h</key>
 		<data>
@@ -362,7 +406,75 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		NIjV7o5fyA4eZfaSNET5VgQtenw=
+		JUheeS6PJCBR6T21Nd6hcEWL64E=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/MZ_ADFocusDefaultImage@2x.png</key>
+		<data>
+		bSSV/U+PE7gMQLBhaa6ZQPJrr3s=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/MZ_ADFocusDefaultImage@3x.png</key>
+		<data>
+		RBwztHg/HQqdboOAo6782ylTm4s=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/MZ_GoodsFocusDefaultImage@2x.png</key>
+		<data>
+		ZJ4ZbSpXQFlDhNh6il7dcfrTwIw=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/MZ_GoodsFocusDefaultImage@3x.png</key>
+		<data>
+		EN/GmvVcDGtyLaYUvdeuIpFu1OU=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_barnnerCover_default@2x.png</key>
+		<data>
+		K3eCfMcrLwXzJHQ41OHMEK3WXB8=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_barnnerCover_default@3x.png</key>
+		<data>
+		ZVaUJqX0vpV6Q8W/86aW5qb/I9g=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_channelShare_placeHolder@2x.png</key>
+		<data>
+		pX5Yf1BqnRqgTotuzeVc1cmYSpI=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_cover_default@2x.png</key>
+		<data>
+		w+pSyPeuYIohXFXQEwdHk5b39ZY=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_cover_default@3x.png</key>
+		<data>
+		sXMZNTf7eix2VPTQGw+viuU2m1Q=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_gift_placeHolder@2x.png</key>
+		<data>
+		AYuV9VXWCreWd5GSUHlWGXEFZaI=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_gift_placeHolder@3x.png</key>
+		<data>
+		HUoBxO8CABPFhBqYpTOLMCwGFSg=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_goods_defaultImage@2x.png</key>
+		<data>
+		0TD0X400pAOA5tHIbFYjQHPIvMI=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_goods_defaultImage@3x.png</key>
+		<data>
+		FcI0y6CW/PfI747cZ0k7/6TmdpQ=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_personPlaceHold@2x.png</key>
+		<data>
+		1LkETMtkTariW1w3wQOONxaFCRU=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_personPlaceHold@3x.png</key>
+		<data>
+		s4EDyFBg7JcDitCKC4vu5HeMiFw=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_qrDefaultImage@2x.png</key>
+		<data>
+		qdWk7VuXdsA0LYTFBpyEbswacXQ=
+		</data>
+		<key>MZCoreSDKLibrary.bundle/mz_qrDefaultImage@3x.png</key>
+		<data>
+		Y67OUDtuGaMC5svqLoycrezjKbI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -382,6 +494,28 @@
 			H0erjZDVp57DLYHZN5FHZnQv200EDloItDX9bOSpG9g=
 			</data>
 		</dict>
+		<key>Headers/HDAutoADModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			w5w6WmiPAb1ugla7UpzQV2AdzaI=
+			</data>
+			<key>hash2</key>
+			<data>
+			IeqDboMJSCsWPPv0doFC3p6NaC298cr3Xj9XTc0jgL4=
+			</data>
+		</dict>
+		<key>Headers/HDCustomTextADModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			M6pM3M1nDIwVAz1c2B+RjCAER5w=
+			</data>
+			<key>hash2</key>
+			<data>
+			i1vDLf2EOfqu8MWws7ickSkjvuiV0uqeZg0Xn2h2dO4=
+			</data>
+		</dict>
 		<key>Headers/MZAPPApiClient.h</key>
 		<dict>
 			<key>hash</key>
@@ -391,6 +525,17 @@
 			<key>hash2</key>
 			<data>
 			IMLpsSFYomHF4GBCAikUN8xaIcCgipyGjKqraU/S0mE=
+			</data>
+		</dict>
+		<key>Headers/MZActMsg.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			TvGTFrICPLwA8rFl3dQwtacEYQ8=
+			</data>
+			<key>hash2</key>
+			<data>
+			E7rbOf4hxGBFepLZ8hs64Tn2luPJDDGzSjWapGD+BT4=
 			</data>
 		</dict>
 		<key>Headers/MZActionSheetView.h</key>
@@ -408,11 +553,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RzF5C2NIC+C1MV3msg45zYrwVdU=
+			bNxIPQBcZlVM0n9mRksu6fS38EE=
 			</data>
 			<key>hash2</key>
 			<data>
-			ggAYgGkozAMJlVcpS2VGCycag2be7+ZAKty/Fgg55mE=
+			c9U+c5Iqs9qDW4AaKkboS0zqLlhiQI23Dq2xCmoKCyw=
 			</data>
 		</dict>
 		<key>Headers/MZActivityConfig.h</key>
@@ -529,11 +674,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lKEpYAhh4/p9986lvGbjUIl7KMs=
+			UYiJTzHbPtwLHoPDEnU70hqn9wc=
 			</data>
 			<key>hash2</key>
 			<data>
-			XylkS4x75Hvw5Sxwta1ll41rFYFsqjkCrASy5r/y5gQ=
+			zCWyosG77vFhq8uH2T2p70XBdKYSL2ACsb8UmY0MD0w=
 			</data>
 		</dict>
 		<key>Headers/MZBaseLayout.h</key>
@@ -595,11 +740,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6fW/D9k/X0yK+Of0BtZg3L3TjyA=
+			Avh6hdlmowoTyuRrRVBeOljgKog=
 			</data>
 			<key>hash2</key>
 			<data>
-			ejgVDy4fnWIBbj4lRz9l+j2qRwYkEksX85d9Z38Eycs=
+			rVZj2SMK+rrNIddEnTv4SlahtGrE/9KcjCMwVVSY49s=
 			</data>
 		</dict>
 		<key>Headers/MZBasePresenterProtocol.h</key>
@@ -661,11 +806,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gwREQRVaYtZQatMC36nvpSoaT+w=
+			iCLcGNus+OB0ecJNLIgV0ryWZds=
 			</data>
 			<key>hash2</key>
 			<data>
-			FFQi/Go67C37c9ovpuhgZN0ZUKTklRRuyoO1YFwuPyk=
+			LVBCBLORtOjpyLJjasoYbRy1rGBk07BeB1PkaIevxLo=
 			</data>
 		</dict>
 		<key>Headers/MZComposition.h</key>
@@ -683,33 +828,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			nSwSA6+W5TC1HSGCOLy7iyYcw7o=
+			kM3SvWuaM/X4HVzaRVGd2PHUZbc=
 			</data>
 			<key>hash2</key>
 			<data>
-			CWLU4yER+vc5tHLLiKzGgqNhiacNAcnMRYKEK64IYF4=
+			5k1sKpgHiNlnMxl/bMxSjpQTniTyYx1jCwK/vKpIjy0=
 			</data>
 		</dict>
 		<key>Headers/MZCoreNetOperate.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			eabmM7aPbTeheXjicSRNN8Ufuhc=
+			583TZg3Kq9NMIBdF5i6tqkXncZk=
 			</data>
 			<key>hash2</key>
 			<data>
-			cVT4Npf7viUFpYYp2ioFCjVEyQQBAlHRk/GyXNIU6q0=
+			y2SzpMOXfwkREyiI/aJco0ywEyBdkpE1kXKJooXbHbc=
 			</data>
 		</dict>
 		<key>Headers/MZCoreSDKLibrary.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nBeXk5lSzQApUaDJUPpmRoxik8Y=
+			4NvRw5b9YXENEttAIBjgSrbTHGU=
 			</data>
 			<key>hash2</key>
 			<data>
-			aOunYmM5ZqRXFxTTqyf099GiWAuSA5WXXQQQW1VXZ/o=
+			7ISBcbegDNBheCV/BrGZaXgAkhL5KrHS/WQ5Bw7bi6M=
+			</data>
+		</dict>
+		<key>Headers/MZCoreSDKNetWork.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nQ/n45+a1yi/U4tLyrRWs2SUnFQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			foUDz8oEb1RAVaQPglK3FaLRUlbcTR3Am7QfPeJE7S8=
 			</data>
 		</dict>
 		<key>Headers/MZCreatPredictTipsModel.h</key>
@@ -756,6 +912,39 @@
 			6RbhYUeM4QmTas5LymA4hotbJKF4IsptX2JFfv2iI+U=
 			</data>
 		</dict>
+		<key>Headers/MZGlobalContentModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RnuK5i/niueJY4EH+NQS2AEFKsQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			PHIBfGjCPYVnWlgZLXZS0MfJIQgRxd4kTZ35f2CO614=
+			</data>
+		</dict>
+		<key>Headers/MZGoodsListModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lLktoTEUqjCsKIjpqTZ2sVYeNmM=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZgAaVxpCbEggTrliKwRMJMJMVx1FFXwSwpfkot/2Zxs=
+			</data>
+		</dict>
+		<key>Headers/MZGoodsListOuterModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			tcxeTR6+CsrKCcvVh8U9mGjK1Kg=
+			</data>
+			<key>hash2</key>
+			<data>
+			YapT/AQnxitQBt5teSQ1wYAQSjv2jHjSLGcpEi88wK4=
+			</data>
+		</dict>
 		<key>Headers/MZImageUpload.h</key>
 		<dict>
 			<key>hash</key>
@@ -800,6 +989,17 @@
 			c4CoqckWww9n48mfVoJd9zj0EwbufedSOzNwgQhWZ/A=
 			</data>
 		</dict>
+		<key>Headers/MZLongPollDataModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fA49PnyX7sptfiQoW/jiQe95w2M=
+			</data>
+			<key>hash2</key>
+			<data>
+			hvcw2z2lw9BRjVsIk+UQCJ/SfrFQTBFMsnbeq0bMfsg=
+			</data>
+		</dict>
 		<key>Headers/MZLottie.h</key>
 		<dict>
 			<key>hash</key>
@@ -837,11 +1037,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ojDpOVpuVeXlmQyLnq+BHPV9oUQ=
+			yfcsS6ihQTJNKVfqal7P6Q/1zko=
 			</data>
 			<key>hash2</key>
 			<data>
-			tJ9Jc97rDDbwHX8jSp4AHSKSnquCJ/9KOupnGmvafiY=
+			shhK0UIa2CMqXDWs4KFuS3zCyJuBmNfzc88+f1P92So=
 			</data>
 		</dict>
 		<key>Headers/MZParameterCommon.h</key>
@@ -870,11 +1070,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5PdfZ7xD6KHxxI4Inm9cRQ7+tc4=
+			9UZvEgFH19jjJ+BYDDZgCurOOlk=
 			</data>
 			<key>hash2</key>
 			<data>
-			4JJcKTyY/qtaf2W2GaywiSm2OqdPJfRg7JjZ8hp9hgg=
+			w6WOeMhxmWtU25o0VKmGLx427HuFadcgFMkjSfmHuvA=
 			</data>
 		</dict>
 		<key>Headers/MZRefresh.h</key>
@@ -1064,6 +1264,28 @@
 			T8bxn1TQjlgPvmQN3Ag2/e07m18UltV59sXcO8jBcag=
 			</data>
 		</dict>
+		<key>Headers/MZRightContenModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			PVBY973P3BYvYob5qlQxVatKP/4=
+			</data>
+			<key>hash2</key>
+			<data>
+			JPqOO+2oi7nxjwpb3Ei+dBfcFhXLe1WI2xnSXQt9sK0=
+			</data>
+		</dict>
+		<key>Headers/MZRightModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			JWdAX35gM00HRXluCJgxYwHsuSk=
+			</data>
+			<key>hash2</key>
+			<data>
+			FtA7Vr+dpWxHoEk0UD+Cgs9YUiJLKT5LyYTQ/aFy7kQ=
+			</data>
+		</dict>
 		<key>Headers/MZSDKMessageTextView.h</key>
 		<dict>
 			<key>hash</key>
@@ -1073,6 +1295,17 @@
 			<key>hash2</key>
 			<data>
 			h9wARGUBVO/6ZOJhVD3nsubFRcmX5DjGoHWJDIGgZoo=
+			</data>
+		</dict>
+		<key>Headers/MZSingleContentModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			t/3MRcmibswE7I47JgmNNhRGFNE=
+			</data>
+			<key>hash2</key>
+			<data>
+			gtVqStmnfQmDyVCyRmiLPEQz1k+1Cf0Ro6lq03fva/M=
 			</data>
 		</dict>
 		<key>Headers/MZStatisticsStystem.h</key>
@@ -1348,6 +1581,193 @@
 			<key>hash2</key>
 			<data>
 			bByEMphvPbXGNaDPMQLwMomaNwTcw6WlpB86bOHN+Lc=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/MZ_ADFocusDefaultImage@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			bSSV/U+PE7gMQLBhaa6ZQPJrr3s=
+			</data>
+			<key>hash2</key>
+			<data>
+			NhM72HJpgpfiLOQwDLkElZSsu6KqaIP6YNtebZfJuCo=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/MZ_ADFocusDefaultImage@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RBwztHg/HQqdboOAo6782ylTm4s=
+			</data>
+			<key>hash2</key>
+			<data>
+			XVCCwI51NZjA0csZA8f3iwX1k7L4SPdwYwskNQEJPx8=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/MZ_GoodsFocusDefaultImage@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZJ4ZbSpXQFlDhNh6il7dcfrTwIw=
+			</data>
+			<key>hash2</key>
+			<data>
+			DXktMqZoUlwL19QmTDhZa9ZELfeFpkmtxMVp1mii3dE=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/MZ_GoodsFocusDefaultImage@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			EN/GmvVcDGtyLaYUvdeuIpFu1OU=
+			</data>
+			<key>hash2</key>
+			<data>
+			PfQgctP8/rHp3Wa3+Km+L8plibOK7KyDIYR/+bN0pWE=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_barnnerCover_default@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			K3eCfMcrLwXzJHQ41OHMEK3WXB8=
+			</data>
+			<key>hash2</key>
+			<data>
+			6afVai2Q6Qjf7Idl61ddw6M/TM75w317q0FeS+czHTM=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_barnnerCover_default@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZVaUJqX0vpV6Q8W/86aW5qb/I9g=
+			</data>
+			<key>hash2</key>
+			<data>
+			Ay3OlfeIDdCE+t7SghSRyHbNWsghaJx4k3S9zICS7yU=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_channelShare_placeHolder@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			pX5Yf1BqnRqgTotuzeVc1cmYSpI=
+			</data>
+			<key>hash2</key>
+			<data>
+			weMCZTO5PT4Z59Q5vWMnwDlwD7Z1pqlDis5DPE9oS1s=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_cover_default@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			w+pSyPeuYIohXFXQEwdHk5b39ZY=
+			</data>
+			<key>hash2</key>
+			<data>
+			SsAWRMLMP7t6yr/7t4+W1IQCvO/HVuox/bzOiQAAssg=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_cover_default@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			sXMZNTf7eix2VPTQGw+viuU2m1Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			OYOjs3dLQyJKe6KLMwI2zcD/5KdszSbTHwH1K1oPYKY=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_gift_placeHolder@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			AYuV9VXWCreWd5GSUHlWGXEFZaI=
+			</data>
+			<key>hash2</key>
+			<data>
+			8CEhQFmSkNA3wnA+DNsO90TKAaNTi4Piwasc8Ie0AMw=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_gift_placeHolder@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HUoBxO8CABPFhBqYpTOLMCwGFSg=
+			</data>
+			<key>hash2</key>
+			<data>
+			8HFU2pnC7WwChEKGaATiuXRsdBhhXgPwykoJUn3ncoI=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_goods_defaultImage@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			0TD0X400pAOA5tHIbFYjQHPIvMI=
+			</data>
+			<key>hash2</key>
+			<data>
+			Yutj5C0Neiyp+SgCdlw0t08jdU7b0mkD4GaaoYUqeKo=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_goods_defaultImage@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FcI0y6CW/PfI747cZ0k7/6TmdpQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			fHVK3eGa1prCoYYmK0n0HiJkHp9Vobffu4djlvuuNAE=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_personPlaceHold@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1LkETMtkTariW1w3wQOONxaFCRU=
+			</data>
+			<key>hash2</key>
+			<data>
+			pom+t12IdNIUGlmtMbw5BkNAZkxZt6YM2RsuI+ymykQ=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_personPlaceHold@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			s4EDyFBg7JcDitCKC4vu5HeMiFw=
+			</data>
+			<key>hash2</key>
+			<data>
+			NcqTgD6rUFC6hmyovOXPCqNzImKMVYsI/pXtG8ZuFrc=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_qrDefaultImage@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			qdWk7VuXdsA0LYTFBpyEbswacXQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			CBsi33j5aSMsjYGBau+Gr2qR1yVzc9rx1A2B1dvtTmQ=
+			</data>
+		</dict>
+		<key>MZCoreSDKLibrary.bundle/mz_qrDefaultImage@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Y67OUDtuGaMC5svqLoycrezjKbI=
+			</data>
+			<key>hash2</key>
+			<data>
+			CvYuBsySdwtC1JN78azDEus2qqK5waMTsGnYM2Hm1eI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

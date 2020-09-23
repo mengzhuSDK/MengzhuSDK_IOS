@@ -9,6 +9,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define kPathDownload @"Download"
 
@@ -51,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface MZDownLoaderCenter : NSObject
+
+@property (nonatomic, strong, readonly) AVAudioPlayer *player;//后台常驻音乐播放器
 
 + (instancetype)shareInstanced;
 

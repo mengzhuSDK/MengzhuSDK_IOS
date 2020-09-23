@@ -1,8 +1,8 @@
 //
 //  MZCoreNetOperate.h
-//  MZCoreSDKLibrary
+//  MZPlayKitSDK
 //
-//  Created by LiWei on 2020/8/18.
+//  Created by LiWei on 2020/8/17.
 //  Copyright © 2020 mengzhu.com. All rights reserved.
 //
 

@@ -55,6 +55,7 @@ typedef NS_ENUM(NSInteger, MZMPMovieScalingMode) {
 };
 
 @protocol MZPlayerDelegate <NSObject>
+@optional
 /**
  开始播放状态回调
  */

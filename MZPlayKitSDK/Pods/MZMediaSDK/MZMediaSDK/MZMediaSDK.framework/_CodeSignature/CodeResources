@@ -4,10 +4,6 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Headers/MZActMsg.h</key>
-		<data>
-		nonsgthtZYB96rTooVT0Osc/s44=
-		</data>
 		<key>Headers/MZAudienceListModel.h</key>
 		<data>
 		sFF4SyLw34yaL2oPkBN0xAz0gtY=
@@ -18,19 +14,15 @@
 		</data>
 		<key>Headers/MZChannelManagerCircleModel.h</key>
 		<data>
-		swSIUapU0uHWVePl9Q8e1/KxWZ8=
+		pyzg5AtUAWx6OmNQa/7G2ENCM1g=
 		</data>
 		<key>Headers/MZChannelManagerModel.h</key>
 		<data>
 		P4xmJ7M1taShoPF5NLnGngECySg=
 		</data>
-		<key>Headers/MZChatKitManager.h</key>
-		<data>
-		lCBUvL3hmEA/u6yKL3Ooev8NDXo=
-		</data>
 		<key>Headers/MZDocumentDownloader.h</key>
 		<data>
-		yY6Xemr5Iv+RF5rOpgAjfvHiaBI=
+		1UG8RoueeFlHWG/FW0A6ayJXbRc=
 		</data>
 		<key>Headers/MZDocumentInfo.h</key>
 		<data>
@@ -52,13 +44,13 @@
 		<data>
 		oHnPzsg79iVnUsSgRan1zChWzp0=
 		</data>
-		<key>Headers/MZGoodsListModel.h</key>
+		<key>Headers/MZFuctionWebView.h</key>
 		<data>
-		R2tss+MtDOnoligInItUJYXmTl8=
+		5pMpTBoEyUl3R+EsS9DhYckRXdo=
 		</data>
-		<key>Headers/MZGoodsListOuterModel.h</key>
+		<key>Headers/MZFullScreenAdModel.h</key>
 		<data>
-		tcxeTR6+CsrKCcvVh8U9mGjK1Kg=
+		7FsjHfeMf8YfvkYx8rXc56Si3bo=
 		</data>
 		<key>Headers/MZHomeCenterModel.h</key>
 		<data>
@@ -66,7 +58,7 @@
 		</data>
 		<key>Headers/MZHost.h</key>
 		<data>
-		DwZ1v5f/aNI0j7qxdu7bDOMyoh0=
+		tN5e4F6StKSFzlfF9luv7kK2IwA=
 		</data>
 		<key>Headers/MZHostModel.h</key>
 		<data>
@@ -84,21 +76,13 @@
 		<data>
 		6i4XtXbwCF8p+qVIvoIf7EBnX8M=
 		</data>
-		<key>Headers/MZLongPollDataModel.h</key>
-		<data>
-		2lh/iGidSW+PNs8caOYugdlFgxA=
-		</data>
-		<key>Headers/MZLongPolling.h</key>
-		<data>
-		PhmeaR62FXNYe/gde2eKB+kCUig=
-		</data>
 		<key>Headers/MZMediaSDK.h</key>
 		<data>
-		VKCHQhyWGpkOwHEaPa+DAMq7tHE=
+		yQV1dvSMDjGEsim/Rtb1Br9aT/I=
 		</data>
 		<key>Headers/MZMoviePlayerModel.h</key>
 		<data>
-		rM8eMB4NTCSN8sOym2EcmX+HO6w=
+		3nVhumlOwKTxBMBsQw5V9+Nb8E0=
 		</data>
 		<key>Headers/MZMyselfListModel.h</key>
 		<data>
@@ -106,7 +90,7 @@
 		</data>
 		<key>Headers/MZNetOperate.h</key>
 		<data>
-		zpkmwlew8P5MVPLDJS1agUHNkgE=
+		kM+MFeTf05KVf8kWSiWzUGQ3Iz4=
 		</data>
 		<key>Headers/MZNewLiveActivityTest.h</key>
 		<data>
@@ -116,17 +100,49 @@
 		<data>
 		8zjP7wdQ5BaMazNfXwoQMrSPxCY=
 		</data>
+		<key>Headers/MZOpenScreenDataModel.h</key>
+		<data>
+		YpfKeP0L0MNkQ7q4SiNWgSXrMvg=
+		</data>
+		<key>Headers/MZOpenScreenView.h</key>
+		<data>
+		4pUpCd4SUNiU9tzhr7KEZwr4zsM=
+		</data>
 		<key>Headers/MZPlayInfoModel.h</key>
 		<data>
 		x4/35fQmDGWfz+99PPbS1LY6ULM=
 		</data>
 		<key>Headers/MZPresentListModel.h</key>
 		<data>
-		ek72hFlqPSiWX9az/gnBaAEw9xg=
+		1hvs/36zUHLpvx8vVycM9/rANWg=
+		</data>
+		<key>Headers/MZRollingADCell.h</key>
+		<data>
+		Q1sjBH4BZjCtHsbFI6maW2yb8AA=
+		</data>
+		<key>Headers/MZRollingADCollectionView.h</key>
+		<data>
+		cRFTkNrNXN5i6TkIqxjjNCIdzGc=
+		</data>
+		<key>Headers/MZRollingADModel.h</key>
+		<data>
+		dKCF+ljQFL0abMkcWa/EicJ+lv8=
+		</data>
+		<key>Headers/MZRollingADPresenter.h</key>
+		<data>
+		bCYgCiDC/4szj5fyPN+r4FmId/Q=
+		</data>
+		<key>Headers/MZRollingADView.h</key>
+		<data>
+		uDBVdN9tcRTLwudRc7vROk0/iYk=
+		</data>
+		<key>Headers/MZRollingPageControl.h</key>
+		<data>
+		DtzDk+/xhmxyWn6reU/fJlQmDaM=
 		</data>
 		<key>Headers/MZSDKBusinessManager.h</key>
 		<data>
-		buXTtThIKoSzKuyCqqn6OwLlId0=
+		GwsJf9KqVTHTricB1XH5jcXwD1o=
 		</data>
 		<key>Headers/MZSDKInitManager.h</key>
 		<data>
@@ -138,7 +154,7 @@
 		</data>
 		<key>Headers/MZShare_info.h</key>
 		<data>
-		sOYPQlbfxhtiV2f0p5kRZIxijJM=
+		hLgduwHpsOM1jywqUADWYPze9Gw=
 		</data>
 		<key>Headers/MZSignView.h</key>
 		<data>
@@ -146,15 +162,15 @@
 		</data>
 		<key>Headers/MZUser_info.h</key>
 		<data>
-		KyUDt7OcgLPrEioqG8ldnTvg0qI=
+		OgRxkqhmIDY3o57++JtUvw6dqa0=
 		</data>
 		<key>Headers/MZWebinar_info.h</key>
 		<data>
-		pKPTcvDnEypsFaXWklxx8KBIpgc=
+		LAZpkuYEGUSC274l527KwNK+MEo=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		21NNA1GkXv3ZwA0zvlGqziBl/Us=
+		M3HQKy4rkuc7PmkN/RZkEFLX8ns=
 		</data>
 		<key>MZMediaSDK.bundle/MZ_Document_Download@2x.png</key>
 		<data>
@@ -327,17 +343,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Headers/MZActMsg.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			nonsgthtZYB96rTooVT0Osc/s44=
-			</data>
-			<key>hash2</key>
-			<data>
-			pNAu+yD/jOGAVRyktcmx+gCdn20CGehDUFXIq9hCdwg=
-			</data>
-		</dict>
 		<key>Headers/MZAudienceListModel.h</key>
 		<dict>
 			<key>hash</key>
@@ -364,11 +369,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			swSIUapU0uHWVePl9Q8e1/KxWZ8=
+			pyzg5AtUAWx6OmNQa/7G2ENCM1g=
 			</data>
 			<key>hash2</key>
 			<data>
-			DGAvi7fQlgSTtPiTitlkMJfteKRuPc3QNWjVKPJ+huI=
+			LT6FzplOtSDb+1XCZsz+ThG9+rhpu08pPi8jFUXiQMs=
 			</data>
 		</dict>
 		<key>Headers/MZChannelManagerModel.h</key>
@@ -382,26 +387,15 @@
 			Oy2GAgjFHy7oWwVD2xHbmfvZT9WWVceC75GNR2Sn/N4=
 			</data>
 		</dict>
-		<key>Headers/MZChatKitManager.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			lCBUvL3hmEA/u6yKL3Ooev8NDXo=
-			</data>
-			<key>hash2</key>
-			<data>
-			qbiFqtxK5ilxc7C7X6YZnudsnD72WMa4imtPjCJE6ho=
-			</data>
-		</dict>
 		<key>Headers/MZDocumentDownloader.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			yY6Xemr5Iv+RF5rOpgAjfvHiaBI=
+			1UG8RoueeFlHWG/FW0A6ayJXbRc=
 			</data>
 			<key>hash2</key>
 			<data>
-			Q7Ap+KjeJ6pLx0Y2OUZ04Lq1SnWH+MnDfN5DXVdcBdQ=
+			VlzKBQOxl8S4akq9WI2+tyqbfIc5S81eUIlKJJElkYY=
 			</data>
 		</dict>
 		<key>Headers/MZDocumentInfo.h</key>
@@ -459,26 +453,26 @@
 			ac4VysT115nkXAp2njwGcBTR/nFNg6h/axSuJVHM+uM=
 			</data>
 		</dict>
-		<key>Headers/MZGoodsListModel.h</key>
+		<key>Headers/MZFuctionWebView.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			R2tss+MtDOnoligInItUJYXmTl8=
+			5pMpTBoEyUl3R+EsS9DhYckRXdo=
 			</data>
 			<key>hash2</key>
 			<data>
-			eKxy5daUa7dY3D7/GIMMyQ7S5QMYa+pyuThweVx/+iA=
+			EGCQ58RukzUzTdcvNVVPgIOtYExZM+aP52s1SmOWqVw=
 			</data>
 		</dict>
-		<key>Headers/MZGoodsListOuterModel.h</key>
+		<key>Headers/MZFullScreenAdModel.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			tcxeTR6+CsrKCcvVh8U9mGjK1Kg=
+			7FsjHfeMf8YfvkYx8rXc56Si3bo=
 			</data>
 			<key>hash2</key>
 			<data>
-			YapT/AQnxitQBt5teSQ1wYAQSjv2jHjSLGcpEi88wK4=
+			ucLo+xTMaSwlOjaOrrzUg2bBGIcfF440nazzMRblvlQ=
 			</data>
 		</dict>
 		<key>Headers/MZHomeCenterModel.h</key>
@@ -496,11 +490,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DwZ1v5f/aNI0j7qxdu7bDOMyoh0=
+			tN5e4F6StKSFzlfF9luv7kK2IwA=
 			</data>
 			<key>hash2</key>
 			<data>
-			h2LzRmZWR/nRSj03TFeYcDUB/zXHATuO1FZFxJZDm1s=
+			e9CfF5TbSY7eA3QBGvM8zEOfaA3GRZ9T8CGCUwXYh7c=
 			</data>
 		</dict>
 		<key>Headers/MZHostModel.h</key>
@@ -547,48 +541,26 @@
 			EB7d7GFjx5cA981MSejfvcaynr3RmbOqTYRSzSR+a14=
 			</data>
 		</dict>
-		<key>Headers/MZLongPollDataModel.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			2lh/iGidSW+PNs8caOYugdlFgxA=
-			</data>
-			<key>hash2</key>
-			<data>
-			QQdbYDZRmqGKAMZ9R1dGR5IXP50d5/fMKJUazSUYAHY=
-			</data>
-		</dict>
-		<key>Headers/MZLongPolling.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			PhmeaR62FXNYe/gde2eKB+kCUig=
-			</data>
-			<key>hash2</key>
-			<data>
-			BbClAJtIRecRBPYjg+9RTNOb7RyPzyFxy7b91XunbpQ=
-			</data>
-		</dict>
 		<key>Headers/MZMediaSDK.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VKCHQhyWGpkOwHEaPa+DAMq7tHE=
+			yQV1dvSMDjGEsim/Rtb1Br9aT/I=
 			</data>
 			<key>hash2</key>
 			<data>
-			KE2FFFpCJSMkRPcML1ljquuoWNxZuD7hM1dxg4xFXmM=
+			a10CEGDsY0k4cx5JntyQKlC4LQZjO9orWWYQgqUN/Nw=
 			</data>
 		</dict>
 		<key>Headers/MZMoviePlayerModel.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rM8eMB4NTCSN8sOym2EcmX+HO6w=
+			3nVhumlOwKTxBMBsQw5V9+Nb8E0=
 			</data>
 			<key>hash2</key>
 			<data>
-			tJrZml7e+SKnMY9MDzrnRQlxoziv8Fmjlf3pjXoKH/w=
+			K/AS6SZVhYSeFJPObYI6ndZ3wBC7znNUo2NEHSGmih4=
 			</data>
 		</dict>
 		<key>Headers/MZMyselfListModel.h</key>
@@ -606,11 +578,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zpkmwlew8P5MVPLDJS1agUHNkgE=
+			kM+MFeTf05KVf8kWSiWzUGQ3Iz4=
 			</data>
 			<key>hash2</key>
 			<data>
-			2Xe0SlUE5Wmk2BgMMFBBFjVcT4d0K09ZLKIVGts8zJk=
+			ka+BCgPzZo4b0My7xzNm2d9aqmrmH0R8cYUjQX3MSTE=
 			</data>
 		</dict>
 		<key>Headers/MZNewLiveActivityTest.h</key>
@@ -635,6 +607,28 @@
 			fGra6jaO43xlBeMiksGSBzlBf8HDob+A+RWm7XtQfAE=
 			</data>
 		</dict>
+		<key>Headers/MZOpenScreenDataModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YpfKeP0L0MNkQ7q4SiNWgSXrMvg=
+			</data>
+			<key>hash2</key>
+			<data>
+			W29VPYRwYALX5yh8X5O7rBndyrFTIKXGiDG4/onKb3Y=
+			</data>
+		</dict>
+		<key>Headers/MZOpenScreenView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4pUpCd4SUNiU9tzhr7KEZwr4zsM=
+			</data>
+			<key>hash2</key>
+			<data>
+			FmIuNDSrwx+7BmLyPxknNfHEYtCkkIH/Dy+oMi7s8i4=
+			</data>
+		</dict>
 		<key>Headers/MZPlayInfoModel.h</key>
 		<dict>
 			<key>hash</key>
@@ -650,22 +644,88 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ek72hFlqPSiWX9az/gnBaAEw9xg=
+			1hvs/36zUHLpvx8vVycM9/rANWg=
 			</data>
 			<key>hash2</key>
 			<data>
-			FiqCbBoUbVo/6NQ4qLKsGnbJDMrnpC1R5chU/Tk5YS0=
+			RjObVEbMQpc5UNaPqCxPBeeAZ2CmBkOesoFtXd++8hc=
+			</data>
+		</dict>
+		<key>Headers/MZRollingADCell.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Q1sjBH4BZjCtHsbFI6maW2yb8AA=
+			</data>
+			<key>hash2</key>
+			<data>
+			8vJAsv/Y4m9ETab+/GYvuyQJmZot9hOHneczV02Bze4=
+			</data>
+		</dict>
+		<key>Headers/MZRollingADCollectionView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			cRFTkNrNXN5i6TkIqxjjNCIdzGc=
+			</data>
+			<key>hash2</key>
+			<data>
+			SmGGtlD1xS9/gdmuMl1wIBeYBqndiWwO7htFvQYP5K8=
+			</data>
+		</dict>
+		<key>Headers/MZRollingADModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dKCF+ljQFL0abMkcWa/EicJ+lv8=
+			</data>
+			<key>hash2</key>
+			<data>
+			BztXygnA2L3ZexGRbUWtGIOgXysEJjyvvmCFtmJHzO0=
+			</data>
+		</dict>
+		<key>Headers/MZRollingADPresenter.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			bCYgCiDC/4szj5fyPN+r4FmId/Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			UIZr4AKhQRS59Yzb7xu82LPVAkrj+ww2OxaDL/1XbPY=
+			</data>
+		</dict>
+		<key>Headers/MZRollingADView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uDBVdN9tcRTLwudRc7vROk0/iYk=
+			</data>
+			<key>hash2</key>
+			<data>
+			eFRKulwsEXSVBKBiELt4nXSSWZChmuo87/rJbCiZJL8=
+			</data>
+		</dict>
+		<key>Headers/MZRollingPageControl.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			DtzDk+/xhmxyWn6reU/fJlQmDaM=
+			</data>
+			<key>hash2</key>
+			<data>
+			nB+0VOg4/DYKFU8iAgXRAcVDK1wis8kashTlWoF+mkU=
 			</data>
 		</dict>
 		<key>Headers/MZSDKBusinessManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			buXTtThIKoSzKuyCqqn6OwLlId0=
+			GwsJf9KqVTHTricB1XH5jcXwD1o=
 			</data>
 			<key>hash2</key>
 			<data>
-			3fptp1LN2PlAZo1DDH1Wdzzgz4VnyOlEaV80DAnlwdw=
+			JoRGJFiN9SWT01R67C/XK22J1Emqol5/J8XzliMzPJ0=
 			</data>
 		</dict>
 		<key>Headers/MZSDKInitManager.h</key>
@@ -694,11 +754,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			sOYPQlbfxhtiV2f0p5kRZIxijJM=
+			hLgduwHpsOM1jywqUADWYPze9Gw=
 			</data>
 			<key>hash2</key>
 			<data>
-			bSr+ZuZNyJaiSclmDm3aAm25NeLWZEAoUof/uPPEcv0=
+			uHOjY/QeXqEQQ+KAtK20aHd+zfgxPCI4ZwUUxKxylBg=
 			</data>
 		</dict>
 		<key>Headers/MZSignView.h</key>
@@ -716,22 +776,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KyUDt7OcgLPrEioqG8ldnTvg0qI=
+			OgRxkqhmIDY3o57++JtUvw6dqa0=
 			</data>
 			<key>hash2</key>
 			<data>
-			SjCfAis5LoFs4XAJZ+bzWrUk1qUPf84XzT/rqF8d9aI=
+			eu1XmcDAgNmPBhorHAsrO16LkQ0OhnjlurROY8jszaU=
 			</data>
 		</dict>
 		<key>Headers/MZWebinar_info.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pKPTcvDnEypsFaXWklxx8KBIpgc=
+			LAZpkuYEGUSC274l527KwNK+MEo=
 			</data>
 			<key>hash2</key>
 			<data>
-			W4z4F/GB+bDW2V2CnhMR78byLjeacRsT2UpjcpxCCxM=
+			kPdf6JpLssU483AGU8+BLqTELgA+LLqWlin7KHabj8w=
 			</data>
 		</dict>
 		<key>MZMediaSDK.bundle/MZ_Document_Download@2x.png</key>

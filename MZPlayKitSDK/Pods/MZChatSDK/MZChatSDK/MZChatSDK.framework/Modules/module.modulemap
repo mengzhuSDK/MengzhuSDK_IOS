@@ -1,0 +1,6 @@
+framework module MZChatSDK {
+  umbrella header "MZChatSDK.h"
+
+  export *
+  module * { export * }
+}

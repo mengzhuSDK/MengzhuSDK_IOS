@@ -7,24 +7,20 @@
 //
 
 #import "MZInputViewController.h"
-#import "MZReadyLiveViewController.h"
 #import "MZSuperPlayerViewController.h"
 #import "MZVerticalPlayerViewController.h"
 
-/// 分配的appID和secretKey
-#define MZSDK_AppID @""
-#define MZSDK_SecretKey @""
-
 @interface MZInputViewController ()
-@property (nonatomic, assign) MZInputFrom from;
 
-@property (nonatomic, strong) UITextView *ticket_IDTextView;
-@property (nonatomic, strong) UITextView *uniqueIDTextView;
-@property (nonatomic, strong) UITextView *nameTextView;
-@property (nonatomic, strong) UITextView *avatarTextView;
+@property (nonatomic, strong) UITextField *ticket_IDTextField;//活动ID
+@property (nonatomic, strong) UITextField *uniqueIDTextField;//用户ID
+@property (nonatomic, strong) UITextField *nameTextField;//用户名字
+@property (nonatomic, strong) UITextField *avatarTextField;//用户头像
+@property (nonatomic, strong) UITextField *phoneTextField;//用户手机号
 
-@property (nonatomic, strong) UIButton *nextButton;
-@property (nonatomic ,strong) UISwitch *isDebugSwitch;//是否debug模式
+@property (nonatomic, strong) UIButton *portraitButton;
+@property (nonatomic, strong) UIButton *landspaceButton;
+
 @end
 
 @implementation MZInputViewController
@@ -38,142 +34,155 @@
     [super viewDidDisappear:animated];
 }
 
-- (instancetype)initWithFrom:(MZInputFrom)from {
-    self = [super init];
-    if (self) {
-        self.from = from;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
+    self.navigationItem.title = @"播放";
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 30)];
-    label.textColor = [UIColor blackColor];
-    label.backgroundColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"活动ID和用户信息配置";
+    CGFloat navBarHeight = self.navigationController.navigationBar.frame.size.height+[UIApplication sharedApplication].statusBarFrame.size.height;
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, navBarHeight, self.view.frame.size.width, 44)];
+    label.textColor = [UIColor colorWithRed:122/255.0 green:122/255.0 blue:122/255.0 alpha:1];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = @"信息填写";
     [self.view addSubview:label];
     
-    //  输入框
-    UILabel *tipL1 = [[UILabel alloc] initWithFrame:CGRectMake(0, label.frame.size.height+label.frame.origin.y+30, self.view.bounds.size.width, 20)];
-    [self.view addSubview:tipL1];
-    tipL1.text = @"活动ID：ticket_ID（活动ID）";
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, label.frame.size.height+label.frame.origin.y, self.view.frame.size.width, 44*MZ_RATE*5)];
+    bgView.backgroundColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
+    [self.view addSubview:bgView];
     
-    self.ticket_IDTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, tipL1.frame.size.height+tipL1.frame.origin.y, self.view.bounds.size.width, 30)];
-    self.ticket_IDTextView.backgroundColor = [UIColor cyanColor];
-    self.ticket_IDTextView.keyboardType = UIKeyboardTypeDefault;
-    [self.view addSubview:self.ticket_IDTextView];
-    self.ticket_IDTextView.text = @"10014121";//横屏
-    self.ticket_IDTextView.text = @"10014334";//语音直播
-    self.ticket_IDTextView.text = @"10014584";//竖屏
+    NSDictionary *attrDict = @{NSFontAttributeName:[UIFont systemFontOfSize:14*MZ_RATE],NSForegroundColorAttributeName:[UIColor colorWithRed:122/255.0 green:122/255.0 blue:122/255.0 alpha:1]};
+    
+    NSMutableAttributedString *ticket_IDPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写ticket_id，必填项，例:10014584" attributes:attrDict];
+    NSMutableAttributedString *uniquePlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写第三方用户唯一ID，必填项，例:user888" attributes:attrDict];
+    NSMutableAttributedString *nicknamePlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写用户昵称，空则使用默认名字" attributes:attrDict];
+    NSMutableAttributedString *avatarPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写用户头像地址，空则使用默认头像" attributes:attrDict];
+    NSMutableAttributedString *phonePlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写用户手机号，空则使用默认手机号" attributes:attrDict];
+    
+    UILabel *aRedStar = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 20, 44*MZ_RATE)];
+    aRedStar.backgroundColor = [UIColor clearColor];
+    aRedStar.textAlignment = NSTextAlignmentCenter;
+    aRedStar.textColor = [UIColor redColor];
+    aRedStar.text = @"*";
+    [bgView addSubview:aRedStar];
 
-    UILabel *tipL2 = [[UILabel alloc] initWithFrame:CGRectMake(0, self.ticket_IDTextView.frame.origin.y+self.ticket_IDTextView.frame.size.height, self.view.bounds.size.width, 20)];
-    [self.view addSubview:tipL2];
-    tipL2.text = @"观众信息：uniqueID(传递过来的唯一ID)";
-    self.uniqueIDTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, tipL2.frame.size.height+tipL2.frame.origin.y, self.view.bounds.size.width, 30)];
-    self.uniqueIDTextView.backgroundColor = [UIColor cyanColor];
-    self.uniqueIDTextView.keyboardType = UIKeyboardTypeDefault;
-    [self.view addSubview:self.uniqueIDTextView];
-    self.uniqueIDTextView.text = @"A123456789B123";
+    self.ticket_IDTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, 0, self.view.bounds.size.width - 30, 44*MZ_RATE)];
+    self.ticket_IDTextField.backgroundColor = [UIColor clearColor];
+    self.ticket_IDTextField.keyboardType = UIKeyboardTypeDefault;
+    self.ticket_IDTextField.textColor = [UIColor whiteColor];
+    [self.ticket_IDTextField setAttributedPlaceholder:ticket_IDPlaceStr];
+    self.ticket_IDTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [bgView addSubview:self.ticket_IDTextField];
     
-    UILabel *tipL3 = [[UILabel alloc] initWithFrame:CGRectMake(0, self.uniqueIDTextView.frame.size.height+self.uniqueIDTextView.frame.origin.y, self.view.bounds.size.width, 20)];
-    [self.view addSubview:tipL3];
-    tipL3.text = @"观众信息：NAME（用户昵称）";
-    self.nameTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, tipL3.frame.size.height+tipL3.frame.origin.y, self.view.bounds.size.width, 30)];
-    self.nameTextView.backgroundColor = [UIColor cyanColor];
-    self.nameTextView.keyboardType = UIKeyboardTypeDefault;
-    [self.view addSubview:self.nameTextView];
-    self.nameTextView.text = @"大鸭梨";
+    UILabel *bRedStar = [[UILabel alloc] initWithFrame:CGRectMake(10, self.ticket_IDTextField.frame.size.height+self.ticket_IDTextField.frame.origin.y, 20, 44*MZ_RATE)];
+    bRedStar.backgroundColor = [UIColor clearColor];
+    bRedStar.textAlignment = NSTextAlignmentCenter;
+    bRedStar.textColor = [UIColor redColor];
+    bRedStar.text = @"*";
+    [bgView addSubview:bRedStar];
     
-    UILabel *tipL4 = [[UILabel alloc] initWithFrame:CGRectMake(0, self.nameTextView.frame.size.height+self.nameTextView.frame.origin.y, self.view.bounds.size.width, 20)];
-    [self.view addSubview:tipL4];
-    tipL4.text = @"观众信息：AVATAR（用户头像URL）";
-    self.avatarTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, tipL4.frame.size.height+tipL4.frame.origin.y, self.view.bounds.size.width, 50)];
-    self.avatarTextView.backgroundColor = [UIColor cyanColor];
-    self.avatarTextView.keyboardType = UIKeyboardTypeDefault;
-    [self.view addSubview:self.avatarTextView];
-    self.avatarTextView.text = @"https://cdn.duitang.com/uploads/item/201410/26/20141026191422_yEKyd.thumb.700_0.jpeg";
+    self.uniqueIDTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.ticket_IDTextField.frame.size.height+self.ticket_IDTextField.frame.origin.y, self.view.bounds.size.width - 30, 44*MZ_RATE)];
+    self.uniqueIDTextField.backgroundColor = [UIColor clearColor];
+    self.uniqueIDTextField.keyboardType = UIKeyboardTypeDefault;
+    self.uniqueIDTextField.textColor = [UIColor whiteColor];
+    self.uniqueIDTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [bgView addSubview:self.uniqueIDTextField];
+    [self.uniqueIDTextField setAttributedPlaceholder:uniquePlaceStr];
     
-    self.isDebugSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 90, self.avatarTextView.frame.size.height+self.avatarTextView.frame.origin.y+20, 60, 44.0)];
-    [self.view addSubview:self.isDebugSwitch];
-    self.isDebugSwitch.backgroundColor = [UIColor whiteColor];
-    [self.isDebugSwitch roundChangeWithRadius:31/2.0];
-    [self.isDebugSwitch setOn:YES];
-
-    UILabel *isDebugLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.isDebugSwitch.frame.origin.y, 180, self.isDebugSwitch.frame.size.height)];
-    isDebugLabel.text = @"是否是debug模式";
-    isDebugLabel.adjustsFontSizeToFitWidth = YES;
-    isDebugLabel.backgroundColor = [UIColor whiteColor];
-    isDebugLabel.textColor = [UIColor blackColor];
-    [self.view addSubview:isDebugLabel];
+    self.nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.uniqueIDTextField.frame.size.height+self.uniqueIDTextField.frame.origin.y, self.view.bounds.size.width - 30, 44*MZ_RATE)];
+    self.nameTextField.backgroundColor = [UIColor clearColor];
+    self.nameTextField.keyboardType = UIKeyboardTypeDefault;
+    self.nameTextField.textColor = [UIColor whiteColor];
+    [self.nameTextField setAttributedPlaceholder:nicknamePlaceStr];
+    self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [bgView addSubview:self.nameTextField];
     
-    self.nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.nextButton.frame = CGRectMake(0, isDebugLabel.frame.size.height+isDebugLabel.frame.origin.y+120, self.view.frame.size.width, 44.0);
-    [self.nextButton setBackgroundColor:[UIColor blueColor]];
-    [self.nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.nextButton addTarget:self action:@selector(nextButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.nextButton];
+    self.avatarTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.nameTextField.frame.size.height+self.nameTextField.frame.origin.y, self.view.bounds.size.width - 30, 44*MZ_RATE)];
+    self.avatarTextField.backgroundColor = [UIColor clearColor];
+    self.avatarTextField.keyboardType = UIKeyboardTypeDefault;
+    self.avatarTextField.textColor = [UIColor whiteColor];
+    [self.avatarTextField setAttributedPlaceholder:avatarPlaceStr];
+    self.avatarTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [bgView addSubview:self.avatarTextField];
     
-    switch (self.from) {
-        case MZInputFromLive:
-            self.navigationItem.title = @"推流";
-            [self.nextButton setTitle:@"进入推流详情配置" forState:UIControlStateNormal];
-            self.ticket_IDTextView.hidden = YES;
-            label.text = @"用户信息配置";
-            tipL1.hidden = YES;
-            break;
-        case MZInputFromSuper:
-            self.navigationItem.title = @"超级播放器";
-            [self.nextButton setTitle:@"进入超级播放器" forState:UIControlStateNormal];
-            break;
-        case MZInputFromPortrait:
-            self.navigationItem.title = @"竖屏播放器";
-            [self.nextButton setTitle:@"进入竖屏播放器" forState:UIControlStateNormal];
-            break;
-        default:
-            break;
-    }
-}
-
-- (void)nextButtonClick {
-    switch (self.from) {
-        case MZInputFromLive:
-            [self pusherClick:self.nextButton];
-            break;
-        case MZInputFromSuper:
-            [self onSuperPlayerViewClick:self.nextButton];
-            break;
-        case MZInputFromPortrait:
-            [self onPlayerViewClick];
-            break;
-        default:
-            break;
+    self.phoneTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.avatarTextField.frame.size.height+self.avatarTextField.frame.origin.y, self.view.bounds.size.width - 30, 44*MZ_RATE)];
+    self.phoneTextField.backgroundColor = [UIColor clearColor];
+    self.phoneTextField.keyboardType = UIKeyboardTypeDefault;
+    self.phoneTextField.textColor = [UIColor whiteColor];
+    [self.phoneTextField setAttributedPlaceholder:phonePlaceStr];
+    self.phoneTextField.keyboardType = UIKeyboardTypePhonePad;
+    [bgView addSubview:self.phoneTextField];
+    
+    self.portraitButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.portraitButton.frame = CGRectMake(48*MZ_RATE, bgView.frame.size.height+bgView.frame.origin.y+200, self.view.frame.size.width-96*MZ_RATE, 44*MZ_RATE);
+    [self.portraitButton setBackgroundColor:[UIColor colorWithRed:255/255.0 green:36/255.0 blue:91/255.0 alpha:1]];
+    [self.portraitButton setTitle:@"竖屏播放" forState:UIControlStateNormal];
+    [self.portraitButton.layer setCornerRadius:22*MZ_RATE];
+    [self.portraitButton.layer setMasksToBounds:YES];
+    [self.view addSubview:self.portraitButton];
+    [self.portraitButton addTarget:self action:@selector(onPlayerViewClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.landspaceButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.landspaceButton.frame = CGRectMake(48*MZ_RATE, self.portraitButton.frame.size.height+self.portraitButton.frame.origin.y+20*MZ_RATE, self.view.frame.size.width-96*MZ_RATE, 44*MZ_RATE);
+    [self.landspaceButton setBackgroundColor:[UIColor colorWithRed:255/255.0 green:36/255.0 blue:91/255.0 alpha:1]];
+    [self.landspaceButton setTitle:@"二分屏播放" forState:UIControlStateNormal];
+    [self.landspaceButton.layer setCornerRadius:22*MZ_RATE];
+    [self.landspaceButton.layer setMasksToBounds:YES];
+    [self.view addSubview:self.landspaceButton];
+    [self.landspaceButton addTarget:self action:@selector(onSuperPlayerViewClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    MZUser *user = [MZBaseUserServer currentUser];
+    if (user) {
+        self.uniqueIDTextField.text = user.uniqueID;
+        self.nameTextField.text = user.nickName;
+        self.avatarTextField.text = user.avatar;
+        self.phoneTextField.text = user.phone;
     }
 }
 
 /// 配置用户信息
-- (void)serUserInfoSuccess:(void(^)(BOOL result, NSString *errorString))success {
-    if (self.from != MZInputFromLive) {
-        if (self.ticket_IDTextView.text.length <= 0) {
-            success(NO, @"活动ID不能为空");
-            return;
-        }
+- (void)setUserInfoSuccess:(void(^)(BOOL result, NSString *errorString))success {
+    if (self.ticket_IDTextField.text.length <= 0) {
+        success(NO, @"活动ID不能为空");
+        return;
     }
     
-    if (self.uniqueIDTextView.text.length <= 0) {
+    if (self.uniqueIDTextField.text.length <= 0) {
         success(NO, @"用户ID不能为空");
         return;
     }
     
-    MZUser *user = [[MZUser alloc] init];
+    MZUser *user = [MZBaseUserServer currentUser];
+    if (!user) {
+        user = [[MZUser alloc] init];
+    }
     
 #warning - 用户自己传过来的唯一ID
-    user.uniqueID = self.uniqueIDTextView.text;
-    user.nickName = self.nameTextView.text;
-    user.avatar = self.avatarTextView.text;
+    user.uniqueID = self.uniqueIDTextField.text;
+    
+    if (self.nameTextField.text.length)  {
+        user.nickName = self.nameTextField.text;
+    } else {
+        if (user.nickName.length <= 0) {
+            user.nickName = @"盟主user888";
+        }
+    }
+    
+    if (self.avatarTextField.text.length) {
+        user.avatar = self.avatarTextField.text;
+    } else {
+        if (user.avatar.length <= 0) {
+            user.avatar = @"https://cdn.duitang.com/uploads/item/201410/26/20141026191422_yEKyd.thumb.700_0.jpeg";
+        }
+    }
+    
+    if (self.phoneTextField.text.length) {
+        user.phone = self.phoneTextField.text;
+    } else {
+        if (user.phone.length <= 0) {
+            user.phone = @"19912344321";
+        }
+    }
     
 #warning - 请输入分配给你们的appID和secretKey
     user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
@@ -186,34 +195,41 @@
     
     [MZBaseUserServer updateCurrentUser:user];
     
+    if (self.nameTextField.text.length <= 0) {
+        self.nameTextField.text = user.nickName;
+    }
+    
+    if (self.avatarTextField.text.length <= 0) {
+        self.avatarTextField.text = user.avatar;
+    }
+    
+    if (self.phoneTextField.text.length <= 0) {
+        self.phoneTextField.text = user.phone;
+    }
+    
     success(YES, @"");
 }
 
-
 /// 进入竖屏播放器
--(void)onPlayerViewClick{
-    [MZSDKBusinessManager setDebug:self.isDebugSwitch.isOn];
-    
-    [self serUserInfoSuccess:^(BOOL result, NSString *errorString) {
+- (void)onPlayerViewClick:(UIButton *)sender {
+    WeaklySelf(weakSelf);
+    [self setUserInfoSuccess:^(BOOL result, NSString *errorString) {
         if (result) {
             MZVerticalPlayerViewController *liveVC = [[MZVerticalPlayerViewController alloc]init];
-            liveVC.ticket_id = self.ticket_IDTextView.text;
-            [self.navigationController pushViewController:liveVC  animated:YES];
+            liveVC.ticket_id = weakSelf.ticket_IDTextField.text;
+            [weakSelf.navigationController pushViewController:liveVC  animated:YES];
         } else {
-            [self.view show:errorString];
+            [weakSelf.view show:errorString];
         }
     }];
 }
 
-
 /// 进入超级播放器（二分屏和横屏）
 - (void)onSuperPlayerViewClick:(UIButton *)sender {
-    [MZSDKBusinessManager setDebug:self.isDebugSwitch.isOn];
-    
-    [self serUserInfoSuccess:^(BOOL result, NSString *errorString) {
+    [self setUserInfoSuccess:^(BOOL result, NSString *errorString) {
         if (result) {
             MZSuperPlayerViewController *superPlayerVC = [[MZSuperPlayerViewController alloc] init];
-            superPlayerVC.ticket_id = self.ticket_IDTextView.text;
+            superPlayerVC.ticket_id = self.ticket_IDTextField.text;
             [self.navigationController pushViewController:superPlayerVC animated:YES];
         } else {
             [self.view show:errorString];
@@ -221,30 +237,9 @@
     }];
 }
 
-/// 进入推流界面（直播界面）
--(void)pusherClick:(UIButton *)sender{
-    if (TARGET_IPHONE_SIMULATOR == 1 && TARGET_OS_IPHONE == 1) {
-        [self.view show:@"推流不支持模拟器"];
-    } else {
-        [MZSDKBusinessManager setDebug:self.isDebugSwitch.isOn];
-        
-        [self serUserInfoSuccess:^(BOOL result, NSString *errorString) {
-            if (result) {
-                MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
-                vc.fromTicket_id = @"点击更改";
-                [self.navigationController pushViewController:vc animated:YES];
-            } else {
-                [self.view show:errorString];
-            }
-        }];
-    }
-}
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
-
 
 - (BOOL)shouldAutorotate {
     return YES;
@@ -257,8 +252,5 @@
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return UIInterfaceOrientationPortrait;
 }
-
-
-
 
 @end

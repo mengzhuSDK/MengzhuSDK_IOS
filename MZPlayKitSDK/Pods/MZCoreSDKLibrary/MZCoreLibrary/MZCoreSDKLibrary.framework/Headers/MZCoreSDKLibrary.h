@@ -28,12 +28,23 @@
 #import "MZBaseModel.h"
 #import "MZBaseNetModel.h"
 
+#import "MZGoodsListModel.h"
+#import "MZGoodsListOuterModel.h"
+#import "HDAutoADModel.h"
+#import "HDCustomTextADModel.h"
+#import "MZActMsg.h"
+#import "MZGlobalContentModel.h"
+#import "MZLongPollDataModel.h"
+#import "MZRightContenModel.h"
+#import "MZRightModel.h"
+#import "MZSingleContentModel.h"
+
 #pragma mark - utils
 #import "MZTimer.h"
 
 #pragma mark - network
 #import "MZApiClient.h"
-
+#import "MZCoreSDKNetWork.h"
 #import "MZStatisticsStystem.h"
 #import "NetworkPathsCommon.h"
 

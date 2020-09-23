@@ -17,7 +17,6 @@ static double onlineButtonOffsetY = 5;
 
 @interface MZHistoryChatView ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 @property (nonatomic ,strong) UITableView *chatTable;
-@property (nonatomic ,strong) NSMutableArray *tempArr;
 @property (nonatomic ,assign) NSInteger refreshTag;//是否刷新新数据 ;
 @property (nonatomic, assign) int loadOldCount;
 @property (nonatomic, assign) int onlineCountDownNum;
@@ -32,7 +31,10 @@ static double onlineButtonOffsetY = 5;
 
 @property (nonatomic, assign) BOOL isCoverAtChatView;
 
+@property (nonatomic, strong) MZChatApiManager *chatApiManager;//聊天API具柄
+
 @end
+
 @implementation MZHistoryChatView
 
 - (void)layoutSubviews {
@@ -87,7 +89,6 @@ static double onlineButtonOffsetY = 5;
     self.isHideChatHistory = NO;
     self.isCoverAtChatView = NO;
     
-    WeaklySelf(weakSelf);
     _chatTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     if (@available(iOS 11.0, *)) {
         _chatTable.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -103,6 +104,7 @@ static double onlineButtonOffsetY = 5;
     _chatTable.showsVerticalScrollIndicator = NO;
     [self addSubview:_chatTable];
     [self setSubViewAutoresizingMask:_chatTable];
+
 }
 
 -(void)setSubViewAutoresizingMask:(UIView *)view
@@ -119,20 +121,27 @@ static double onlineButtonOffsetY = 5;
 -(void)setActivity:(MZMoviePlayerModel *)activity
 {
     _activity = activity;
+    [self.chatApiManager.allMessages removeAllObjects];
+    [self.chatApiManager.filterMessages removeAllObjects];
+    [self addFilterUserId:activity.chat_uid];
     [self.dataArray removeAllObjects];
     [self.chatTable reloadData];
     [self loadDataIsMore:NO];
 }
 
+-(void)setHostModel:(MZHostModel *)hostModel
+{
+    _hostModel = hostModel;
+    [self addFilterUserId:hostModel.uid];
+}
 
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
     if (self.isHideChatHistory) {
         return;
     }
-    WeaklySelf(weakSelf);
     if (self.refreshTag == 1) {
         _loadOldCount ++;
-        MZLongPollDataModel*dataModel = [_dataArray firstObject];
+        MZLongPollDataModel*dataModel = [self.chatApiManager.allMessages firstObject];//lbx 没请请求数据的时候都从totalDataArray里获取数据
         _chatTable.userInteractionEnabled = NO;
         //拉去的20条有可能会与以前的重复，所以需要去重
         __weak typeof(self)weakSelf = self;
@@ -140,30 +149,11 @@ static double onlineButtonOffsetY = 5;
         if(!_activity || !dataModel)
             return;
         
-        [MZSDKBusinessManager reqChatHistoryWith:self.activity.ticket_id offset:self.dataArray.count limit:20 last_id:dataModel.id success:^(id responseObject) {
+        [self.chatApiManager reqChatHistoryWith:self.activity.ticket_id offset:self.chatApiManager.allMessages.count limit:20 last_id:dataModel.id success:^(id responseObject) {
             weakSelf.chatTable.userInteractionEnabled = YES;
-            NSMutableArray *ary = [NSMutableArray array];
-//            for (NSDictionary* dict in responseObject) {
-//
-//                MZLongPollDataModel *dataModel = [MZLongPollDataModel initWithChatHistoryDict:dict];
-//                for (MZLongPollDataModel *oldDataModel in weakSelf.dataArray) {
-//                    if([dataModel.id isEqualToString:oldDataModel.id]){
-//                        dataModel =nil;
-//                    }
-//                }
-//                if(dataModel){
-//                    [ary addObject:dataModel];
-//                }
-//            }
-//            if(ary.count==0){
-//                [weakSelf show:@"没有更多消息了"];
-//                return ;
-//            }
-            weakSelf.chatTable.userInteractionEnabled = YES;
-            NSMutableArray *TEMPArr =responseObject;
-            float height1 = weakSelf.chatTable.contentSize.height;
-            [weakSelf.dataArray insertObjects:TEMPArr atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, TEMPArr.count)]];
             
+            weakSelf.dataArray = responseObject;
+            float height1 = weakSelf.chatTable.contentSize.height;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [scrollView setContentOffset:CGPointMake(0, 0)];
                 [weakSelf.chatTable reloadData];
@@ -235,15 +225,19 @@ static double onlineButtonOffsetY = 5;
             }
         }else{
             if(weakSelf.dataArray.count == 0){
-                [weakSelf.dataArray addObject:dataModel];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf.chatTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
-                });
-                
+                [weakSelf.chatApiManager addMessage:dataModel success:^(NSMutableArray<MZLongPollDataModel *> * _Nonnull showMessages) {
+                    weakSelf.dataArray = showMessages;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.chatTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+                    });
+                }];
             }else{
                 //重复数据不予加入
                 if(![weakSelf arrayContainsObject:dataModel]){
-                    [weakSelf.dataArray addObject:dataModel];
+                    [weakSelf.chatApiManager addMessage:dataModel success:^(NSMutableArray<MZLongPollDataModel *> * _Nonnull showMessages) {
+                        weakSelf.dataArray = showMessages;
+                    }];
+
                     if ([dataModel.data.uniqueID isEqualToString:[MZBaseUserServer currentUser].uniqueID]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [weakSelf reloadData];
@@ -254,7 +248,6 @@ static double onlineButtonOffsetY = 5;
                                 [weakSelf scrollViewToBottom];
                             }
                         });
-                        
                     }else{
                         dispatch_async(dispatch_get_main_queue(), ^{
                             if(weakSelf.isTabInBottom){//底部
@@ -334,7 +327,7 @@ static double onlineButtonOffsetY = 5;
     __weak __typeof(self)weakSelf = self;
 //    self.activity.ticket_id
     
-    [MZSDKBusinessManager reqChatHistoryWith:self.activity.ticket_id offset:self.dataArray.count limit:20 last_id:nil success:^(NSMutableArray *responseObject) {
+    [self.chatApiManager reqChatHistoryWith:self.activity.ticket_id offset:self.chatApiManager.allMessages.count limit:20 last_id:nil success:^(NSMutableArray *responseObject) {
         [weakSelf afterLoadData:responseObject isMore:isMore];
     } failure:^(NSError *error) {
         
@@ -346,11 +339,15 @@ static double onlineButtonOffsetY = 5;
     if (notice.length <= 0) {
         return NO;
     }
-    [self.dataArray addObject:[self getNotice:notice]];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.chatTable reloadData];
-        [self scrollViewToBottom];
-    });
+    
+    WeaklySelf(weakSelf);
+    [self.chatApiManager addNotice:[self getNotice:notice] success:^(NSMutableArray<MZLongPollDataModel *> * _Nonnull showMessages) {
+        weakSelf.dataArray = showMessages;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.chatTable reloadData];
+            [weakSelf scrollViewToBottom];
+        });
+    }];
     return YES;
 }
 - (MZLongPollDataModel *)getNotice:(NSString *)notice
@@ -369,10 +366,9 @@ static double onlineButtonOffsetY = 5;
         return;
     }
 
-    _tempArr = result;
     _chatTable.userInteractionEnabled = YES;
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _tempArr.count)];
-    [self.dataArray insertObjects:_tempArr atIndexes:indexSet];
+    self.dataArray = result;
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.chatTable reloadData];
         [self scrollViewToBottom];
@@ -417,6 +413,9 @@ static double onlineButtonOffsetY = 5;
     return _onlineIconBtn;
 }
 
+-(void)iconCLick:(MZOnlineTipView *)tipView {
+    
+}
 
 -(void)reloadData
 {
@@ -434,6 +433,13 @@ static double onlineButtonOffsetY = 5;
             [self.chatTable scrollToRowAtIndexPath:lastIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
     });
+}
+
+///切换 只看主播 按钮状态后，展示对应的消息
+- (void)updateOnlyHostState:(BOOL)isOnlyHost {
+    self.chatApiManager.isOnlyHost = isOnlyHost;
+    self.dataArray = self.chatApiManager.isOnlyHost ? self.chatApiManager.filterMessages : self.chatApiManager.allMessages;
+    [self scrollToBottom];
 }
 
 #pragma mark - tableViewDelegate
@@ -589,7 +595,21 @@ static double onlineButtonOffsetY = 5;
     
 }
 
+- (MZChatApiManager *)chatApiManager {
+    if (!_chatApiManager) {
+        _chatApiManager = [[MZChatApiManager alloc] init];
+        _chatApiManager.isOnlyHost = NO;
+    }
+    return _chatApiManager;
+}
 
-
+/// 添加过滤条件的用户Id
+- (void)addFilterUserId:(NSString *)userId {
+    if (userId.length) {
+        [self.chatApiManager.filterUserIds addObject:userId];
+    }
+    MZUser *user = [MZBaseUserServer currentUser];
+    [self.chatApiManager.filterUserIds addObject:user.uniqueID];
+}
 
 @end

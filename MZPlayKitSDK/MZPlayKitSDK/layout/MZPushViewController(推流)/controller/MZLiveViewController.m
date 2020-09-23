@@ -239,7 +239,8 @@ CGFloat BtnSpace = 28 + 12;
         if(_chatToolBar==nil)
         {
             [self initHideKeyBoardBtn];
-            _chatToolBar = [[MZMessageToolView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - [MZMessageToolView defaultHeight],  self.view.frame.size.width, [MZMessageToolView defaultHeight]) type:MZMessageToolBarTypeAllBtn];
+            _chatToolBar = [[MZMessageToolView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - [MZMessageToolView defaultHeight],  self.view.frame.size.width, [MZMessageToolView defaultHeight]) type:MZMessageToolBarTypeAllBtn isShowHostButton:NO];
+            _chatToolBar.isLive = YES;
             _chatToolBar.maxLength = 100;
             _chatToolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
             _chatToolBar.delegate = self;
@@ -275,7 +276,6 @@ CGFloat BtnSpace = 28 + 12;
 #pragma mark - View LifeCycle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"startFullScreen" object:nil];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.tabBarController.tabBar.hidden = YES;
     [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -743,6 +743,7 @@ CGFloat BtnSpace = 28 + 12;
             if (_isFrontCameraType) {
                 _isTorchType = NO;
             }
+
             [_pushManager setTorch:_isTorchType];
             [self.flashLightBtn setSelected:_isTorchType];
         }
@@ -1109,13 +1110,14 @@ CGFloat BtnSpace = 28 + 12;
 
 - (void)addKeyBoardNoti{
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification
+                                             selector:@selector(keyboardWillChangeFrame:)
+                                                 name:UIKeyboardWillChangeFrameNotification
                                                object:nil];
+
 }
 
 - (void)removeKeyBoardNoti{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 /**
@@ -1186,6 +1188,13 @@ CGFloat BtnSpace = 28 + 12;
         }
         case mz_rtmp_state_connected: {
             NSLog(@"连接成功");
+            
+            static BOOL firstConnected = YES;
+            // 设置是否全体禁言
+            if (firstConnected && self.isBlockAllChat) {
+                [self blockAllOrAlowChat];
+            }
+            firstConnected = NO;
             break;
         }
         case mz_rtmp_state_closed: {
@@ -1663,7 +1672,8 @@ CGFloat BtnSpace = 28 + 12;
             if(_chatToolBar==nil)
             {
                 [self initHideKeyBoardBtn];
-                _chatToolBar = [[MZMessageToolView alloc] initWithFrame:CGRectMake(0, MZTotalScreenHeight - [MZMessageToolView defaultHeight],  MZ_SW, [MZMessageToolView defaultHeight]) type:MZMessageToolBarTypeAllBtn];
+                _chatToolBar = [[MZMessageToolView alloc] initWithFrame:CGRectMake(0, MZTotalScreenHeight - [MZMessageToolView defaultHeight],  MZ_SW, [MZMessageToolView defaultHeight]) type:MZMessageToolBarTypeAllBtn isShowHostButton:NO];
+                _chatToolBar.isLive = YES;
                 _chatToolBar.maxLength = 100;
                 _chatToolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
                 _chatToolBar.delegate = self;
@@ -1772,8 +1782,8 @@ CGFloat BtnSpace = 28 + 12;
     // Dispose of any resources that can be recreated.
 }
 
-- (void) keyboardWasShown:(NSNotification *) notif{
-//    _chatToolBar.frame = CGRectMake(_chatToolBar.origin.x, MZTotalScreenHeight  - _chatToolBar.frame.size.height, _chatToolBar.width, _chatToolBar.height);
+- (void) keyboardWillChangeFrame:(NSNotification *) notif {
+    
 }
 
 - (void)clickBtn{

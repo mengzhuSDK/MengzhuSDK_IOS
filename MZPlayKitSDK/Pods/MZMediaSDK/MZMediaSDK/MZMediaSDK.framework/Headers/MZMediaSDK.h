@@ -23,26 +23,19 @@ FOUNDATION_EXPORT const unsigned char MZMediaSDKVersionString[];
 #import "MZNetOperate.h"
 
 #pragma mark - MZLiveActivity
-#import "MZActMsg.h"
 #import "MZLiveModel.h"
-#import "MZLongPollDataModel.h"
 
 #pragma mark - comment
 #import "MZEventTag.h"
-
-#pragma mark - chat
-#import "MZLongPolling.h"
 
 #pragma mark - MZPushServer
 #import "MZNewLiveActivityTest.h"
 
 #pragma mark - 网络请求句柄 && 聊天句柄 && SDK初始化句柄
 #import "MZSDKBusinessManager.h"
-#import "MZChatKitManager.h"
 #import "MZSDKInitManager.h"
 
 #pragma mark - model
-#import "MZGoodsListModel.h"
 #import "MZLiveFinishModel.h"
 #import "MZBlackListModel.h"
 #import "MZHomeCenterModel.h"
@@ -50,7 +43,6 @@ FOUNDATION_EXPORT const unsigned char MZMediaSDKVersionString[];
 #import "MZMoviePlayerModel.h"
 #import "MZHostModel.h"
 #import "MZPlayInfoModel.h"
-#import "MZGoodsListOuterModel.h"
 #import "MZOnlineUserListModel.h"
 
 #pragma mark - push_model
@@ -74,3 +66,19 @@ FOUNDATION_EXPORT const unsigned char MZMediaSDKVersionString[];
 
 #import "MZDocumentListView.h"
 #import "MZDocumentListCell.h"
+
+#pragma mark - 滚动广告
+#import "MZRollingADView.h"
+#import "MZRollingADModel.h"
+#import "MZRollingADPresenter.h"
+#import "MZRollingPageControl.h"
+#import "MZRollingADCollectionView.h"
+#import "MZRollingADCell.h"
+
+#pragma mark - 开屏广告
+#import "MZOpenScreenView.h"
+#import "MZOpenScreenDataModel.h"
+#import "MZFullScreenAdModel.h"
+
+#pragma mark - 抽奖
+#import "MZFuctionWebView.h"

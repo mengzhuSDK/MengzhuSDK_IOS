@@ -7,7 +7,6 @@
 //
 
 #import "MZWatchHeaderMessageView.h"
-#import "MZLiveViewController.h"
 
 @interface MZWatchHeaderMessageView()
 {

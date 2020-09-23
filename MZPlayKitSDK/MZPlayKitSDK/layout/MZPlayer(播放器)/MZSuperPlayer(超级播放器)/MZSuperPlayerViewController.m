@@ -8,6 +8,7 @@
 
 #import "MZSuperPlayerViewController.h"
 #import "MZSuperPlayerView.h"
+#import "UIView+MZPlayPermission.h"
 
 @interface MZSuperPlayerViewController ()<MZSuperPlayerViewDelegate>
 @property (nonatomic, assign) BOOL isLandSpace;//横竖屏记录,默认竖屏
@@ -39,8 +40,15 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     
-    [self.view addSubview:self.superPlayerView];
-    [self.superPlayerView playVideoWithLiveIDString:self.ticket_id];
+    // 检测是否有权限观看此视频
+    [self.view checkPlayPermissionWithTicketId:self.ticket_id phone:[MZBaseUserServer currentUser].phone success:^(BOOL isPermission) {
+        if (isPermission) {
+            [self.view addSubview:self.superPlayerView];
+            [self.superPlayerView playVideoWithLiveIDString:self.ticket_id];
+        }
+    } cancelButtonClick:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 #pragma mark - 懒加载

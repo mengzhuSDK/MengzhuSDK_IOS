@@ -6,6 +6,7 @@
 //  Copyright © 2016年 www.mengzhu.com. All rights reserved.
 //
 
+#import "MZBaseNetModel.h"
 #import <Foundation/Foundation.h>
 
 @class MZupdateModel;

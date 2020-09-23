@@ -10,5 +10,4 @@
 
 @interface MZReadyLiveViewController : UIViewController
 
-@property (nonatomic, copy) NSString *fromTicket_id;//传递过来的活动ID
 @end

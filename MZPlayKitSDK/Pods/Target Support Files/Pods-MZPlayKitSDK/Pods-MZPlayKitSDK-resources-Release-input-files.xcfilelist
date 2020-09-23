@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-MZPlayKitSDK/Pods-MZPlayKitSDK-resources.sh
+${PODS_ROOT}/MZChatSDK/MZChatSDK/MZChatSDKResource.bundle
 ${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary/MZCoreSDKLibrary.bundle
 ${PODS_ROOT}/MZDownLoaderSDK/MZDownLoaderSDK/MZM3U8DownLoaderSDKBundle.bundle
 ${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.bundle

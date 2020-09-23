@@ -26,7 +26,7 @@
 
 typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
-@interface MZVerticalPlayerView()<MZMessageToolBarDelegate,UITextViewDelegate,MZChatKitDelegate,MZGoodsRequestProtocol,MZHistoryChatViewProtocol,MZMultiMenuDelegate,MZMediaPlayerViewDelegate,MZDLNAViewDelegate,MZPlaybackRateDelegate>
+@interface MZVerticalPlayerView()<MZMessageToolBarDelegate,UITextViewDelegate,MZChatKitDelegate,MZGoodsRequestProtocol,MZHistoryChatViewProtocol,MZMultiMenuDelegate,MZMediaPlayerViewDelegate,MZDLNAViewDelegate,MZPlaybackRateDelegate,MZVideoOpenADViewProtocol>
 
 @property (nonatomic, strong) UIView *playerBackgroundView;//播放器上盖的一层View，用于承载各模块view
 
@@ -84,9 +84,12 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
 @property (nonatomic, assign) BOOL isShowVote;//是否显示投票
 @property (nonatomic, assign) BOOL isShowSign;//是否显示签到
+@property (nonatomic, assign) BOOL isShowPrize;//是否显示抽奖
 @property (nonatomic, assign) BOOL isShowDocuments;//是否显示文档
+@property (nonatomic, assign) BOOL isShowVideoBeforeAD;//是否显示暖场图
 
 @property (nonatomic, strong) MZAnimationView *audioAnimationView;//静音直播的动画展示
+@property (nonatomic ,strong)MZOpenScreenView *openScreenView;//暖场图
 
 @end
 
@@ -102,7 +105,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         self.selectedRate = 1;
-
+        
         self.isChat = YES;
         self.isRecordScreen = NO;
         self.isCanBarrage = YES;
@@ -110,6 +113,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         
         self.isShowVote = NO;//默认不展示投票
         self.isShowSign = NO;//默认不展示签到
+        self.isShowPrize = NO;//默认不展示抽奖
         self.isShowDocuments = NO;//默认不展示文档
         
         [self customAddSubviews];
@@ -135,7 +139,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     self.playerBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
     self.playerBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self addSubview:self.playerBackgroundView];
-        
+    
     [self createTopView];
     [self createBottomButtons];
     [self setupChatView];
@@ -339,7 +343,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     _goodsListView.outGoodsListView = ^{
         weakSelf.goodsListView = nil;
     };
-
+    
     [self addSubview:_goodsListView];
 }
 
@@ -457,7 +461,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             self.goodsNumLabel.text = [NSString stringWithFormat:@"%d",goodsListOuterModel.total];
             self.goodsNumLabel.hidden = !goodsListOuterModel.total;
         }
-
+        
         if(self.goodsListArr.count == 0){
             self.chatView.frame = CGRectMake(0, MZHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), MZWidth, 198*MZ_RATE);
         }else{
@@ -467,7 +471,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         if(block){
             block(self.goodsListArr, self.totalNum);
         }
-
+        
         [self tipGoodAnimationWithGoodsListArr:self.goodsListArr];
         
     } failure:^(NSError *error) {
@@ -530,7 +534,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         NSLog(@"还没有添加播放窗口");
         return;
     }
-
+    
     [self preventRecordScreenLabelIsShow:NO];
     
     WeaklySelf(weakSelf);
@@ -584,7 +588,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         if (!self.barrageBackgroundView) {
             // 竖屏独有的弹幕frame
             CGFloat topSpace = IPHONE_X ? 20 : 0;
-
+            
             self.barrageBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, topSpace + 22*MZ_RATE + 44*MZ_RATE, self.playerView.playerManager.view.size.width, self.playerView.playerManager.view.size.height)];
             self.barrageBackgroundView.backgroundColor = [UIColor clearColor];
             [self.playerView.playerManager.view addSubview:self.barrageBackgroundView];
@@ -624,7 +628,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     actMsg.barrage = isBarrage;
     msgModel.data = actMsg;
     [self.chatView addChatData:msgModel];
-        
+    
     if (self.isShowBarrage && isBarrage) {
         [MZBarrageManager sendBarrageWithMessage:msgModel.data.msgText userName:msgModel.userName avatar:msgModel.userAvatar isMe:YES result:^(BOOL isSuccess, NSError * _Nonnull error) {
             if (isSuccess) {
@@ -680,14 +684,20 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         if (frame.size.width < frame.size.height) {
             if (_chatToolBar == nil) {
                 [self addSubview:self.hideKeyBoardBtn];
-
-                _chatToolBar = [[MZMessageToolView alloc] initWithFrame:CGRectMake(0, MZTotalScreenHeight - [MZMessageToolView defaultHeight],  MZ_SW, [MZMessageToolView defaultHeight]) type:MZMessageToolBarTypeAllBtn];
+                
+                _chatToolBar = [[MZMessageToolView alloc] initWithFrame:CGRectMake(0, MZTotalScreenHeight - [MZMessageToolView defaultHeight],  MZ_SW, [MZMessageToolView defaultHeight]) type:MZMessageToolBarTypeAllBtn isShowHostButton:YES];
                 _chatToolBar.maxLength = 100;
                 _chatToolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
                 _chatToolBar.delegate = self;
                 _chatToolBar.isBarrage = self.isCanBarrage;
                 _chatToolBar.hidden = YES;
                 [self addSubview:_chatToolBar];
+                
+                // 监听 只看主播 按钮的状态
+                WeaklySelf(weakSelf);
+                [_chatToolBar listenOnlyHostState:^(BOOL isOnlyHostMessage) {
+                    [weakSelf.chatView updateOnlyHostState:isOnlyHostMessage];
+                }];
             }
         }
     }
@@ -700,108 +710,18 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     [[MZSDKInitManager sharedManager]initSDK:^(id responseObject) {
         //    获取播放信息
         [MZSDKBusinessManager reqPlayInfo:ticket_id success:^(MZMoviePlayerModel *responseObject) {
-            //        http://vod.t.zmengzhu.com/record/base/hls-sd/a954304bb6482c3c00083250.m3u8
+            
             NSLog(@"%@",responseObject);
             self.playInfo = responseObject;
-            
-            // 设置 历史记录是否隐藏
-            self.chatView.isHideChatHistory = self.playInfo.isHideChatHistory;
-            
-            self.chatView.activity = self.playInfo;
-                        
-            /// 设置封面
-            if (self.playInfo.cover.length) {
-                [self.playerView showPreviewImage:self.playInfo.cover];
+            if(responseObject.isShowVideoBeforeAD){
+               self.openScreenView = [[MZOpenScreenView alloc]initializationADViewWithTicketID:responseObject.ticket_id delegate:self];
+                [KeyWindow addSubview:self.openScreenView];
+                MZOpenScreenDataModel *model = [self.openScreenView getOpenScreenADData];
+                NSLog(@"%@",model);
+            }else{
+                [self initPlayer];
             }
-            
-//            @property (nonatomic, assign) int user_status;// 用户状态 1:正常 2:被踢出 3:禁言
-            self.bottomTalkBtn.isBanned = self.playInfo.user_status == 1 ? NO : YES;
-            if (self.playInfo.user_status == 1) {//正常
-                [self show:@"状态：正常"];
-            } else if (self.playInfo.user_status == 2) {//被踢出
-                [self show:@"状态：被踢出"];
-            } else if (self.playInfo.user_status == 3) {//禁言
-                [self show:@"状态：禁言"];
-            }
-            
-            self.isCanBarrage = self.playInfo.isBarrage;
-            self.isChat = self.playInfo.isChat;
-            self.isRecordScreen = self.playInfo.isRecord_screen;
-            
-            // 加载商品总个数
-            [MZGoodsListPresenter getGoodsListCountWithTicket_id:self.ticket_id finished:^(MZGoodsListOuterModel * _Nullable goodsListOuterModel) {
-                self.totalNum = goodsListOuterModel.total;
-                self.goodsNumLabel.text = [NSString stringWithFormat:@"%d",goodsListOuterModel.total];
-                
-                self.goodsNumLabel.hidden = !goodsListOuterModel.total;
-
-                if(goodsListOuterModel.list.count == 0){
-                    self.chatView.frame = CGRectMake(0, MZHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), MZWidth, 198*MZ_RATE);
-                }else{
-                    self.chatView.frame = CGRectMake(0, MZHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), MZWidth, 130*MZ_RATE);
-                }
-                [self tipGoodAnimationWithGoodsListArr:goodsListOuterModel.list];
-            }];
-            
-            // 播放视频
-            [self playerVideoWithURLString:responseObject.video.url];
-            
-            // 设置人气缓存
-            self.popularityNum = [self.playInfo.popular longLongValue];
-            // 更新主播UI
-            [self updateUIWithPlayInfo];
-            
-            // 非语音直播
-            if (self.playInfo.live_type != 1) {
-                if ([self.audioAnimationView isAnimationPlaying]) {
-                    [self.audioAnimationView stop];
-                }
-                [self.audioAnimationView removeFromSuperview];
-                self.audioAnimationView = nil;
-            }
-            
-            // 加载聊天SDK
-            if (self.chatKitManager) {
-                [self.chatKitManager closeLongPoll];
-                [self.chatKitManager closeSocketIO];
-                self.chatKitManager.delegate = nil;
-                self.chatKitManager = nil;
-            }
-            self.chatKitManager = [[MZChatKitManager alloc] init];
-            self.chatKitManager.delegate = self;
-            
-            [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
-            
-            // 获取前50位观众信息
-            [MZAudienceView getOnlineUsersWithTicket_id:self.ticket_id chat_idOfMe:self.playInfo.chat_uid finished:^(NSArray<MZOnlineUserListModel *> *onlineUsers) {
-                [self updateUIWithOnlineUsers:onlineUsers];
-                
-                __block BOOL isHaveMe = NO;
-                [onlineUsers enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    MZOnlineUserListModel *onlineUser = (MZOnlineUserListModel *)obj;
-                    if ([onlineUser.uid isEqualToString:self.playInfo.chat_uid]) {
-                        isHaveMe = YES;
-                        *stop = YES;
-                    }
-                }];
-                
-                if (onlineUsers.count < 50) {//在线人数低于50人的处理
-                    self.onlineUsersTotalCount = isHaveMe ? (int)onlineUsers.count : (int)onlineUsers.count + 1;
-                } else {//在线人数高于50人的处理
-                    self.onlineUsersTotalCount = [self.playInfo.webinar_onlines intValue] + 1;
-                }
-                [self.liveAudienceHeaderView updateOnlineUserTotalCount:self.onlineUsersTotalCount];
-            } failed:^(NSString *errorString) {
-                NSLog(@"获取前50名观众信息出错");
-            }];
-            
-            // 添加公告
-            if (self.playInfo.notice.notice_content.length) {
-                [self.chatView addNotice:self.playInfo.notice.notice_content];
-            } else {
-                [self.chatView addNotice:@"依法对直播内容进行24小时巡查，禁止传播暴力血腥、低俗色情、招嫖诈骗、非法政治活动等违法信息，坚决维护社会文明健康环境"];
-            }
-            
+ 
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
         }] ;
@@ -814,7 +734,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             if (self.delegate && [self.delegate respondsToSelector:@selector(updateHostUserInfo:)]) {
                 [self.delegate updateHostUserInfo:self.hostModel];
             }
-            
+            self.chatView.hostModel = self.hostModel;
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
         }];
@@ -823,12 +743,113 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     }];
 }
 
+-(void)initPlayer{
+    // 设置 历史记录是否隐藏
+    self.chatView.isHideChatHistory = self.playInfo.isHideChatHistory;
+    
+    self.chatView.activity = self.playInfo;
+    
+    /// 设置封面
+    if (self.playInfo.cover.length) {
+        [self.playerView showPreviewImage:self.playInfo.cover];
+    }
+    
+    //            @property (nonatomic, assign) int user_status;// 用户状态 1:正常 2:被踢出 3:禁言
+    self.bottomTalkBtn.isBanned = self.playInfo.user_status == 1 ? NO : YES;
+    if (self.playInfo.user_status == 1) {//正常
+        [self show:@"状态：正常"];
+    } else if (self.playInfo.user_status == 2) {//被踢出
+        [self show:@"状态：被踢出"];
+    } else if (self.playInfo.user_status == 3) {//禁言
+        [self show:@"状态：禁言"];
+    }
+    
+    self.isCanBarrage = self.playInfo.isBarrage;
+    self.isChat = self.playInfo.isChat;
+    self.isRecordScreen = self.playInfo.isRecord_screen;
+    
+    // 加载商品总个数
+    [MZGoodsListPresenter getGoodsListCountWithTicket_id:self.ticket_id finished:^(MZGoodsListOuterModel * _Nullable goodsListOuterModel) {
+        self.totalNum = goodsListOuterModel.total;
+        self.goodsNumLabel.text = [NSString stringWithFormat:@"%d",goodsListOuterModel.total];
+        
+        self.goodsNumLabel.hidden = !goodsListOuterModel.total;
+        
+        if(goodsListOuterModel.list.count == 0){
+            self.chatView.frame = CGRectMake(0, MZHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), MZWidth, 198*MZ_RATE);
+        }else{
+            self.chatView.frame = CGRectMake(0, MZHeight - 265*MZ_RATE - (IPHONE_X ? 34 : 0), MZWidth, 130*MZ_RATE);
+        }
+        [self tipGoodAnimationWithGoodsListArr:goodsListOuterModel.list];
+    }];
+    
+    // 播放视频
+    [self playerVideoWithURLString:self.playInfo.video.url];
+    
+    // 设置人气缓存
+    self.popularityNum = [self.playInfo.popular longLongValue];
+    // 更新主播UI
+    [self updateUIWithPlayInfo];
+    
+    // 非语音直播
+    if (self.playInfo.live_type != 1) {
+        if ([self.audioAnimationView isAnimationPlaying]) {
+            [self.audioAnimationView stop];
+        }
+        [self.audioAnimationView removeFromSuperview];
+        self.audioAnimationView = nil;
+    }
+    
+    // 加载聊天SDK
+    if (self.chatKitManager) {
+        [self.chatKitManager closeLongPoll];
+        [self.chatKitManager closeSocketIO];
+        self.chatKitManager.delegate = nil;
+        self.chatKitManager = nil;
+    }
+    self.chatKitManager = [[MZChatKitManager alloc] init];
+    self.chatKitManager.delegate = self;
+    
+    [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
+    
+    // 获取前50位观众信息
+    [MZAudienceView getOnlineUsersWithTicket_id:self.ticket_id chat_idOfMe:self.playInfo.chat_uid finished:^(NSArray<MZOnlineUserListModel *> *onlineUsers) {
+        [self updateUIWithOnlineUsers:onlineUsers];
+        
+        __block BOOL isHaveMe = NO;
+        [onlineUsers enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            MZOnlineUserListModel *onlineUser = (MZOnlineUserListModel *)obj;
+            if ([onlineUser.uid isEqualToString:self.playInfo.chat_uid]) {
+                isHaveMe = YES;
+                *stop = YES;
+            }
+        }];
+        
+        if (onlineUsers.count < 50) {//在线人数低于50人的处理
+            self.onlineUsersTotalCount = isHaveMe ? (int)onlineUsers.count : (int)onlineUsers.count + 1;
+        } else {//在线人数高于50人的处理
+            self.onlineUsersTotalCount = [self.playInfo.webinar_onlines intValue] + 1;
+        }
+        [self.liveAudienceHeaderView updateOnlineUserTotalCount:self.onlineUsersTotalCount];
+    } failed:^(NSString *errorString) {
+        NSLog(@"获取前50名观众信息出错");
+    }];
+    
+    // 添加公告
+    if (self.playInfo.notice.notice_content.length) {
+        [self.chatView addNotice:self.playInfo.notice.notice_content];
+    } else {
+        [self.chatView addNotice:@"依法对直播内容进行24小时巡查，禁止传播暴力血腥、低俗色情、招嫖诈骗、非法政治活动等违法信息，坚决维护社会文明健康环境"];
+    }
+}
+
+
 /// 播放 直播/回放
 - (void)playerVideoWithURLString:(NSString *)videoString {
     
     MZMediaPlayerView *view = (MZMediaPlayerView *)[self.playerBackgroundView viewWithTag:186];
     if (view) [view removeFromSuperview];
-        
+    
     self.playerView.tag = 186;
     
     int videoStatus = 1;//默认直播
@@ -838,10 +859,10 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     
     [self.playerView playWithURLString:videoString isLive:(videoStatus == 2 ? NO : YES) showView:self.playerBackgroundView delegate:self interfaceOrientation:MZMediaControlInterfaceOrientationMaskPortrait movieModel:MZMPMovieScalingModeAspectFit];
     [self.playerBackgroundView sendSubviewToBack:self.playerView];
-
+    
     [self.playerView startPlayer];
     [self.playerView.playerManager setPauseInBackground:NO];
-        
+    
     [self preventRecordScreenLabelIsShow:self.isRecordScreen];
     
     [self.unusualTipView setHidden:YES];
@@ -884,6 +905,37 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         });
     }];
 }
+
+#pragma mark MZVideoOpenADViewProtocol
+
+// 点击图片的回调
+/// @param link 图片对应的连接
+- (void)videoOpenADViewTapImageLink:(NSString *)link {
+    if(link.length == 0){
+        
+    }else{
+        //[self.openScreenView closeTheOpenADViewNOCallBack];
+        //这里跳相应的链接。若返回播放器，需要再次调用initPlayer才能播放
+    }
+
+}
+- (void)ADScrollViewLoadImagesSuccess {//图片全部加载完成
+    
+}
+
+- (void)ADScrollViewLoadImagesFailure {//图片全部加载失败
+    
+}
+//点击关闭
+- (void)videoOpenADViewClose {
+    [self initPlayer];
+}
+//返回数据回调
+- (void)ADOpenScreenDataIsReadyWithSuccessData:(id)data modelData:(MZOpenScreenDataModel *)modelData error:(NSError *)error{
+    NSLog(@"%@ %@ %@",data,modelData,error);
+}
+
+
 
 #pragma mark - MZDLNAViewDelegate
 /// 投屏成功开始播放
@@ -1062,7 +1114,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             // 配置在线总人数
             self.onlineUsersTotalCount++;
             [self.liveAudienceHeaderView updateOnlineUserTotalCount:self.onlineUsersTotalCount];
-
+            
             break;
         }
         case MsgTypeOffline: {//下线一个用户
@@ -1126,7 +1178,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
                         }
                     }];
                 }
-            }  
+            }
             break;
         }
         case MsgTypeGoodsUrl: {//推广商品
@@ -1166,7 +1218,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
                 [self addSubview:self.realyEndView];
                 
                 CGFloat topSpace = IPHONE_X ? 20 : 0;
-
+                
                 UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
                 closeButton.frame = CGRectMake(MZ_SW - 44*MZ_RATE - 8*MZ_RATE, topSpace + 20*MZ_RATE, 44*MZ_RATE, 44*MZ_RATE);
                 [closeButton addTarget:self action:@selector(closeButtonDidclick:) forControlEvents:UIControlEventTouchUpInside];
@@ -1192,20 +1244,24 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         case MsgTypeWebinarFunctionMsg: {//活动配置更改
             for (MZSingleContentModel *model in msg.data.webinar_content) {
                 if ([model.type isEqualToString:@"disable_chat"]) {//聊天室是否可以聊天
-                     self.isChat = !model.is_open;
-                 } else if ([model.type isEqualToString:@"barrage"]) {//弹幕是否打开
-                     self.isCanBarrage = model.is_open;
-                 } else if ([model.type isEqualToString:@"record_screen"]) {//防录屏是否开启
-                     self.isRecordScreen = model.is_open;
-                     [self preventRecordScreenLabelIsShow:self.isRecordScreen];
-                 } else if ([model.type isEqualToString:@"vote"]) {//是否显示投票
-                     self.isShowVote = model.is_open;
-                 } else if ([model.type isEqualToString:@"sign"]) {//是否显示签到
+                    self.isChat = !model.is_open;
+                } else if ([model.type isEqualToString:@"barrage"]) {//弹幕是否打开
+                    self.isCanBarrage = model.is_open;
+                } else if ([model.type isEqualToString:@"record_screen"]) {//防录屏是否开启
+                    self.isRecordScreen = model.is_open;
+                    [self preventRecordScreenLabelIsShow:self.isRecordScreen];
+                } else if ([model.type isEqualToString:@"vote"]) {//是否显示投票
+                    self.isShowVote = model.is_open;
+                } else if ([model.type isEqualToString:@"sign"]) {//是否显示签到
 #warning - 签到关闭是实时的，开启的话只有重新进入视频才可以
-                     self.isShowVote = model.is_open;
-                 } else if ([model.type isEqualToString:@"documents"]) {//是否显示文档
-                     self.isShowDocuments = model.is_open;
-                 }
+                    self.isShowVote = model.is_open;
+                } else if ([model.type isEqualToString:@"documents"]) {//是否显示文档
+                    self.isShowDocuments = model.is_open;
+                }else if([model.type isEqualToString:@"prize"]){//是否显示抽奖
+                    self.isShowPrize = model.is_open;
+                }else if([model.type isEqualToString:@"full_screen"]){//是否显示暖场图
+                    self.isShowVideoBeforeAD = model.is_open;
+                }
             }
             break;
         }
@@ -1341,11 +1397,11 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             [self.audioAnimationView play];
         }
     }
-
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(mediaIsPreparedToPlayDidChange)]) {
         [self.delegate mediaIsPreparedToPlayDidChange];
     }
-
+    
 }
 /// 播放失败
 - (void)playerViewFailePlay:(MZMediaPlayerView *)player {

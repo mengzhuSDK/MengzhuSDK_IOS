@@ -6,6 +6,8 @@
 //  Copyright © 2016年 www.mengzhu.com. All rights reserved.
 //
 
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
+
 @interface MZHost : MZBaseModel
 
 @property(nonatomic,strong)NSString *alias_id;

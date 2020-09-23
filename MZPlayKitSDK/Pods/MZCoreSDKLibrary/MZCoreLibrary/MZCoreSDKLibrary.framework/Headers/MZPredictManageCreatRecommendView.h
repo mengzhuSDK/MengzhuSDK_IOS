@@ -5,7 +5,8 @@
 //  Created by xu on 2019/4/17.
 //  Copyright © 2019 www.mengzhu.com. All rights reserved.
 //
-
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import "MZCreatPredictTipsModel.h"
 
 typedef enum{

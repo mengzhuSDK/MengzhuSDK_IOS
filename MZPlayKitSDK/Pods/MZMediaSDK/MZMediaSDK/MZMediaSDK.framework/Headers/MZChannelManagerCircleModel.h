@@ -6,6 +6,8 @@
 //  Copyright © 2018年 www.mengzhu.com. All rights reserved.
 //
 
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
+
 @interface MZChannelManagerCircleModel : MZBaseNetModel
 @property(nonatomic,strong)NSString     *id;
 @property(nonatomic,strong)NSString     *uid;

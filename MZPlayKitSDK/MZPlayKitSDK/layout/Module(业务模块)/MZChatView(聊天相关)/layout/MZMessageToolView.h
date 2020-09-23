@@ -44,6 +44,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) BOOL isBanned;//是否被禁言
 @property (nonatomic, assign) BOOL isBarrage;// 弹幕开关
+@property (nonatomic, assign, readonly) BOOL isOnlyHostMessage;//是否 只展示主播的聊天信息
 
 @property (strong, nonatomic) UIView *toolBackGroundView;
 
@@ -77,21 +78,28 @@ typedef enum : NSUInteger {
 
 @property (nonatomic,assign) MZMessageToolBarType type;
 
-@property(nonatomic,copy)NSString * tempString;
+@property (nonatomic,copy)NSString * tempString;
 
-+(CGFloat)defaultHeight;
+@property (nonatomic,assign)BOOL isLive;//是否是直播
 
--(BOOL)endEditing:(BOOL)force;
++ (CGFloat)defaultHeight;
 
--(void)beginFaceViewInView;
+- (BOOL)endEditing:(BOOL)force;
 
+- (void)beginFaceViewInView;
 
-- (id)initWithFrame:(CGRect)frame type:(MZMessageToolBarType)type;//type为2要用下面这个
-//MZMessageToolBarTypeNoBar 要用下面这个
+// 初始化
+- (id)initWithFrame:(CGRect)frame type:(MZMessageToolBarType)type;
+// 初始化 - isShowHostButton 当前的输入框是否显示 只看主播 按钮
+- (id)initWithFrame:(CGRect)frame type:(MZMessageToolBarType)type isShowHostButton:(BOOL)isShowHostButton;
+
 - (id)initWithFrame:(CGRect)frame type:(MZMessageToolBarType)type textView:(MZSDKMessageTextView *)textView;
+
+// 监听 是否 只展示主播的聊天信息 状态的更改
+- (void)listenOnlyHostState:(void(^)(BOOL isOnlyHostMessage))listenState;
 
 - (void)addKeyBoardNoti;
 - (void)removeKeyBoardNoti;
 
--(void)sendButtonTouchUpInside;
+- (void)sendButtonTouchUpInside;
 @end

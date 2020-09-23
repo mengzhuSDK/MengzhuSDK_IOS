@@ -1,2 +1,0 @@
-# MZTCoreSDK
-MZTCoreSDK

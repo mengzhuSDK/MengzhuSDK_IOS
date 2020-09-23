@@ -30,17 +30,17 @@
  */
 + (void)reqPlayInfo:(NSString*)ticketId success:(void (^)(MZMoviePlayerModel*  responseObject))success failure:(void (^)(NSError *error))failure;
 
-/**
- * 回放历史数据
- *
- * @param ticketId 直播活动ID
- * @param offset 数据获取偏移
- * @param limit 获取数据条数
- * @param last_id 获取的最后一条数据
- * @param success 成功回调
- * @param failure 失败原因回调
- */
-+(void)reqChatHistoryWith :(NSString *)ticketId  offset : (NSInteger)offset limit :(NSInteger)limit last_id:(NSString *)last_id success:(void(^)(NSMutableArray *responseObject))success failure:(void(^)(NSError * error))failure;
+///**
+// * 回放历史数据，请使用MZChatSDK里的 MZChatApiManager 类
+// *
+// * @param ticketId 直播活动ID
+// * @param offset 数据获取偏移
+// * @param limit 获取数据条数
+// * @param last_id 获取的最后一条数据
+// * @param success 成功回调
+// * @param failure 失败原因回调
+// */
+//+(void)reqChatHistoryWith:(NSString *)ticketId  offset: (NSInteger)offset limit :(NSInteger)limit last_id:(NSString *)last_id success:(void(^)(NSMutableArray *responseObject))success failure:(void(^)(NSError * error))failure;
 
 /**
  * 活动商品列表
@@ -258,6 +258,51 @@
  * @param failure 失败原因回调
  */
 +(void)submitDiscussWithTicketId:(NSString *)ticketId content:(NSString *)content isAnonymous:(BOOL)isAnonymous success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
+
+/// 获取活动的开屏广告信息
+/// @param ticket_id 活动ID
+/// @param success 成功回调
+/// @param failure 失败原因回调
++(void)getVideoOpenAdMessageWithTicketID:(NSString *)ticket_id success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+/**
+ * 观看视频权限检测
+ *
+ * @param ticketId 直播活动Id
+ * @param phone 用户手机号，选填参数，仅验证白名单使用
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)checkPlayPermissionWithTicketId:(NSString *)ticketId phone:(NSString *)phone success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 观看视频 使用F码
+ *
+ * @param ticketId 直播活动Id
+ * @param fCode F码
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)useFCodeWithTicketId:(NSString *)ticketId fCode:(NSString *)fCode success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 获取活动视频广告
+ *
+ * @param ticketId 直播活动Id
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getVideoAdvertWithTicketId:(NSString *)ticketId success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 获取活动滚动广告
+ *
+ * @param ticketId 直播活动Id
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getRollAdvertWithTicketId:(NSString *)ticketId success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
+
 
 @end
 

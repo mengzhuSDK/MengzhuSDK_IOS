@@ -22,6 +22,8 @@
 
 @property (nonatomic, assign) BOOL isOnlyAudio;//是否只是语音直播
 
+@property (nonatomic, assign) BOOL isBlockAllChat;//是否禁止聊天
+
 @property (nonatomic, strong) NSDictionary * liveParama;
 @property (nonatomic, strong) MZChannelManagerModel *model;
 @property (nonatomic, strong) MZLiveUserModel *latestUser;
