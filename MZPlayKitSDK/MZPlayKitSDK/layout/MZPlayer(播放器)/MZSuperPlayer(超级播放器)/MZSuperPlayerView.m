@@ -1023,6 +1023,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     
     [self.playerView.playerManager shutdown];
     [self.playerView.playerManager didShutdown];
+    [self.playerView.advertPlayerView stop];
 }
 
 #pragma mark - 发送消息
