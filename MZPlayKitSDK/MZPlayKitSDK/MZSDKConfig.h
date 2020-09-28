@@ -11,10 +11,10 @@
 
 /// 分配的 appID 和 secretKey 和 频道ID
 
-#define MZ_is_debug 0//测试环境还是正式环境
+#define MZ_is_debug 1//测试环境还是正式环境
 
-#define MZSDK_AppID @"2020071921224458769"
-#define MZSDK_SecretKey @"eELJedmokAYbULKN6X3CgPD9ymj6vAHXI9ClfT8abSARaNji9HEcNK3zLLQcWo9d"
-#define MZSDK_ChannelId @"2004628"
+#define MZSDK_AppID @""
+#define MZSDK_SecretKey @""
+#define MZSDK_ChannelId @""
 
 #endif /* MZSDKConfig_h */
