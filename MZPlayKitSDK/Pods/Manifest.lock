@@ -38,7 +38,7 @@ PODS:
   - MZDownLoaderSDK (2.4.0)
   - MZEmojiLabel (1.1.7):
     - TTTAttributedLabel (~> 1.13.4)
-  - MZMediaSDK (2.4.0):
+  - MZMediaSDK (2.4.1):
     - MZCoreSDKLibrary (>= 2.4.0)
   - MZPlayerSDK (2.4.0):
     - MZCoreSDKLibrary (>= 2.4.0)
@@ -58,7 +58,7 @@ DEPENDENCIES:
   - MZChatSDK (= 2.4.0)
   - MZCoreSDKLibrary (= 2.4.0)
   - MZDownLoaderSDK (= 2.4.0)
-  - MZMediaSDK (= 2.4.0)
+  - MZMediaSDK (= 2.4.1)
   - MZPlayerSDK (= 2.4.0)
   - MZPushFlowSDK (= 2.3.0)
 
@@ -96,7 +96,7 @@ SPEC CHECKSUMS:
   MZCoreSDKLibrary: 9d55069cf46f33e804152b7c32db405bd659e289
   MZDownLoaderSDK: 21c46fb59ca8dedca09f2bc27ebc56a9f8fb558c
   MZEmojiLabel: da36d19421e619a1f703dacebd186b2357c7948f
-  MZMediaSDK: 5461f74c3302f622eb3d8799c0fc9e788b6c7af4
+  MZMediaSDK: 6eb43d017afe29375f68e7b5569d113dfd778fa1
   MZPlayerSDK: 0e35f238f35f689ee6d7570c4f3f5220794b37b1
   MZPushFlowSDK: 39872a2273016148fcf595ac1af7ab8206e38d3c
   MZSocketIO: 55777cd356bd5400ad1a44d98368bd59e3b68a3d
@@ -105,6 +105,6 @@ SPEC CHECKSUMS:
   SDWebImage: a990c053fff71e388a10f3357edb0be17929c9c5
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
-PODFILE CHECKSUM: 8f62fd9d0bfe4711718da2fc9df3bfa67f14a165
+PODFILE CHECKSUM: d86c64b52a5ab1fc9b5f2f3f718c6311e074eba3
 
 COCOAPODS: 1.10.0.rc.1

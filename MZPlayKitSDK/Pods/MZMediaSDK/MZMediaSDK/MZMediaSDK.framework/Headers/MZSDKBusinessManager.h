@@ -13,6 +13,21 @@
 
 @interface MZSDKBusinessManager : NSObject
 /**
+ * 创建直播活动接口 - 此接口建议只是测试使用，该接口返回需要的数据请从自己服务端获取
+ *
+ * @param channel_id 活动所属的频道ID，此ID从服务器获取或者找对接人员索要
+ * @param liveCover 活动封皮地址
+ * @param liveName 活动名字
+ * @param liveIntroduction 活动简介
+ * @param live_style 横屏还是竖屏 0-横屏 1-竖屏
+ * @param live_type 语音还是视频直播，0-视频直播 1-语音直播
+ * @param success 成功回调
+ * @param failure 失败回调
+ *
+ */
++ (void)createNewLiveWithChannel_id:(NSString *)channel_id liveCover:(NSString *)liveCover liveName:(NSString *)liveName liveIntroduction:(NSString *)liveIntroduction live_style:(int)live_style live_type:(int)live_type success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+
+/**
  * 获取主播信息
  *
  * @param ticketId 直播活动ID

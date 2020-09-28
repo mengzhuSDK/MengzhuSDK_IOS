@@ -6,12 +6,7 @@
 //  Copyright © 2019 mengzhu.com. All rights reserved.
 //
 
-/// 分配的appID和secretKey
-#define MZSDK_AppID @""
-#define MZSDK_SecretKey @""
-
 #import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>//核心组件
-
 #import <MZMediaSDK/MZMediaSDK.h>//业务组件
 #import <MZPlayerSDK/MZPlayerSDK.h>//播放器（观看直播和回放）组件
 #import <MZM3U8DownLoaderSDK/MZM3U8DownLoaderSDK.h>//下载器器组件

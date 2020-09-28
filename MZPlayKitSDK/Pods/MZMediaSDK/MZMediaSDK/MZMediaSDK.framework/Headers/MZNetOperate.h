@@ -14,6 +14,7 @@
 
 
 #define MZNET_SDK_Versions @"1000000"
+#define MZNET_Create_NewLive   @"/live/create"//创建新的直播活动
 #define MZNET_Host_Info    @"/user/liveUser"//主播信息
 
 #define MZNET_Channel_ChannelInfo       @"/video/play"//新播放器详情
@@ -65,6 +66,7 @@
 //+(void)setDebug:(BOOL)isDebug;
 //+(BOOL)isDebug;
 
++(NSString *)createNewLive;
 +(NSString *)netHostInfo;
 +(NSString *)netChannelChannelInfo;
 +(NSString *)netWatchChatHistory;

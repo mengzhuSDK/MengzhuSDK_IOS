@@ -10,6 +10,7 @@
 #import "MZLiveViewController.h"
 #import "MZLiveFinishViewController.h"
 #import "MZAlertController.h"
+#import "MZSDKConfig.h"
 
 @protocol MZConditionLabelSelectProtocol <NSObject>
 @optional
@@ -64,15 +65,17 @@
 @end
 
 @interface MZReadyLiveViewController ()<UITextFieldDelegate,UITextFieldDelegate,MZConditionLabelSelectProtocol>
-@property (nonatomic, strong)NSMutableDictionary *startLiveInfoDict;
-@property (nonatomic, strong)MZChannelManagerModel *model;
+@property (nonatomic, strong) NSMutableDictionary *startLiveInfoDict;
+@property (nonatomic,   copy) NSString *live_tkString;
+@property (nonatomic,   copy) NSString *ticket_idString;
+@property (nonatomic, strong) MZChannelManagerModel *model;
 
 @property (nonatomic, strong) UIScrollView *bgScrollView;//背景滑动的ScrollView
 @property (nonatomic, strong) UIView *topBgView;//信息填写的背景
 
 @property (nonatomic, strong) UITextField *uniqueIdTextField;//用户ID
-@property (nonatomic, strong) UITextField *liveTKTextField;//live_tk
-@property (nonatomic, strong) UITextField *ticketIdTextField;//ticket_id
+//@property (nonatomic, strong) UITextField *liveTKTextField;//live_tk
+//@property (nonatomic, strong) UITextField *ticketIdTextField;//ticket_id
 @property (nonatomic, strong) UITextField *countDownTextField;//倒计时
 
 @property (nonatomic, strong) MZConditionLabel *beautyFaceLabel;//美颜label
@@ -124,8 +127,8 @@
 
 - (void)hideKeyboard {
     [self.uniqueIdTextField resignFirstResponder];
-    [self.liveTKTextField resignFirstResponder];
-    [self.ticketIdTextField resignFirstResponder];
+//    [self.liveTKTextField resignFirstResponder];
+//    [self.ticketIdTextField resignFirstResponder];
     [self.countDownTextField resignFirstResponder];
 }
 
@@ -137,7 +140,7 @@
     CGFloat navBarHeight = self.navigationController.navigationBar.frame.size.height+[UIApplication sharedApplication].statusBarFrame.size.height;
 
     CGFloat scrollViewHeight = self.view.frame.size.height - navBarHeight - (IPHONE_X ? 39 : 10) - 49 - 20 - 44 - 10;
-    CGFloat scrollViewContentHeight = 44*3+44*MZ_RATE*9+60*MZ_RATE;
+    CGFloat scrollViewContentHeight = 44*3+44*MZ_RATE*7+60*MZ_RATE;
     
     self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, navBarHeight, self.view.frame.size.width, scrollViewHeight)];
     self.bgScrollView.backgroundColor = [UIColor clearColor];
@@ -153,15 +156,15 @@
     infoInputLabel.text = @"信息填写";
     [self.bgScrollView addSubview:infoInputLabel];
     
-    self.topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, infoInputLabel.frame.size.height+infoInputLabel.frame.origin.y, self.view.frame.size.width, 44*MZ_RATE*4)];
+    self.topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, infoInputLabel.frame.size.height+infoInputLabel.frame.origin.y, self.view.frame.size.width, 44*MZ_RATE*2)];
     self.topBgView.backgroundColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
     [self.bgScrollView addSubview:self.topBgView];
     
     NSDictionary *attrDict = @{NSFontAttributeName:[UIFont systemFontOfSize:14*MZ_RATE],NSForegroundColorAttributeName:[UIColor colorWithRed:122/255.0 green:122/255.0 blue:122/255.0 alpha:1]};
     
     NSMutableAttributedString *uniquePlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写第三方用户唯一ID，必填项，例:user888" attributes:attrDict];
-    NSMutableAttributedString *live_TKPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写live_tk，debug模式会自动获取，无需填写" attributes:attrDict];
-    NSMutableAttributedString *ticket_IDPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写ticketId，debug模式会自动获取，无需填写" attributes:attrDict];
+//    NSMutableAttributedString *live_TKPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写live_tk，debug模式会自动获取，无需填写" attributes:attrDict];
+//    NSMutableAttributedString *ticket_IDPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写ticketId，debug模式会自动获取，无需填写" attributes:attrDict];
     NSMutableAttributedString *countDownPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写开始倒计时时长，默认为3秒" attributes:attrDict];
     
     UILabel *aRedStar = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 20, 44*MZ_RATE)];
@@ -179,23 +182,23 @@
     [self.topBgView addSubview:self.uniqueIdTextField];
     [self.uniqueIdTextField setAttributedPlaceholder:uniquePlaceStr];
     
-    self.liveTKTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.uniqueIdTextField.bottom, self.view.bounds.size.width - 30, 44*MZ_RATE)];
-    self.liveTKTextField.backgroundColor = [UIColor clearColor];
-    self.liveTKTextField.keyboardType = UIKeyboardTypeDefault;
-    self.liveTKTextField.textColor = [UIColor whiteColor];
-    self.liveTKTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    [self.topBgView addSubview:self.liveTKTextField];
-    [self.liveTKTextField setAttributedPlaceholder:live_TKPlaceStr];
+//    self.liveTKTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.uniqueIdTextField.bottom, self.view.bounds.size.width - 30, 44*MZ_RATE)];
+//    self.liveTKTextField.backgroundColor = [UIColor clearColor];
+//    self.liveTKTextField.keyboardType = UIKeyboardTypeDefault;
+//    self.liveTKTextField.textColor = [UIColor whiteColor];
+//    self.liveTKTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+//    [self.topBgView addSubview:self.liveTKTextField];
+//    [self.liveTKTextField setAttributedPlaceholder:live_TKPlaceStr];
+//
+//    self.ticketIdTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.liveTKTextField.bottom, self.view.bounds.size.width - 30, 44*MZ_RATE)];
+//    self.ticketIdTextField.backgroundColor = [UIColor clearColor];
+//    self.ticketIdTextField.keyboardType = UIKeyboardTypeDefault;
+//    self.ticketIdTextField.textColor = [UIColor whiteColor];
+//    self.ticketIdTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+//    [self.topBgView addSubview:self.ticketIdTextField];
+//    [self.ticketIdTextField setAttributedPlaceholder:ticket_IDPlaceStr];
     
-    self.ticketIdTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.liveTKTextField.bottom, self.view.bounds.size.width - 30, 44*MZ_RATE)];
-    self.ticketIdTextField.backgroundColor = [UIColor clearColor];
-    self.ticketIdTextField.keyboardType = UIKeyboardTypeDefault;
-    self.ticketIdTextField.textColor = [UIColor whiteColor];
-    self.ticketIdTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    [self.topBgView addSubview:self.ticketIdTextField];
-    [self.ticketIdTextField setAttributedPlaceholder:ticket_IDPlaceStr];
-    
-    self.countDownTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.ticketIdTextField.bottom, self.view.bounds.size.width - 30, 44*MZ_RATE)];
+    self.countDownTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.uniqueIdTextField.bottom, self.view.bounds.size.width - 30, 44*MZ_RATE)];
     self.countDownTextField.backgroundColor = [UIColor clearColor];
     self.countDownTextField.keyboardType = UIKeyboardTypeDefault;
     self.countDownTextField.textColor = [UIColor whiteColor];
@@ -438,12 +441,12 @@
             button.userInteractionEnabled = NO;
             
             // 如果已经从你们服务器获取了 live_tk 和 ticket_id,那么就直接开始直播
-            if (weakSelf.liveTKTextField.text.length > 4 && weakSelf.ticketIdTextField.text.length > 4) {
-                [weakSelf getLiveData];
-            } else {
+//            if (weakSelf.liveTKTextField.text.length > 4 && weakSelf.ticketIdTextField.text.length > 4) {
+//                [weakSelf getLiveData];
+//            } else {
                 // 从测试服务器使用测试数据获取
                 [weakSelf createNewLiveActivity];
-            }
+//            }
         } else {
             [weakSelf.view show:errorString];
         }
@@ -452,13 +455,17 @@
 
 - (void)createNewLiveActivity {
     
-#ifdef DEBUG
     [MZSDKSimpleHud show];
     
     // 直播封面地址（测试数据）
     NSString *live_coverURLString = @"http://s1.t.zmengzhu.com/upload/img/6e/77/6e77552721067fbc87ee0b00664556d1.png";
     // 直播名字（测试数据）
     NSString *live_name = @"直播测试";
+    // 直播简介（测试数据）
+    NSString *liveIntroduction = @"直接活动简介";
+    
+    // 直播所属频道ID，测试的时候请使用对应自己APPID的频道ID，可以向对接人员索取。
+    NSString *channel_id = MZSDK_ChannelId;
     
     int live_style = 1;//默认竖屏
     if (self.currentPusherButton == self.pusherLandspaceButton) {//横屏
@@ -470,12 +477,12 @@
         live_type = 1;
     }
     
-#warning 此接口只用于debug模式测试使用，为了获取 live_tk 和 ticket_id ,数据是写死的。（你用的时候自己从自己服务器获取 live_tk 和 ticket_id,不需要使用这个接口）
-    [MZNewLiveActivityTest test_createNewLiveWithLiveCover:live_coverURLString liveName:live_name live_style:live_style live_type:live_type success:^(id _Nonnull response) {
+#pragma mark - 创建直播活动接口 - 此接口建议只是测试使用，该接口返回需要的数据请从自己服务端获取
+    [MZSDKBusinessManager createNewLiveWithChannel_id:channel_id liveCover:live_coverURLString liveName:live_name liveIntroduction:liveIntroduction live_style:live_style live_type:live_type success:^(id _Nonnull response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"live_tk-----------  %@",[response valueForKey:@"live_tk"]);
-            self.liveTKTextField.text = [NSString stringWithFormat:@"%@",[response valueForKey:@"live_tk"]];
-            self.ticketIdTextField.text = [NSString stringWithFormat:@"%@",[response valueForKey:@"ticket_id"]];
+            self.live_tkString = [NSString stringWithFormat:@"%@",[response valueForKey:@"live_tk"]];
+            self.ticket_idString = [NSString stringWithFormat:@"%@",[response valueForKey:@"ticket_id"]];
             [self getLiveData];
         });
     } failure:^(NSError * _Nonnull error) {
@@ -487,18 +494,12 @@
             [MZSDKSimpleHud hide];
         });
     }];
-    
-#else
-    [MZAlertController showWithTitle:@"错误" message:@"创建活动接口只可用于测试使用" cancelTitle:@"" sureTitle:@"确定" preferredStyle:UIAlertControllerStyleAlert handle:^(MZResultCode code) {
-        
-    }];
-#endif
 }
 
 - (void)getLiveData {
     MZUser *user = [MZBaseUserServer currentUser];
 
-    [MZSDKBusinessManager startLiveWithUsername:user.nickName userAvatar:user.avatar uniqueId:user.uniqueID ticketId:self.ticketIdTextField.text live_tk:self.liveTKTextField.text success:^(id response) {
+    [MZSDKBusinessManager startLiveWithUsername:user.nickName userAvatar:user.avatar uniqueId:user.uniqueID ticketId:self.ticket_idString live_tk:self.live_tkString success:^(id response) {
         self.startLiveInfoDict = ((NSDictionary *)response).mutableCopy;
         self.model.ticket_id = self.startLiveInfoDict[@"ticket_id"];
         self.model.msg_conf = [MZMoviePlayerMsg_conf mj_objectWithKeyValues:self.startLiveInfoDict[@"msg_conf"]];
@@ -586,10 +587,16 @@
         self.currentPusherButton.userInteractionEnabled = YES;
         live.modalPresentationStyle = UIModalPresentationFullScreen;
         
-        self.liveTKTextField.text = @"";
-        self.ticketIdTextField.text = @"";
+        self.live_tkString = @"";
+        self.ticket_idString = @"";
         
-        [self presentViewController:live animated:(live.isLandscape ? NO : YES) completion:nil];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"此创建活动功能API接口权限所属于服务端，提供此功能为了便于demo演示。如接入时考虑数据安全等因素建议通过服务访问API并将live_tk、ticket_id传入SDK进行推流。" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"开始直播" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [self presentViewController:live animated:(live.isLandscape ? NO : YES) completion:nil];
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
     });
 }
 

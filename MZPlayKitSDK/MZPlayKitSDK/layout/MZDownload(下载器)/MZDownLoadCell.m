@@ -10,6 +10,7 @@
 #import <AVKit/AVKit.h>
 #import "MZVerticalPlayerViewController.h"
 #import "MZDownLoadProgressView.h"
+#import "MZSDKConfig.h"
 
 @interface MZDownLoadCell()
 @property (nonatomic, strong) UIButton *menuButton;//菜单

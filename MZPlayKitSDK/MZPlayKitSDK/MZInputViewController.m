@@ -9,6 +9,7 @@
 #import "MZInputViewController.h"
 #import "MZSuperPlayerViewController.h"
 #import "MZVerticalPlayerViewController.h"
+#import "MZSDKConfig.h"
 
 @interface MZInputViewController ()
 

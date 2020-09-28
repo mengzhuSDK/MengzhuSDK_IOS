@@ -28,9 +28,6 @@ FOUNDATION_EXPORT const unsigned char MZMediaSDKVersionString[];
 #pragma mark - comment
 #import "MZEventTag.h"
 
-#pragma mark - MZPushServer
-#import "MZNewLiveActivityTest.h"
-
 #pragma mark - 网络请求句柄 && 聊天句柄 && SDK初始化句柄
 #import "MZSDKBusinessManager.h"
 #import "MZSDKInitManager.h"

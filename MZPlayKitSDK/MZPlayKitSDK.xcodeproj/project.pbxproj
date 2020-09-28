@@ -327,6 +327,7 @@
 		C04B9B9724F048E400881A6E /* MZKitDemoPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZKitDemoPrefixHeader.pch; sourceTree = "<group>"; };
 		C04B9C5A24F048E400881A6E /* MZInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZInputViewController.m; sourceTree = "<group>"; };
 		C04B9C5B24F048E400881A6E /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
+		C0A7F4882521B5C800A3A79E /* MZSDKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSDKConfig.h; sourceTree = "<group>"; };
 		C7BF90104B18BBA6598C8C71 /* Pods-MZPlayKitSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZPlayKitSDK.debug.xcconfig"; path = "Target Support Files/Pods-MZPlayKitSDK/Pods-MZPlayKitSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		D3F9D3F63292904F5879FE3F /* Pods-MZPlayKitSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZPlayKitSDK.release.xcconfig"; path = "Target Support Files/Pods-MZPlayKitSDK/Pods-MZPlayKitSDK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1005,6 +1006,7 @@
 				C04B9B9724F048E400881A6E /* MZKitDemoPrefixHeader.pch */,
 				C04B9B9524F048E400881A6E /* PlayerViewController.h */,
 				C04B9C5B24F048E400881A6E /* PlayerViewController.m */,
+				C0A7F4882521B5C800A3A79E /* MZSDKConfig.h */,
 				C04B9B7C24F0484D00881A6E /* AppDelegate.h */,
 				C04B9B7D24F0484D00881A6E /* AppDelegate.m */,
 				C04B9B8224F0484D00881A6E /* ViewController.h */,

@@ -9,6 +9,7 @@
 #import "MZM3U8DownLoadViewController.h"
 #import "MZInputViewController.h"
 #import "MZReadyLiveViewController.h"
+#import "MZSDKConfig.h"
 
 @interface ViewController ()
 
@@ -80,7 +81,7 @@
 }
 
 - (void)intoInpuInfoVC:(UIButton *)sender  {
-    [MZSDKBusinessManager setDebug:YES];
+    [MZSDKBusinessManager setDebug:MZ_is_debug];
     if (sender == _pusherButton) {
         MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
