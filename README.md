@@ -13,7 +13,7 @@
 use_frameworks!#这行必须加
 
 pod 'MZCoreSDKLibrary','2.4.0' #盟主SDK的核心依赖库
-pod 'MZMediaSDK','2.4.0' #盟主业务组件，如需使用业务请求功能，请添加此行代码
+pod 'MZMediaSDK','2.4.1' #盟主业务组件，如需使用业务请求功能，请添加此行代码
 pod 'MZPlayerSDK','2.4.0' #盟主播放器组件，如需播放器功能，请添加此行代码
 pod 'MZPushFlowSDK','2.3.0' #盟主推流组件，如需直播功能，请添加此行代码
 pod 'MZDownLoaderSDK','2.4.0' #盟主下载器的组件，如需下载功能，请添加此行代码
