@@ -5,7 +5,7 @@ ENABLE_BITCODE = NO
 FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking" "${PODS_CONFIGURATION_BUILD_DIR}/EGOCache" "${PODS_CONFIGURATION_BUILD_DIR}/GTMBase64" "${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/MJExtension" "${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh" "${PODS_CONFIGURATION_BUILD_DIR}/MZSocketIO" "${PODS_CONFIGURATION_BUILD_DIR}/Masonry" "${PODS_CONFIGURATION_BUILD_DIR}/Reachability" "${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage" "${PODS_ROOT}/MZCoreSDKLibrary/MZCoreLibrary"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) ${SDKROOT}/usr/include/libxml2
-OTHER_LDFLAGS = $(inherited) -l"bz2" -l"bz2.1.0" -l"c++" -l"icucore" -l"xml2" -l"z" -l"z.1.2.5" -framework "AVFoundation" -framework "AssetsLibrary" -framework "CoreMedia" -framework "CoreVideo" -framework "Foundation" -framework "JavaScriptCore" -framework "OpenGLES" -framework "QuartzCore" -framework "Security" -framework "UIKit" -framework "WebKit"
+OTHER_LDFLAGS = $(inherited) -l"bz2" -l"bz2.1.0" -l"c++" -l"icucore" -l"xml2" -l"z" -l"z.1.2.5" -framework "AVFoundation" -framework "AssetsLibrary" -framework "AudioToolbox" -framework "CoreMedia" -framework "CoreServices" -framework "CoreVideo" -framework "Foundation" -framework "JavaScriptCore" -framework "MapKit" -framework "MobileCoreServices" -framework "OpenGLES" -framework "Photos" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "UIKit" -framework "WebKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}

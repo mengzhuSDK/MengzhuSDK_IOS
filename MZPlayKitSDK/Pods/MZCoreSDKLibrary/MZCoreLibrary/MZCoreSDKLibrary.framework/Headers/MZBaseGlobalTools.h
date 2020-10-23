@@ -37,6 +37,8 @@
 + (NSString*) emptyForNil:(NSString *)str;
 + (NSString*) delSpaceCharacter:(NSString *)str;
 + (void) testValue:(id)value key:(NSString*)key op:(NSString*)op;
+
+
 //yyyy-MM-dd HH:mm:ss
 + (NSDate *)dateFromString:(NSString *)dateString Formatter:(NSString*)formatter;
 //MM-dd HH:mm
@@ -55,6 +57,8 @@
  **将某个时间转化成 时间戳
  */
 +(NSInteger)timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format;
+
+
 +(BOOL)isFloat:(NSString *)floatstr;
 +(BOOL)isValidateEmail:(NSString *)email;
 //身份证号
@@ -155,7 +159,8 @@
  *计算字符串所占区域大小(带有行间距的情况)
  */
 +(CGSize)getSpaceLabelHeight:(NSString*)str withFont:(UIFont*)font withWidth:(CGFloat)width lineSpace:(CGFloat)lineSpace;
-
+//判断字符串是否在规定的字节范围内
++ (BOOL)isOverLengthString:(NSString *)string limitLength:(int)length;
 //判断空字符串
 + (BOOL)isBlankString:(NSString *)string;
 

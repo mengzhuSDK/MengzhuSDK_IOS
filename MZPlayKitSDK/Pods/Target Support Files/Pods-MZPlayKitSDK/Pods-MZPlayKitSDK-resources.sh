@@ -102,6 +102,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/MZDownLoaderSDK/MZDownLoaderSDK/MZM3U8DownLoaderSDKBundle.bundle"
   install_resource "${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.bundle"
   install_resource "${PODS_ROOT}/MZPlayerSDK/MZPlayerSDK/MZPlayerSDK.bundle"
+  install_resource "${PODS_ROOT}/MZUploadVideoSDK/MZUploadVideoSDK/MZUploadVideoSDK.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/MZChatSDK/MZChatSDK/MZChatSDKResource.bundle"
@@ -109,6 +110,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/MZDownLoaderSDK/MZDownLoaderSDK/MZM3U8DownLoaderSDKBundle.bundle"
   install_resource "${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.bundle"
   install_resource "${PODS_ROOT}/MZPlayerSDK/MZPlayerSDK/MZPlayerSDK.bundle"
+  install_resource "${PODS_ROOT}/MZUploadVideoSDK/MZUploadVideoSDK/MZUploadVideoSDK.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

@@ -91,6 +91,10 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 @property (nonatomic, strong) MZAnimationView *audioAnimationView;//静音直播的动画展示
 @property (nonatomic ,strong)MZOpenScreenView *openScreenView;//暖场图
 
+@property (nonatomic, assign) BOOL isShowPraiseView;//是否显示点赞视图
+@property (nonatomic, assign) BOOL isShowGiftView;//是否显示礼物视图
+@property (nonatomic, assign) BOOL isShowTimesSpeedView;//是否显示倍速视图
+
 @end
 
 @implementation MZVerticalPlayerView
@@ -115,6 +119,8 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         self.isShowSign = NO;//默认不展示签到
         self.isShowPrize = NO;//默认不展示抽奖
         self.isShowDocuments = NO;//默认不展示文档
+        self.isShowGiftView = YES;//默认展示礼物按钮
+        self.isShowPraiseView = YES;//默认展示点赞按钮
         
         [self customAddSubviews];
         [self addObserver:self forKeyPath:kViewFramePath options:NSKeyValueObservingOptionNew context:nil];
@@ -133,6 +139,29 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     // 隐藏按钮的frame
     _hideKeyBoardBtn.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     
+    // 处理是否显示点赞按钮
+    if (self.isShowPraiseView) {
+        if (![self.stackContainerView.subviews containsObject:self.praiseButton]) {
+            [self.stackContainerView addArrangedSubview:self.praiseButton];
+        }
+    } else {
+        if ([self.stackContainerView.subviews containsObject:self.praiseButton]) {
+            [self.stackContainerView removeArrangedSubview:self.praiseButton];
+            [self.praiseButton removeFromSuperview];
+        }
+    }
+    
+    // 处理是否显示礼物按钮
+    if (self.isShowGiftView) {
+        if (![self.stackContainerView.subviews containsObject:self.giftButton]) {
+            [self.stackContainerView insertArrangedSubview:self.giftButton atIndex:1];
+        }
+    } else {
+        if ([self.stackContainerView.subviews containsObject:self.giftButton]) {
+            [self.stackContainerView removeArrangedSubview:self.giftButton];
+            [self.giftButton removeFromSuperview];
+        }
+    }
 }
 
 - (void)customAddSubviews {
@@ -707,39 +736,35 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 /// 通过活动ID请求视频播放详情
 - (void)playVideoWithLiveIDString:(NSString *)ticket_id {
     self.ticket_id = ticket_id;
-    [[MZSDKInitManager sharedManager]initSDK:^(id responseObject) {
-        //    获取播放信息
-        [MZSDKBusinessManager reqPlayInfo:ticket_id success:^(MZMoviePlayerModel *responseObject) {
-            
-            NSLog(@"%@",responseObject);
-            self.playInfo = responseObject;
-            if(responseObject.isShowVideoBeforeAD){
-               self.openScreenView = [[MZOpenScreenView alloc]initializationADViewWithTicketID:responseObject.ticket_id delegate:self];
-                [KeyWindow addSubview:self.openScreenView];
-                MZOpenScreenDataModel *model = [self.openScreenView getOpenScreenADData];
-                NSLog(@"%@",model);
-            }else{
-                [self initPlayer];
-            }
- 
-        } failure:^(NSError *error) {
-            NSLog(@"%@",error);
-        }] ;
+    //    获取播放信息
+    [MZSDKBusinessManager reqPlayInfo:ticket_id success:^(MZMoviePlayerModel *responseObject) {
         
-        //    获取主播信息
-        [MZSDKBusinessManager reqHostInfo:ticket_id success:^(MZHostModel *responseObject) {
-            // 更新主播信息
-            self.hostModel = responseObject;
-            [self updateHostInfo:self.hostModel];
-            if (self.delegate && [self.delegate respondsToSelector:@selector(updateHostUserInfo:)]) {
-                [self.delegate updateHostUserInfo:self.hostModel];
-            }
-            self.chatView.hostModel = self.hostModel;
-        } failure:^(NSError *error) {
-            NSLog(@"%@",error);
-        }];
+        NSLog(@"%@",responseObject);
+        self.playInfo = responseObject;
+        if(responseObject.isShowVideoBeforeAD){
+            self.openScreenView = [[MZOpenScreenView alloc]initializationADViewWithTicketID:responseObject.ticket_id delegate:self];
+            [KeyWindow addSubview:self.openScreenView];
+            MZOpenScreenDataModel *model = [self.openScreenView getOpenScreenADData];
+            NSLog(@"%@",model);
+        }else{
+            [self initPlayer];
+        }
+        
     } failure:^(NSError *error) {
-        [self show:@"sdk验证失败"];
+        NSLog(@"%@",error);
+    }] ;
+    
+    //    获取主播信息
+    [MZSDKBusinessManager reqHostInfo:ticket_id success:^(MZHostModel *responseObject) {
+        // 更新主播信息
+        self.hostModel = responseObject;
+        [self updateHostInfo:self.hostModel];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(updateHostUserInfo:)]) {
+            [self.delegate updateHostUserInfo:self.hostModel];
+        }
+        self.chatView.hostModel = self.hostModel;
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
     }];
 }
 
@@ -841,8 +866,36 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     } else {
         [self.chatView addNotice:@"依法对直播内容进行24小时巡查，禁止传播暴力血腥、低俗色情、招嫖诈骗、非法政治活动等违法信息，坚决维护社会文明健康环境"];
     }
+    
+    // 请求活动配置信息
+    [MZSDKBusinessManager getWebinarToolsList:self.playInfo.ticket_id success:^(id response) {
+        NSDictionary *data = response[@"data"];
+        NSArray *tools = data[@"tools"];
+        if (tools.count) {//这个数组里是活动的所有配置开关项，这里我们就只摘出来 点赞开关/礼物开关/倍速开关 的配置
+            //是否显示点赞按钮配置/是否显示礼物按钮配置/是否显示倍速按钮配置
+            NSString *open_like = @"open_like"; NSString *pay_gift = @"pay_gift"; NSString *times_speed = @"times_speed";
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tools == %@ or tools == %@ or tools == %@",open_like,pay_gift,times_speed];
+            NSArray *predicateArray = [tools filteredArrayUsingPredicate:predicate];
+            for (NSDictionary *dict in predicateArray) {
+                if ([[dict objectForKey:@"tools"] isEqualToString:open_like]) {
+                    self.isShowPraiseView = [[dict objectForKey:@"is_open"] boolValue];
+                } else if ([[dict objectForKey:@"tools"] isEqualToString:pay_gift]) {
+                    self.isShowGiftView = [[dict objectForKey:@"is_open"] boolValue];
+                } else if ([[dict objectForKey:@"tools"] isEqualToString:times_speed]) {
+                    self.isShowTimesSpeedView = [[dict objectForKey:@"is_open"] boolValue];
+                }
+            }
+            [self setNeedsLayout];
+            if (self.playInfo.status != 2) {//非回放状态下强制隐藏倍速按钮
+                self.isShowTimesSpeedView = NO;
+            }
+            [self.playerView setPlayRateButtonIsHidden:!self.isShowTimesSpeedView];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"请求配置出错");
+    }];
 }
-
 
 /// 播放 直播/回放
 - (void)playerVideoWithURLString:(NSString *)videoString {
@@ -892,18 +945,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
 /// 播放本地视频(暂时不使用，只是用于测试)
 - (void)playVideoWithLocalMVURLString:(NSString *)mvURLString {
-    WeaklySelf(weakSelf);
-    [[MZSDKInitManager sharedManager] initSDK:^(id responseObject) {
-        NSLog(@"sdk验证成功");
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf playerVideoWithURLString:mvURLString];
-        });
-    } failure:^(NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf playerVideoWithURLString:mvURLString];
-            [self show:@"sdk验证失败"];
-        });
-    }];
+    [self playerVideoWithURLString:mvURLString];
 }
 
 #pragma mark MZVideoOpenADViewProtocol
@@ -1261,6 +1303,21 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
                     self.isShowPrize = model.is_open;
                 }else if([model.type isEqualToString:@"full_screen"]){//是否显示暖场图
                     self.isShowVideoBeforeAD = model.is_open;
+                } else if ([model.type isEqualToString:@"pay_gift"]) {//是否显示礼物视图
+                    self.isShowGiftView = model.is_open;
+                    [self setNeedsLayout];
+                } else if ([model.type isEqualToString:@"open_like"]) {//是否显示点赞视图
+                    self.isShowPraiseView = model.is_open;
+                    [self setNeedsLayout];
+                } else if ([model.type isEqualToString:@"times_speed"]) {//是否显示倍速视图
+                    self.isShowTimesSpeedView = model.is_open;
+                    if (self.playInfo.status != 2) {//非回放状态下强制隐藏倍速按钮
+                        self.isShowTimesSpeedView = NO;
+                    }
+                    [self.playerView setPlayRateButtonIsHidden:!self.isShowTimesSpeedView];
+
+                } else {
+                    NSLog(@"未解析的活动配置更改消息类型 = %@",model.type);
                 }
             }
             break;

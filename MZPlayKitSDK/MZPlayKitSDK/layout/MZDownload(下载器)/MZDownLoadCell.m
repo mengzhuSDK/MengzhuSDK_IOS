@@ -10,7 +10,6 @@
 #import <AVKit/AVKit.h>
 #import "MZVerticalPlayerViewController.h"
 #import "MZDownLoadProgressView.h"
-#import "MZSDKConfig.h"
 
 @interface MZDownLoadCell()
 @property (nonatomic, strong) UIButton *menuButton;//菜单
@@ -174,13 +173,6 @@
         if (errorString.length) {
             NSLog(@"errorString = %@",errorString);
         } else {
-            
-            [MZSDKBusinessManager setDebug:YES];
-
-            MZUser *user=[[MZUser alloc] init];
-            user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
-            user.secretKey = MZSDK_SecretKey;
-            [MZBaseUserServer updateCurrentUser:user];
             
             MZVerticalPlayerViewController *liveVC = [[MZVerticalPlayerViewController alloc]init];
             liveVC.mvURLString = m3u8URLString;

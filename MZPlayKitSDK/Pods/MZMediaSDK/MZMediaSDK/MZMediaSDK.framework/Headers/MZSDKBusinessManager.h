@@ -21,11 +21,38 @@
  * @param liveIntroduction 活动简介
  * @param live_style 横屏还是竖屏 0-横屏 1-竖屏
  * @param live_type 语音还是视频直播，0-视频直播 1-语音直播
+ * @param auto_record 是否生成回放 YES=生成 NO=不生成
+ * @param view_mode 观看方式 0=免费，5=白名单观看，6=F码观看
+ * @param white_id 观看方式为白名单时，填写服务器生成的白名单组的ID
+ * @param fcode_id 观看方式为F码时，填写服务器生成的F码组的ID
+ * @param pay_notice 非免费观看方式时，显示的提示语，eg. 视频设置了F码，请输入F码观看
+ * @param category_id 直播所属的分类ID eg. 生活类
  * @param success 成功回调
  * @param failure 失败回调
  *
  */
-+ (void)createNewLiveWithChannel_id:(NSString *)channel_id liveCover:(NSString *)liveCover liveName:(NSString *)liveName liveIntroduction:(NSString *)liveIntroduction live_style:(int)live_style live_type:(int)live_type success:(void (^)(id))success failure:(void (^)(NSError *))failure;
++ (void)createNewLiveWithChannel_id:(NSString *)channel_id liveCover:(NSString *)liveCover liveName:(NSString *)liveName liveIntroduction:(NSString *)liveIntroduction live_style:(int)live_style live_type:(int)live_type auto_record:(BOOL)auto_record  view_mode:(int)view_mode white_id:(int)white_id fcode_id:(int)fcode_id pay_notice:(NSString *)pay_notice category_id:(int)category_id success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 获取分类列表
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)getCategoryListSuccess:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * 获取F码列表
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)getFCodeListSuccess:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * 获取白名单列表
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)getWhiteListSuccess:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
 
 /**
  * 获取主播信息
@@ -44,6 +71,15 @@
  * @param failure 失败原因回调
  */
 + (void)reqPlayInfo:(NSString*)ticketId success:(void (^)(MZMoviePlayerModel*  responseObject))success failure:(void (^)(NSError *error))failure;
+
+/**
+ * 获取该活动配置详情
+ *
+ * @param ticketId 直播活动ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)getWebinarToolsList:(NSString *)ticketId success:(void (^)(id response))success failure:(void (^)(NSError *error))failure;
 
 ///**
 // * 回放历史数据，请使用MZChatSDK里的 MZChatApiManager 类

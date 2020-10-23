@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MZSDKConfig.h"
 
 @interface AppDelegate ()
 @property (nonatomic, assign) UIBackgroundTaskIdentifier backgrounTask;
@@ -18,10 +19,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     
-
-
+    [[MZSDKInitManager sharedManager] initSDKWithAppID:MZSDK_AppID appSecretKey:MZSDK_SecretKey isTestServer:MZ_is_debug success:^{
+        NSLog(@"SDK初始化成功");
+    } failure:^(NSError * _Nullable error) {
+        NSLog(@"SDK初始化出错 = %@", error.domain);
+    }];
     return YES;
 }
 
@@ -41,22 +44,22 @@
 
 -(void)backgroundMode{
     //创建一个背景任务去和系统请求后台运行的时间
-    self.backgrounTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        [[UIApplication sharedApplication] endBackgroundTask:self.backgrounTask];
-        self.backgrounTask = UIBackgroundTaskInvalid;
-    }];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(applyToSystemForMoreTime) userInfo:nil repeats:YES];
-    [self.timer fire];
+//    self.backgrounTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+//        [[UIApplication sharedApplication] endBackgroundTask:self.backgrounTask];
+//        self.backgrounTask = UIBackgroundTaskInvalid;
+//    }];
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(applyToSystemForMoreTime) userInfo:nil repeats:YES];
+//    [self.timer fire];
 }
 
 - (void)applyToSystemForMoreTime {
-    if ([UIApplication sharedApplication].backgroundTimeRemaining < 30.0) {//如果剩余时间小于30秒
-        [[UIApplication sharedApplication] endBackgroundTask:self.self.backgrounTask];
-        self.backgrounTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-            [[UIApplication sharedApplication] endBackgroundTask:self.self.backgrounTask];
-            self.backgrounTask = UIBackgroundTaskInvalid;
-        }];
-    }
+//    if ([UIApplication sharedApplication].backgroundTimeRemaining < 30.0) {//如果剩余时间小于30秒
+//        [[UIApplication sharedApplication] endBackgroundTask:self.self.backgrounTask];
+//        self.backgrounTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+//            [[UIApplication sharedApplication] endBackgroundTask:self.backgrounTask];
+//            self.backgrounTask = UIBackgroundTaskInvalid;
+//        }];
+//    }
 }
 
 

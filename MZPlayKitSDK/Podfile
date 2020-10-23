@@ -5,10 +5,11 @@ use_frameworks!
 target'MZPlayKitSDK'do
 
 pod 'MZPushFlowSDK','2.3.0'
-pod 'MZCoreSDKLibrary','2.4.0'
-pod 'MZMediaSDK','2.4.1'
-pod 'MZPlayerSDK','2.4.0'
+pod 'MZCoreSDKLibrary','2.5.0'
+pod 'MZMediaSDK','2.5.0'
+pod 'MZPlayerSDK','2.5.0'
 pod 'MZDownLoaderSDK','2.4.0'
 pod 'MZChatSDK','2.4.0'
+pod 'MZUploadVideoSDK','1.0.0'
 
 end

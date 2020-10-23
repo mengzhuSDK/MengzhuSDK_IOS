@@ -13,11 +13,16 @@
 #define MZAPP_DownLoadUrl   @"https://itunes.apple.com/us/app/meng-zhu/id1038341935?"
 
 
-#define MZNET_SDK_Versions @"1000000"
-#define MZNET_Create_NewLive   @"/live/create"//创建新的直播活动
-#define MZNET_Host_Info    @"/user/liveUser"//主播信息
+#define MZNET_SDK_Versions              @"1000000"
+#define MZNET_Create_NewLive            @"/live/create"//创建新的直播活动
+#define MZNET_GetCategoryList           @"/category/list"//获取分类列表
+#define MZNET_GetFCodeList              @"/fcode/list"//获取F码列表
+#define MZNET_GetWhiteList              @"/white/list"//获取白名单列表
+#define MZNET_Host_Info                 @"/user/liveUser"//主播信息
 
 #define MZNET_Channel_ChannelInfo       @"/video/play"//新播放器详情
+#define MZNET_GetWebinarToolsList       @"/setting/getWebinarToolsList"//新播放器配置详情
+
 #define MZNET_WATCH_CHAT_HISTORY        @"/message/history" //推送历史消息
 //获取活动商品列表
 #define MZNET_Goods_List                @"/video/goods"
@@ -67,8 +72,12 @@
 //+(BOOL)isDebug;
 
 +(NSString *)createNewLive;
++(NSString *)getCategoryList;
++(NSString *)getFCodeList;
++(NSString *)getWhiteList;
 +(NSString *)netHostInfo;
 +(NSString *)netChannelChannelInfo;
++(NSString *)netGetWebinarToolsList;
 +(NSString *)netWatchChatHistory;
 +(NSString *)netGoodsList;
 +(NSString *)netOnlineUserList;

@@ -95,11 +95,11 @@
     [dict1 setObject:[[UIColor whiteColor] colorWithAlphaComponent:1.0] forKey:NSForegroundColorAttributeName];
     
     NSMutableDictionary *dict2 = [[NSMutableDictionary alloc] init];
-    [dict2 setObject:FontSystemSize(11) forKey:NSFontAttributeName];
+    [dict2 setObject:FontSystemSize(10) forKey:NSFontAttributeName];
     [dict2 setObject:[[UIColor whiteColor] colorWithAlphaComponent:0.7] forKey:NSForegroundColorAttributeName];
     
     NSMutableAttributedString *str1 = [self getSpot];
-    
+
     NSString *num = [NSString stringWithFormat:@"人气%@",numStr];
     
     NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:num attributes:dict2];

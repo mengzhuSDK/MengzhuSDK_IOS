@@ -35,7 +35,6 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 
 #define isiPhone      (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
-#define MZ_RATE         (MZ_SW/375.0)//以ip6为标准 ip5缩小 ip6p放大 zoom
 #define WeaklySelf(weakSelf)  __weak __typeof(&*self)weakSelf = self
 
 #pragma mark 颜色设置宏
@@ -65,6 +64,9 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 #define MZ_FULL_SH    MZ_SW
 #define MZ_FULL_RATE  ((MZ_FULL_SW/667.0) > 1.15 ? 1.15 : (MZ_FULL_SW/667.0))
 
+//竖屏
+#define MZ_RATE         (MZ_SW/375.0)//以ip6为标准 ip5缩小 ip6p放大 zoom
+
 //抽象类异常处理
 #define AbstractMethodNotImplemented() \
 @throw [NSException exceptionWithName:NSInternalInconsistencyException \
@@ -79,17 +81,6 @@ userInfo:nil]
 #define KeyWindow [UIApplication sharedApplication].delegate.window
 #define KeyWindowView [UIApplication sharedApplication].delegate.window.rootViewController.view
 #define KeyRootVC [UIApplication sharedApplication].delegate.window.rootViewController
-
-//状态栏隐藏的时候这个值为空，所以这里不能使用[[UIApplication sharedApplication] statusBarFrame].size.height来获取了(这样就不会出现X的nav跑到状态栏位置的bug了)
-#define kStatusBarHeight   (IPHONE_X ? 44 : 20)
-
-#define kNavBarHeight 44.0
-
-#define kTabBarHeight     ([[UIApplication sharedApplication] statusBarFrame].size.height>20?49:49)//tabBar高
-
-#define kTopHeight    (kStatusBarHeight + kNavBarHeight)//导航栏高
-
-#define KBottomEmptyH   (IPHONE_X ? 34 : 0)  //底部空白区域大小（iPhone X空出来34）
 
 #define MZScreenHeight  (IPHONE_X ? ( [UIApplication sharedApplication].delegate.window.rootViewController.view.bounds.size.height - 34) :  ( [UIApplication sharedApplication].delegate.window.rootViewController.view.bounds.size.height))
 
@@ -108,6 +99,119 @@ userInfo:nil]
 #define IS_IPHONE_6Plus                            (IS_IPHONE && IS_WIDESCREEN_6Plus)
 
 
+
+#pragma mark - B端的新定义
+
+/// 某个系统版本是否有效
+#define kAvailabel(systemVersion) @available(iOS systemVersion, *)
+
+/// 设备宽高
+#define kWidth [UIScreen mainScreen].bounds.size.width
+#define kHeight [UIScreen mainScreen].bounds.size.height
+
+/// 这个是设计比例按照实际设备比例的备注,最大1.15倍
+#define kMultiple MIN(1.15, [UIScreen mainScreen].bounds.size.width / 375)
+
+/// 切到 主线程
+#ifndef MZDispatchAsyncMainQueue
+#define MZDispatchAsyncMainQueue(block) dispatch_async(dispatch_get_main_queue(), ^{\
+{block}\
+});
+#endif
+
+/// 几秒之后切到主线程
+#ifndef MZDispatchAfterTimeAsyncMainQueue
+#define MZDispatchAfterTimeAsyncMainQueue(time, block) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{\
+{block}\
+});
+#endif
+
+/// 切到 全局异步线程(并行)
+#ifndef MZDispatchAsyncGlobalQueue
+#define MZDispatchAsyncGlobalQueue(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{\
+{block}\
+});
+#endif
+
+/// 切到 自定义的异步线程(并行)
+#ifndef MZDispatchAsyncCustomQueue
+#define MZDispatchAsyncCustomQueue(name, block) dispatch_queue_t customQueue = dispatch_queue_create([name UTF8String], DISPATCH_QUEUE_CONCURRENT);\
+dispatch_async(customQueue, ^{\
+{block}\
+});
+#endif
+
+/// 断言
+#ifndef MZAssert
+#define MZAssert(condition, desc) NSAssert(condition, desc)
+#endif
+
+/// 强制内联
+#ifndef mz_inline
+#define mz_inline __inline__ __attribute__((always_inline))
+#endif
+
+static dispatch_semaphore_t mz_semaphore() {
+    static dispatch_semaphore_t _semaphore = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _semaphore = dispatch_semaphore_create(0);
+    });
+    return _semaphore;
+}
+
+/// 阻塞线程等待任务完成
+static mz_inline void MZTaskWaitUntilFinished() {
+    if ([NSThread isMainThread]) {
+        NSCAssert(0, @"不可以在主线程里阻塞线程");
+    }
+    dispatch_semaphore_wait(mz_semaphore(), DISPATCH_TIME_FOREVER);
+}
+
+/// 任务完成，解锁线程
+static mz_inline void MZTaskFinished() {
+    dispatch_semaphore_signal(mz_semaphore());
+}
+
+/// 比例放大缩小bounds
+static mz_inline float kRATE(float value) {
+    return value * kMultiple;
+}
+
+/// 比例放大缩小字体
+static mz_inline float kFont(float value) {
+    return value * kMultiple;
+}
+
+/// 是否是暗黑模式
+static mz_inline BOOL isDark() {
+    if (@available(iOS 12.0, *)) {
+        return [UIScreen mainScreen].traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark;
+    }
+    return false;
+}
+
+/// 计算文字宽高度
+static mz_inline CGSize MZGetContentSize(__unsafe_unretained NSString *content, CGSize size, double font) {
+    UIFont *curFont = [UIFont systemFontOfSize:font];
+    CGRect contentBounds = [content boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObject:curFont forKey:NSFontAttributeName] context:nil];
+    return contentBounds.size;
+}
+
+/// 状态栏的高
+#define kStatusBarHeight   (IPHONE_X ? 44 : 20)
+
+/// 导航栏的高
+#define kNavBarHeight 44.0
+
+/// 状态栏 + 导航栏 的高
+#define kTopHeight    (kStatusBarHeight + kNavBarHeight)
+
+/// 屏幕底部的安全高度
+#define KBottomEmptyH   (IPHONE_X ? 34 : 0)
+
+/// tabBar高
+#define kTabBarHeight     49
 
 
 #endif /* MZConstantConfig_h */

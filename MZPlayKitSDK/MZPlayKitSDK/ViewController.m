@@ -9,13 +9,14 @@
 #import "MZM3U8DownLoadViewController.h"
 #import "MZInputViewController.h"
 #import "MZReadyLiveViewController.h"
-#import "MZSDKConfig.h"
+#import "MZUploadViewController.h"
 
 @interface ViewController ()
 
 @property (nonatomic, strong) UIButton *playButton;
 @property (nonatomic, strong) UIButton *pusherButton;
 @property (nonatomic, strong) UIButton *downloadButton;
+@property (nonatomic, strong) UIButton *uploadButton;
 
 @end
 
@@ -46,7 +47,19 @@
     logoIV.frame = CGRectMake((self.view.frame.size.width - 100*MZ_RATE)/2.0, 110, 100*MZ_RATE, 146*MZ_RATE);
     [self.view addSubview:logoIV];
     
-    _downloadButton=[[UIButton alloc]initWithFrame:CGRectMake(48, self.view.frame.size.height - 90 - 48, self.view.bounds.size.width - 96, 48)];
+    _uploadButton=[[UIButton alloc]initWithFrame:CGRectMake(48, self.view.frame.size.height - 90 - 48, self.view.bounds.size.width - 96, 48)];
+    [_uploadButton setTitle:@"上传测试" forState:UIControlStateNormal];
+    [_uploadButton setTitleColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1] forState:UIControlStateNormal];
+    [_uploadButton setBackgroundColor:[UIColor clearColor]];
+    [_uploadButton addTarget:self action:@selector(uploadClick) forControlEvents:UIControlEventTouchDown];
+    [_uploadButton.layer setCornerRadius:25];
+    [_uploadButton.layer setMasksToBounds:YES];
+    [_uploadButton.layer setBorderColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor
+     ];
+    [_uploadButton.layer setBorderWidth:1.0];
+    [self.view addSubview:_uploadButton];
+    
+    _downloadButton=[[UIButton alloc]initWithFrame:CGRectMake(_uploadButton.frame.origin.x, _uploadButton.frame.origin.y - 20 - 48, _uploadButton.frame.size.width, _uploadButton.frame.size.height)];
     [_downloadButton setTitle:@"下载测试" forState:UIControlStateNormal];
     [_downloadButton setTitleColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1] forState:UIControlStateNormal];
     [_downloadButton setBackgroundColor:[UIColor clearColor]];
@@ -81,7 +94,6 @@
 }
 
 - (void)intoInpuInfoVC:(UIButton *)sender  {
-    [MZSDKBusinessManager setDebug:MZ_is_debug];
     if (sender == _pusherButton) {
         MZReadyLiveViewController *vc = [[MZReadyLiveViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -96,6 +108,12 @@
     MZM3U8DownLoadViewController *downloadVC = [[MZM3U8DownLoadViewController alloc] init];
     downloadVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.navigationController pushViewController:downloadVC animated:YES];
+}
+
+/// 进入上传界面
+- (void)uploadClick {
+    MZUploadViewController *uploadVC = [[MZUploadViewController alloc] init];
+    [self.navigationController pushViewController:uploadVC animated:YES];
 }
 
 - (BOOL)shouldAutorotate {

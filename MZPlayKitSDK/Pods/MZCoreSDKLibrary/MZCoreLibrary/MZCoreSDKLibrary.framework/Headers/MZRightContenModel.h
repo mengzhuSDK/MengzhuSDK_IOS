@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign) int force_type;  //1,填写后可观看   2，可跳过
 @property (nonatomic,assign) int delay_time;
 @property (nonatomic ,copy) NSString *ticket_id;
+@property (nonatomic ,strong)NSString *svote_id;//投票ID
 //广告图相关字段
 @property (nonatomic ,copy) NSString *adver_id;
 @property (nonatomic ,strong) NSArray *content;

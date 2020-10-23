@@ -12,6 +12,7 @@ ${PODS_ROOT}/MZMediaSDK/MZMediaSDK/MZMediaSDK.framework
 ${PODS_ROOT}/MZPlayerSDK/MZPlayerSDK/MZPlayerSDK.framework
 ${PODS_ROOT}/MZPushFlowSDK/MZPushFlowSDK/MZPushFlowSDK.framework
 ${BUILT_PRODUCTS_DIR}/MZSocketIO/MZSocketIO.framework
+${PODS_ROOT}/MZUploadVideoSDK/MZUploadVideoSDK/MZUploadVideoSDK.framework
 ${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework
 ${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework
 ${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework

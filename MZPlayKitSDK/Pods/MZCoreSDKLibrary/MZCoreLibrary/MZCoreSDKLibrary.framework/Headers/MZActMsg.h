@@ -221,7 +221,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,strong)NSString *uid;//连麦uid
 #pragma mark --新改的播放器开关
 @property (nonatomic ,strong)NSArray <MZGlobalContentModel *>*global_content;//全局开关配置
-@property (nonatomic ,strong)NSArray <MZSingleContentModel *>*webinar_content;//单场活动配置
+@property (nonatomic ,strong)NSArray <MZRightModel *>*webinar_content;//单场活动配置
 
 #pragma mark --流量用完的提示
 @property (nonatomic ,strong)NSString *msg;// 提示消息

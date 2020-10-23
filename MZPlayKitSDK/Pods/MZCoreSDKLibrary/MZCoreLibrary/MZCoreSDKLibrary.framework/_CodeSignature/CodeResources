@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/MZActMsg.h</key>
 		<data>
-		TvGTFrICPLwA8rFl3dQwtacEYQ8=
+		gddhke6BH6INft6BL8EgXldrwLc=
 		</data>
 		<key>Headers/MZActionSheetView.h</key>
 		<data>
@@ -35,6 +35,10 @@
 		<key>Headers/MZActivityConfig.h</key>
 		<data>
 		UYuZoAGDrApELAlnuZe94/HAeck=
+		</data>
+		<key>Headers/MZAlertControl.h</key>
+		<data>
+		4BlxnBdbYxRssDybX1KyURGqWm8=
 		</data>
 		<key>Headers/MZAnimatedControl.h</key>
 		<data>
@@ -64,13 +68,17 @@
 		<data>
 		OecNTP8pTKZSi04qEYIkG2rGO7o=
 		</data>
+		<key>Headers/MZAudioTool.h</key>
+		<data>
+		vLiqKzIuvj+bA9bwGfG33ca9s0Q=
+		</data>
 		<key>Headers/MZBadgeButton.h</key>
 		<data>
 		CaoZmrf6v96ocyA0xum3f0zmwrI=
 		</data>
 		<key>Headers/MZBaseGlobalTools.h</key>
 		<data>
-		TAcARtamaLfEqtkbwFul7CQqCUs=
+		fo1YUMYS+D1g3D4EJ5SSnD/hdrQ=
 		</data>
 		<key>Headers/MZBaseImageTools.h</key>
 		<data>
@@ -94,7 +102,7 @@
 		</data>
 		<key>Headers/MZBaseNormalViewController.h</key>
 		<data>
-		Y9d1muqHjypI/3I3e6CXxn2fRnU=
+		8cpiodRALeczWaGfXOhFj4xP5Ew=
 		</data>
 		<key>Headers/MZBasePresenter.h</key>
 		<data>
@@ -130,23 +138,39 @@
 		</data>
 		<key>Headers/MZConstantConfig.h</key>
 		<data>
-		kM3SvWuaM/X4HVzaRVGd2PHUZbc=
+		w324L+X+xeEA4WvhZvCzQsmTqWQ=
+		</data>
+		<key>Headers/MZCoreNavigationController.h</key>
+		<data>
+		rv71CJScQMr2W/usx618wZ/b0nY=
 		</data>
 		<key>Headers/MZCoreNetOperate.h</key>
 		<data>
-		583TZg3Kq9NMIBdF5i6tqkXncZk=
+		FLn2anxr6wtQgt6iPBNbdl/aB4o=
+		</data>
+		<key>Headers/MZCoreNetWork.h</key>
+		<data>
+		mIKNTM3pqQNb5W7XjLNY53D5LIc=
 		</data>
 		<key>Headers/MZCoreSDKLibrary.h</key>
 		<data>
-		4NvRw5b9YXENEttAIBjgSrbTHGU=
+		7pLsYOqdbWjsU+b7JPfsNsjmlJU=
 		</data>
 		<key>Headers/MZCoreSDKNetWork.h</key>
 		<data>
-		nQ/n45+a1yi/U4tLyrRWs2SUnFQ=
+		88jGF6cY/5LHqz6sSNF8XhyqCBk=
+		</data>
+		<key>Headers/MZCoreViewController.h</key>
+		<data>
+		vUwowu1Q7maOppjtbHUmQBN2IPw=
 		</data>
 		<key>Headers/MZCreatPredictTipsModel.h</key>
 		<data>
 		9QSkxpVyOkJE+YQt/3Noo7aFd7k=
+		</data>
+		<key>Headers/MZCreatUI.h</key>
+		<data>
+		53IGHSe4Lx8SrLtFjJux+7WAQpU=
 		</data>
 		<key>Headers/MZDismissVew.h</key>
 		<data>
@@ -160,6 +184,10 @@
 		<data>
 		MAKDcnUsuH2pxYJg49+vMWzvnHo=
 		</data>
+		<key>Headers/MZFileManager.h</key>
+		<data>
+		Vn21y+ThaiTz97EZsXehfqHNOXo=
+		</data>
 		<key>Headers/MZGlobalContentModel.h</key>
 		<data>
 		RnuK5i/niueJY4EH+NQS2AEFKsQ=
@@ -171,6 +199,10 @@
 		<key>Headers/MZGoodsListOuterModel.h</key>
 		<data>
 		tcxeTR6+CsrKCcvVh8U9mGjK1Kg=
+		</data>
+		<key>Headers/MZImagePickerController.h</key>
+		<data>
+		Z/wVPTnBDDCo+ayE3Sb+mp5tHMo=
 		</data>
 		<key>Headers/MZImageUpload.h</key>
 		<data>
@@ -290,7 +322,7 @@
 		</data>
 		<key>Headers/MZRightContenModel.h</key>
 		<data>
-		PVBY973P3BYvYob5qlQxVatKP/4=
+		eQA5Q6NQkFtULkI4x5q6m7FdTFk=
 		</data>
 		<key>Headers/MZRightModel.h</key>
 		<data>
@@ -316,6 +348,10 @@
 		<data>
 		fpRBlTRrcCICpH8bFb9wSal8Oj0=
 		</data>
+		<key>Headers/MZTimeManager.h</key>
+		<data>
+		9LzEjlIyR6nXesB+NYOmKeJ/hys=
+		</data>
 		<key>Headers/MZTimer.h</key>
 		<data>
 		Qkbg5lr7JbxTQSbPhCTfDuYR8OY=
@@ -327,6 +363,10 @@
 		<key>Headers/MZUser.h</key>
 		<data>
 		C6t81MG7s+8LhEoRROhdMqpAtUM=
+		</data>
+		<key>Headers/MZUserDefaults.h</key>
+		<data>
+		HApIoIAR1Qegy78eI65y7toIcWg=
 		</data>
 		<key>Headers/MZValueCallback.h</key>
 		<data>
@@ -358,7 +398,15 @@
 		</data>
 		<key>Headers/NSObject+MZPopoverProgressHub.h</key>
 		<data>
-		o9GtHOXUlYsbd8U87p8pJc0MSz8=
+		sawf7mdKZNlVG2qqvqVChqf8bZs=
+		</data>
+		<key>Headers/NSObject+MZTimer.h</key>
+		<data>
+		dlQTCusuryCh6YMvn81p2bC3e0w=
+		</data>
+		<key>Headers/NSString+MZCommon.h</key>
+		<data>
+		gNq2+qvdNc9BvLa9tQq9beDOXxk=
 		</data>
 		<key>Headers/NetworkPathsCommon.h</key>
 		<data>
@@ -386,7 +434,7 @@
 		</data>
 		<key>Headers/UIView+MZExtend.h</key>
 		<data>
-		W89IHVRS3bZAiF/iKd48dnAuiJ0=
+		0UmSloTHx0l6g61rFq9CMnDpsG4=
 		</data>
 		<key>Headers/UIView+MZExtension.h</key>
 		<data>
@@ -398,7 +446,7 @@
 		</data>
 		<key>Headers/UIViewExt.h</key>
 		<data>
-		X5dJOuR7gJSk2W6lbCNrM+q9mF0=
+		l2Ev17Y2a/+7JDU2XUg6McMlD9k=
 		</data>
 		<key>Headers/codeObfuscation.h</key>
 		<data>
@@ -406,7 +454,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		JUheeS6PJCBR6T21Nd6hcEWL64E=
+		IBTeK1fNa/79jXntshDPJJD6NhM=
 		</data>
 		<key>MZCoreSDKLibrary.bundle/MZ_ADFocusDefaultImage@2x.png</key>
 		<data>
@@ -531,11 +579,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			TvGTFrICPLwA8rFl3dQwtacEYQ8=
+			gddhke6BH6INft6BL8EgXldrwLc=
 			</data>
 			<key>hash2</key>
 			<data>
-			E7rbOf4hxGBFepLZ8hs64Tn2luPJDDGzSjWapGD+BT4=
+			ZnxI9h06m6XZBz9HGXjJqFGI3Ep1x8clgtUUlwWu4C4=
 			</data>
 		</dict>
 		<key>Headers/MZActionSheetView.h</key>
@@ -569,6 +617,17 @@
 			<key>hash2</key>
 			<data>
 			RKdRL2bJID381r8AAzL4B0Pgx1/AsoY6Krtzey8FgxQ=
+			</data>
+		</dict>
+		<key>Headers/MZAlertControl.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4BlxnBdbYxRssDybX1KyURGqWm8=
+			</data>
+			<key>hash2</key>
+			<data>
+			KwRWXi1ix9QOqnQ58rbwmo7HZTDpVM/cGjDSWnaRUrU=
 			</data>
 		</dict>
 		<key>Headers/MZAnimatedControl.h</key>
@@ -648,6 +707,17 @@
 			svI2NSCht1+KLuuA/wkqnEMkakAF1XVa/Ise7wSUSBY=
 			</data>
 		</dict>
+		<key>Headers/MZAudioTool.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vLiqKzIuvj+bA9bwGfG33ca9s0Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			VLOnESLkjBgeT63XUg+XHTpxlRrajwrDzVx+lyBlkZU=
+			</data>
+		</dict>
 		<key>Headers/MZBadgeButton.h</key>
 		<dict>
 			<key>hash</key>
@@ -663,11 +733,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			TAcARtamaLfEqtkbwFul7CQqCUs=
+			fo1YUMYS+D1g3D4EJ5SSnD/hdrQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			dY0aG7ZaZfHBMksxZGLZZMmwtQNP1mUaR5204uuW0mk=
+			zOfucYq7o9To+92i8rrSHeCxwU/Wq+067NWpF0qHWOU=
 			</data>
 		</dict>
 		<key>Headers/MZBaseImageTools.h</key>
@@ -729,11 +799,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Y9d1muqHjypI/3I3e6CXxn2fRnU=
+			8cpiodRALeczWaGfXOhFj4xP5Ew=
 			</data>
 			<key>hash2</key>
 			<data>
-			cCOHpmu/SAonADjO/vZ9afCTGkOFEeTvCXDmcFdnBwI=
+			Cd5BDIM+FwDGfX+abjclIv36Y/LXyi5Do5JPngDH/wA=
 			</data>
 		</dict>
 		<key>Headers/MZBasePresenter.h</key>
@@ -828,44 +898,77 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			kM3SvWuaM/X4HVzaRVGd2PHUZbc=
+			w324L+X+xeEA4WvhZvCzQsmTqWQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			5k1sKpgHiNlnMxl/bMxSjpQTniTyYx1jCwK/vKpIjy0=
+			l5cD7MMWm+46BuuEpSIbPA5VTS9A91xa5ttDLDox8yc=
+			</data>
+		</dict>
+		<key>Headers/MZCoreNavigationController.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rv71CJScQMr2W/usx618wZ/b0nY=
+			</data>
+			<key>hash2</key>
+			<data>
+			Ebr9ZX474OnmNf+bxQYUZMQbPXji2M1iiBS3MHVgjKI=
 			</data>
 		</dict>
 		<key>Headers/MZCoreNetOperate.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			583TZg3Kq9NMIBdF5i6tqkXncZk=
+			FLn2anxr6wtQgt6iPBNbdl/aB4o=
 			</data>
 			<key>hash2</key>
 			<data>
-			y2SzpMOXfwkREyiI/aJco0ywEyBdkpE1kXKJooXbHbc=
+			Dr8oZoowKKQ0K7b722hxzIVGv5mlDCq/Q8pfDXDM//Y=
+			</data>
+		</dict>
+		<key>Headers/MZCoreNetWork.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			mIKNTM3pqQNb5W7XjLNY53D5LIc=
+			</data>
+			<key>hash2</key>
+			<data>
+			OrE2jq22Vggmvdfo2dF4IgEI78Ts/5j//bKGYAN5lfw=
 			</data>
 		</dict>
 		<key>Headers/MZCoreSDKLibrary.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4NvRw5b9YXENEttAIBjgSrbTHGU=
+			7pLsYOqdbWjsU+b7JPfsNsjmlJU=
 			</data>
 			<key>hash2</key>
 			<data>
-			7ISBcbegDNBheCV/BrGZaXgAkhL5KrHS/WQ5Bw7bi6M=
+			Y94FZhI0PTyRlTL8sspt77yaCZmCM+wL0HE5U8ISld4=
 			</data>
 		</dict>
 		<key>Headers/MZCoreSDKNetWork.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nQ/n45+a1yi/U4tLyrRWs2SUnFQ=
+			88jGF6cY/5LHqz6sSNF8XhyqCBk=
 			</data>
 			<key>hash2</key>
 			<data>
-			foUDz8oEb1RAVaQPglK3FaLRUlbcTR3Am7QfPeJE7S8=
+			7x1dbWa+W+DMbMxVfWy9du2kTv480LG1UbHnG8bznQg=
+			</data>
+		</dict>
+		<key>Headers/MZCoreViewController.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vUwowu1Q7maOppjtbHUmQBN2IPw=
+			</data>
+			<key>hash2</key>
+			<data>
+			H/tfRmdtWVlk0n9LGWovopNnDSFc+NFZKBYEl1dT/vY=
 			</data>
 		</dict>
 		<key>Headers/MZCreatPredictTipsModel.h</key>
@@ -877,6 +980,17 @@
 			<key>hash2</key>
 			<data>
 			+OHTlzOYkfMjP+6jVmA5krjpFBw2piOG2nEEFU9sp7M=
+			</data>
+		</dict>
+		<key>Headers/MZCreatUI.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			53IGHSe4Lx8SrLtFjJux+7WAQpU=
+			</data>
+			<key>hash2</key>
+			<data>
+			Z8m8mF3RqD3VR62DzZLLJ2sCV1izzju+qoEP1jUfZ14=
 			</data>
 		</dict>
 		<key>Headers/MZDismissVew.h</key>
@@ -912,6 +1026,17 @@
 			6RbhYUeM4QmTas5LymA4hotbJKF4IsptX2JFfv2iI+U=
 			</data>
 		</dict>
+		<key>Headers/MZFileManager.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Vn21y+ThaiTz97EZsXehfqHNOXo=
+			</data>
+			<key>hash2</key>
+			<data>
+			4uSW0aWJ7nr6r3oZtryPmplNYgJHjSNMrD8ACa8fa30=
+			</data>
+		</dict>
 		<key>Headers/MZGlobalContentModel.h</key>
 		<dict>
 			<key>hash</key>
@@ -943,6 +1068,17 @@
 			<key>hash2</key>
 			<data>
 			YapT/AQnxitQBt5teSQ1wYAQSjv2jHjSLGcpEi88wK4=
+			</data>
+		</dict>
+		<key>Headers/MZImagePickerController.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Z/wVPTnBDDCo+ayE3Sb+mp5tHMo=
+			</data>
+			<key>hash2</key>
+			<data>
+			SMNxsnlvjMKs3v1q8MEm6aB78iZ4w4V959fi5ZPJ/iw=
 			</data>
 		</dict>
 		<key>Headers/MZImageUpload.h</key>
@@ -1268,11 +1404,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PVBY973P3BYvYob5qlQxVatKP/4=
+			eQA5Q6NQkFtULkI4x5q6m7FdTFk=
 			</data>
 			<key>hash2</key>
 			<data>
-			JPqOO+2oi7nxjwpb3Ei+dBfcFhXLe1WI2xnSXQt9sK0=
+			Ssbrg4OqwN3x1U3STF0AQemFrgjIS/z7A71o54P+pEs=
 			</data>
 		</dict>
 		<key>Headers/MZRightModel.h</key>
@@ -1341,6 +1477,17 @@
 			YViKdFxu+tD0GLUzf3+Xj/2vypZhLK4Zx1z9PAFgVyU=
 			</data>
 		</dict>
+		<key>Headers/MZTimeManager.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9LzEjlIyR6nXesB+NYOmKeJ/hys=
+			</data>
+			<key>hash2</key>
+			<data>
+			qSV7euCdsjvOwh+MTfV5lHwqmLetG5fYbzMC8IKAxvk=
+			</data>
+		</dict>
 		<key>Headers/MZTimer.h</key>
 		<dict>
 			<key>hash</key>
@@ -1372,6 +1519,17 @@
 			<key>hash2</key>
 			<data>
 			NAOw99cfCGRXEhvMQunttZFpmT81T+0fx2iFptQd5bg=
+			</data>
+		</dict>
+		<key>Headers/MZUserDefaults.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HApIoIAR1Qegy78eI65y7toIcWg=
+			</data>
+			<key>hash2</key>
+			<data>
+			PTZew26X/Etl0m/oUTi5kOKse/F49TtR5bjkD5QyGtk=
 			</data>
 		</dict>
 		<key>Headers/MZValueCallback.h</key>
@@ -1455,11 +1613,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			o9GtHOXUlYsbd8U87p8pJc0MSz8=
+			sawf7mdKZNlVG2qqvqVChqf8bZs=
 			</data>
 			<key>hash2</key>
 			<data>
-			BWjqE/hYSBBHSN+Hy6bhTfnPHiuXt34BkY1qGUEpwC4=
+			x3TiNdOUQn5LO8DXsxavMEz4UhpL/GiCGhOhP4LhESc=
+			</data>
+		</dict>
+		<key>Headers/NSObject+MZTimer.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dlQTCusuryCh6YMvn81p2bC3e0w=
+			</data>
+			<key>hash2</key>
+			<data>
+			7wz3ZYBo0Imb3T2uvkzza785s4JishstroMb9raeLFE=
+			</data>
+		</dict>
+		<key>Headers/NSString+MZCommon.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			gNq2+qvdNc9BvLa9tQq9beDOXxk=
+			</data>
+			<key>hash2</key>
+			<data>
+			ONPg88wnwceoqZGDzGpQN9w0eOzLxcK3REzIjna3+cw=
 			</data>
 		</dict>
 		<key>Headers/NetworkPathsCommon.h</key>
@@ -1532,11 +1712,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			W89IHVRS3bZAiF/iKd48dnAuiJ0=
+			0UmSloTHx0l6g61rFq9CMnDpsG4=
 			</data>
 			<key>hash2</key>
 			<data>
-			BRhDGiBN0GYyoaXyuijJJcLDf88P+xxfhoShrEfYRPc=
+			BIpbcM5cUlU7Kg52vVrEfi+m0W9Is4alTJoA0uQ+NLs=
 			</data>
 		</dict>
 		<key>Headers/UIView+MZExtension.h</key>
@@ -1565,11 +1745,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			X5dJOuR7gJSk2W6lbCNrM+q9mF0=
+			l2Ev17Y2a/+7JDU2XUg6McMlD9k=
 			</data>
 			<key>hash2</key>
 			<data>
-			aAjarF86yeQxgAuKCThhIXJ2VeSAJtu1aNlai6st9Ig=
+			SSMzxLeqkpz6RrkqhgCuPs0PPJ3CySLwK3PLTvonJZQ=
 			</data>
 		</dict>
 		<key>Headers/codeObfuscation.h</key>

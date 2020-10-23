@@ -5,13 +5,17 @@
 //  Created by LiWei on 2020/7/30.
 //  Copyright © 2020 mengzhu.com. All rights reserved.
 //
+//
+#import <MZCoreSDKLibrary/MZCoreSDKLibrary.h>
 
-#import <UIKit/UIKit.h>
+/**
+    此类用户盟主APP普通用户端继承使用
+ */
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MZBaseNormalViewController : UIViewController
+@interface MZBaseNormalViewController : MZCoreViewController
 
 @property(nonatomic)BOOL isPersent;//标识controllert弹出方向 左右走还是上下走
 @property (nonatomic ,strong)UIViewController *loginWillGoVC;
@@ -42,3 +46,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+

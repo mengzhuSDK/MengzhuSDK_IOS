@@ -9,12 +9,21 @@
 #ifndef MZSDKConfig_h
 #define MZSDKConfig_h
 
-/// 分配的 appID 和 secretKey 和 频道ID
+/// SDK的测试环境还是正式环境，1=测试环境，0=正式环境，无特殊情况下请使用正式环境
+#define MZ_is_debug 0//切换测试环境和正式环境
 
-#define MZ_is_debug 1//测试环境还是正式环境
+#if MZ_is_debug
 
 #define MZSDK_AppID @""
 #define MZSDK_SecretKey @""
-#define MZSDK_ChannelId @""
+#define MZSDK_ChannelId @""//此值只有推流才使用
+
+#else
+
+#define MZSDK_AppID @""
+#define MZSDK_SecretKey @""
+#define MZSDK_ChannelId @""//此值只有推流才使用
+
+#endif
 
 #endif /* MZSDKConfig_h */

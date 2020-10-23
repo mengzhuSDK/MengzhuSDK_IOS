@@ -25,11 +25,20 @@ CGRect  CGRectMoveToCenter(CGRect rect, CGPoint center);
 @property CGFloat bottom;
 @property CGFloat right;
 @property (nonatomic ,strong)UILabel *badgeLable;
-//变成圆角
+/// 变成圆角
 -(instancetype)roundChangeWithRadius:(CGFloat)radius;
-//设置边框
--(instancetype)borderWithColor:(UIColor *)color :(CGFloat)borderWidth;
 
+/// 给当前view添加指定角度的圆角，默认4个角
+- (void)mz_setCornerRadius:(CGFloat)radius;
+/// 给当前view添加指定角度的圆角，自定义哪几个角
+- (void)mz_setCornerRadius:(CGFloat)radius rectCorner:(UIRectCorner)corners;
+/// 给当前view添加高度一半的圆角，默认4个角
+- (void)mz_setCornerRadiusOfHalfHeight;
+/// 给当前view添加高度一半的圆角，自定义哪几个角
+- (void)mz_setCornerRadiusOfHalfHeightWithRectCorner:(UIRectCorner)corners;
+
+/// 设置边框
+-(instancetype)borderWithColor:(UIColor *)color :(CGFloat)borderWidth;
 
 - (void) moveBy: (CGPoint) delta;
 - (void) scaleBy: (CGFloat) scaleFactor;

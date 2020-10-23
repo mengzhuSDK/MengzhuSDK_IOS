@@ -84,7 +84,6 @@
 #import "MZNetSeverUrlManager.h"
 #import "MZNetSeverUrlModel.h"
 #import "MZStystemSetting.h"
-#import "MZBaseNormalViewController.h"
 #import "NSObject+MZCurrentVC.h"
 #import "MZSupportComment.h"
 #import "MZParameterCommon.h"
@@ -127,6 +126,27 @@
 #import "UIScrollView+MZRefresh.h"
 #import "UIScrollView+MZExtension.h"
 #import "NSBundle+MZRefresh.h"
+#import "MZCoreNetWork.h"
+
+#pragma mark - B New Add
+// category
+#import "NSObject+MZTimer.h"
+#import "NSString+MZCommon.h"
+
+// utils
+#import "MZUserDefaults.h"
+#import "MZAudioTool.h"
+#import "MZCreatUI.h"
+#import "MZAlertControl.h"
+#import "MZTimeManager.h"
+#import "MZFileManager.h"
+#import "MZImagePickerController.h"
+
+// base
+#import "MZCoreNavigationController.h"//navigationController基类
+#import "MZCoreViewController.h"//viewcontroller基类
+#import "MZBaseNormalViewController.h"//盟主普通用户端的viewcontroller基类
+
 
 
 //! Project version number for MZCoreSDKLibrary.

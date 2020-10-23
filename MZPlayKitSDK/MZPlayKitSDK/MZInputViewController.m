@@ -9,7 +9,6 @@
 #import "MZInputViewController.h"
 #import "MZSuperPlayerViewController.h"
 #import "MZVerticalPlayerViewController.h"
-#import "MZSDKConfig.h"
 
 @interface MZInputViewController ()
 
@@ -184,16 +183,7 @@
             user.phone = @"19912344321";
         }
     }
-    
-#warning - 请输入分配给你们的appID和secretKey
-    user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
-    user.secretKey = MZSDK_SecretKey;
-    
-    if (user.appID.length <= 0 || user.secretKey.length <= 0) {
-        success(NO, @"请配置appId或secretKey");
-        return;
-    }
-    
+
     [MZBaseUserServer updateCurrentUser:user];
     
     if (self.nameTextField.text.length <= 0) {
@@ -227,13 +217,14 @@
 
 /// 进入超级播放器（二分屏和横屏）
 - (void)onSuperPlayerViewClick:(UIButton *)sender {
+    __weak typeof(self) weakSelf = self;
     [self setUserInfoSuccess:^(BOOL result, NSString *errorString) {
         if (result) {
             MZSuperPlayerViewController *superPlayerVC = [[MZSuperPlayerViewController alloc] init];
-            superPlayerVC.ticket_id = self.ticket_IDTextField.text;
-            [self.navigationController pushViewController:superPlayerVC animated:YES];
+            superPlayerVC.ticket_id = weakSelf.ticket_IDTextField.text;
+            [weakSelf.navigationController pushViewController:superPlayerVC animated:YES];
         } else {
-            [self.view show:errorString];
+            [weakSelf.view show:errorString];
         }
     }];
 }

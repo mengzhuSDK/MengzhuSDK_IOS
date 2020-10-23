@@ -1,0 +1,6 @@
+framework module MZUploadVideoSDK {
+  umbrella header "MZUploadVideoSDK.h"
+
+  export *
+  module * { export * }
+}

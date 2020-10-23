@@ -11,58 +11,13 @@
 #import "MZLiveFinishViewController.h"
 #import "MZAlertController.h"
 #import "MZSDKConfig.h"
+#import "MZConditionListView.h"
 
-@protocol MZConditionLabelSelectProtocol <NSObject>
-@optional
-- (void)selectOrUnSelect;
-@end
-
-@interface MZConditionLabel : UILabel
-@property (nonatomic, assign) BOOL isSelect;//是否选中
-@property (nonatomic,   weak) id<MZConditionLabelSelectProtocol>delegate;
-@end
-
-@implementation MZConditionLabel
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self makeView];
-    }
-    return self;
-}
-
-- (void)makeView {
-    self.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(select:)];
-    [self addGestureRecognizer:tap];
-    
-    CGFloat item = 18*MZ_RATE;
-    
-    UIImageView *selectImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mz_condition_select"]];
-    selectImageView.frame = CGRectMake(self.frame.size.width - 16 - item, (self.frame.size.height - item)/2.0, item, item);
-    selectImageView.contentMode = UIViewContentModeScaleAspectFit;
-    selectImageView.tag = 153;
-    selectImageView.hidden = YES;
-    [self addSubview:selectImageView];
-}
-
-- (void)select:(UITapGestureRecognizer *)tap {
-    self.isSelect = !self.isSelect;
-    if (_delegate && [_delegate respondsToSelector:@selector(selectOrUnSelect)]) {
-        [_delegate selectOrUnSelect];
-    }
-}
-
-- (void)setIsSelect:(BOOL)isSelect {
-    _isSelect = isSelect;
-    UIImageView *iv = [self viewWithTag:153];
-    if (iv) {
-        iv.hidden = !_isSelect;
-    }
-}
-
-@end
+typedef enum : int {
+    MZWatchMode_Free = 1,
+    MZWatchMode_WhiteList = 5,
+    MZWatchMode_FCode = 6,
+} MZWatchMode;
 
 @interface MZReadyLiveViewController ()<UITextFieldDelegate,UITextFieldDelegate,MZConditionLabelSelectProtocol>
 @property (nonatomic, strong) NSMutableDictionary *startLiveInfoDict;
@@ -77,16 +32,26 @@
 //@property (nonatomic, strong) UITextField *liveTKTextField;//live_tk
 //@property (nonatomic, strong) UITextField *ticketIdTextField;//ticket_id
 @property (nonatomic, strong) UITextField *countDownTextField;//倒计时
+@property (nonatomic, strong) UITextField *categoryTextField;//直播分类选择
+@property (nonatomic, assign) int selectCategoryId;//选中的分类ID
 
 @property (nonatomic, strong) MZConditionLabel *beautyFaceLabel;//美颜label
 @property (nonatomic, strong) MZConditionLabel *backgroundCameraLabel;//是否后置摄像头
 @property (nonatomic, strong) MZConditionLabel *muteLabel;//静音label
 @property (nonatomic, strong) MZConditionLabel *blockAllLabel;//禁言label
+@property (nonatomic, strong) MZConditionLabel *autoRecordLabel;//是否生成回放label
 
 @property (nonatomic, strong) UIButton *sessionPresetMediumButton;//标清
 @property (nonatomic, strong) UIButton *sessionPresetHighButton;//高清
 @property (nonatomic, strong) UIButton *sessionPresetVeryHighButton;//超清
 @property (nonatomic, assign) MZCaptureSessionPreset selectSessionPreset;//选中的分辨率
+
+@property (nonatomic, strong) UIButton *watchOfFreeButton;//免费观看按钮
+@property (nonatomic, strong) UIButton *watchOfWhiteListButton;//白名单观看按钮
+@property (nonatomic, strong) UIButton *watchOfFCodeButton;//F码观看按钮
+@property (nonatomic, assign) MZWatchMode selectWatchMode;//选中的观看方式，默认是免费
+@property (nonatomic, assign) int selectFCodeId;//选中的F码ID
+@property (nonatomic, assign) int selectWhiteListIds;//选中的白名单ID列表
 
 @property (nonatomic, strong) UIButton *pusherPortraitButton;//竖屏直播按钮
 @property (nonatomic, strong) UIButton *pusherLandspaceButton;//横屏直播按钮
@@ -96,6 +61,10 @@
 @end
 
 @implementation MZReadyLiveViewController
+
+- (void)dealloc {
+    NSLog(@"推流配置界面释放");
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -132,15 +101,19 @@
     [self.countDownTextField resignFirstResponder];
 }
 
-- (void)selectOrUnSelect {
+- (void)selectOrUnSelect:(MZConditionLabel *)label {
     [self hideKeyboard];
 }
 
 - (void)setupUI {
+    self.selectCategoryId = 0;
+    self.selectFCodeId = 0;
+    self.selectWhiteListIds = 0;
+    
     CGFloat navBarHeight = self.navigationController.navigationBar.frame.size.height+[UIApplication sharedApplication].statusBarFrame.size.height;
 
     CGFloat scrollViewHeight = self.view.frame.size.height - navBarHeight - (IPHONE_X ? 39 : 10) - 49 - 20 - 44 - 10;
-    CGFloat scrollViewContentHeight = 44*3+44*MZ_RATE*7+60*MZ_RATE;
+    CGFloat scrollViewContentHeight = 44*4 + 44*MZ_RATE*8 + 60*MZ_RATE*2;
     
     self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, navBarHeight, self.view.frame.size.width, scrollViewHeight)];
     self.bgScrollView.backgroundColor = [UIColor clearColor];
@@ -156,7 +129,7 @@
     infoInputLabel.text = @"信息填写";
     [self.bgScrollView addSubview:infoInputLabel];
     
-    self.topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, infoInputLabel.frame.size.height+infoInputLabel.frame.origin.y, self.view.frame.size.width, 44*MZ_RATE*2)];
+    self.topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, infoInputLabel.frame.size.height+infoInputLabel.frame.origin.y, self.view.frame.size.width, 44*MZ_RATE*3)];
     self.topBgView.backgroundColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
     [self.bgScrollView addSubview:self.topBgView];
     
@@ -166,7 +139,8 @@
 //    NSMutableAttributedString *live_TKPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写live_tk，debug模式会自动获取，无需填写" attributes:attrDict];
 //    NSMutableAttributedString *ticket_IDPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写ticketId，debug模式会自动获取，无需填写" attributes:attrDict];
     NSMutableAttributedString *countDownPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写开始倒计时时长，默认为3秒" attributes:attrDict];
-    
+    NSMutableAttributedString *categoryPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"选择直播分类" attributes:attrDict];
+
     UILabel *aRedStar = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 20, 44*MZ_RATE)];
     aRedStar.backgroundColor = [UIColor clearColor];
     aRedStar.textAlignment = NSTextAlignmentCenter;
@@ -206,13 +180,22 @@
     [self.topBgView addSubview:self.countDownTextField];
     [self.countDownTextField setAttributedPlaceholder:countDownPlaceStr];
     
+    self.categoryTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, self.countDownTextField.bottom, self.view.bounds.size.width - 30, 44*MZ_RATE)];
+    self.categoryTextField.backgroundColor = [UIColor clearColor];
+    self.categoryTextField.keyboardType = UIKeyboardTypeDefault;
+    self.categoryTextField.textColor = [UIColor whiteColor];
+    self.categoryTextField.keyboardType = UIKeyboardTypePhonePad;
+    self.categoryTextField.delegate = self;
+    [self.topBgView addSubview:self.categoryTextField];
+    [self.categoryTextField setAttributedPlaceholder:categoryPlaceStr];
+    
     UILabel *conditionLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, self.topBgView.bottom, self.view.frame.size.width, 44)];
     conditionLabel.textColor = [UIColor colorWithRed:122/255.0 green:122/255.0 blue:122/255.0 alpha:1];
     conditionLabel.backgroundColor = [UIColor clearColor];
     conditionLabel.text = @"条件筛选";
     [self.bgScrollView addSubview:conditionLabel];
     
-    UIView *conditionBgView = [[UIView alloc] initWithFrame:CGRectMake(0, conditionLabel.frame.size.height+conditionLabel.frame.origin.y, self.view.frame.size.width, 44*MZ_RATE*4)];
+    UIView *conditionBgView = [[UIView alloc] initWithFrame:CGRectMake(0, conditionLabel.frame.size.height+conditionLabel.frame.origin.y, self.view.frame.size.width, 44*MZ_RATE*5)];
     conditionBgView.backgroundColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
     [self.bgScrollView addSubview:conditionBgView];
     
@@ -242,12 +225,21 @@
     [conditionBgView addSubview:self.muteLabel];
     
     self.blockAllLabel = [[MZConditionLabel alloc] initWithFrame:CGRectMake(30, self.muteLabel.bottom, self.view.frame.size.width - 30, 44*MZ_RATE)];
-    self. blockAllLabel.delegate = self;
+    self.blockAllLabel.delegate = self;
     self.blockAllLabel.text = @"全体禁言";
     self.blockAllLabel.textColor = [UIColor whiteColor];
     self.blockAllLabel.font = [UIFont systemFontOfSize:14];
     self.blockAllLabel.backgroundColor = [UIColor clearColor];
     [conditionBgView addSubview:self.blockAllLabel];
+    
+    self.autoRecordLabel = [[MZConditionLabel alloc] initWithFrame:CGRectMake(30, self.blockAllLabel.bottom, self.view.frame.size.width - 30, 44*MZ_RATE)];
+    self.autoRecordLabel.delegate = self;
+    self.autoRecordLabel.text = @"是否生成回放";
+    self.autoRecordLabel.textColor = [UIColor whiteColor];
+    self.autoRecordLabel.font = [UIFont systemFontOfSize:14];
+    self.autoRecordLabel.backgroundColor = [UIColor clearColor];
+    [conditionBgView addSubview:self.autoRecordLabel];
+    self.autoRecordLabel.isSelect = YES;
     
     UILabel *sessionPresetLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, conditionBgView.bottom, self.view.frame.size.width, 44)];
     sessionPresetLabel.textColor = [UIColor colorWithRed:122/255.0 green:122/255.0 blue:122/255.0 alpha:1];
@@ -304,6 +296,54 @@
     self.sessionPresetVeryHighButton.layer.borderColor = [UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor;
     self.sessionPresetVeryHighButton.layer.borderWidth = 1.0;
     
+    UILabel *watchModeLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, sessionPresetBgView.bottom, self.view.frame.size.width, 44)];
+    watchModeLabel.textColor = [UIColor colorWithRed:122/255.0 green:122/255.0 blue:122/255.0 alpha:1];
+    watchModeLabel.backgroundColor = [UIColor clearColor];
+    watchModeLabel.text = @"观看方式";
+    [self.bgScrollView addSubview:watchModeLabel];
+       
+    UIView *watchModeBgView = [[UIView alloc] initWithFrame:CGRectMake(0, watchModeLabel.frame.size.height+watchModeLabel.frame.origin.y, self.view.frame.size.width, 60*MZ_RATE)];
+    watchModeBgView.backgroundColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
+    [self.bgScrollView addSubview:watchModeBgView];
+                  
+    self.watchOfFreeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.watchOfFreeButton.frame = CGRectMake(30, 10*MZ_RATE, itemWidth, 40*MZ_RATE);
+    [self.watchOfFreeButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [self.watchOfFreeButton setTitle:@"免费观看" forState:UIControlStateNormal];
+    [self.watchOfFreeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.watchOfFreeButton setTitleColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1] forState:UIControlStateSelected];
+    [self.watchOfFreeButton addTarget:self action:@selector(watchModeClick:) forControlEvents:UIControlEventTouchUpInside];
+    [watchModeBgView addSubview:self.watchOfFreeButton];
+    self.watchOfFreeButton.layer.borderColor = [UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor;
+    self.watchOfFreeButton.layer.borderWidth = 1.0;
+    self.watchOfFreeButton.layer.cornerRadius = 10.5;
+    self.watchOfFreeButton.layer.masksToBounds = YES;
+    
+    self.watchOfWhiteListButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.watchOfWhiteListButton.frame = CGRectMake(30+self.watchOfFreeButton.right, 10*MZ_RATE, itemWidth, 40*MZ_RATE);
+    [self.watchOfWhiteListButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [self.watchOfWhiteListButton setTitle:@"白名单观看" forState:UIControlStateNormal];
+    [self.watchOfWhiteListButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.watchOfWhiteListButton setTitleColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1] forState:UIControlStateSelected];
+    [self.watchOfWhiteListButton addTarget:self action:@selector(watchModeClick:) forControlEvents:UIControlEventTouchUpInside];
+    [watchModeBgView addSubview:self.watchOfWhiteListButton];
+    self.watchOfWhiteListButton.layer.cornerRadius = 10.5;
+    self.watchOfWhiteListButton.layer.masksToBounds = YES;
+    
+    self.watchOfFCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.watchOfFCodeButton.frame = CGRectMake(30+self.watchOfWhiteListButton.right, 10*MZ_RATE, itemWidth, 40*MZ_RATE);
+    [self.watchOfFCodeButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [self.watchOfFCodeButton setTitle:@"F码观看" forState:UIControlStateNormal];
+    [self.watchOfFCodeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.watchOfFCodeButton setTitleColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1] forState:UIControlStateSelected];
+    [self.watchOfFCodeButton addTarget:self action:@selector(watchModeClick:) forControlEvents:UIControlEventTouchUpInside];
+    [watchModeBgView addSubview:self.watchOfFCodeButton];
+    self.watchOfFCodeButton.layer.cornerRadius = 10.5;
+    self.watchOfFCodeButton.layer.masksToBounds = YES;
+    
+    self.watchOfFreeButton.selected = YES;
+    self.selectWatchMode = MZWatchMode_Free;
+
     CGFloat pushItemWidth = (self.view.frame.size.width - 46*2 - 20)/2;
     
     self.pusherAudioButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -382,6 +422,95 @@
     }
 }
 
+/// 选择观看方式
+- (void)watchModeClick:(UIButton *)sender {
+    if (sender == self.watchOfFreeButton) {
+        self.watchOfFreeButton.layer.borderColor = [UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor;
+        self.watchOfFreeButton.layer.borderWidth = 1.0;
+        self.watchOfWhiteListButton.layer.borderColor = [UIColor clearColor].CGColor;
+        self.watchOfWhiteListButton.layer.borderWidth = 0;
+        self.watchOfFCodeButton.layer.borderColor = [UIColor clearColor].CGColor;
+        self.watchOfFCodeButton.layer.borderWidth = 0;
+        self.watchOfFreeButton.selected = YES;
+        self.watchOfWhiteListButton.selected = NO;
+        self.watchOfFCodeButton.selected = NO;
+        
+        self.selectWatchMode = MZWatchMode_Free;
+        self.selectWhiteListIds = 0;
+        self.selectFCodeId = 0;
+    } else if (sender == self.watchOfWhiteListButton) {
+        __weak typeof(self) weakSelf = self;
+        [self setUserInfoSuccess:^(BOOL result, NSString *errorString) {
+            if (result) {
+                [MZConditionListView showList:MZReadyConditionListType_White result:^(BOOL isCancel, MZReadyConditionListType type, int selectId, NSString *selectString) {
+                    if (isCancel) return;
+                    weakSelf.watchOfWhiteListButton.layer.borderColor = [UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor;
+                    weakSelf.watchOfWhiteListButton.layer.borderWidth = 1.0;
+                    weakSelf.watchOfFreeButton.layer.borderColor = [UIColor clearColor].CGColor;
+                    weakSelf.watchOfFreeButton.layer.borderWidth = 0;
+                    weakSelf.watchOfFCodeButton.layer.borderColor = [UIColor clearColor].CGColor;
+                    weakSelf.watchOfFCodeButton.layer.borderWidth = 0;
+                    
+                    weakSelf.watchOfWhiteListButton.selected = YES;
+                    weakSelf.watchOfFreeButton.selected = NO;
+                    weakSelf.watchOfFCodeButton.selected = NO;
+                            
+                    weakSelf.selectWatchMode = MZWatchMode_WhiteList;
+                    weakSelf.selectFCodeId = 0;
+                    weakSelf.selectWhiteListIds = selectId;
+                }];
+            } else {
+                [weakSelf.view show:errorString];
+            }
+        }];
+
+    } else if (sender == self.watchOfFCodeButton) {
+        __weak typeof(self) weakSelf = self;
+        [self setUserInfoSuccess:^(BOOL result, NSString *errorString) {
+            if (result) {
+                [MZConditionListView showList:MZReadyConditionListType_FCode result:^(BOOL isCancel, MZReadyConditionListType type, int selectId, NSString *selectString) {
+                    if (isCancel) return;
+                    weakSelf.watchOfFCodeButton.layer.borderColor = [UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor;
+                    weakSelf.watchOfFCodeButton.layer.borderWidth = 1.0;
+                    weakSelf.watchOfFreeButton.layer.borderColor = [UIColor clearColor].CGColor;
+                    weakSelf.watchOfFreeButton.layer.borderWidth = 0;
+                    weakSelf.watchOfWhiteListButton.layer.borderColor = [UIColor clearColor].CGColor;
+                    weakSelf.watchOfWhiteListButton.layer.borderWidth = 0;
+                    
+                    weakSelf.watchOfFCodeButton.selected = YES;
+                    weakSelf.watchOfFreeButton.selected = NO;
+                    weakSelf.watchOfWhiteListButton.selected = NO;
+
+                    weakSelf.selectWatchMode = MZWatchMode_FCode;
+                    weakSelf.selectFCodeId = selectId;
+                    weakSelf.selectWhiteListIds = 0;
+                }];
+            } else {
+                [weakSelf.view show:errorString];
+            }
+        }];
+    }
+}
+
+/// 展示分类列表
+- (void)showCategoryList {
+    NSLog(@"展示分类列表");
+    __weak typeof(self) weakSelf = self;
+    [self setUserInfoSuccess:^(BOOL result, NSString *errorString) {
+        if (result) {
+            [MZConditionListView showList:MZReadyConditionListType_Categroy result:^(BOOL isCancel, MZReadyConditionListType type, int selectId, NSString *selectString) {
+                if (isCancel) return;
+                weakSelf.selectCategoryId = selectId;
+                weakSelf.categoryTextField.text = selectString;
+            }];
+        } else {
+            weakSelf.categoryTextField.text = @"";
+            weakSelf.selectCategoryId = 0;
+            [weakSelf.view show:errorString];
+        }
+    }];
+}
+
 /// 配置用户信息
 - (void)setUserInfoSuccess:(void(^)(BOOL result, NSString *errorString))success {
     if (self.uniqueIdTextField.text.length <= 0) {
@@ -409,15 +538,6 @@
 #warning - 用户自己传过来的唯一ID
     user.uniqueID = self.uniqueIdTextField.text;
 
-#warning - 请输入分配给你们的appID和secretKey
-    user.appID = MZSDK_AppID;//线上模拟环境(这里需要自己填一下)
-    user.secretKey = MZSDK_SecretKey;
-
-    if (user.appID.length <= 0 || user.secretKey.length <= 0) {
-        success(NO, @"请配置appId或secretKey");
-        return;
-    }
-
     [MZBaseUserServer updateCurrentUser:user];
 
     success(YES, @"");
@@ -440,7 +560,7 @@
         if (result) {
             button.userInteractionEnabled = NO;
             
-            // 如果已经从你们服务器获取了 live_tk 和 ticket_id,那么就直接开始直播
+            // 如果已经从你们服务器获取了 live_tk 和 ticket_id,那么就直接调用getLiveData开始直播
 //            if (weakSelf.liveTKTextField.text.length > 4 && weakSelf.ticketIdTextField.text.length > 4) {
 //                [weakSelf getLiveData];
 //            } else {
@@ -454,7 +574,6 @@
 }
 
 - (void)createNewLiveActivity {
-    
     [MZSDKSimpleHud show];
     
     // 直播封面地址（测试数据）
@@ -477,15 +596,22 @@
         live_type = 1;
     }
     
+    NSString *pay_notice = @"";
+    if (self.selectWatchMode == MZWatchMode_FCode) {
+        pay_notice = @"视频设置了F码，请输入F码观看";
+    } else if (self.selectWatchMode == MZWatchMode_WhiteList) {
+        pay_notice = @"视频设置了白名单观看";
+    }
+    
 #pragma mark - 创建直播活动接口 - 此接口建议只是测试使用，该接口返回需要的数据请从自己服务端获取
-    [MZSDKBusinessManager createNewLiveWithChannel_id:channel_id liveCover:live_coverURLString liveName:live_name liveIntroduction:liveIntroduction live_style:live_style live_type:live_type success:^(id _Nonnull response) {
+    [MZSDKBusinessManager createNewLiveWithChannel_id:channel_id liveCover:live_coverURLString liveName:live_name liveIntroduction:liveIntroduction live_style:live_style live_type:live_type auto_record:self.autoRecordLabel.isSelect view_mode:self.selectWatchMode white_id:self.selectWhiteListIds fcode_id:self.selectFCodeId pay_notice:pay_notice category_id:self.selectCategoryId success:^(id response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"live_tk-----------  %@",[response valueForKey:@"live_tk"]);
             self.live_tkString = [NSString stringWithFormat:@"%@",[response valueForKey:@"live_tk"]];
             self.ticket_idString = [NSString stringWithFormat:@"%@",[response valueForKey:@"ticket_id"]];
             [self getLiveData];
         });
-    } failure:^(NSError * _Nonnull error) {
+    } failure:^(NSError * error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"error = %@",error.localizedDescription);
             [MZAlertController showWithTitle:@"错误" message:error.domain cancelTitle:@"" sureTitle:@"确定" preferredStyle:UIAlertControllerStyleAlert handle:^(MZResultCode code) {
@@ -528,11 +654,16 @@
 }
 
 - (void)pushToLive:(MZLiveUserModel *)user {
+
     //相机、麦克风权限检测
-    if (![MZBaseGlobalTools checkMediaDevice:AVMediaTypeAudio])
+    if (![MZBaseGlobalTools checkMediaDevice:AVMediaTypeAudio]) {
+        self.currentPusherButton.userInteractionEnabled = YES;
         return;
-    if (![MZBaseGlobalTools checkMediaDevice:AVMediaTypeVideo])
+    }
+    if (![MZBaseGlobalTools checkMediaDevice:AVMediaTypeVideo]) {
+        self.currentPusherButton.userInteractionEnabled = YES;
         return;
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         WeaklySelf(weakSelf);
         MZLiveViewController * live = [[MZLiveViewController alloc]initWithFinishModel:^(MZLiveFinishModel *model) {
@@ -598,6 +729,15 @@
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     });
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (textField == self.categoryTextField) {
+        [self showCategoryList];
+        return NO;
+    }
+    return YES;
 }
 
 // 是否是模拟器
