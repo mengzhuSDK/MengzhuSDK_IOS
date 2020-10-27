@@ -724,8 +724,23 @@ typedef enum : int {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"此创建活动功能API接口权限所属于服务端，提供此功能为了便于demo演示。如接入时考虑数据安全等因素建议通过服务访问API并将live_tk、ticket_id传入SDK进行推流。" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"开始直播" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            [self presentViewController:live animated:(live.isLandscape ? NO : YES) completion:nil];
-        }];
+                  UIView *loadingOneView = nil;
+                  UIView *loadingTwoView = nil;
+                  if (live.isLandscape) {
+                      loadingOneView = [[UIImageView alloc] initWithFrame:CGRectMake(-200, -200, 5000, 5000)];
+                      loadingOneView.backgroundColor = [UIColor blackColor];
+                      [live.view addSubview:loadingOneView];
+                      
+                      loadingTwoView = [[UIImageView alloc] initWithFrame:CGRectMake(-200, -200, 5000, 5000)];
+                      loadingTwoView.backgroundColor = [UIColor blackColor];
+                      [[UIApplication sharedApplication].keyWindow addSubview:loadingTwoView];
+                  }
+                  [self presentViewController:live animated:(live.isLandscape ? NO : YES) completion:^{
+                      NSLog(@"跳转完成");
+                      [loadingTwoView removeFromSuperview];
+                      [loadingOneView removeFromSuperview];
+                  }];
+              }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     });

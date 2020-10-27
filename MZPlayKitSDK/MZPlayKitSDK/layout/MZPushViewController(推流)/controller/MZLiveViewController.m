@@ -1374,9 +1374,18 @@ CGFloat BtnSpace = 28 + 12;
             self.cameraChangeBtn.userInteractionEnabled = YES;
             
             [self startLive];
+            
+            [self showHistoryMessages];
         });
     }
     _countDownNum --;
+}
+
+- (void)showHistoryMessages  {
+    MZMoviePlayerModel *activity = [[MZMoviePlayerModel alloc] init];
+    activity.ticket_id = self.model.ticket_id;
+    activity.chat_uid = self.model.chat_conf.chat_uid;
+    _chatView.activity = activity;
 }
 
 - (void)startCountDownTimer{
