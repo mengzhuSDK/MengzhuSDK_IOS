@@ -1081,8 +1081,8 @@
 				C04B9B7524F0484D00881A6E /* Sources */,
 				C04B9B7624F0484D00881A6E /* Frameworks */,
 				C04B9B7724F0484D00881A6E /* Resources */,
-				362C9F1FBEC0E6D7ECFFD1EF /* [CP] Embed Pods Frameworks */,
-				17D953F94209AC15228D4340 /* [CP] Copy Pods Resources */,
+				9C6400171F8E43741A58C5A6 /* [CP] Embed Pods Frameworks */,
+				76F5BB9813B3AF3D11D01699 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1164,7 +1164,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		17D953F94209AC15228D4340 /* [CP] Copy Pods Resources */ = {
+		76F5BB9813B3AF3D11D01699 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1179,23 +1179,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MZPlayKitSDK/Pods-MZPlayKitSDK-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		362C9F1FBEC0E6D7ECFFD1EF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MZPlayKitSDK/Pods-MZPlayKitSDK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MZPlayKitSDK/Pods-MZPlayKitSDK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MZPlayKitSDK/Pods-MZPlayKitSDK-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		873AF1B7721208CE82B53809 /* [CP] Check Pods Manifest.lock */ = {
@@ -1218,6 +1201,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C6400171F8E43741A58C5A6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MZPlayKitSDK/Pods-MZPlayKitSDK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MZPlayKitSDK/Pods-MZPlayKitSDK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MZPlayKitSDK/Pods-MZPlayKitSDK-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1461,7 +1461,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.3.0;
 				DEVELOPMENT_TEAM = 9E78V92FYD;
-				GCC_PREFIX_HEADER = $SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch";
 				INFOPLIST_FILE = MZPlayKitSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1483,7 +1483,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.3.0;
 				DEVELOPMENT_TEAM = 9E78V92FYD;
-				GCC_PREFIX_HEADER = $SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch";
 				INFOPLIST_FILE = MZPlayKitSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

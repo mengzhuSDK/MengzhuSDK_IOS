@@ -129,7 +129,7 @@ static const char MJCachedPropertiesKey = '\0';
     MJExtensionSemaphoreSignal
     // 遍历成员变量
     BOOL stop = NO;
-    for (MJProperty *property in [cachedProperties copy]) {
+    for (MJProperty *property in cachedProperties) {
         enumeration(property, &stop);
         if (stop) break;
     }
@@ -138,8 +138,7 @@ static const char MJCachedPropertiesKey = '\0';
 #pragma mark - 公共方法
 + (NSMutableArray *)mj_properties
 {
-    NSMutableDictionary *cachedInfo = [self mj_propertyDictForKey:&MJCachedPropertiesKey];
-    NSMutableArray *cachedProperties = cachedInfo[NSStringFromClass(self)];
+    NSMutableArray *cachedProperties = [self mj_propertyDictForKey:&MJCachedPropertiesKey][NSStringFromClass(self)];
     if (cachedProperties == nil) {
         cachedProperties = [NSMutableArray array];
         

@@ -9,7 +9,7 @@ pod 'MZCoreSDKLibrary','2.5.0'
 pod 'MZMediaSDK','2.5.0'
 pod 'MZPlayerSDK','2.5.0'
 pod 'MZDownLoaderSDK','2.4.0'
-pod 'MZChatSDK','2.4.0'
+pod 'MZChatSDK','2.4.2'
 pod 'MZUploadVideoSDK','1.0.0'
 
 end
