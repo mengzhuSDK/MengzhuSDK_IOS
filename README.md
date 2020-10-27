@@ -17,7 +17,7 @@ pod 'MZMediaSDK','2.5.0' #盟主业务组件
 pod 'MZPlayerSDK','2.5.0' #盟主播放器组件，如需播放器功能，请添加此行代码
 pod 'MZPushFlowSDK','2.3.0' #盟主推流组件，如需直播功能，请添加此行代码
 pod 'MZDownLoaderSDK','2.4.0' #盟主下载器的组件，如需下载功能，请添加此行代码
-pod 'MZChatSDK','2.4.0'#盟主聊天消息组件
+pod 'MZChatSDK','2.4.2'#盟主聊天消息组件
 pod 'MZUploadVideoSDK','1.0.0'#盟主视频上传组件，如需上传功能，请添加此行代码
 ```
 
