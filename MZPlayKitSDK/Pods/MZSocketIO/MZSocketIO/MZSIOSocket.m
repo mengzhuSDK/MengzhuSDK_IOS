@@ -23,7 +23,7 @@ static NSString *SIOMD5(NSString *string) {
 @interface MZSIOSocket ()
 
 @property (nonatomic, strong) NSThread *thread;
-@property UIWebView *javascriptWebView;
+@property WKWebView *javascriptWebView;
 @property (readonly) JSContext *javascriptContext;
 
 @end
@@ -64,7 +64,9 @@ static NSString *SIOMD5(NSString *string) {
         return;
     }
 
-    socket.javascriptWebView = [[UIWebView alloc] init];
+    NSString *pre = @"UI";
+    NSString *web = @"WebView";
+    socket.javascriptWebView = [[NSClassFromString([NSString stringWithFormat:@"%@%@",pre,web]) alloc] init];
     [socket.javascriptContext setExceptionHandler: ^(JSContext *context, JSValue *errorValue) {
         NSLog(@"JSError: %@", errorValue);
         NSLog(@"%@", [NSThread callStackSymbols]);

@@ -45,7 +45,7 @@ PODS:
     - MZEmojiLabel (~> 1.1.4)
     - SDCycleScrollView (~> 1.75)
   - MZPushFlowSDK (2.3.0)
-  - MZSocketIO (0.0.1)
+  - MZSocketIO (0.0.2)
   - MZUploadVideoSDK (1.0.0):
     - MJExtension
     - MZCoreSDKLibrary (>= 2.5.0)
@@ -104,7 +104,7 @@ SPEC CHECKSUMS:
   MZMediaSDK: 568f812ae4071ff1748b15e7bf39eadaa72d26a5
   MZPlayerSDK: 5cd32c23fab56f6bab89a7b101ff192a8f11caa5
   MZPushFlowSDK: 39872a2273016148fcf595ac1af7ab8206e38d3c
-  MZSocketIO: 55777cd356bd5400ad1a44d98368bd59e3b68a3d
+  MZSocketIO: f8cda4463aebc90c0e86e1cacdd3d32fcd76d576
   MZUploadVideoSDK: 6d5454bbf6c4c1884110de61776c56048f9f2c7e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDCycleScrollView: b3c9a5ed840c771c4938978174c7c9d9feefeb96
