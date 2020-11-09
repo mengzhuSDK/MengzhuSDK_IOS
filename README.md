@@ -21,15 +21,27 @@ pod 'MZChatSDK','2.4.2'#盟主聊天消息组件
 pod 'MZUploadVideoSDK','1.0.0'#盟主视频上传组件，如需上传功能，请添加此行代码
 ```
 
+# Wiki开发文档
+* [1. 文档首页](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki)
+* [2. 快速集成](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/2.快速集成)
+* [3. 用户唯一标示](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/3.用户唯一标示)
+* [4. SDK初始化](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/4.SDK初始化)
+* [5. 推流](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/5.推流)
+* [6. 播放器(竖屏/二分屏/自定义)](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/6.播放器(竖屏-二分屏-自定义))
+* [7. 功能(投屏 弹幕 小窗口 倍速 防录屏)](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/7.功能(投屏-弹幕-小窗口-倍速-防录屏))
+* [8. 互动(签到 投票 文档 抽奖 广告 观看权限)](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/8.互动(签到-投票-文档-抽奖-广告-观看权限))
+* [9. 聊天和消息](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/9.聊天和消息)
+* [10. 问答和礼物](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/10.问答和礼物)
+* [11. 下载器](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/11.下载器)
+* [12. 上传视频](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/12.上传视频)
+* [13. 版本更新](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/13.版本更新)
+
 # 注意
 本项目是一个包含盟主SDK所有功能使用的demo，旨在帮助开发者快速集成盟主SDK。
 
 demo里实现了多种适用于盟主SDK的UI，后续会继续改动，所以建议开发者基于盟主SDK进行开发，这样更灵活。
 
 如若在本demo上进行开发，demo里的源码UI则需自己维护，这种更适用于UI改动较少或者着急出功能的开发者。
-
-# 开发文档
-[Wiki 文档](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki)
 
 
 # 支持功能
