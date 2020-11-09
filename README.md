@@ -22,7 +22,7 @@ pod 'MZUploadVideoSDK','1.0.0'#盟主视频上传组件，如需上传功能，�
 ```
 
 # Wiki开发文档
-* [1. 文档首页](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki)
+* [1. 开发文档首页](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki)
 * [2. 快速集成](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/2.快速集成)
 * [3. 用户唯一标示](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/3.用户唯一标示)
 * [4. SDK初始化](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/4.SDK初始化)
@@ -35,6 +35,7 @@ pod 'MZUploadVideoSDK','1.0.0'#盟主视频上传组件，如需上传功能，�
 * [11. 下载器](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/11.下载器)
 * [12. 上传视频](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/12.上传视频)
 * [13. 版本更新](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/13.版本更新)
+* [14. API文档](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/14.API文档)
 
 # 注意
 本项目是一个包含盟主SDK所有功能使用的demo，旨在帮助开发者快速集成盟主SDK。
