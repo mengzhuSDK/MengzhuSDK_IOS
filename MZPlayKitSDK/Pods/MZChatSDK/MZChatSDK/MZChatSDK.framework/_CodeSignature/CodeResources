@@ -4,21 +4,53 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/DXFaceView.h</key>
+		<data>
+		jz3GF70PEQLirrjNvmX3M3TkhXM=
+		</data>
+		<key>Headers/FacialView.h</key>
+		<data>
+		wheU0bDvHfxqtydERe4CGpbV6b0=
+		</data>
+		<key>Headers/HDAutoADModel.h</key>
+		<data>
+		w5w6WmiPAb1ugla7UpzQV2AdzaI=
+		</data>
+		<key>Headers/HDCustomTextADModel.h</key>
+		<data>
+		M6pM3M1nDIwVAz1c2B+RjCAER5w=
+		</data>
+		<key>Headers/MZActMsg.h</key>
+		<data>
+		gddhke6BH6INft6BL8EgXldrwLc=
+		</data>
 		<key>Headers/MZAppChatApiManager.h</key>
 		<data>
 		g6ee1zFmVNug2A/8Wl/EDhk7eK8=
 		</data>
 		<key>Headers/MZAppMessageToolView.h</key>
 		<data>
-		ADSL38lMNCkOtRJrXKh7mmrOPPE=
+		vCDWzS1zjCc8B43aw7aUTCuC6h0=
+		</data>
+		<key>Headers/MZBarrageSwitch.h</key>
+		<data>
+		6eR6PzwDFTJ/eSnvM8cbpOrNdHg=
 		</data>
 		<key>Headers/MZChatApiManager.h</key>
 		<data>
-		VqYilxHWYvmzQpMZTl42r/bve5M=
+		lamofybt/pUye7EvCU3OAEyJrjg=
+		</data>
+		<key>Headers/MZChatCommen.h</key>
+		<data>
+		9E7anpir88uXPtFsuPGAtMxANBU=
 		</data>
 		<key>Headers/MZChatKitManager.h</key>
 		<data>
-		BCRpCXHOfp7bqv/eV0OACxUtyb0=
+		ou5GfEIUzflyXn3ja94QUA/yOlU=
+		</data>
+		<key>Headers/MZChatNetOperate.h</key>
+		<data>
+		rCwob0Jls6164fLWrEhkhoiA3KE=
 		</data>
 		<key>Headers/MZChatPresenter.h</key>
 		<data>
@@ -26,15 +58,51 @@
 		</data>
 		<key>Headers/MZChatSDK.h</key>
 		<data>
-		PrxhElqWgOTq599sA6k/11D65wY=
+		NEr4M3olQ8EektMHS4SQ6ciEC5E=
+		</data>
+		<key>Headers/MZChatThemeManager.h</key>
+		<data>
+		CewUMvnd2Ua4UqGHNx3cjzxwBfw=
+		</data>
+		<key>Headers/MZChatTool.h</key>
+		<data>
+		gsNV5+DvUs0jYp3dOzyUtYarHs8=
+		</data>
+		<key>Headers/MZGlobalContentModel.h</key>
+		<data>
+		RnuK5i/niueJY4EH+NQS2AEFKsQ=
+		</data>
+		<key>Headers/MZGoodsListModel.h</key>
+		<data>
+		pKT+yzB6FmpJf5YIPYQTBzgae7E=
+		</data>
+		<key>Headers/MZGoodsListOuterModel.h</key>
+		<data>
+		tcxeTR6+CsrKCcvVh8U9mGjK1Kg=
+		</data>
+		<key>Headers/MZLongPollDataModel.h</key>
+		<data>
+		HiE+Tmu8NFUilxDx89BRJXopZuc=
 		</data>
 		<key>Headers/MZLongPolling.h</key>
 		<data>
 		G2110rZ+kuvwyaqLi8rD39Yx3/U=
 		</data>
+		<key>Headers/MZRightContenModel.h</key>
+		<data>
+		eQA5Q6NQkFtULkI4x5q6m7FdTFk=
+		</data>
+		<key>Headers/MZRightModel.h</key>
+		<data>
+		JWdAX35gM00HRXluCJgxYwHsuSk=
+		</data>
+		<key>Headers/MZSingleContentModel.h</key>
+		<data>
+		t/3MRcmibswE7I47JgmNNhRGFNE=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		Rcjija2Pc7FaSxsT5XS7y0cnLRE=
+		9JenzgjEdHoESalX1UwqhVieG3Q=
 		</data>
 		<key>MZChatSDKResource.bundle/mz_barrageSwitch_off@2x.png</key>
 		<data>
@@ -75,6 +143,61 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/DXFaceView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			jz3GF70PEQLirrjNvmX3M3TkhXM=
+			</data>
+			<key>hash2</key>
+			<data>
+			wqsQUZnt5ZG/YFoh0qGmMMecCsQUSk6OLyIOfEul5n0=
+			</data>
+		</dict>
+		<key>Headers/FacialView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			wheU0bDvHfxqtydERe4CGpbV6b0=
+			</data>
+			<key>hash2</key>
+			<data>
+			sTpflYFjTrI3KCtMFXTOnoJC6vWa1KJ2MQKMOsB/ICU=
+			</data>
+		</dict>
+		<key>Headers/HDAutoADModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			w5w6WmiPAb1ugla7UpzQV2AdzaI=
+			</data>
+			<key>hash2</key>
+			<data>
+			IeqDboMJSCsWPPv0doFC3p6NaC298cr3Xj9XTc0jgL4=
+			</data>
+		</dict>
+		<key>Headers/HDCustomTextADModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			M6pM3M1nDIwVAz1c2B+RjCAER5w=
+			</data>
+			<key>hash2</key>
+			<data>
+			i1vDLf2EOfqu8MWws7ickSkjvuiV0uqeZg0Xn2h2dO4=
+			</data>
+		</dict>
+		<key>Headers/MZActMsg.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			gddhke6BH6INft6BL8EgXldrwLc=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZnxI9h06m6XZBz9HGXjJqFGI3Ep1x8clgtUUlwWu4C4=
+			</data>
+		</dict>
 		<key>Headers/MZAppChatApiManager.h</key>
 		<dict>
 			<key>hash</key>
@@ -90,33 +213,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ADSL38lMNCkOtRJrXKh7mmrOPPE=
+			vCDWzS1zjCc8B43aw7aUTCuC6h0=
 			</data>
 			<key>hash2</key>
 			<data>
-			2AO1E2vxQPSMiz5azEadcJSuhpvba/H1GF12jZ3qhso=
+			L1ygmYPZLnSsyNlNZBajZDkL1THWNFh5FOmfGYW4lxs=
+			</data>
+		</dict>
+		<key>Headers/MZBarrageSwitch.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6eR6PzwDFTJ/eSnvM8cbpOrNdHg=
+			</data>
+			<key>hash2</key>
+			<data>
+			XFAqlbmOIU/dGApLrgHdGd4M3LI2jaf5xZw4xXiIXE0=
 			</data>
 		</dict>
 		<key>Headers/MZChatApiManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VqYilxHWYvmzQpMZTl42r/bve5M=
+			lamofybt/pUye7EvCU3OAEyJrjg=
 			</data>
 			<key>hash2</key>
 			<data>
-			373nLBJY36/X1Gc1e0MGkWQkiz+1misoXiNb3748Wz0=
+			FnnIV1i62Il5PQt6ziGOXp5RQ9+i3QuBjKqIX/eGEgQ=
+			</data>
+		</dict>
+		<key>Headers/MZChatCommen.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9E7anpir88uXPtFsuPGAtMxANBU=
+			</data>
+			<key>hash2</key>
+			<data>
+			XZot7JQrFHE00syqqsd3R2jZ34B8rYS2uEFOrfkeZ5Q=
 			</data>
 		</dict>
 		<key>Headers/MZChatKitManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BCRpCXHOfp7bqv/eV0OACxUtyb0=
+			ou5GfEIUzflyXn3ja94QUA/yOlU=
 			</data>
 			<key>hash2</key>
 			<data>
-			C5pBbYzc/rsIUkHwSzDGr7NinPtzNo9tAHqrMvMSj5I=
+			NoijECnXIo0Tr1W7t6wv71iBZWqjGcN/ZzfExyKkmaI=
+			</data>
+		</dict>
+		<key>Headers/MZChatNetOperate.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rCwob0Jls6164fLWrEhkhoiA3KE=
+			</data>
+			<key>hash2</key>
+			<data>
+			RWqJE958f039+SjAaE23kN6JxlN6Cws3VuX3oowgC8U=
 			</data>
 		</dict>
 		<key>Headers/MZChatPresenter.h</key>
@@ -134,11 +290,77 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PrxhElqWgOTq599sA6k/11D65wY=
+			NEr4M3olQ8EektMHS4SQ6ciEC5E=
 			</data>
 			<key>hash2</key>
 			<data>
-			ltw2F6GBDXca7zTUNIp1eR8Tr46bMcVZSjhOvcTTlMs=
+			lHfG+FIxwDldsojuxioqGTxyrHrHAhARjd4Qo9wPPwo=
+			</data>
+		</dict>
+		<key>Headers/MZChatThemeManager.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			CewUMvnd2Ua4UqGHNx3cjzxwBfw=
+			</data>
+			<key>hash2</key>
+			<data>
+			8ARNV0lS8FTnmhmyUUoG2TFIUE+wM3IWPulkAcF8S3o=
+			</data>
+		</dict>
+		<key>Headers/MZChatTool.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			gsNV5+DvUs0jYp3dOzyUtYarHs8=
+			</data>
+			<key>hash2</key>
+			<data>
+			Ov1SSVBf1U1wRdihJv6pgzMyZO1BxQxlxi+rVur2op4=
+			</data>
+		</dict>
+		<key>Headers/MZGlobalContentModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RnuK5i/niueJY4EH+NQS2AEFKsQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			PHIBfGjCPYVnWlgZLXZS0MfJIQgRxd4kTZ35f2CO614=
+			</data>
+		</dict>
+		<key>Headers/MZGoodsListModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			pKT+yzB6FmpJf5YIPYQTBzgae7E=
+			</data>
+			<key>hash2</key>
+			<data>
+			Up5ePPh0apSNIWAKgGQhyAckiEHCXw+/5TL90Wx7vQY=
+			</data>
+		</dict>
+		<key>Headers/MZGoodsListOuterModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			tcxeTR6+CsrKCcvVh8U9mGjK1Kg=
+			</data>
+			<key>hash2</key>
+			<data>
+			YapT/AQnxitQBt5teSQ1wYAQSjv2jHjSLGcpEi88wK4=
+			</data>
+		</dict>
+		<key>Headers/MZLongPollDataModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HiE+Tmu8NFUilxDx89BRJXopZuc=
+			</data>
+			<key>hash2</key>
+			<data>
+			DcdJX/WJjIYR1O+p5ImCGm84MyNxYdqAbknrDM6a3/Q=
 			</data>
 		</dict>
 		<key>Headers/MZLongPolling.h</key>
@@ -150,6 +372,39 @@
 			<key>hash2</key>
 			<data>
 			bmdrmWQglu9dX33jtpuJvYo137WYMszVXzR9ySxTFAc=
+			</data>
+		</dict>
+		<key>Headers/MZRightContenModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			eQA5Q6NQkFtULkI4x5q6m7FdTFk=
+			</data>
+			<key>hash2</key>
+			<data>
+			Ssbrg4OqwN3x1U3STF0AQemFrgjIS/z7A71o54P+pEs=
+			</data>
+		</dict>
+		<key>Headers/MZRightModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			JWdAX35gM00HRXluCJgxYwHsuSk=
+			</data>
+			<key>hash2</key>
+			<data>
+			FtA7Vr+dpWxHoEk0UD+Cgs9YUiJLKT5LyYTQ/aFy7kQ=
+			</data>
+		</dict>
+		<key>Headers/MZSingleContentModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			t/3MRcmibswE7I47JgmNNhRGFNE=
+			</data>
+			<key>hash2</key>
+			<data>
+			gtVqStmnfQmDyVCyRmiLPEQz1k+1Cf0Ro6lq03fva/M=
 			</data>
 		</dict>
 		<key>MZChatSDKResource.bundle/mz_barrageSwitch_off@2x.png</key>

@@ -1,0 +1,1 @@
+../../../MZPlayerSDK/MZPlayerHeader/MZMovieCoverPageControl.h

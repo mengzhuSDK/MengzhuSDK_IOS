@@ -280,7 +280,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     self.chatView.chatDelegate =self;
     [self addSubview:self.chatView];
     
-    //将弹出菜单放到muqianself的最顶部
+    //将弹出菜单放到self的最顶部
     [self bringSubviewToFront:self.multiMenu];
 }
 
@@ -477,7 +477,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 /// 请求加载商品列表
 - (void)requestGoodsList:(GoodsDataResult)block offset:(int)offset {
     [MZSDKBusinessManager reqGoodsList:self.ticket_id offset:offset limit:50 success:^(id responseObject) {
-        MZGoodsListOuterModel *goodsListOuterModel = (MZGoodsListOuterModel *)responseObject;
+        MZGoodsListOuterModel *goodsListOuterModel = [MZGoodsListOuterModel initModel:responseObject];
         
         if(offset>0){
             if (goodsListOuterModel.list.count) {

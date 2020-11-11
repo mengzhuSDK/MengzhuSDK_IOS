@@ -13,11 +13,11 @@
 #import <MZPushFlowSDK/MZPushFlowSDK.h>//直播推流组件
 #import <MZChatSDK/MZChatSDK.h>//消息组件
 
-#import <Masonry.h>
+#import <Masonry/Masonry.h>
 #import <AFNetworking/AFNetworking.h>
 #import <SDWebImage/SDWebImageManager.h>
 #import <MJRefresh/MJRefresh.h>
-#import <MJExtension.h>
+#import <MJExtension/MJExtension.h>
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
 #import <MZEmojiLabel/MZEmojiLabel.h>

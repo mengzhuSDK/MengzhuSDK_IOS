@@ -9,6 +9,7 @@
 #import "MZInputViewController.h"
 #import "MZSuperPlayerViewController.h"
 #import "MZVerticalPlayerViewController.h"
+#import "MZSDKConfig.h"
 
 @interface MZInputViewController ()
 
@@ -53,8 +54,15 @@
     
     NSDictionary *attrDict = @{NSFontAttributeName:[UIFont systemFontOfSize:14*MZ_RATE],NSForegroundColorAttributeName:[UIColor colorWithRed:122/255.0 green:122/255.0 blue:122/255.0 alpha:1]};
     
-    NSMutableAttributedString *ticket_IDPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写ticket_id，必填项，例:10014584" attributes:attrDict];
-    NSMutableAttributedString *uniquePlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写第三方用户唯一ID，必填项，例:user888" attributes:attrDict];
+    NSString *egTicketId = @"10014584";
+    NSString *egUniqueId = @"debugUser888";
+    if (MZ_is_debug == 0) {//正式环境
+        egTicketId = @"10145420";
+        egUniqueId = @"releaseUser999";
+    }
+    
+    NSMutableAttributedString *ticket_IDPlaceStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"填写ticket_id，必填项，例:%@",egTicketId] attributes:attrDict];
+    NSMutableAttributedString *uniquePlaceStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"填写用户唯一ID，必填项，例:%@",egUniqueId] attributes:attrDict];
     NSMutableAttributedString *nicknamePlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写用户昵称，空则使用默认名字" attributes:attrDict];
     NSMutableAttributedString *avatarPlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写用户头像地址，空则使用默认头像" attributes:attrDict];
     NSMutableAttributedString *phonePlaceStr = [[NSMutableAttributedString alloc] initWithString:@"填写用户手机号，空则使用默认手机号" attributes:attrDict];

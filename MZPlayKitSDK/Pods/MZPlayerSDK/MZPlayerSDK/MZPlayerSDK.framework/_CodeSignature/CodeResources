@@ -62,7 +62,7 @@
 		</data>
 		<key>Headers/MZNewMediaControl.h</key>
 		<data>
-		CTclH8fwMglTSpS+u1t1PCVbIfA=
+		wR3u0zpU6vYXAtNBj9BXewVIF+Q=
 		</data>
 		<key>Headers/MZOnlyVerticalMediaControl.h</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Headers/MZPlayerManager.h</key>
 		<data>
-		gSJCGSzC2+yQwUcrRXisT9+zQ4M=
+		rPqCCfoLdELpMjLg+l4NQoDtfbQ=
 		</data>
 		<key>Headers/MZPlayerSDK.h</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		twfPFu5esIDkWqgZAOcA1dIJFsg=
+		QQPSXslawc989Xjmu3LxWzsquyE=
 		</data>
 		<key>MZPlayerSDK.bundle/device_exchange@2x.png</key>
 		<data>
@@ -437,11 +437,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			CTclH8fwMglTSpS+u1t1PCVbIfA=
+			wR3u0zpU6vYXAtNBj9BXewVIF+Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			9SFfkBAXaoep7BYtW9AIYqiT96OelWfREjR26GcUQSw=
+			aK6Ab7J/uj1tg4Ou6i1z6yoNvdyuX6a7QiI3viZ7O7s=
 			</data>
 		</dict>
 		<key>Headers/MZOnlyVerticalMediaControl.h</key>
@@ -459,11 +459,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gSJCGSzC2+yQwUcrRXisT9+zQ4M=
+			rPqCCfoLdELpMjLg+l4NQoDtfbQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			3CXJLpzWlc4wtXQVV7ds15R5YtthG40aMPSv/4Kz+uo=
+			kMyyEc0qk7WV7EGwWaop8ejb8C0c172MR3YjBCQOmIY=
 			</data>
 		</dict>
 		<key>Headers/MZPlayerSDK.h</key>

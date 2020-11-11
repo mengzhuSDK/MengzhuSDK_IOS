@@ -1,0 +1,1 @@
+../../../MZPlayerSDK/MZPlayerHeader/MZPlayerScrollCoverView.h

@@ -463,6 +463,13 @@ CGFloat BtnSpace = 28 + 12;
     [_preView addSubview:_chatView];
 }
 
+- (void)showHistoryMessages  {
+    MZMoviePlayerModel *activity = [[MZMoviePlayerModel alloc] init];
+    activity.ticket_id = self.model.ticket_id;
+    activity.chat_uid = self.model.chat_conf.chat_uid;
+    _chatView.activity = activity;
+}
+
 - (void)historyChatViewUserHeaderClick:(MZLongPollDataModel *)pollingDate{
     if ([MZBaseGlobalTools isBlankString:pollingDate.userId] ||[pollingDate.userId isEqualToString:@"0"]){
         return;
@@ -1379,13 +1386,6 @@ CGFloat BtnSpace = 28 + 12;
         });
     }
     _countDownNum --;
-}
-
-- (void)showHistoryMessages  {
-    MZMoviePlayerModel *activity = [[MZMoviePlayerModel alloc] init];
-    activity.ticket_id = self.model.ticket_id;
-    activity.chat_uid = self.model.chat_conf.chat_uid;
-    _chatView.activity = activity;
 }
 
 - (void)startCountDownTimer{

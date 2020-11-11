@@ -20,6 +20,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    // 设置各组件的日志打印开关
+    [self setLogEnable];
+    // 初始化SDK
     [[MZSDKInitManager sharedManager] initSDKWithAppID:MZSDK_AppID appSecretKey:MZSDK_SecretKey isTestServer:MZ_is_debug success:^{
         NSLog(@"SDK初始化成功");
     } failure:^(NSError * _Nullable error) {
@@ -28,6 +31,15 @@
     return YES;
 }
 
+/// 设置各组件打印开关 - 发布版本的时候建议关闭日志
+- (void)setLogEnable {
+    // (开启/关闭）播放等相关业务的打印
+    [MZSDKInitManager setLogEnable:YES];
+    // (开启/关闭) 下载组件的打印 - 下载组件的日志开关可以放在你认为合适的地方
+    [[MZDownLoaderCenter shareInstanced] setLogEnable:YES];
+    // (开启/关闭) 推流组件的打印 - 推流组件的日志开关可以放在你认为合适的地方
+    [MZPushStreamManager setLogEnable:YES];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

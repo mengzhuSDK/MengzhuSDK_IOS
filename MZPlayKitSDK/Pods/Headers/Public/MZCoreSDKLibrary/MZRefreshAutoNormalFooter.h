@@ -1,0 +1,1 @@
+../../../MZCoreSDKLibrary/MZCoreHeader/MZRefreshAutoNormalFooter.h

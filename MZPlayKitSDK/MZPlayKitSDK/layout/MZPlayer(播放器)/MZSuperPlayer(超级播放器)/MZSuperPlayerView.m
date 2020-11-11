@@ -1197,7 +1197,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 #pragma mark - MZGoodsRequestProtocol
 - (void)requestGoodsList:(GoodsDataResult)block offset:(int)offset{
     [MZSDKBusinessManager reqGoodsList:self.ticket_id offset:offset limit:50 success:^(id responseObject) {
-        MZGoodsListOuterModel *goodsListOuterModel = (MZGoodsListOuterModel *)responseObject;
+        MZGoodsListOuterModel *goodsListOuterModel = [MZGoodsListOuterModel initModel:responseObject];
         int oldTotal = [self.shoppingBagButton getNumber];
         if (offset > 0) {
             if (goodsListOuterModel.list.count) {

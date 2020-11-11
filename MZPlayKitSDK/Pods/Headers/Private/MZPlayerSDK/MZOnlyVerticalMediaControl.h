@@ -1,0 +1,1 @@
+../../../MZPlayerSDK/MZPlayerHeader/MZOnlyVerticalMediaControl.h

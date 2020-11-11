@@ -14,7 +14,8 @@
 + (void)getGoodsListCountWithTicket_id:(NSString *)ticket_id
                               finished:(void(^)(MZGoodsListOuterModel * _Nullable goodsListOuterModel))finished {
     [MZSDKBusinessManager reqGoodsList:ticket_id offset:0 limit:50 success:^(id responseObject) {
-        MZGoodsListOuterModel *goodsListOuterModel = (MZGoodsListOuterModel *)responseObject;
+        MZGoodsListOuterModel *goodsListOuterModel = [MZGoodsListOuterModel initModel:responseObject];
+        
         finished(goodsListOuterModel);
     } failure:^(NSError *error) {
         
@@ -27,7 +28,7 @@
                       finished:(void(^)(MZGoodsListOuterModel * _Nonnull goodsListOuterModel))finished
                         failed:(void(^)(NSString *errorString))failed {
     [MZSDKBusinessManager reqGoodsList:ticket_id offset:offset limit:50 success:^(id responseObject) {
-        MZGoodsListOuterModel *goodsListOuterModel = (MZGoodsListOuterModel *)responseObject;
+        MZGoodsListOuterModel *goodsListOuterModel = [MZGoodsListOuterModel initModel:responseObject];
         
         finished(goodsListOuterModel);
 

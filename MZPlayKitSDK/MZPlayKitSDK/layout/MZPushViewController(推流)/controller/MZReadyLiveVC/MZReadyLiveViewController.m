@@ -561,12 +561,45 @@ typedef enum : int {
             button.userInteractionEnabled = NO;
             
             // 如果已经从你们服务器获取了 live_tk 和 ticket_id,那么就直接调用getLiveData开始直播
-//            if (weakSelf.liveTKTextField.text.length > 4 && weakSelf.ticketIdTextField.text.length > 4) {
-//                [weakSelf getLiveData];
-//            } else {
-                // 从测试服务器使用测试数据获取
+            // [weakSelf getLiveData];
+
+            // 获取当前频道有没有正在直播的活动
+            [MZSDKBusinessManager getLiveInfoOfChannel:MZSDK_ChannelId success:^(id responseData) {
+                MZCurrentLiveInfo *live = [MZCurrentLiveInfo mj_objectWithKeyValues:responseData];
+                live.is_multipath = NO;
+                if (live.is_multipath || live.is_live == NO) {
+                    // 该频道支持多路推流，或者当前没有没有正在直播的活动，直接创建新活动，开始直播
+                    [weakSelf createNewLiveActivity];
+                    return;
+                }
+                
+                // 获取到正在直播的活动信息
+                if (live.live_info.ticket_id.length && live.live_info.live_tk.length) {
+                    [MZAlertController showWithTitle:@"提示" message:@"发现当前频道有正在直播的活动，如果开始新的直播，旧的直播将自动关闭" cancelTitle:@"继续直播" sureTitle:@"新的直播" preferredStyle:UIAlertControllerStyleAlert handle:^(MZResultCode code) {
+                        if (code == MZResultCodeSure) {//开始新的直播
+                            [MZSDKBusinessManager stopLive:MZSDK_ChannelId ticketId:live.live_info.ticket_id success:^(MZLiveFinishModel *model) {//结束旧活动成功
+                                // 创建新的活动
+                                [weakSelf createNewLiveActivity];
+                            } failure:^(NSError *error) {//结束旧活动失败
+                                // 创建新的活动
+                                [weakSelf createNewLiveActivity];
+                            }];
+                        } else {//继续正在直播的活动
+                            weakSelf.live_tkString = live.live_info.live_tk;
+                            weakSelf.ticket_idString = live.live_info.ticket_id;
+                            [weakSelf getLiveData];
+                        }
+                    }];
+                    return;
+                }
+                
+                // 没有获取到正在直播的活动详细信息，直接去创建新的活动
                 [weakSelf createNewLiveActivity];
-//            }
+                
+            } failure:^(NSError *error) {
+                // 请求失败了，直接去创建新的活动
+                [weakSelf createNewLiveActivity];
+            }];
         } else {
             [weakSelf.view show:errorString];
         }
@@ -724,23 +757,23 @@ typedef enum : int {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"此创建活动功能API接口权限所属于服务端，提供此功能为了便于demo演示。如接入时考虑数据安全等因素建议通过服务访问API并将live_tk、ticket_id传入SDK进行推流。" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"开始直播" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                  UIView *loadingOneView = nil;
-                  UIView *loadingTwoView = nil;
-                  if (live.isLandscape) {
-                      loadingOneView = [[UIImageView alloc] initWithFrame:CGRectMake(-200, -200, 5000, 5000)];
-                      loadingOneView.backgroundColor = [UIColor blackColor];
-                      [live.view addSubview:loadingOneView];
-                      
-                      loadingTwoView = [[UIImageView alloc] initWithFrame:CGRectMake(-200, -200, 5000, 5000)];
-                      loadingTwoView.backgroundColor = [UIColor blackColor];
-                      [[UIApplication sharedApplication].keyWindow addSubview:loadingTwoView];
-                  }
-                  [self presentViewController:live animated:(live.isLandscape ? NO : YES) completion:^{
-                      NSLog(@"跳转完成");
-                      [loadingTwoView removeFromSuperview];
-                      [loadingOneView removeFromSuperview];
-                  }];
-              }];
+            UIView *loadingOneView = nil;
+            UIView *loadingTwoView = nil;
+            if (live.isLandscape) {
+                loadingOneView = [[UIImageView alloc] initWithFrame:CGRectMake(-200, -200, 5000, 5000)];
+                loadingOneView.backgroundColor = [UIColor blackColor];
+                [live.view addSubview:loadingOneView];
+                
+                loadingTwoView = [[UIImageView alloc] initWithFrame:CGRectMake(-200, -200, 5000, 5000)];
+                loadingTwoView.backgroundColor = [UIColor blackColor];
+                [[UIApplication sharedApplication].keyWindow addSubview:loadingTwoView];
+            }
+            [self presentViewController:live animated:(live.isLandscape ? NO : YES) completion:^{
+                NSLog(@"跳转完成");
+                [loadingTwoView removeFromSuperview];
+                [loadingOneView removeFromSuperview];
+            }];
+        }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     });

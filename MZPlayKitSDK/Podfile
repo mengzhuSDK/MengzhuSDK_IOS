@@ -4,12 +4,12 @@ inhibit_all_warnings!
 use_frameworks!
 target'MZPlayKitSDK'do
 
-pod 'MZPushFlowSDK','2.3.0'
-pod 'MZCoreSDKLibrary','2.5.0'
-pod 'MZMediaSDK','2.5.0'
-pod 'MZPlayerSDK','2.5.0'
-pod 'MZDownLoaderSDK','2.4.0'
-pod 'MZChatSDK','2.4.2'
-pod 'MZUploadVideoSDK','1.0.0'
+pod 'MZPushFlowSDK','2.6.1'
+pod 'MZCoreSDKLibrary','2.6.1'
+pod 'MZMediaSDK','2.6.1'
+pod 'MZPlayerSDK','2.6.1'
+pod 'MZDownLoaderSDK','2.6.1'
+pod 'MZChatSDK','2.6.6'
+pod 'MZUploadVideoSDK','2.6.1'
 
 end
