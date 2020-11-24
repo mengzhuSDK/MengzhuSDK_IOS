@@ -14,31 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		iVO3DDqddnJ/j+yEua25LhsD+Cc=
-		</data>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/Info.plist</key>
-		<data>
-		F6vn8+ZdznB4xrsVCHfQ/Ej3VQw=
-		</data>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/_CodeSignature/CodeDirectory</key>
-		<data>
-		lCsFWYHpAh2rhICyx1K8iHTf1zg=
-		</data>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/_CodeSignature/CodeRequirements</key>
-		<data>
-		OnX22wWFKRSOFN1+obRynMCeyXM=
-		</data>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/_CodeSignature/CodeRequirements-1</key>
-		<data>
-		7ASJ7w3I8raxQVPH2oual0IoxKg=
-		</data>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/_CodeSignature/CodeResources</key>
-		<data>
-		Ox/LYgcTwWRfjazki47/mOJ6pu4=
-		</data>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/_CodeSignature/CodeSignature</key>
-		<data>
-		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+		rRSWViepFtdDnZacGGsw21+yuWM=
 		</data>
 		<key>MZM3U8DownLoaderSDKBundle.bundle/slience.mp3</key>
 		<data>
@@ -71,72 +47,6 @@
 			<key>hash2</key>
 			<data>
 			MiGuSs3nCQW0p0azkMeL4VcaSOH9KGYUxa78RBRB6Ok=
-			</data>
-		</dict>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			F6vn8+ZdznB4xrsVCHfQ/Ej3VQw=
-			</data>
-			<key>hash2</key>
-			<data>
-			MZyihGeDeEvMf51iIrN2WI3hsI2TzcDojnftyuy295w=
-			</data>
-		</dict>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/_CodeSignature/CodeDirectory</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			lCsFWYHpAh2rhICyx1K8iHTf1zg=
-			</data>
-			<key>hash2</key>
-			<data>
-			aVj7T9w37zuzpdb+TbXTTNgIyC81K+OyRIsqL1hDQ0M=
-			</data>
-		</dict>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/_CodeSignature/CodeRequirements</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			OnX22wWFKRSOFN1+obRynMCeyXM=
-			</data>
-			<key>hash2</key>
-			<data>
-			mHkgkE6rZQ51eIwFSqCwUk5qgL/HGqMt+NI3phdD+YY=
-			</data>
-		</dict>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/_CodeSignature/CodeRequirements-1</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			7ASJ7w3I8raxQVPH2oual0IoxKg=
-			</data>
-			<key>hash2</key>
-			<data>
-			yQbL8hXTjoDwDg6FHqg/uczVi1ctAsWtORua7tZE8s8=
-			</data>
-		</dict>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Ox/LYgcTwWRfjazki47/mOJ6pu4=
-			</data>
-			<key>hash2</key>
-			<data>
-			4rbyLsC2VhnA4vt9QHy/PhBittAd+bIkQnqUf7abUK0=
-			</data>
-		</dict>
-		<key>MZM3U8DownLoaderSDKBundle.bundle/_CodeSignature/CodeSignature</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			2jmj7l5rSw0yVb/vlWAYkK/YBwk=
-			</data>
-			<key>hash2</key>
-			<data>
-			47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
 			</data>
 		</dict>
 		<key>MZM3U8DownLoaderSDKBundle.bundle/slience.mp3</key>
