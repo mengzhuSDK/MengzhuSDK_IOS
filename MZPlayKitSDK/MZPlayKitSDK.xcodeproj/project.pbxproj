@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		86A97E519FA7AF8AEC38A15B /* Pods_MZPlayKitSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08692C3198DD73BACD676DB0 /* Pods_MZPlayKitSDK.framework */; };
+		C00A5FA32591D6E600D226B4 /* MZJoinMeetingLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C00A5F9F2591D6E600D226B4 /* MZJoinMeetingLayout.m */; };
+		C00A5FA42591D6E600D226B4 /* MZJoinMettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C00A5FA22591D6E600D226B4 /* MZJoinMettingViewController.m */; };
+		C00A5FAC2591D7AB00D226B4 /* MZMeetingSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C00A5FA82591D7AB00D226B4 /* MZMeetingSDK.bundle */; };
+		C00A5FAD2591D7AB00D226B4 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C00A5FA92591D7AB00D226B4 /* MobileRTCResources.bundle */; };
+		C00A5FB12591D7B400D226B4 /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00A5FAB2591D7AB00D226B4 /* MobileRTC.framework */; };
+		C00A5FB22591D7B400D226B4 /* MobileRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C00A5FAB2591D7AB00D226B4 /* MobileRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C00A5FB42591D7B600D226B4 /* MZMeetingSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00A5FAA2591D7AB00D226B4 /* MZMeetingSDK.framework */; };
+		C00A5FB52591D7B600D226B4 /* MZMeetingSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C00A5FAA2591D7AB00D226B4 /* MZMeetingSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C04B9B7E24F0484D00881A6E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C04B9B7D24F0484D00881A6E /* AppDelegate.m */; };
 		C04B9B8424F0484D00881A6E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04B9B8324F0484D00881A6E /* ViewController.m */; };
 		C04B9B8724F0484D00881A6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C04B9B8524F0484D00881A6E /* Main.storyboard */; };
@@ -16,6 +24,7 @@
 		C04B9B8F24F0484F00881A6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C04B9B8E24F0484F00881A6E /* main.m */; };
 		C04B9CB524F048E500881A6E /* MZInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04B9C5A24F048E400881A6E /* MZInputViewController.m */; };
 		C04B9CB624F048E500881A6E /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04B9C5B24F048E400881A6E /* PlayerViewController.m */; };
+		C087D62225B1884E00EA0035 /* 会议SDK集成步骤.md in Resources */ = {isa = PBXBuildFile; fileRef = C087D62125B1884E00EA0035 /* 会议SDK集成步骤.md */; };
 		C0DAA03E2542B6CC00951250 /* MZBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9F442542B6CC00951250 /* MZBaseView.m */; };
 		C0DAA03F2542B6CC00951250 /* MZBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9F452542B6CC00951250 /* MZBaseNavigationController.m */; };
 		C0DAA0402542B6CC00951250 /* MZBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9F4A2542B6CC00951250 /* MZBagButton.m */; };
@@ -129,8 +138,31 @@
 		C0DAA0AC2542B6CD00951250 /* MZTipGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DAA03C2542B6CC00951250 /* MZTipGoodsView.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C00A5FB32591D7B400D226B4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C00A5FB52591D7B600D226B4 /* MZMeetingSDK.framework in Embed Frameworks */,
+				C00A5FB22591D7B400D226B4 /* MobileRTC.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		08692C3198DD73BACD676DB0 /* Pods_MZPlayKitSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MZPlayKitSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C00A5F9F2591D6E600D226B4 /* MZJoinMeetingLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZJoinMeetingLayout.m; sourceTree = "<group>"; };
+		C00A5FA02591D6E600D226B4 /* MZJoinMettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZJoinMettingViewController.h; sourceTree = "<group>"; };
+		C00A5FA12591D6E600D226B4 /* MZJoinMeetingLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZJoinMeetingLayout.h; sourceTree = "<group>"; };
+		C00A5FA22591D6E600D226B4 /* MZJoinMettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZJoinMettingViewController.m; sourceTree = "<group>"; };
+		C00A5FA82591D7AB00D226B4 /* MZMeetingSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MZMeetingSDK.bundle; sourceTree = "<group>"; };
+		C00A5FA92591D7AB00D226B4 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MobileRTCResources.bundle; sourceTree = "<group>"; };
+		C00A5FAA2591D7AB00D226B4 /* MZMeetingSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MZMeetingSDK.framework; sourceTree = "<group>"; };
+		C00A5FAB2591D7AB00D226B4 /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileRTC.framework; sourceTree = "<group>"; };
 		C04B9B7924F0484D00881A6E /* MZPlayKitSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZPlayKitSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C04B9B7C24F0484D00881A6E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C04B9B7D24F0484D00881A6E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -146,6 +178,7 @@
 		C04B9B9724F048E400881A6E /* MZKitDemoPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZKitDemoPrefixHeader.pch; sourceTree = "<group>"; };
 		C04B9C5A24F048E400881A6E /* MZInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZInputViewController.m; sourceTree = "<group>"; };
 		C04B9C5B24F048E400881A6E /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
+		C087D62125B1884E00EA0035 /* 会议SDK集成步骤.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "会议SDK集成步骤.md"; sourceTree = "<group>"; };
 		C0A7F4882521B5C800A3A79E /* MZSDKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSDKConfig.h; sourceTree = "<group>"; };
 		C0DA9F422542B6CC00951250 /* MZBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBaseView.h; sourceTree = "<group>"; };
 		C0DA9F432542B6CC00951250 /* MZBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBaseNavigationController.h; sourceTree = "<group>"; };
@@ -353,7 +386,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C00A5FB12591D7B400D226B4 /* MobileRTC.framework in Frameworks */,
 				86A97E519FA7AF8AEC38A15B /* Pods_MZPlayKitSDK.framework in Frameworks */,
+				C00A5FB42591D7B600D226B4 /* MZMeetingSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +402,30 @@
 				D3F9D3F63292904F5879FE3F /* Pods-MZPlayKitSDK.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C00A5F9E2591D6E600D226B4 /* MZMeeting(会议) */ = {
+			isa = PBXGroup;
+			children = (
+				C00A5FA72591D78200D226B4 /* Frameworks */,
+				C00A5FA12591D6E600D226B4 /* MZJoinMeetingLayout.h */,
+				C00A5F9F2591D6E600D226B4 /* MZJoinMeetingLayout.m */,
+				C00A5FA02591D6E600D226B4 /* MZJoinMettingViewController.h */,
+				C00A5FA22591D6E600D226B4 /* MZJoinMettingViewController.m */,
+			);
+			path = "MZMeeting(会议)";
+			sourceTree = "<group>";
+		};
+		C00A5FA72591D78200D226B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C087D62125B1884E00EA0035 /* 会议SDK集成步骤.md */,
+				C00A5FAB2591D7AB00D226B4 /* MobileRTC.framework */,
+				C00A5FA92591D7AB00D226B4 /* MobileRTCResources.bundle */,
+				C00A5FA82591D7AB00D226B4 /* MZMeetingSDK.bundle */,
+				C00A5FAA2591D7AB00D226B4 /* MZMeetingSDK.framework */,
+			);
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		C04B9B7024F0484D00881A6E = {
@@ -413,6 +472,7 @@
 		C0DA9F402542B6CC00951250 /* layout */ = {
 			isa = PBXGroup;
 			children = (
+				C00A5F9E2591D6E600D226B4 /* MZMeeting(会议) */,
 				C0DA9F412542B6CC00951250 /* Base(基类) */,
 				C0DA9FCF2542B6CC00951250 /* Module(业务模块) */,
 				C0DA9FC82542B6CC00951250 /* MZDownload(下载器) */,
@@ -1083,6 +1143,7 @@
 				C04B9B7724F0484D00881A6E /* Resources */,
 				05FF86DEA04B54D9788227E2 /* [CP] Embed Pods Frameworks */,
 				E87C0AD4CEC8A112C845F4F6 /* [CP] Copy Pods Resources */,
+				C00A5FB32591D7B400D226B4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1130,6 +1191,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C00A5FAC2591D7AB00D226B4 /* MZMeetingSDK.bundle in Resources */,
 				C0DAA0632542B6CC00951250 /* loading6@2x.png in Resources */,
 				C0DAA0542542B6CC00951250 /* loadingin@2x.png in Resources */,
 				C0DAA07E2542B6CD00951250 /* upload_test3.MP4 in Resources */,
@@ -1154,10 +1216,12 @@
 				C0DAA0612542B6CC00951250 /* loading4@2x.png in Resources */,
 				C0DAA05D2542B6CC00951250 /* loadingout@2x.png in Resources */,
 				C0DAA05C2542B6CC00951250 /* loading2@2x.png in Resources */,
+				C00A5FAD2591D7AB00D226B4 /* MobileRTCResources.bundle in Resources */,
 				C0DAA05F2542B6CC00951250 /* loading2@3x.png in Resources */,
 				C0DAA0582542B6CC00951250 /* loading_3@3x.png in Resources */,
 				C0DAA0572542B6CC00951250 /* loading_1@2x.png in Resources */,
 				C0DAA0652542B6CC00951250 /* loading_2@3x.png in Resources */,
+				C087D62225B1884E00EA0035 /* 会议SDK集成步骤.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1239,6 +1303,7 @@
 				C0DAA0A02542B6CD00951250 /* MZDiscussView.m in Sources */,
 				C0DAA0962542B6CD00951250 /* MZBottomTalkBtn.m in Sources */,
 				C0DAA0782542B6CD00951250 /* MZReadyLiveViewController.m in Sources */,
+				C00A5FA42591D6E600D226B4 /* MZJoinMettingViewController.m in Sources */,
 				C0DAA04D2542B6CC00951250 /* MZCameraHelperView.m in Sources */,
 				C0DAA04A2542B6CC00951250 /* MZVerticalPlayerView.m in Sources */,
 				C0DAA0732542B6CD00951250 /* MZLiveFinishViewController.m in Sources */,
@@ -1273,6 +1338,7 @@
 				C0DAA0A82542B6CD00951250 /* MZGiftView.m in Sources */,
 				C0DAA0842542B6CD00951250 /* MZVoteInfoModel.m in Sources */,
 				C0DAA0402542B6CC00951250 /* MZBagButton.m in Sources */,
+				C00A5FA32591D6E600D226B4 /* MZJoinMeetingLayout.m in Sources */,
 				C0DAA0A22542B6CD00951250 /* MZGoodsListView.m in Sources */,
 				C0DAA06E2542B6CD00951250 /* MZPresentView.m in Sources */,
 				C0DAA0442542B6CC00951250 /* MZMultiMenu.m in Sources */,
@@ -1461,7 +1527,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.3.0;
 				DEVELOPMENT_TEAM = 9E78V92FYD;
-				GCC_PREFIX_HEADER = "$SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MZPlayKitSDK/layout/MZMeeting(会议)/Frameworks",
+				);
+				GCC_PREFIX_HEADER = $SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch;
 				INFOPLIST_FILE = MZPlayKitSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1483,7 +1553,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.3.0;
 				DEVELOPMENT_TEAM = 9E78V92FYD;
-				GCC_PREFIX_HEADER = "$SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MZPlayKitSDK/layout/MZMeeting(会议)/Frameworks",
+				);
+				GCC_PREFIX_HEADER = $SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch;
 				INFOPLIST_FILE = MZPlayKitSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

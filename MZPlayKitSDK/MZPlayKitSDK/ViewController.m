@@ -10,6 +10,7 @@
 #import "MZInputViewController.h"
 #import "MZReadyLiveViewController.h"
 #import "MZUploadViewController.h"
+#import "MZJoinMettingViewController.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) UIButton *pusherButton;
 @property (nonatomic, strong) UIButton *downloadButton;
 @property (nonatomic, strong) UIButton *uploadButton;
+@property (nonatomic, strong) UIButton *joinMeetingButton;
 
 @end
 
@@ -47,7 +49,19 @@
     logoIV.frame = CGRectMake((self.view.frame.size.width - 100*MZ_RATE)/2.0, 110, 100*MZ_RATE, 146*MZ_RATE);
     [self.view addSubview:logoIV];
     
-    _uploadButton=[[UIButton alloc]initWithFrame:CGRectMake(48, self.view.frame.size.height - 90 - 48, self.view.bounds.size.width - 96, 48)];
+    _joinMeetingButton=[[UIButton alloc]initWithFrame:CGRectMake(48, self.view.frame.size.height - 90 - 48, self.view.bounds.size.width - 96, 48)];
+    [_joinMeetingButton setTitle:@"加入会议测试" forState:UIControlStateNormal];
+    [_joinMeetingButton setTitleColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1] forState:UIControlStateNormal];
+    [_joinMeetingButton setBackgroundColor:[UIColor clearColor]];
+    [_joinMeetingButton addTarget:self action:@selector(joinMeetingClick) forControlEvents:UIControlEventTouchDown];
+    [_joinMeetingButton.layer setCornerRadius:25];
+    [_joinMeetingButton.layer setMasksToBounds:YES];
+    [_joinMeetingButton.layer setBorderColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor
+     ];
+    [_joinMeetingButton.layer setBorderWidth:1.0];
+    [self.view addSubview:_joinMeetingButton];
+    
+    _uploadButton=[[UIButton alloc]initWithFrame:CGRectMake(_joinMeetingButton.frame.origin.x, _joinMeetingButton.frame.origin.y - 20 - 48, _joinMeetingButton.frame.size.width, _joinMeetingButton.frame.size.height)];
     [_uploadButton setTitle:@"上传测试" forState:UIControlStateNormal];
     [_uploadButton setTitleColor:[UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1] forState:UIControlStateNormal];
     [_uploadButton setBackgroundColor:[UIColor clearColor]];
@@ -114,6 +128,12 @@
 - (void)uploadClick {
     MZUploadViewController *uploadVC = [[MZUploadViewController alloc] init];
     [self.navigationController pushViewController:uploadVC animated:YES];
+}
+
+/// 进入加入会议界面
+- (void)joinMeetingClick {
+    MZJoinMettingViewController *joinMettingVC = [[MZJoinMettingViewController alloc] init];
+    [self.navigationController pushViewController:joinMettingVC animated:YES];
 }
 
 - (BOOL)shouldAutorotate {

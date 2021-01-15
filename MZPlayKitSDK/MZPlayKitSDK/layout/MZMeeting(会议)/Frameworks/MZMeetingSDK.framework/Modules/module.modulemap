@@ -1,0 +1,6 @@
+framework module MZMeetingSDK {
+  umbrella header "MZMeetingSDK.h"
+
+  export *
+  module * { export * }
+}
