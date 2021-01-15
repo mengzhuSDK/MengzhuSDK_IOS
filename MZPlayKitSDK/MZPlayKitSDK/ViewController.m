@@ -10,7 +10,6 @@
 #import "MZInputViewController.h"
 #import "MZReadyLiveViewController.h"
 #import "MZUploadViewController.h"
-#import "MZJoinMettingViewController.h"
 
 @interface ViewController ()
 
@@ -132,8 +131,7 @@
 
 /// 进入加入会议界面
 - (void)joinMeetingClick {
-    MZJoinMettingViewController *joinMettingVC = [[MZJoinMettingViewController alloc] init];
-    [self.navigationController pushViewController:joinMettingVC animated:YES];
+    [MZAlertControl showAlertWithTitle:@"提示" message:@"如果需要使用会议功能，请切换到meeting分支" sureTitle:@"确定"];
 }
 
 - (BOOL)shouldAutorotate {
