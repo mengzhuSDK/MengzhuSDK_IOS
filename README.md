@@ -36,6 +36,7 @@ pod 'MZUploadVideoSDK','2.6.1'#盟主视频上传组件，如需上传功能，�
 * [12. 上传视频](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/12.上传视频)
 * [13. 版本更新](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/13.版本更新)
 * [14. API文档](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/14.API文档)
+* [15. 视频会议](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/15.视频会议)
 
 # 注意
 本项目是一个包含盟主SDK所有功能使用的demo，旨在帮助开发者快速集成盟主SDK。
@@ -74,3 +75,7 @@ demo里实现了多种适用于盟主SDK的UI，后续会继续改动，所以�
 - 上传
 
 视频多线程上传、多任务上传，支持后台上传
+
+- 视频会议
+
+多人视频会议、聊天室聊天、个人聊天
