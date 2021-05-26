@@ -210,7 +210,7 @@ MZEmojiLabel  *new_textLabel;
         
         if(new_textLabel == nil)
         {
-            new_textLabel = [MZEmojiLabel new];
+            new_textLabel = [[MZEmojiLabel alloc] initWithFrame:CGRectZero];
             new_textLabel.numberOfLines = 5;
         }
     

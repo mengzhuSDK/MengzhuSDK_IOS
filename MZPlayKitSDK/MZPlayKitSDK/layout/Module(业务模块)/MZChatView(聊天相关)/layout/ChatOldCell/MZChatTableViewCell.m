@@ -197,7 +197,7 @@ MZEmojiLabel  *normal_textLabel;
         
         if(normal_textLabel == nil)
         {
-            normal_textLabel = [MZEmojiLabel new];
+            normal_textLabel = [[MZEmojiLabel alloc] initWithFrame:CGRectZero];
             normal_textLabel.numberOfLines = 5;
         }
     

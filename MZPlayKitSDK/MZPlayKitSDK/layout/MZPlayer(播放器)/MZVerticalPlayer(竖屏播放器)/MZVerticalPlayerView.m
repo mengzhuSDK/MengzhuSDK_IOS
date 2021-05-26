@@ -22,7 +22,12 @@
 #import "MZVerticalPlayerView+UI.h"
 #import "MZGiftView.h"
 
+#import "MZVoteView.h"
+
 #define kViewFramePath      @"frame"
+
+static NSString *signImageName = @"mz_qiandao_normal";//未签到图片
+static NSString *signInImageName = @"mz_qiandao_select";//签到图片
 
 typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
@@ -82,9 +87,6 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 @property (nonatomic, assign) BOOL isCanBarrage;//是否可以发弹幕，默认可以
 @property (nonatomic, assign) BOOL isShowBarrage;//是否显示弹幕，默认可以
 
-@property (nonatomic, assign) BOOL isShowVote;//是否显示投票
-@property (nonatomic, assign) BOOL isShowSign;//是否显示签到
-@property (nonatomic, assign) BOOL isShowPrize;//是否显示抽奖
 @property (nonatomic, assign) BOOL isShowDocuments;//是否显示文档
 @property (nonatomic, assign) BOOL isShowVideoBeforeAD;//是否显示暖场图
 
@@ -95,37 +97,98 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 @property (nonatomic, assign) BOOL isShowGiftView;//是否显示礼物视图
 @property (nonatomic, assign) BOOL isShowTimesSpeedView;//是否显示倍速视图
 
+@property (nonatomic, assign) NSTimeInterval videoPauseTimeInBackground;//视频进入后台时候的记录位置
+@property (nonatomic, assign) BOOL isEnterBackground;//是否进入后台标示
+@property (nonatomic, assign) BOOL isBackgroundPlay;//是否后台播放
+
+/**
+    这里的是右侧菜单列表处理，所有的开关统一说明，例如:
+    isShowSignLocation 本地的是否显示签到
+    isShowSign 控制台的是否显示签到
+    如果本地是否显示为YES，那么就按照控制台的开关来处理，
+    如果本地是否显示为NO，那么就忽略控制台的是否显示状态，强制不显示
+ */
+@property (nonatomic, assign) BOOL isShowSignLocation;//本地的是否显示签到
+@property (nonatomic, assign) BOOL isShowSign;//控制台的是否显示签到
+@property (nonatomic, assign) BOOL isSignIn;//是否已经签到
+@property (nonatomic, strong) UIButton *signButton;//签到按钮
+@property (nonatomic, strong) MZSignView *signView;//签到View
+
+@property (nonatomic, assign) BOOL isShowVoteLocation;//本地的是否显示投票
+@property (nonatomic, assign) BOOL isShowVote;//控制台是否显示投票
+@property (nonatomic, strong) UIButton *voteButton;//投票按钮
+@property (nonatomic, strong) MZVoteView *voteView;//投票View
+
+@property (nonatomic, assign) BOOL isShowPrizeLocation;//本地的是否显示抽奖
+@property (nonatomic, assign) BOOL isShowPrize;//控制台是否显示抽奖
+@property (nonatomic ,strong) UIButton *prizeButton;//抽奖按钮
+@property (nonatomic ,strong) MZFuctionWebView *prizeFuctionWebView;//抽奖View
+
 @end
 
 @implementation MZVerticalPlayerView
 
 - (void)dealloc {
-    self.delegate = nil;
+    _delegate = nil;
     [self removeObserver:self forKeyPath:kViewFramePath];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [MZSmallPlayerView hide];
+
+    [_playerView.advertPlayerView stop];
     NSLog(@"竖屏播放器界面释放");
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         self.selectedRate = 1;
-        
+        self.videoPauseTimeInBackground = 0;
+
         self.isChat = YES;
         self.isRecordScreen = NO;
         self.isCanBarrage = YES;
         self.isShowBarrage = YES;
+        self.isSignIn = NO;//默认未签到
+
+        // 右侧菜单列表 - 所有本地控制的开关
+        self.isShowSignLocation = YES;//本地默认展示签到
+        self.isShowVoteLocation = YES;//本地默认展示投票
+        self.isShowPrizeLocation = YES;//本地默认展示抽奖
+
+        // 右侧菜单列表 - 控制台控制的开关
+        self.isShowSign = NO;//控制台默认不展示签到
+        self.isShowVote = NO;//控制台默认不展示投票
+        self.isShowPrize = NO;//控制台默认不展示抽奖
         
-        self.isShowVote = NO;//默认不展示投票
-        self.isShowSign = NO;//默认不展示签到
-        self.isShowPrize = NO;//默认不展示抽奖
         self.isShowDocuments = NO;//默认不展示文档
         self.isShowGiftView = YES;//默认展示礼物按钮
         self.isShowPraiseView = YES;//默认展示点赞按钮
         
         [self customAddSubviews];
         [self addObserver:self forKeyPath:kViewFramePath options:NSKeyValueObservingOptionNew context:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterForeground:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     }
     return self;
+}
+
+- (void)enterForeground:(NSNotification *)noti {
+    self.isEnterBackground = NO;
+    if (@available(iOS 14.0, *)) {
+        if (self.playInfo.status == 2) {//回放
+            if (!self.isBackgroundPlay) {
+                self.videoPauseTimeInBackground = self.playerView.playerManager.currentPlaybackTime;
+                [self playerVideoWithURLString:self.playInfo.video.url];
+            }
+        } else {//直播
+            if (self.playerView.playerManager.isPlaying == NO) {
+                [self.playerView startPlayer];
+            }
+        }
+    }
+}
+
+- (void)enterBackground:(NSNotification *)noti {
+    self.isEnterBackground = YES;
 }
 
 - (void)layoutSubviews {
@@ -303,9 +366,13 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
 /// 关闭播放器按钮点击
 - (void)closeButtonDidclick:(UIButton *)button {
+    // 移除延迟弹窗的逻辑
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(signButtonClick) object:nil];
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(closeButtonDidClick:)]) {
         [self.delegate closeButtonDidClick:self.playInfo];
     }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(initChat) object:nil];
     [self playerShutDown];
 }
 
@@ -528,7 +595,11 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
 /// 添加/删除防录屏
 - (void)preventRecordScreenLabelIsShow:(BOOL)isShow {
-    if (isShow) [MZPreventRecordScreenLabel showRandomLabelWithShowView:self.playerBackgroundView text:@"自定义的防录屏文字"];
+    NSString *text = self.hostModel.nickname;
+    if (text.length <= 0) text = self.hostModel.uid;
+    if (text.length <= 0) text = @"防录屏";
+    
+    if (isShow) [MZPreventRecordScreenLabel showRandomLabelWithShowView:self.playerBackgroundView text:text];
     else [MZPreventRecordScreenLabel hideRandomLabel];
 }
 
@@ -623,6 +694,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             [self.playerView.playerManager.view addSubview:self.barrageBackgroundView];
         }
         [MZBarrageManager startWithView:self.barrageBackgroundView];
+//        [MZBarrageManager setSpriteHeaderIsHidden:YES];
     } else {
         [MZBarrageManager destory];
     }
@@ -744,28 +816,44 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         if(responseObject.isShowVideoBeforeAD){
             self.openScreenView = [[MZOpenScreenView alloc]initializationADViewWithTicketID:responseObject.ticket_id delegate:self];
             [KeyWindow addSubview:self.openScreenView];
+
+//            self.openScreenView = [[MZOpenScreenView alloc]initializationADViewWithImageUrlArray:@[@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607326730404&di=b01bad44f9e64381e0be926971402f8b&imgtype=0&src=http%3A%2F%2Fdiy.qqjay.com%2Fu%2Ffiles%2F2012%2F0217%2Fb693a3b6d232ffe861da22287c888729.jpg"] showTime:5 delegate:self];
+//            [KeyWindow addSubview:self.openScreenView];
             MZOpenScreenDataModel *model = [self.openScreenView getOpenScreenADData];
             NSLog(@"%@",model);
         }else{
             [self initPlayer];
         }
-        
+        //    获取主播信息
+        [MZSDKBusinessManager reqHostInfo:ticket_id success:^(MZHostModel *responseObject) {
+            // 更新主播信息
+            self.hostModel = responseObject;
+            [self updateHostInfo:self.hostModel];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(updateHostUserInfo:)]) {
+                [self.delegate updateHostUserInfo:self.hostModel];
+            }
+            self.chatView.hostModel = self.hostModel;
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+            [self show:error.domain];
+        }];
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
+        [self show:error.domain];
     }] ;
+}
+
+- (void)initChat {
+    if (self.chatKitManager) {
+        [self.chatKitManager closeLongPoll];
+        [self.chatKitManager closeSocketIO];
+        self.chatKitManager.delegate = nil;
+        self.chatKitManager = nil;
+    }
+    self.chatKitManager = [[MZChatKitManager alloc] init];
+    self.chatKitManager.delegate = self;
     
-    //    获取主播信息
-    [MZSDKBusinessManager reqHostInfo:ticket_id success:^(MZHostModel *responseObject) {
-        // 更新主播信息
-        self.hostModel = responseObject;
-        [self updateHostInfo:self.hostModel];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(updateHostUserInfo:)]) {
-            [self.delegate updateHostUserInfo:self.hostModel];
-        }
-        self.chatView.hostModel = self.hostModel;
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-    }];
+    [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
 }
 
 -(void)initPlayer{
@@ -826,16 +914,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     }
     
     // 加载聊天SDK
-    if (self.chatKitManager) {
-        [self.chatKitManager closeLongPoll];
-        [self.chatKitManager closeSocketIO];
-        self.chatKitManager.delegate = nil;
-        self.chatKitManager = nil;
-    }
-    self.chatKitManager = [[MZChatKitManager alloc] init];
-    self.chatKitManager.delegate = self;
-    
-    [self.chatKitManager startTimelyChar:self.playInfo.ticket_id receive_url:self.playInfo.chat_config.receive_url srv:self.playInfo.msg_config.msg_online_srv token:self.playInfo.msg_config.msg_token];
+    [self performSelector:@selector(initChat) withObject:nil afterDelay:1];
     
     // 获取前50位观众信息
     [MZAudienceView getOnlineUsersWithTicket_id:self.ticket_id chat_idOfMe:self.playInfo.chat_uid finished:^(NSArray<MZOnlineUserListModel *> *onlineUsers) {
@@ -895,6 +974,66 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     } failure:^(NSError *error) {
         NSLog(@"请求配置出错");
     }];
+    
+    // 配置右侧菜单列表
+    self.isShowPrize = self.playInfo.isShowPrize;
+    self.isShowSign = self.playInfo.isShowSign;
+    self.isShowVote = self.playInfo.isShowVote;
+    
+    if (!_signButton && !_voteButton && !_prizeButton) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            while (self.superview == NO) {
+                sleep(1);
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIView *marketingMenusView = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 64*MZ_RATE, 120*MZ_RATE, 44*MZ_RATE, 350*MZ_RATE)];
+                marketingMenusView.backgroundColor = [UIColor clearColor];
+                [self addSubview:marketingMenusView];
+                
+                [marketingMenusView addSubview:self.signButton];
+                [marketingMenusView addSubview:self.voteButton];
+                [marketingMenusView addSubview:self.prizeButton];
+                
+                [self.signButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(marketingMenusView);
+                    make.left.equalTo(@0);
+                    make.width.equalTo(@(44*MZ_RATE));
+                    make.height.equalTo(@(54*MZ_RATE));
+                }];
+                
+                [self.voteButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(self.signButton.mas_bottom);
+                    make.left.width.equalTo(self.signButton);
+                    make.height.equalTo(@(54*MZ_RATE));
+                }];
+                
+                [self.prizeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(self.voteButton.mas_bottom);
+                    make.left.width.equalTo(self.voteButton);
+                    make.height.equalTo(@(54*MZ_RATE));
+                }];
+                
+                [self updateMarketingMenusView];
+                
+            });
+        });
+    }
+    
+    // 设置 签到
+    self.isSignIn = self.playInfo.signInfo.is_sign;
+    [self updateSignButtonStatus];
+        
+    if (self.playInfo.signInfo.is_sign == NO && self.playInfo.signInfo.is_force) {//如果未签到 && 是强制签到        //获取是否已经进入过强制签到的活动
+        NSString *signFirstKey = [NSString stringWithFormat:@"%@%@%d",self.playInfo.unique_id,self.playInfo.ticket_id,self.playInfo.signInfo.sign_id];
+        int isFirst = [[[NSUserDefaults standardUserDefaults] objectForKey:signFirstKey] intValue];
+        if (isFirst == 1) {//这是第二次以后的进入强制签到的直播间,直接弹出强制签到
+            [self signButtonClick];
+        } else { //第一次进入强制签到的活动，延迟展示
+            [self performSelector:@selector(signButtonClick) withObject:nil afterDelay:(self.playInfo.signInfo.delay_time*60)];
+        }
+    }
+    
+    [self updateMarketingMenusView];
 }
 
 /// 播放 直播/回放
@@ -910,11 +1049,14 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         videoStatus = self.playInfo.status;
     }
     
-    [self.playerView playWithURLString:videoString isLive:(videoStatus == 2 ? NO : YES) showView:self.playerBackgroundView delegate:self interfaceOrientation:MZMediaControlInterfaceOrientationMaskPortrait movieModel:MZMPMovieScalingModeAspectFit];
+    [self.playerView playWithURLString:videoString isLive:(videoStatus == 2 ? NO : YES) showView:self.playerBackgroundView delegate:self interfaceOrientation:MZMediaControlInterfaceOrientationMaskPortrait movieModel:MZMPMovieScalingModeAspectFill];
     [self.playerBackgroundView sendSubviewToBack:self.playerView];
     
     [self.playerView startPlayer];
-    [self.playerView.playerManager setPauseInBackground:NO];
+    
+    // 设置是否后台播放
+    self.isBackgroundPlay = YES;
+    [self.playerView.playerManager setPauseInBackground:!self.isBackgroundPlay];
     
     [self preventRecordScreenLabelIsShow:self.isRecordScreen];
     
@@ -948,6 +1090,87 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     [self playerVideoWithURLString:mvURLString];
 }
 
+/// 更新整体右侧菜单列表的是否展示UI
+- (void)updateMarketingMenusView {
+    if (self.isShowSignLocation == NO || self.isShowSign == NO) {//强制隐藏签到按钮 或者 控制台隐藏签到按钮
+        [self.signButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@0);
+        }];
+    } else {//展示签到按钮
+        [self.signButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(54*MZ_RATE));
+        }];
+    }
+    
+    if (self.isShowVoteLocation == NO || self.isShowVote == NO) {//强制隐藏投票按钮 或者 控制台隐藏投票按钮
+        [self.voteButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@0);
+        }];
+    } else {//展示投票按钮
+        [self.voteButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(54*MZ_RATE));
+        }];
+    }
+    
+    if (self.isShowPrizeLocation == NO || self.isShowPrize == NO) {//强制隐藏抽奖按钮 或者 控制台隐藏抽奖按钮
+        [self.prizeButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@0);
+        }];
+    } else {//展示抽奖按钮
+        [self.prizeButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(54*MZ_RATE));
+        }];
+    }
+}
+
+/// 置空投票按钮
+- (void)hideVoteView {
+    self.voteView = nil;
+}
+
+/// 更新签到按钮的状态
+- (void)updateSignButtonStatus {
+    if (self.isSignIn) {
+        [self.signButton setImage:[UIImage imageNamed:signInImageName] forState:UIControlStateNormal];
+    } else {
+        [self.signButton setImage:[UIImage imageNamed:signImageName] forState:UIControlStateNormal];
+    }
+}
+
+/// 签到按钮点击
+- (void)signButtonClick {
+    // 移除延迟弹窗的逻辑
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(signButtonClick) object:nil];
+    // 显示签到页面
+    [self.signView showSignView:self.playInfo.signInfo.access_url];
+    // 记录展示过签到界面了
+    NSString *signFirstKey = [NSString stringWithFormat:@"%@%@%d",self.playInfo.unique_id,self.playInfo.ticket_id,self.playInfo.signInfo.sign_id];
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:signFirstKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+/// 投票按钮点击
+- (void)voteButtonClick:(UIButton *)sender {
+    [self.voteView showWithChannelId:self.playInfo.channel_id ticketId:self.playInfo.ticket_id];
+}
+
+/// 抽奖按钮点击
+- (void)prizeButtonClick{
+    WeaklySelf(weakSelf);
+    // 移除延迟弹窗的逻辑
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(prizeButtonClick) object:nil];
+    // 显示抽奖页面
+    [self.prizeFuctionWebView showWebView:self.playInfo.prizeInfo.access_url];
+    [self.prizeFuctionWebView addScriptMessageWithScriptArr:@[@"goModifyAddress",@"finishActivity"] callBackBlock:^(NSString * _Nullable methodName) {
+        if([methodName isEqualToString:@"goModifyAddress"]){
+            [weakSelf.prizeFuctionWebView showWebView:weakSelf.playInfo.prizeInfo.prize_modify_address];
+            
+        }else if ([methodName isEqualToString:@"finishActivity"]){
+            [weakSelf.prizeFuctionWebView showWebView:weakSelf.playInfo.prizeInfo.access_url];
+        }
+    }];
+}
+
 #pragma mark MZVideoOpenADViewProtocol
 
 // 点击图片的回调
@@ -976,8 +1199,6 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 - (void)ADOpenScreenDataIsReadyWithSuccessData:(id)data modelData:(MZOpenScreenDataModel *)modelData error:(NSError *)error{
     NSLog(@"%@ %@ %@",data,modelData,error);
 }
-
-
 
 #pragma mark - MZDLNAViewDelegate
 /// 投屏成功开始播放
@@ -1149,12 +1370,16 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
                 if (!onlineArrayIsHas) {
                     [self.onlineUsersArr addObject:user];
                 }
+                
+                // 配置在线总人数
+                if (onlineArrayIsHas == NO) {
+                    self.onlineUsersTotalCount++;
+                }
             }
             
             // 配置在线3位人员资料
             self.liveAudienceHeaderView.userArr = self.onlineUsersArr;
-            // 配置在线总人数
-            self.onlineUsersTotalCount++;
+
             [self.liveAudienceHeaderView updateOnlineUserTotalCount:self.onlineUsersTotalCount];
             
             break;
@@ -1294,13 +1519,19 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
                     [self preventRecordScreenLabelIsShow:self.isRecordScreen];
                 } else if ([model.type isEqualToString:@"vote"]) {//是否显示投票
                     self.isShowVote = model.is_open;
+                    [self updateMarketingMenusView];
                 } else if ([model.type isEqualToString:@"sign"]) {//是否显示签到
 #warning - 签到关闭是实时的，开启的话只有重新进入视频才可以
-                    self.isShowVote = model.is_open;
+                    self.isShowSign = model.is_open;                    
+                    if (self.isShowSign) {
+                        self.isShowSign = NO;
+                    }
+                    [self updateMarketingMenusView];
                 } else if ([model.type isEqualToString:@"documents"]) {//是否显示文档
                     self.isShowDocuments = model.is_open;
                 }else if([model.type isEqualToString:@"prize"]){//是否显示抽奖
                     self.isShowPrize = model.is_open;
+                    [self updateMarketingMenusView];
                 }else if([model.type isEqualToString:@"full_screen"]){//是否显示暖场图
                     self.isShowVideoBeforeAD = model.is_open;
                 } else if ([model.type isEqualToString:@"pay_gift"]) {//是否显示礼物视图
@@ -1436,6 +1667,15 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     if (type == MZMPMoviePlaybackStateInterrupted) {
         [self show:@"当前网络状态不佳"];
     }
+    if (@available(iOS 14.0, *)) {
+        if (type == MZMPMoviePlaybackStatePaused) {
+            if (self.isEnterBackground && self.playInfo.status == 2) {//进入后台并且是回放
+                if (self.isBackgroundPlay) {
+                    [self.playerView startPlayer];
+                }
+            }
+        }
+    }
 }
 /// 播放结束状态 包含异常停止
 - (void)moviePlayBackDidFinish:(MZMPMovieFinishReason)type {
@@ -1553,6 +1793,95 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         _audioAnimationView.hidden = YES;
     }
     return _audioAnimationView;
+}
+
+- (UIButton *)signButton {
+    if (!_signButton) {
+        _signButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_signButton setImage:[UIImage imageNamed:signImageName] forState:UIControlStateNormal];
+        [_signButton addTarget:self action:@selector(signButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _signButton;
+}
+
+- (UIButton *)voteButton {
+    if (!_voteButton) {
+        _voteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_voteButton setImage:[UIImage imageNamed:@"mz_toupiao_normal"] forState:UIControlStateNormal];
+        [_voteButton addTarget:self action:@selector(voteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _voteButton;
+}
+
+- (UIButton *)prizeButton{
+    if (!_prizeButton) {
+        _prizeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_prizeButton setImage:[UIImage imageNamed:@"mz_choujiang_menu"] forState:UIControlStateNormal];
+        [_prizeButton addTarget:self action:@selector(prizeButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _prizeButton;
+}
+
+- (MZSignView *)signView {
+    if (!_signView) {
+        WeaklySelf(weakSelf);
+        _signView = [[MZSignView alloc] initWithSignInfo:self.playInfo.signInfo closeHandle:^(MZSignMethodType methodType, NSString * _Nonnull message) {
+            switch (methodType) {
+                case MZSignMethodTypeClose: {
+                    NSLog(@"点击了关闭按钮");
+                    weakSelf.signView = nil;
+                    if (self.playInfo.signInfo.is_force && self.playInfo.signInfo.force_type == 1) {//强制签到 && 不可跳过
+                        [weakSelf closeButtonDidclick:nil];
+                    }
+                    break;
+                }
+                case MZSignMethodTypeSignIn: {
+                    NSLog(@"签到成功");
+                    weakSelf.isSignIn = YES;
+                    [weakSelf updateSignButtonStatus];
+                    weakSelf.signView = nil;
+                    break;
+                }
+                case MZSignMethodTypeLoadStart: {
+                    break;
+                }
+                case MZSignMethodTypeLoadFinish: {
+                    break;
+                }
+                case MZSignMethodTypeLoadFail: {
+                    [self show:message];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }];
+    }
+    return _signView;
+}
+
+-(MZFuctionWebView *)prizeFuctionWebView{
+    WeaklySelf(weakSelf);
+    if(!_prizeFuctionWebView){
+        _prizeFuctionWebView = [[MZFuctionWebView alloc]initWithFuctionWebType:MZFuctionWebPrizeType url:@"www.baidu.com" closeHandle:^(MZFuctionMethodWebType methodType, NSString * _Nonnull message) {
+            if([message isEqualToString:@"close"]){
+                [weakSelf.prizeFuctionWebView removeFromSuperview];
+                weakSelf.prizeFuctionWebView = nil;
+            }
+            
+        }];
+    }
+    return _prizeFuctionWebView;
+}
+
+- (MZVoteView *)voteView {
+    if (!_voteView) {
+        WeaklySelf(weakSelf);
+        _voteView = [[MZVoteView alloc] initWithCloseHander:^{
+            [weakSelf hideVoteView];
+        }];
+    }
+    return _voteView;
 }
 
 @end
