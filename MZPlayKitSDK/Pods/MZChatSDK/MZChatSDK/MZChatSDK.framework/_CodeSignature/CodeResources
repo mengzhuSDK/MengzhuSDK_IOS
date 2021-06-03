@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/MZActMsg.h</key>
 		<data>
-		gddhke6BH6INft6BL8EgXldrwLc=
+		AtNDKH5ujed39caqZWRm2fPY/Bc=
 		</data>
 		<key>Headers/MZAppChatApiManager.h</key>
 		<data>
@@ -36,13 +36,17 @@
 		<data>
 		6eR6PzwDFTJ/eSnvM8cbpOrNdHg=
 		</data>
+		<key>Headers/MZBonusRainSendInfoModel.h</key>
+		<data>
+		hrT9J5SVNXJAuXAY3Say1EfcmII=
+		</data>
 		<key>Headers/MZChatApiManager.h</key>
 		<data>
 		lamofybt/pUye7EvCU3OAEyJrjg=
 		</data>
 		<key>Headers/MZChatCommen.h</key>
 		<data>
-		9E7anpir88uXPtFsuPGAtMxANBU=
+		Kpl/UaILH/qnKExZEiMFr4iqF64=
 		</data>
 		<key>Headers/MZChatKitManager.h</key>
 		<data>
@@ -58,7 +62,7 @@
 		</data>
 		<key>Headers/MZChatSDK.h</key>
 		<data>
-		NEr4M3olQ8EektMHS4SQ6ciEC5E=
+		BoD5jtiVdHnttb3U3ohkVV1hkbU=
 		</data>
 		<key>Headers/MZChatThemeManager.h</key>
 		<data>
@@ -82,7 +86,7 @@
 		</data>
 		<key>Headers/MZLongPollDataModel.h</key>
 		<data>
-		HiE+Tmu8NFUilxDx89BRJXopZuc=
+		l6zQiUZ6o1pe+sJhomuUnqGZcmY=
 		</data>
 		<key>Headers/MZLongPolling.h</key>
 		<data>
@@ -90,7 +94,7 @@
 		</data>
 		<key>Headers/MZRightContenModel.h</key>
 		<data>
-		eQA5Q6NQkFtULkI4x5q6m7FdTFk=
+		T/jz/vPNof5huIFXgAWedcgl5ng=
 		</data>
 		<key>Headers/MZRightModel.h</key>
 		<data>
@@ -102,7 +106,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		9JenzgjEdHoESalX1UwqhVieG3Q=
+		o0ATOQnSuNyT9FGtRXbupk/uy3o=
 		</data>
 		<key>MZChatSDKResource.bundle/mz_barrageSwitch_off@2x.png</key>
 		<data>
@@ -191,11 +195,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gddhke6BH6INft6BL8EgXldrwLc=
+			AtNDKH5ujed39caqZWRm2fPY/Bc=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZnxI9h06m6XZBz9HGXjJqFGI3Ep1x8clgtUUlwWu4C4=
+			A5T9nNWgUC2NSljqZmAEyagtSg2K8i/uf4oab+dYkg4=
 			</data>
 		</dict>
 		<key>Headers/MZAppChatApiManager.h</key>
@@ -231,6 +235,17 @@
 			XFAqlbmOIU/dGApLrgHdGd4M3LI2jaf5xZw4xXiIXE0=
 			</data>
 		</dict>
+		<key>Headers/MZBonusRainSendInfoModel.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			hrT9J5SVNXJAuXAY3Say1EfcmII=
+			</data>
+			<key>hash2</key>
+			<data>
+			3fBUPssp58o15uu6UrwCRCKMNrutjYmqo8iDGQjzlH4=
+			</data>
+		</dict>
 		<key>Headers/MZChatApiManager.h</key>
 		<dict>
 			<key>hash</key>
@@ -246,11 +261,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9E7anpir88uXPtFsuPGAtMxANBU=
+			Kpl/UaILH/qnKExZEiMFr4iqF64=
 			</data>
 			<key>hash2</key>
 			<data>
-			XZot7JQrFHE00syqqsd3R2jZ34B8rYS2uEFOrfkeZ5Q=
+			U4NP8230caTjyvrKoK4KX+Krb45GyuYcn3kBI1xUgmg=
 			</data>
 		</dict>
 		<key>Headers/MZChatKitManager.h</key>
@@ -290,11 +305,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			NEr4M3olQ8EektMHS4SQ6ciEC5E=
+			BoD5jtiVdHnttb3U3ohkVV1hkbU=
 			</data>
 			<key>hash2</key>
 			<data>
-			lHfG+FIxwDldsojuxioqGTxyrHrHAhARjd4Qo9wPPwo=
+			R0QsM4r+2zOWmY0o2hUEsFu9APrBOIQxe+OUG8N5Qlo=
 			</data>
 		</dict>
 		<key>Headers/MZChatThemeManager.h</key>
@@ -356,11 +371,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HiE+Tmu8NFUilxDx89BRJXopZuc=
+			l6zQiUZ6o1pe+sJhomuUnqGZcmY=
 			</data>
 			<key>hash2</key>
 			<data>
-			DcdJX/WJjIYR1O+p5ImCGm84MyNxYdqAbknrDM6a3/Q=
+			TUjPC/a7yfFB3KrNwhmOm5nltCOhCGca9ssvdjQBoRc=
 			</data>
 		</dict>
 		<key>Headers/MZLongPolling.h</key>
@@ -378,11 +393,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			eQA5Q6NQkFtULkI4x5q6m7FdTFk=
+			T/jz/vPNof5huIFXgAWedcgl5ng=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ssbrg4OqwN3x1U3STF0AQemFrgjIS/z7A71o54P+pEs=
+			dIl+v16of1CgHlF4Z/Y2p1BClsVvsEXIXonLpZuxg8M=
 			</data>
 		</dict>
 		<key>Headers/MZRightModel.h</key>

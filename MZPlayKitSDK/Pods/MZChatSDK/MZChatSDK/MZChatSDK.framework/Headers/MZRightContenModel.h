@@ -47,6 +47,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,strong) NSArray *content;
 @property (nonatomic ,strong)NSString *stay_duration;//暖场图倒计时秒数
 
+//集章
+@property (nonatomic ,copy) NSString *app_medal_url;//集章详情链接
+@property (nonatomic ,copy) NSString *mid;//集章id
+
 @end
 
 NS_ASSUME_NONNULL_END

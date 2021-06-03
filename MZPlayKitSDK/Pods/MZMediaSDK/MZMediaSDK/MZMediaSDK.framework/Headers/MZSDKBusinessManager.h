@@ -114,6 +114,18 @@
 +(void)reqGoodsList:(NSString *)ticketId offset : (NSInteger)offset limit :(NSInteger)limit success:(void(^)(id responseObject))success failure:(void(^)(NSError * error))failure;
 
 /**
+ * 活动商品列表 - 带过滤条件
+ *
+ * @param ticketId 直播活动ID
+ * @param offset 数据获取偏移
+ * @param limit 获取数据条数
+ * @param filter 过滤条件
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)reqGoodsList:(NSString *)ticketId offset : (NSInteger)offset limit :(NSInteger)limit filter:(NSDictionary *)filter success:(void(^)(id responseObject))success failure:(void(^)(NSError * error))failure;
+
+/**
  * 获取在线用户
  *
  * @param ticketId 直播活动ID
@@ -363,7 +375,13 @@
  */
 +(void)getRollAdvertWithTicketId:(NSString *)ticketId success:(void(^)(id responseObject))success failure:(void (^)(NSError *))failure;
 
-
+/**
+ * 更新用户头像和昵称
+ * @param unique_id 用户唯一ID
+ * @param nickname 用户昵称
+ * @param avatar 用户头像地址
+ */
++ (void)updateUserInfoWithUnique_id:(NSString *)unique_id nickname:(NSString *)nickname avatar:(NSString *)avatar success:(void(^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 @end
 
 

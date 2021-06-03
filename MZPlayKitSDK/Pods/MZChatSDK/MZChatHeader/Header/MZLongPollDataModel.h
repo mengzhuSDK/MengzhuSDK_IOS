@@ -30,6 +30,7 @@
 @property (nonatomic,assign)int         buy_num;
 @property (nonatomic,strong) NSString * imgSrc;
 @property (nonatomic,assign) float    cellHeight;//cell的缓存高度
+@property (nonatomic,strong) NSDictionary *user_ext;
 +(MZLongPollDataModel *)initWithDict:(NSDictionary *)data;
 
 //历史聊天

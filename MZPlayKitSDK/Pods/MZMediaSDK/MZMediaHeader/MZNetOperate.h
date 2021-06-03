@@ -63,6 +63,8 @@
 #define MZNet_Video_VideoAdvert         @"/video/videoAdvert"//活动的视频广告
 #define MZNet_Video_RollAdvert          @"/video/rollAdvert"//活动的滚动广告
 
+#define MZNet_UserInfo_Update          @"/user/updateUserInfo"//更新用户昵称和头像
+
 #endif
 //static BOOL isDebugs;
 //static NSString *mBusinessPrefix;
@@ -107,4 +109,5 @@
 +(NSString *)useFCodeToPlay;
 +(NSString *)video_VideoAdvert;
 +(NSString *)video_RollAdvert;
++(NSString *)updateUserInfo;
 @end

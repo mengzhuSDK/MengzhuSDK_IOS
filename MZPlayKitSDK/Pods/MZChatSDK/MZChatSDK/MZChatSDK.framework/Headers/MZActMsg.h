@@ -11,7 +11,7 @@
 #import "MZSingleContentModel.h"
 #import "MZGlobalContentModel.h"
 #import "HDAutoADModel.h"
-
+@class MZBonusRainSendInfoModel;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MZSingleContentRightModel:NSObject
@@ -234,6 +234,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSArray <HDAutoADModel *>* contentADModelArr;
 //秒杀组ID
 @property (nonatomic ,strong)NSString *seckill_group_id;
+
+#pragma mark ----红包雨提示时间
+@property (nonatomic ,strong)NSString *duration;
+#pragma mark ----红包雨开始
+@property (nonatomic ,strong)NSString *rain_id;
+@property (nonatomic ,strong)NSString *app_url;
+@property (nonatomic ,strong)MZBonusRainSendInfoModel *send_info;
+
+#pragma mark ----集章推送消息
+@property (nonatomic ,strong)NSString *image;//勋章图片
+@property (nonatomic ,strong)NSString *info_id;
+@property (nonatomic ,strong)NSString *mid;//勋章ID
 
 @end
 

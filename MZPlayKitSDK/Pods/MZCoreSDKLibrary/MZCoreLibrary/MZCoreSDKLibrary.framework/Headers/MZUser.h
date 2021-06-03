@@ -66,6 +66,10 @@ typedef NS_ENUM(NSUInteger, RelationType) {
  用户头像
  */
 @property (nonatomic,strong)NSString * avatar;
+/*!
+ 用户扩展信息,是个json字符串
+ */
+@property (nonatomic,strong)NSString * user_ext;
 
 
 @property (nonatomic,strong)NSString * appID;//appID

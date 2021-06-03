@@ -26,6 +26,7 @@
 #import "MZAppMessageToolView.h"
 #import "MZBarrageSwitch.h"
 #import "MZLongPollDataModel.h"
+#import "MZBonusRainSendInfoModel.h"
 #import "MZRightModel.h"
 #import "MZGoodsListOuterModel.h"
 #import "MZGoodsListModel.h"
@@ -39,6 +40,7 @@
 #import "MZActMsg.h"
 
 #import "MZChatCommen.h"
+#import "MZBonusRainSendInfoModel.h"
 
 //! Project version number for MZChatSDK.
 FOUNDATION_EXPORT double MZChatSDKVersionNumber;
