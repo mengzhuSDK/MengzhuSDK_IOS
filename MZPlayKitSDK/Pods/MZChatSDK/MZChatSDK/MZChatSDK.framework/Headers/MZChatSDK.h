@@ -40,7 +40,6 @@
 #import "MZActMsg.h"
 
 #import "MZChatCommen.h"
-#import "MZBonusRainSendInfoModel.h"
 
 //! Project version number for MZChatSDK.
 FOUNDATION_EXPORT double MZChatSDKVersionNumber;

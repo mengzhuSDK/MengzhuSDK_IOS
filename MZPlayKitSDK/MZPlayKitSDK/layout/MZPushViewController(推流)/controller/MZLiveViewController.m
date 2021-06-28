@@ -11,6 +11,7 @@
 #import <CoreTelephony/CTCallCenter.h>
 #import <CoreTelephony/CTCall.h>
 #import "MZWatchHeaderMessageView.h"
+#import "MZUserTipView.h"
 
 #import "MZMessageToolView.h"
 #import "MZAudienceView.h"
@@ -19,7 +20,6 @@
 #import "MZLiveAlertView.h"
 #import "MZLiveManagerHearderView.h"
 #import "MZLiveAudienceHeaderView.h"
-#import "MZUserTipView.h"
 #import "MZBottomTalkBtn.h"
 
 #import "MZChannelAlertView.h"
@@ -33,6 +33,7 @@
 #import "MZLiveFinishViewController.h"
 #import "MZSessionPresetView.h"
 #import "MZBeautyFaceOptionView.h"
+#import "MZRedPackageViewController.h"
 
 #define StreamName     @"86ff6b3712d6f8c6ccd14980fc6319e2"
 #define Token          @"123456"
@@ -62,6 +63,7 @@ typedef enum {
     MZLiveViewMirrorTag,
     MZLiveViewBitRateTag,
     MZLiveViewMenuTag,
+    MZLiveViewRedPackageTag,
     MZLiveViewBeautyFaceTag,//美颜
     MZLiveViewSessionPresetTag,//分辨率
 }MZLiveViewBtnTag;
@@ -149,6 +151,9 @@ CGFloat BtnSpace = 28 + 12;
 @property (nonatomic, strong) UIButton *blockAllButton;//全体禁言，解禁
 @property (nonatomic, strong) UIButton *sessionPresetButton;//分辨率按钮
 
+@property (nonatomic, strong) UIButton *redPackageButton;//红包按钮
+@property (nonatomic, assign) BOOL isShowRedPackageButton;//是否显示红包按钮
+
 @property (nonatomic, strong) MZLiveAlertView *liveAlertView;//断流提示的view
 
 @property (nonatomic, strong) UIVisualEffectView *blurEffectBgView;
@@ -173,6 +178,8 @@ CGFloat BtnSpace = 28 + 12;
 @property (nonatomic, strong) MZBeautyFaceOptionView *beautyFaceOptionView;//美颜等级选择View
 
 @property (nonatomic, strong) MZSessionPresetView *sessionPresetView;//分辨率选择View
+
+@property (nonatomic, assign) BOOL isBackgroundPushFlow;//是否后台推流
 
 @end
 
@@ -233,6 +240,9 @@ CGFloat BtnSpace = 28 + 12;
         self.blockAllButton.frame = CGRectMake(self.muteBtn.frame.origin.x - 44*landScapeRate - 8, self.cameraChangeBtn.frame.origin.y, self.cameraChangeBtn.frame.size.width, self.cameraChangeBtn.frame.size.height);
         
         self.sessionPresetButton.frame = CGRectMake(self.blockAllButton.frame.origin.x - 44*landScapeRate - 8, self.cameraChangeBtn.frame.origin.y, self.cameraChangeBtn.frame.size.width, self.cameraChangeBtn.frame.size.height);
+        
+        self.redPackageButton.frame = CGRectMake(self.sessionPresetButton.frame.origin.x - 44*landScapeRate - 8, self.sessionPresetButton.frame.origin.y, self.cameraChangeBtn.frame.size.width, self.cameraChangeBtn.frame.size.height);
+        self.redPackageButton.alpha = self.isShowRedPackageButton;
 
         self.tipView.frame = _preView.bounds;
         
@@ -269,6 +279,8 @@ CGFloat BtnSpace = 28 + 12;
         self.isMirroringType = NO;
         self.isMuteType = NO;
         self.isTorchType = NO;
+        
+        self.isShowRedPackageButton = NO;//红包试图默认不显示
     }
     return self;
 }
@@ -299,6 +311,7 @@ CGFloat BtnSpace = 28 + 12;
     [super viewDidLoad];
     _liveDuration = 0;
     _isConnecting = NO;
+    self.isBackgroundPushFlow = NO;
 
     self.onlineUsersArr = [NSMutableArray arrayWithCapacity:10];
     [self initView];
@@ -460,6 +473,7 @@ CGFloat BtnSpace = 28 + 12;
     
     _chatView = [[MZHistoryChatView alloc]initWithFrame:CGRectMake(0, _preView.frame.size.height - 265*MZ_RATE - (IPHONE_X ? 34 : 0), _preView.frame.size.width, 200*MZ_RATE)];
     _chatView.chatDelegate =self;
+    _chatView.isLiveHost = YES;
     [_preView addSubview:_chatView];
 }
 
@@ -474,7 +488,24 @@ CGFloat BtnSpace = 28 + 12;
     if ([MZBaseGlobalTools isBlankString:pollingDate.userId] ||[pollingDate.userId isEqualToString:@"0"]){
         return;
     }
-    [self getUserMessageWithPollingDate:pollingDate];
+    [MZSDKSimpleHud show];
+    [MZSDKBusinessManager getUserBlockStateWithTicketId:self.model.ticket_id uid:pollingDate.userId success:^(id response) {
+        [MZSDKSimpleHud hide];
+        int state = [[NSString stringWithFormat:@"%@",response[@"state"]] intValue];
+        
+        MZLiveUserModel *model = [[MZLiveUserModel alloc] init];
+        model.uid = pollingDate.userId;
+        model.nickname = pollingDate.userName;
+        model.avatar = pollingDate.userAvatar;
+        model.is_kickOut = NO;//固定设置未踢出
+        model.is_banned = state == 1 ? NO : YES;
+        
+        [self tipUserMessageViewWithUserModel:model];
+
+    } failure:^(NSError *error) {
+        [MZSDKSimpleHud show];
+        [self.view show:error.domain];
+    }];
 }
 
 //屏幕底部控件
@@ -496,8 +527,8 @@ CGFloat BtnSpace = 28 + 12;
     
     self.menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(_preView.frame.size.width - 12*MZ_RATE - 44*MZ_RATE , self.bottomTalkBtn.top, 44*MZ_RATE, 44*MZ_RATE)];
     self.menuBtn.tag = MZLiveViewMenuTag;
-    [self.menuBtn setImage:ImageName(@"bottomButton_jubao") forState:UIControlStateNormal];
-    [self.menuBtn setImage:ImageName(@"bottomButton_jubao_click") forState:UIControlStateSelected];
+    [self.menuBtn setImage:ImageName(@"bottomButton_jubao_max") forState:UIControlStateNormal];
+    [self.menuBtn setImage:ImageName(@"bottomButton_jubao_click_max") forState:UIControlStateSelected];
     [self.menuBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_preView addSubview:self.menuBtn];
     self.menuBtn.hidden = YES;
@@ -511,7 +542,7 @@ CGFloat BtnSpace = 28 + 12;
     
     self.shareBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.cameraChangeBtn.frame.origin.x - 44*MZ_RATE - 12, self.cameraChangeBtn.frame.origin.y, self.cameraChangeBtn.frame.size.width, self.cameraChangeBtn.frame.size.height)];
     self.shareBtn.tag = MZLiveViewShareButtonTag;
-    [self.shareBtn setImage:ImageName(@"bottomButton_share") forState:UIControlStateNormal];
+    [self.shareBtn setImage:ImageName(@"bottomButton_share_max") forState:UIControlStateNormal];
     [self.shareBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_preView addSubview:self.shareBtn];
     self.shareBtn.hidden = YES;
@@ -568,6 +599,14 @@ CGFloat BtnSpace = 28 + 12;
     self.sessionPresetButton.hidden = YES;
     self.sessionPresetButton.alpha = 0;
     [self updateSessionPresetButton];
+    
+    self.redPackageButton = [[UIButton alloc]initWithFrame:CGRectMake(self.flashLightBtn.frame.origin.x, self.sessionPresetButton.frame.origin.y - 44*MZ_RATE - 12, self.sessionPresetButton.frame.size.width, self.sessionPresetButton.frame.size.height)];
+    self.redPackageButton.tag = MZLiveViewRedPackageTag;
+    [self.redPackageButton setImage:ImageName(@"red_max-push") forState:UIControlStateNormal];
+    [self.redPackageButton addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [_preView addSubview:self.redPackageButton];
+    self.redPackageButton.hidden = YES;
+    self.redPackageButton.alpha = 0;
 
     
     [_preView addSubview:self.beautyFaceOptionView];
@@ -582,6 +621,8 @@ CGFloat BtnSpace = 28 + 12;
         self.muteBtn.frame = self.beautyFaceBtn.frame;
         // 禁言按钮
         self.blockAllButton.frame = self.mirrorBtn.frame;
+        // 红包按钮
+        self.redPackageButton.frame = self.flashLightBtn.frame;
         // 分辨率按钮
         self.sessionPresetButton.frame = CGRectZero;
         // 美颜按钮
@@ -616,27 +657,6 @@ CGFloat BtnSpace = 28 + 12;
     _chatToolBar.joinID = joinID;
 }
 
--(void)getUserMessageWithPollingDate:(MZLongPollDataModel *)pollingDate
-{
-    if ([pollingDate.data.uniqueID isEqualToString:[MZBaseUserServer currentUser].uniqueID]) {
-        [self.view show:@"点击了自己的头像"];
-        return;
-    }
-    
-    // 这里需要你们自己去获取用户的详细信息，包括是否已经禁言，直播量，赞量等你们自己的数据，我这里只是简单模拟
-    MZLiveUserModel *model = [[MZLiveUserModel alloc] init];
-    model.uid = pollingDate.userId;
-    model.nickname = pollingDate.userName;
-    model.avatar = pollingDate.userAvatar;
-    
-    model.is_banned = NO;//模拟显示未禁言
-    model.lives = @"2";
-    model.attentions = @"1";
-    model.likes = @"3";
-
-    [self tipUserMessageViewWithUserModel:model];
-}
-
 -(void)tipUserMessageViewWithUserModel:(MZLiveUserModel *)user
 {
     WeaklySelf(weakSelf);
@@ -644,12 +664,15 @@ CGFloat BtnSpace = 28 + 12;
     headerMessageView.isMySelf = NO;
     if ([user.uid isEqualToString:self.model.chat_conf.chat_uid]) {
         headerMessageView.isMySelf = YES;
+        [self.view show:@"点击了自己头像"];
+        return;
     }
     
     headerMessageView.otherUserInfoModel = user;
     [headerMessageView showWithView:self.view action:^(HeadViewActionType actionType) {
-        if(actionType == HeadViewActionTypeBlock){
+        if(actionType == HeadViewActionTypeBlock || actionType == HeadViewActionTypeKick){
             weakSelf.tipView = [[MZUserTipView alloc]initWithFrame:CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.height)];
+            weakSelf.tipView.isKickOut = actionType == HeadViewActionTypeKick ? YES : NO;
             weakSelf.tipView.otherUser = user;
             __weak typeof(weakSelf.tipView)weakTipView = weakSelf.tipView;
             weakSelf.tipView.userTipBlock = ^(MZUserTipType type) {
@@ -659,12 +682,31 @@ CGFloat BtnSpace = 28 + 12;
                     [weakSelf banedOrUnBannedUserWithModel:user isBanned:YES];
                 }else if(type == MZUserTipTypeUnBanned){
                     [weakSelf banedOrUnBannedUserWithModel:user isBanned:NO];
+                }else if(type == MZUserTipTypeKickOut){
+                    [weakSelf kickOutOrUnKickOutUserWithModel:user isKickOut:YES];
+                }else if(type == MZUserTipTypeUnKickOut){
+                    [weakSelf kickOutOrUnKickOutUserWithModel:user isKickOut:NO];
                 }
             };
             [weakSelf.view addSubview:self.tipView];
         }
     }];
 }
+
+/// 踢出请求 - 这里后续改成踢出接口
+-(void)kickOutOrUnKickOutUserWithModel:(MZLiveUserModel *)user isKickOut:(BOOL)isKickOut
+{
+    [MZSDKSimpleHud show];
+    [MZSDKBusinessManager kickoutUserWithTicketId:self.model.ticket_id channelId:self.model.channelId uid:user.uid isKickout:isKickOut success:^(id response) {
+        [MZSDKSimpleHud hide];
+        [self.view show:isKickOut ? @"踢出成功":@"解除踢出成功"];
+        [self.tipView removeFromSuperview];
+    } failure:^(NSError *error) {
+        [MZSDKSimpleHud hide];
+        [self.view show:error.domain];
+    }];
+}
+
 
 /// 禁言请求
 -(void)banedOrUnBannedUserWithModel:(MZLiveUserModel *)user isBanned:(BOOL)isBanned
@@ -964,6 +1006,7 @@ CGFloat BtnSpace = 28 + 12;
                 self.mirrorBtn.alpha = button.selected;
                 self.beautyFaceBtn.alpha = button.selected;
                 self.blockAllButton.alpha = button.selected;
+                self.redPackageButton.alpha = button.selected;
                 self.sessionPresetButton.alpha = button.selected;
             }];
         }
@@ -1056,7 +1099,10 @@ CGFloat BtnSpace = 28 + 12;
     if (!self.isStartPush) {//还没有开始推流
         return;
     }
-    [self destoryPusher];
+    
+    if (!self.isBackgroundPushFlow) {
+        [self destoryPusher];
+    }
     
     // 监听电话
     if (_callCenter) {
@@ -1112,7 +1158,9 @@ CGFloat BtnSpace = 28 + 12;
     }else{
         [self.view show:@"无推流配置"];
     }
-    [_pushManager startCaptureWithRtmpUrl:_url];
+    if (_url != nil) {
+        [_pushManager startCaptureWithRtmpUrl:_url];
+    }
 }
 
 - (void)addKeyBoardNoti{
@@ -1162,7 +1210,9 @@ CGFloat BtnSpace = 28 + 12;
 
 /// 断流后重连
 - (void)outToConnect {
-    [_pushManager startCaptureWithRtmpUrl:_url];
+    if (_url != nil) {
+        [_pushManager startCaptureWithRtmpUrl:_url];
+    }
 }
 
 - (void)videoBitrateCurrentBandwidth:(CGFloat)currentBandwidth {
@@ -1277,7 +1327,9 @@ CGFloat BtnSpace = 28 + 12;
         }
         [self.chatKitManager startTimelyChar:self.model.ticket_id receive_url:self.model.chat_conf.receive_url srv:self.model.msg_conf.msg_srv token:self.model.msg_conf.msg_token];
 
-        [_pushManager startCaptureWithRtmpUrl:_url];
+        if (_url != nil) {
+            [_pushManager startCaptureWithRtmpUrl:_url];
+        }
         
         [self startLiveTimer];
         _isConnecting = YES;
@@ -1359,6 +1411,7 @@ CGFloat BtnSpace = 28 + 12;
                 self.flashLightBtn.alpha = 1;
                 self.muteBtn.alpha = 1;
                 self.blockAllButton.alpha = 1;
+                self.redPackageButton.alpha = 1;
                 self.sessionPresetButton.alpha = 1;
                 
                 [self.view setNeedsLayout];
@@ -1369,6 +1422,7 @@ CGFloat BtnSpace = 28 + 12;
             self.shareBtn.hidden = NO;
             self.muteBtn.hidden = NO;
             self.blockAllButton.hidden = NO;
+            self.redPackageButton.hidden = NO;
             self.sessionPresetButton.hidden = NO;
             self.flashLightBtn.hidden = NO;
             self.mirrorBtn.hidden = NO;
@@ -1411,8 +1465,8 @@ CGFloat BtnSpace = 28 + 12;
 - (void)applicationDidEnterBackground{
     NSLog(@"进入后台，停止直播");
 
-    [self hideKeyboard];
-    [self appResignActive];
+//    [self hideKeyboard];
+//    [self appResignActive];
 }
 
 //- (void)stopLive:(NSString*)str{
@@ -1509,8 +1563,7 @@ CGFloat BtnSpace = 28 + 12;
 #pragma mark --观众列表
 - (void)creatAudienceWinView {
     WeaklySelf(weakSelf);
-    MZAudienceView *audienceView = [[MZAudienceView alloc] initWithFrame:self.view.bounds ticket_id:self.model.ticket_id chat_idOfMe:self.model.chat_conf.chat_uid  selectUserHandle:^(MZOnlineUserListModel *userModel) {
-        [weakSelf.view show:@"点击了某一个观众"];
+    MZAudienceView *audienceView = [[MZAudienceView alloc] initWithFrame:self.view.bounds ticket_id:self.model.ticket_id channel_id:self.model.channelId chat_idOfMe:self.model.chat_conf.chat_uid isLiveHost:YES selectUserHandle:^(MZOnlineUserListModel *userModel) {
     } closeHandle:^{
         NSLog(@"关闭了在线列表");
     }];
@@ -1624,10 +1677,12 @@ CGFloat BtnSpace = 28 + 12;
     }else if (msg.event == MsgTypeDisableChat){
         if(self.model.chat_conf.chat_uid.intValue  == msg.data.disableChatUserID.intValue){
             self.bottomTalkBtn.isBanned = YES;
+            [self.view show:@"您已被禁言"];
         }
     }else if (msg.event == MsgTypeAbleChat){
         if(self.model.chat_conf.chat_uid.intValue  == msg.data.ableChatUserID.intValue){
             self.bottomTalkBtn.isBanned = NO;
+            [self.view show:@"您已解除禁言"];
         }
     }else if (msg.event == MsgTypeGetGift) {
          MZPresentListModel * model = [[MZPresentListModel alloc]init];
@@ -1647,6 +1702,17 @@ CGFloat BtnSpace = 28 + 12;
 
     }else if (msg.event == MsgTypeKickout) {//踢出用户
         // "user_id": "1111", // 用户ID
+    }else if (msg.event == MsgTypeWebinarFunctionMsg) {//活动页面单场活动配置更新消息通知
+        for (MZSingleContentModel *model in msg.data.webinar_content) {
+            if ([model.type isEqualToString:@"bonus"]){
+                self.isShowRedPackageButton = model.is_open;
+                self.redPackageButton.alpha = self.isShowRedPackageButton;
+            } else {
+                NSLog(@"未解析的活动配置更改消息类型 = %@",model.type);
+            }
+        }
+    } else {
+        NSLog(@"未处理的逻辑: %lu",(unsigned long)msg.event);
     }
 }
 

@@ -16,6 +16,34 @@
 		C04B9B8F24F0484F00881A6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C04B9B8E24F0484F00881A6E /* main.m */; };
 		C04B9CB524F048E500881A6E /* MZInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04B9C5A24F048E400881A6E /* MZInputViewController.m */; };
 		C04B9CB624F048E500881A6E /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04B9C5B24F048E400881A6E /* PlayerViewController.m */; };
+		C0B9734F2689A194001DF70A /* MZKickoutManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973492689A194001DF70A /* MZKickoutManagerView.m */; };
+		C0B973502689A194001DF70A /* MZBlockManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B9734D2689A194001DF70A /* MZBlockManagerView.m */; };
+		C0B973512689A194001DF70A /* MZAudienceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B9734E2689A194001DF70A /* MZAudienceCell.m */; };
+		C0B973542689A1CA001DF70A /* MZBonusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973522689A1CA001DF70A /* MZBonusCell.m */; };
+		C0B973572689A1D2001DF70A /* MZBonusNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973552689A1D2001DF70A /* MZBonusNewCell.m */; };
+		C0B973732689A200001DF70A /* MZRedPackageRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973592689A200001DF70A /* MZRedPackageRecordViewController.m */; };
+		C0B973742689A200001DF70A /* MZRedPackagePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B9735D2689A200001DF70A /* MZRedPackagePresenter.m */; };
+		C0B973752689A200001DF70A /* MZRedRecodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B9735F2689A200001DF70A /* MZRedRecodeTableViewCell.m */; };
+		C0B973762689A200001DF70A /* MZRebBagRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973672689A200001DF70A /* MZRebBagRecordModel.m */; };
+		C0B973772689A200001DF70A /* MZRedBagReceiverListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973682689A200001DF70A /* MZRedBagReceiverListModel.m */; };
+		C0B973782689A200001DF70A /* MZRedBagUserReceiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973692689A200001DF70A /* MZRedBagUserReceiveModel.m */; };
+		C0B973792689A200001DF70A /* MZRedBagMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B9736A2689A200001DF70A /* MZRedBagMessageModel.m */; };
+		C0B9737A2689A200001DF70A /* MZRedBagSenderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B9736B2689A200001DF70A /* MZRedBagSenderModel.m */; };
+		C0B9737B2689A200001DF70A /* MZReceiveRedBagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B9736C2689A200001DF70A /* MZReceiveRedBagModel.m */; };
+		C0B9737C2689A200001DF70A /* MZRedPackageAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973712689A200001DF70A /* MZRedPackageAlert.m */; };
+		C0B9737D2689A200001DF70A /* MZRedPackageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973722689A200001DF70A /* MZRedPackageViewController.m */; };
+		C0B973862689A260001DF70A /* MZSendRedEnvelopesLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973832689A260001DF70A /* MZSendRedEnvelopesLayout.m */; };
+		C0B973872689A260001DF70A /* MZSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973842689A260001DF70A /* MZSegmentedView.m */; };
+		C0B973882689A260001DF70A /* MZSendRedEnvelopesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973852689A260001DF70A /* MZSendRedEnvelopesViewController.m */; };
+		C0B973972689A2E6001DF70A /* MZC_WaterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973892689A2E5001DF70A /* MZC_WaterFlowLayout.m */; };
+		C0B973982689A2E6001DF70A /* MZCreateFCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B9738E2689A2E5001DF70A /* MZCreateFCodeViewController.m */; };
+		C0B973992689A2E6001DF70A /* MZCurrentLive.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973902689A2E6001DF70A /* MZCurrentLive.m */; };
+		C0B9739A2689A2E6001DF70A /* MZCreateWhiteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973922689A2E6001DF70A /* MZCreateWhiteUserViewController.m */; };
+		C0B9739B2689A2E6001DF70A /* MZEditWhiteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973932689A2E6001DF70A /* MZEditWhiteUserViewController.m */; };
+		C0B9739C2689A2E6001DF70A /* MZCreateWhiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973942689A2E6001DF70A /* MZCreateWhiteViewController.m */; };
+		C0B9739D2689A2E6001DF70A /* MZFCodeInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973962689A2E6001DF70A /* MZFCodeInfoViewController.m */; };
+		C0B973A32689A4BF001DF70A /* MZWatchHeaderMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B9739F2689A4BF001DF70A /* MZWatchHeaderMessageView.m */; };
+		C0B973A42689A4BF001DF70A /* MZUserTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B973A22689A4BF001DF70A /* MZUserTipView.m */; };
 		C0DAA03E2542B6CC00951250 /* MZBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9F442542B6CC00951250 /* MZBaseView.m */; };
 		C0DAA03F2542B6CC00951250 /* MZBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9F452542B6CC00951250 /* MZBaseNavigationController.m */; };
 		C0DAA0402542B6CC00951250 /* MZBagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9F4A2542B6CC00951250 /* MZBagButton.m */; };
@@ -65,18 +93,14 @@
 		C0DAA06C2542B6CD00951250 /* MZSessionPresetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9F9A2542B6CC00951250 /* MZSessionPresetView.m */; };
 		C0DAA06D2542B6CD00951250 /* MZLiveSelectBiteRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9F9B2542B6CC00951250 /* MZLiveSelectBiteRateView.m */; };
 		C0DAA06E2542B6CD00951250 /* MZPresentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9F9C2542B6CC00951250 /* MZPresentView.m */; };
-		C0DAA06F2542B6CD00951250 /* MZWatchHeaderMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9F9D2542B6CC00951250 /* MZWatchHeaderMessageView.m */; };
 		C0DAA0702542B6CD00951250 /* MZLiveManagerHearderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FA12542B6CC00951250 /* MZLiveManagerHearderView.m */; };
-		C0DAA0712542B6CD00951250 /* MZUserTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FA62542B6CC00951250 /* MZUserTipView.m */; };
 		C0DAA0722542B6CD00951250 /* MZEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FA72542B6CC00951250 /* MZEmptyView.m */; };
 		C0DAA0732542B6CD00951250 /* MZLiveFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FA92542B6CC00951250 /* MZLiveFinishViewController.m */; };
 		C0DAA0742542B6CD00951250 /* MZLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FAC2542B6CC00951250 /* MZLiveViewController.m */; };
 		C0DAA0752542B6CD00951250 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FAE2542B6CC00951250 /* VPImageCropperViewController.m */; };
 		C0DAA0762542B6CD00951250 /* MZConditionListView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FB02542B6CC00951250 /* MZConditionListView.m */; };
-		C0DAA0772542B6CD00951250 /* MZReadyLiveHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FB12542B6CC00951250 /* MZReadyLiveHeaderView.m */; };
 		C0DAA0782542B6CD00951250 /* MZReadyLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FB32542B6CC00951250 /* MZReadyLiveViewController.m */; };
 		C0DAA0792542B6CD00951250 /* MZImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FB52542B6CC00951250 /* MZImagePickerViewController.m */; };
-		C0DAA07A2542B6CD00951250 /* MZReadyLiveCellBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FB82542B6CC00951250 /* MZReadyLiveCellBtn.m */; };
 		C0DAA07B2542B6CD00951250 /* MZAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FBC2542B6CC00951250 /* MZAlertController.m */; };
 		C0DAA07C2542B6CD00951250 /* MZUploadProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA9FC02542B6CC00951250 /* MZUploadProgressView.m */; };
 		C0DAA07D2542B6CD00951250 /* upload_test.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = C0DA9FC22542B6CC00951250 /* upload_test.MP4 */; };
@@ -160,6 +184,62 @@
 		C04B9C5A24F048E400881A6E /* MZInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZInputViewController.m; sourceTree = "<group>"; };
 		C04B9C5B24F048E400881A6E /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
 		C0A7F4882521B5C800A3A79E /* MZSDKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSDKConfig.h; sourceTree = "<group>"; };
+		C0B973492689A194001DF70A /* MZKickoutManagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZKickoutManagerView.m; sourceTree = "<group>"; };
+		C0B9734A2689A194001DF70A /* MZKickoutManagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZKickoutManagerView.h; sourceTree = "<group>"; };
+		C0B9734B2689A194001DF70A /* MZAudienceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAudienceCell.h; sourceTree = "<group>"; };
+		C0B9734C2689A194001DF70A /* MZBlockManagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBlockManagerView.h; sourceTree = "<group>"; };
+		C0B9734D2689A194001DF70A /* MZBlockManagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZBlockManagerView.m; sourceTree = "<group>"; };
+		C0B9734E2689A194001DF70A /* MZAudienceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAudienceCell.m; sourceTree = "<group>"; };
+		C0B973522689A1CA001DF70A /* MZBonusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZBonusCell.m; sourceTree = "<group>"; };
+		C0B973532689A1CA001DF70A /* MZBonusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBonusCell.h; sourceTree = "<group>"; };
+		C0B973552689A1D2001DF70A /* MZBonusNewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZBonusNewCell.m; sourceTree = "<group>"; };
+		C0B973562689A1D2001DF70A /* MZBonusNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBonusNewCell.h; sourceTree = "<group>"; };
+		C0B973592689A200001DF70A /* MZRedPackageRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRedPackageRecordViewController.m; sourceTree = "<group>"; };
+		C0B9735A2689A200001DF70A /* MZRedPackageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRedPackageViewController.h; sourceTree = "<group>"; };
+		C0B9735C2689A200001DF70A /* MZRedPackagePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRedPackagePresenter.h; sourceTree = "<group>"; };
+		C0B9735D2689A200001DF70A /* MZRedPackagePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRedPackagePresenter.m; sourceTree = "<group>"; };
+		C0B9735F2689A200001DF70A /* MZRedRecodeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRedRecodeTableViewCell.m; sourceTree = "<group>"; };
+		C0B973602689A200001DF70A /* MZRedRecodeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRedRecodeTableViewCell.h; sourceTree = "<group>"; };
+		C0B973612689A200001DF70A /* MZRedPackageRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRedPackageRecordViewController.h; sourceTree = "<group>"; };
+		C0B973632689A200001DF70A /* MZRedBagMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRedBagMessageModel.h; sourceTree = "<group>"; };
+		C0B973642689A200001DF70A /* MZRedBagUserReceiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRedBagUserReceiveModel.h; sourceTree = "<group>"; };
+		C0B973652689A200001DF70A /* MZReceiveRedBagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZReceiveRedBagModel.h; sourceTree = "<group>"; };
+		C0B973662689A200001DF70A /* MZRedBagSenderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRedBagSenderModel.h; sourceTree = "<group>"; };
+		C0B973672689A200001DF70A /* MZRebBagRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRebBagRecordModel.m; sourceTree = "<group>"; };
+		C0B973682689A200001DF70A /* MZRedBagReceiverListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRedBagReceiverListModel.m; sourceTree = "<group>"; };
+		C0B973692689A200001DF70A /* MZRedBagUserReceiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRedBagUserReceiveModel.m; sourceTree = "<group>"; };
+		C0B9736A2689A200001DF70A /* MZRedBagMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRedBagMessageModel.m; sourceTree = "<group>"; };
+		C0B9736B2689A200001DF70A /* MZRedBagSenderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRedBagSenderModel.m; sourceTree = "<group>"; };
+		C0B9736C2689A200001DF70A /* MZReceiveRedBagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZReceiveRedBagModel.m; sourceTree = "<group>"; };
+		C0B9736D2689A200001DF70A /* MZRedBagReceiverListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRedBagReceiverListModel.h; sourceTree = "<group>"; };
+		C0B9736E2689A200001DF70A /* MZRebBagRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRebBagRecordModel.h; sourceTree = "<group>"; };
+		C0B973702689A200001DF70A /* MZRedPackageAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRedPackageAlert.h; sourceTree = "<group>"; };
+		C0B973712689A200001DF70A /* MZRedPackageAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRedPackageAlert.m; sourceTree = "<group>"; };
+		C0B973722689A200001DF70A /* MZRedPackageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRedPackageViewController.m; sourceTree = "<group>"; };
+		C0B9737F2689A260001DF70A /* MZSendRedEnvelopesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSendRedEnvelopesViewController.h; sourceTree = "<group>"; };
+		C0B973812689A260001DF70A /* MZSendRedEnvelopesLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSendRedEnvelopesLayout.h; sourceTree = "<group>"; };
+		C0B973822689A260001DF70A /* MZSegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSegmentedView.h; sourceTree = "<group>"; };
+		C0B973832689A260001DF70A /* MZSendRedEnvelopesLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZSendRedEnvelopesLayout.m; sourceTree = "<group>"; };
+		C0B973842689A260001DF70A /* MZSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZSegmentedView.m; sourceTree = "<group>"; };
+		C0B973852689A260001DF70A /* MZSendRedEnvelopesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZSendRedEnvelopesViewController.m; sourceTree = "<group>"; };
+		C0B973892689A2E5001DF70A /* MZC_WaterFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZC_WaterFlowLayout.m; sourceTree = "<group>"; };
+		C0B9738A2689A2E5001DF70A /* MZEditWhiteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZEditWhiteUserViewController.h; sourceTree = "<group>"; };
+		C0B9738B2689A2E5001DF70A /* MZCreateWhiteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCreateWhiteUserViewController.h; sourceTree = "<group>"; };
+		C0B9738C2689A2E5001DF70A /* MZC_WaterFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZC_WaterFlowLayout.h; sourceTree = "<group>"; };
+		C0B9738D2689A2E5001DF70A /* MZFCodeInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZFCodeInfoViewController.h; sourceTree = "<group>"; };
+		C0B9738E2689A2E5001DF70A /* MZCreateFCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCreateFCodeViewController.m; sourceTree = "<group>"; };
+		C0B9738F2689A2E5001DF70A /* MZCreateWhiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCreateWhiteViewController.h; sourceTree = "<group>"; };
+		C0B973902689A2E6001DF70A /* MZCurrentLive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCurrentLive.m; sourceTree = "<group>"; };
+		C0B973912689A2E6001DF70A /* MZCreateFCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCreateFCodeViewController.h; sourceTree = "<group>"; };
+		C0B973922689A2E6001DF70A /* MZCreateWhiteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCreateWhiteUserViewController.m; sourceTree = "<group>"; };
+		C0B973932689A2E6001DF70A /* MZEditWhiteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZEditWhiteUserViewController.m; sourceTree = "<group>"; };
+		C0B973942689A2E6001DF70A /* MZCreateWhiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCreateWhiteViewController.m; sourceTree = "<group>"; };
+		C0B973952689A2E6001DF70A /* MZCurrentLive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCurrentLive.h; sourceTree = "<group>"; };
+		C0B973962689A2E6001DF70A /* MZFCodeInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZFCodeInfoViewController.m; sourceTree = "<group>"; };
+		C0B9739F2689A4BF001DF70A /* MZWatchHeaderMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZWatchHeaderMessageView.m; sourceTree = "<group>"; };
+		C0B973A02689A4BF001DF70A /* MZUserTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZUserTipView.h; sourceTree = "<group>"; };
+		C0B973A12689A4BF001DF70A /* MZWatchHeaderMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZWatchHeaderMessageView.h; sourceTree = "<group>"; };
+		C0B973A22689A4BF001DF70A /* MZUserTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZUserTipView.m; sourceTree = "<group>"; };
 		C0DA9F422542B6CC00951250 /* MZBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBaseView.h; sourceTree = "<group>"; };
 		C0DA9F432542B6CC00951250 /* MZBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBaseNavigationController.h; sourceTree = "<group>"; };
 		C0DA9F442542B6CC00951250 /* MZBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZBaseView.m; sourceTree = "<group>"; };
@@ -232,32 +312,24 @@
 		C0DA9F9A2542B6CC00951250 /* MZSessionPresetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZSessionPresetView.m; sourceTree = "<group>"; };
 		C0DA9F9B2542B6CC00951250 /* MZLiveSelectBiteRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLiveSelectBiteRateView.m; sourceTree = "<group>"; };
 		C0DA9F9C2542B6CC00951250 /* MZPresentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZPresentView.m; sourceTree = "<group>"; };
-		C0DA9F9D2542B6CC00951250 /* MZWatchHeaderMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZWatchHeaderMessageView.m; sourceTree = "<group>"; };
 		C0DA9F9E2542B6CC00951250 /* MZEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZEmptyView.h; sourceTree = "<group>"; };
-		C0DA9F9F2542B6CC00951250 /* MZUserTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZUserTipView.h; sourceTree = "<group>"; };
 		C0DA9FA02542B6CC00951250 /* MZBeautyFaceOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBeautyFaceOptionView.h; sourceTree = "<group>"; };
 		C0DA9FA12542B6CC00951250 /* MZLiveManagerHearderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLiveManagerHearderView.m; sourceTree = "<group>"; };
-		C0DA9FA22542B6CC00951250 /* MZWatchHeaderMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZWatchHeaderMessageView.h; sourceTree = "<group>"; };
 		C0DA9FA32542B6CC00951250 /* MZLiveSelectBiteRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLiveSelectBiteRateView.h; sourceTree = "<group>"; };
 		C0DA9FA42542B6CC00951250 /* MZPresentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZPresentView.h; sourceTree = "<group>"; };
 		C0DA9FA52542B6CC00951250 /* MZSessionPresetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSessionPresetView.h; sourceTree = "<group>"; };
-		C0DA9FA62542B6CC00951250 /* MZUserTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZUserTipView.m; sourceTree = "<group>"; };
 		C0DA9FA72542B6CC00951250 /* MZEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZEmptyView.m; sourceTree = "<group>"; };
 		C0DA9FA92542B6CC00951250 /* MZLiveFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLiveFinishViewController.m; sourceTree = "<group>"; };
 		C0DA9FAA2542B6CC00951250 /* MZLiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLiveViewController.h; sourceTree = "<group>"; };
 		C0DA9FAB2542B6CC00951250 /* MZLiveFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLiveFinishViewController.h; sourceTree = "<group>"; };
 		C0DA9FAC2542B6CC00951250 /* MZLiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZLiveViewController.m; sourceTree = "<group>"; };
 		C0DA9FAE2542B6CC00951250 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
-		C0DA9FAF2542B6CC00951250 /* MZReadyLiveCellBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZReadyLiveCellBtn.h; sourceTree = "<group>"; };
 		C0DA9FB02542B6CC00951250 /* MZConditionListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZConditionListView.m; sourceTree = "<group>"; };
-		C0DA9FB12542B6CC00951250 /* MZReadyLiveHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZReadyLiveHeaderView.m; sourceTree = "<group>"; };
 		C0DA9FB22542B6CC00951250 /* MZImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZImagePickerViewController.h; sourceTree = "<group>"; };
 		C0DA9FB32542B6CC00951250 /* MZReadyLiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZReadyLiveViewController.m; sourceTree = "<group>"; };
 		C0DA9FB42542B6CC00951250 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
 		C0DA9FB52542B6CC00951250 /* MZImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZImagePickerViewController.m; sourceTree = "<group>"; };
-		C0DA9FB62542B6CC00951250 /* MZReadyLiveHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZReadyLiveHeaderView.h; sourceTree = "<group>"; };
 		C0DA9FB72542B6CC00951250 /* MZConditionListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZConditionListView.h; sourceTree = "<group>"; };
-		C0DA9FB82542B6CC00951250 /* MZReadyLiveCellBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZReadyLiveCellBtn.m; sourceTree = "<group>"; };
 		C0DA9FB92542B6CC00951250 /* MZReadyLiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZReadyLiveViewController.h; sourceTree = "<group>"; };
 		C0DA9FBC2542B6CC00951250 /* MZAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAlertController.m; sourceTree = "<group>"; };
 		C0DA9FBD2542B6CC00951250 /* MZAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAlertController.h; sourceTree = "<group>"; };
@@ -423,6 +495,99 @@
 			path = MZPlayKitSDK;
 			sourceTree = "<group>";
 		};
+		C0B973582689A200001DF70A /* MZRedPackage(红包) */ = {
+			isa = PBXGroup;
+			children = (
+				C0B9735E2689A200001DF70A /* Cell */,
+				C0B973622689A200001DF70A /* Model */,
+				C0B973612689A200001DF70A /* MZRedPackageRecordViewController.h */,
+				C0B973592689A200001DF70A /* MZRedPackageRecordViewController.m */,
+				C0B9735A2689A200001DF70A /* MZRedPackageViewController.h */,
+				C0B973722689A200001DF70A /* MZRedPackageViewController.m */,
+				C0B9735B2689A200001DF70A /* Presenter */,
+				C0B9736F2689A200001DF70A /* View */,
+			);
+			path = "MZRedPackage(红包)";
+			sourceTree = "<group>";
+		};
+		C0B9735B2689A200001DF70A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				C0B9735C2689A200001DF70A /* MZRedPackagePresenter.h */,
+				C0B9735D2689A200001DF70A /* MZRedPackagePresenter.m */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		C0B9735E2689A200001DF70A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C0B973602689A200001DF70A /* MZRedRecodeTableViewCell.h */,
+				C0B9735F2689A200001DF70A /* MZRedRecodeTableViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		C0B973622689A200001DF70A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0B9736E2689A200001DF70A /* MZRebBagRecordModel.h */,
+				C0B973672689A200001DF70A /* MZRebBagRecordModel.m */,
+				C0B973652689A200001DF70A /* MZReceiveRedBagModel.h */,
+				C0B9736C2689A200001DF70A /* MZReceiveRedBagModel.m */,
+				C0B973632689A200001DF70A /* MZRedBagMessageModel.h */,
+				C0B9736A2689A200001DF70A /* MZRedBagMessageModel.m */,
+				C0B9736D2689A200001DF70A /* MZRedBagReceiverListModel.h */,
+				C0B973682689A200001DF70A /* MZRedBagReceiverListModel.m */,
+				C0B973662689A200001DF70A /* MZRedBagSenderModel.h */,
+				C0B9736B2689A200001DF70A /* MZRedBagSenderModel.m */,
+				C0B973642689A200001DF70A /* MZRedBagUserReceiveModel.h */,
+				C0B973692689A200001DF70A /* MZRedBagUserReceiveModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C0B9736F2689A200001DF70A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C0B973702689A200001DF70A /* MZRedPackageAlert.h */,
+				C0B973712689A200001DF70A /* MZRedPackageAlert.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C0B9737E2689A260001DF70A /* MZSendRedEnvelopes(发红包页面) */ = {
+			isa = PBXGroup;
+			children = (
+				C0B9737F2689A260001DF70A /* MZSendRedEnvelopesViewController.h */,
+				C0B973802689A260001DF70A /* layout */,
+				C0B973852689A260001DF70A /* MZSendRedEnvelopesViewController.m */,
+			);
+			path = "MZSendRedEnvelopes(发红包页面)";
+			sourceTree = "<group>";
+		};
+		C0B973802689A260001DF70A /* layout */ = {
+			isa = PBXGroup;
+			children = (
+				C0B973812689A260001DF70A /* MZSendRedEnvelopesLayout.h */,
+				C0B973822689A260001DF70A /* MZSegmentedView.h */,
+				C0B973832689A260001DF70A /* MZSendRedEnvelopesLayout.m */,
+				C0B973842689A260001DF70A /* MZSegmentedView.m */,
+			);
+			path = layout;
+			sourceTree = "<group>";
+		};
+		C0B9739E2689A4BF001DF70A /* MZWatchHeaderMessageViiew */ = {
+			isa = PBXGroup;
+			children = (
+				C0B973A02689A4BF001DF70A /* MZUserTipView.h */,
+				C0B973A22689A4BF001DF70A /* MZUserTipView.m */,
+				C0B973A12689A4BF001DF70A /* MZWatchHeaderMessageView.h */,
+				C0B9739F2689A4BF001DF70A /* MZWatchHeaderMessageView.m */,
+			);
+			path = MZWatchHeaderMessageViiew;
+			sourceTree = "<group>";
+		};
 		C0DA9F402542B6CC00951250 /* layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -461,6 +626,7 @@
 		C0DA9F472542B6CC00951250 /* Modular(播放器公用的模块) */ = {
 			isa = PBXGroup;
 			children = (
+				C0B9737E2689A260001DF70A /* MZSendRedEnvelopes(发红包页面) */,
 				C0DA9F482542B6CC00951250 /* MZBagButton(购物包按钮) */,
 				C0DA9F542542B6CC00951250 /* MZMultiMenu(多菜单展示的view) */,
 				C0DA9F512542B6CC00951250 /* MZPlayManagerHeaderView(主播View) */,
@@ -583,10 +749,6 @@
 				C0DA9F9C2542B6CC00951250 /* MZPresentView.m */,
 				C0DA9FA52542B6CC00951250 /* MZSessionPresetView.h */,
 				C0DA9F9A2542B6CC00951250 /* MZSessionPresetView.m */,
-				C0DA9F9F2542B6CC00951250 /* MZUserTipView.h */,
-				C0DA9FA62542B6CC00951250 /* MZUserTipView.m */,
-				C0DA9FA22542B6CC00951250 /* MZWatchHeaderMessageView.h */,
-				C0DA9F9D2542B6CC00951250 /* MZWatchHeaderMessageView.m */,
 				C0DA9F6B2542B6CC00951250 /* tools */,
 			);
 			path = layout;
@@ -697,14 +859,24 @@
 				C0DA9FB02542B6CC00951250 /* MZConditionListView.m */,
 				C0DA9FB22542B6CC00951250 /* MZImagePickerViewController.h */,
 				C0DA9FB52542B6CC00951250 /* MZImagePickerViewController.m */,
-				C0DA9FAF2542B6CC00951250 /* MZReadyLiveCellBtn.h */,
-				C0DA9FB82542B6CC00951250 /* MZReadyLiveCellBtn.m */,
-				C0DA9FB62542B6CC00951250 /* MZReadyLiveHeaderView.h */,
-				C0DA9FB12542B6CC00951250 /* MZReadyLiveHeaderView.m */,
 				C0DA9FB92542B6CC00951250 /* MZReadyLiveViewController.h */,
 				C0DA9FB32542B6CC00951250 /* MZReadyLiveViewController.m */,
 				C0DA9FB42542B6CC00951250 /* VPImageCropperViewController.h */,
 				C0DA9FAE2542B6CC00951250 /* VPImageCropperViewController.m */,
+				C0B9738C2689A2E5001DF70A /* MZC_WaterFlowLayout.h */,
+				C0B973892689A2E5001DF70A /* MZC_WaterFlowLayout.m */,
+				C0B973912689A2E6001DF70A /* MZCreateFCodeViewController.h */,
+				C0B9738E2689A2E5001DF70A /* MZCreateFCodeViewController.m */,
+				C0B9738B2689A2E5001DF70A /* MZCreateWhiteUserViewController.h */,
+				C0B973922689A2E6001DF70A /* MZCreateWhiteUserViewController.m */,
+				C0B9738F2689A2E5001DF70A /* MZCreateWhiteViewController.h */,
+				C0B973942689A2E6001DF70A /* MZCreateWhiteViewController.m */,
+				C0B973952689A2E6001DF70A /* MZCurrentLive.h */,
+				C0B973902689A2E6001DF70A /* MZCurrentLive.m */,
+				C0B9738A2689A2E5001DF70A /* MZEditWhiteUserViewController.h */,
+				C0B973932689A2E6001DF70A /* MZEditWhiteUserViewController.m */,
+				C0B9738D2689A2E5001DF70A /* MZFCodeInfoViewController.h */,
+				C0B973962689A2E6001DF70A /* MZFCodeInfoViewController.m */,
 			);
 			path = MZReadyLiveVC;
 			sourceTree = "<group>";
@@ -765,6 +937,8 @@
 		C0DA9FCF2542B6CC00951250 /* Module(业务模块) */ = {
 			isa = PBXGroup;
 			children = (
+				C0B9739E2689A4BF001DF70A /* MZWatchHeaderMessageViiew */,
+				C0B973582689A200001DF70A /* MZRedPackage(红包) */,
 				C0DAA0072542B6CC00951250 /* MZAudienceHeaderView(右上角在线观众) */,
 				C0DAA0362542B6CC00951250 /* MZAudienceView(在线观众列表) */,
 				C0DA9FE32542B6CC00951250 /* MZChatView(聊天相关) */,
@@ -871,6 +1045,8 @@
 		C0DA9FEC2542B6CC00951250 /* ChatOldCell */ = {
 			isa = PBXGroup;
 			children = (
+				C0B973532689A1CA001DF70A /* MZBonusCell.h */,
+				C0B973522689A1CA001DF70A /* MZBonusCell.m */,
 				C0DA9FF02542B6CC00951250 /* MZChatGiftCell.h */,
 				C0DA9FEE2542B6CC00951250 /* MZChatGiftCell.m */,
 				C0DA9FEF2542B6CC00951250 /* MZChatTableViewCell.h */,
@@ -891,6 +1067,8 @@
 		C0DA9FF62542B6CC00951250 /* ChatNewCell */ = {
 			isa = PBXGroup;
 			children = (
+				C0B973562689A1D2001DF70A /* MZBonusNewCell.h */,
+				C0B973552689A1D2001DF70A /* MZBonusNewCell.m */,
 				C0DA9FF72542B6CC00951250 /* MZChatGiftNewCell.h */,
 				C0DA9FF92542B6CC00951250 /* MZChatGiftNewCell.m */,
 				C0DA9FF82542B6CC00951250 /* MZChatNewCell.h */,
@@ -1058,10 +1236,16 @@
 		C0DAA0362542B6CC00951250 /* MZAudienceView(在线观众列表) */ = {
 			isa = PBXGroup;
 			children = (
+				C0B9734B2689A194001DF70A /* MZAudienceCell.h */,
+				C0B9734E2689A194001DF70A /* MZAudienceCell.m */,
 				C0DAA0382542B6CC00951250 /* MZAudiencePresenter.h */,
 				C0DAA03A2542B6CC00951250 /* MZAudiencePresenter.m */,
 				C0DAA0372542B6CC00951250 /* MZAudienceView.h */,
 				C0DAA0392542B6CC00951250 /* MZAudienceView.m */,
+				C0B9734C2689A194001DF70A /* MZBlockManagerView.h */,
+				C0B9734D2689A194001DF70A /* MZBlockManagerView.m */,
+				C0B9734A2689A194001DF70A /* MZKickoutManagerView.h */,
+				C0B973492689A194001DF70A /* MZKickoutManagerView.m */,
 			);
 			path = "MZAudienceView(在线观众列表)";
 			sourceTree = "<group>";
@@ -1247,10 +1431,13 @@
 				C0DAA0812542B6CD00951250 /* MZDownLoadProgressView.m in Sources */,
 				C0DAA04C2542B6CC00951250 /* MZCameraViewController.m in Sources */,
 				C0DAA0882542B6CD00951250 /* MZVoteTextCell.m in Sources */,
+				C0B973542689A1CA001DF70A /* MZBonusCell.m in Sources */,
+				C0B9739B2689A2E6001DF70A /* MZEditWhiteUserViewController.m in Sources */,
 				C0DAA06B2542B6CD00951250 /* MZBeautyFaceOptionView.m in Sources */,
 				C0DAA08B2542B6CD00951250 /* MZTopLeftLabel.m in Sources */,
 				C0DAA0AC2542B6CD00951250 /* MZTipGoodsView.m in Sources */,
 				C0DAA0A02542B6CD00951250 /* MZDiscussView.m in Sources */,
+				C0B973502689A194001DF70A /* MZBlockManagerView.m in Sources */,
 				C0DAA0962542B6CD00951250 /* MZBottomTalkBtn.m in Sources */,
 				C0DAA0782542B6CD00951250 /* MZReadyLiveViewController.m in Sources */,
 				C0DAA04D2542B6CC00951250 /* MZCameraHelperView.m in Sources */,
@@ -1261,6 +1448,7 @@
 				C0DAA09E2542B6CD00951250 /* MZDiscussPresenter.m in Sources */,
 				C0DAA0492542B6CC00951250 /* MZVerticalPlayerViewController.m in Sources */,
 				C0DAA0A42542B6CD00951250 /* MZGoodsListTabCell.m in Sources */,
+				C0B973772689A200001DF70A /* MZRedBagReceiverListModel.m in Sources */,
 				C0DAA03F2542B6CC00951250 /* MZBaseNavigationController.m in Sources */,
 				C0DAA0682542B6CD00951250 /* VHPullingRefreshTableView.m in Sources */,
 				C0DAA0472542B6CC00951250 /* MZActivityMenu.m in Sources */,
@@ -1269,19 +1457,29 @@
 				C0DAA0862542B6CD00951250 /* MZVoteHeaderView.m in Sources */,
 				C04B9CB524F048E500881A6E /* MZInputViewController.m in Sources */,
 				C0DAA08D2542B6CD00951250 /* MZOnlineTipView.m in Sources */,
-				C0DAA07A2542B6CD00951250 /* MZReadyLiveCellBtn.m in Sources */,
+				C0B973782689A200001DF70A /* MZRedBagUserReceiveModel.m in Sources */,
 				C0DAA06A2542B6CD00951250 /* MZLiveAlertView.m in Sources */,
 				C0DAA09B2542B6CD00951250 /* MZDiscussCell.m in Sources */,
 				C04B9B8424F0484D00881A6E /* ViewController.m in Sources */,
+				C0B9734F2689A194001DF70A /* MZKickoutManagerView.m in Sources */,
+				C0B973572689A1D2001DF70A /* MZBonusNewCell.m in Sources */,
+				C0B973972689A2E6001DF70A /* MZC_WaterFlowLayout.m in Sources */,
+				C0B9737A2689A200001DF70A /* MZRedBagSenderModel.m in Sources */,
+				C0B973742689A200001DF70A /* MZRedPackagePresenter.m in Sources */,
 				C0DAA06D2542B6CD00951250 /* MZLiveSelectBiteRateView.m in Sources */,
+				C0B973872689A260001DF70A /* MZSegmentedView.m in Sources */,
+				C0B973762689A200001DF70A /* MZRebBagRecordModel.m in Sources */,
+				C0B973982689A2E6001DF70A /* MZCreateFCodeViewController.m in Sources */,
 				C0DAA08E2542B6CD00951250 /* MZChatView.m in Sources */,
 				C04B9CB624F048E500881A6E /* PlayerViewController.m in Sources */,
 				C0DAA0832542B6CD00951250 /* MZDownLoadCell.m in Sources */,
 				C0DAA0972542B6CD00951250 /* MZFaceKeyboard.m in Sources */,
 				C0DAA0A52542B6CD00951250 /* NSString+SafePrice.m in Sources */,
 				C0DAA0922542B6CD00951250 /* MZChatBaseCell.m in Sources */,
+				C0B973882689A260001DF70A /* MZSendRedEnvelopesViewController.m in Sources */,
 				C0DAA0912542B6CD00951250 /* MZChatGiftCell.m in Sources */,
 				C0DAA0AA2542B6CD00951250 /* MZAudienceView.m in Sources */,
+				C0B973792689A200001DF70A /* MZRedBagMessageModel.m in Sources */,
 				C0DAA0952542B6CD00951250 /* MZMessageToolView.m in Sources */,
 				C0DAA09D2542B6CD00951250 /* MZDiscussInputView.m in Sources */,
 				C0DAA0A82542B6CD00951250 /* MZGiftView.m in Sources */,
@@ -1294,8 +1492,11 @@
 				C0DAA04B2542B6CC00951250 /* MZVerticalPlayerView+UI.m in Sources */,
 				C0DAA0762542B6CD00951250 /* MZConditionListView.m in Sources */,
 				C0DAA0A92542B6CD00951250 /* MZGiftModel.m in Sources */,
+				C0B9739D2689A2E6001DF70A /* MZFCodeInfoViewController.m in Sources */,
+				C0B9737D2689A200001DF70A /* MZRedPackageViewController.m in Sources */,
 				C0DAA0792542B6CD00951250 /* MZImagePickerViewController.m in Sources */,
 				C0DAA0432542B6CC00951250 /* MZPlayManagerHeaderView.m in Sources */,
+				C0B973732689A200001DF70A /* MZRedPackageRecordViewController.m in Sources */,
 				C0DAA0452542B6CC00951250 /* MZSuperPlayerView+UI.m in Sources */,
 				C0DAA0742542B6CD00951250 /* MZLiveViewController.m in Sources */,
 				C0DAA0982542B6CD00951250 /* MZHistoryChatView.m in Sources */,
@@ -1304,30 +1505,37 @@
 				C0DAA0892542B6CD00951250 /* MZVoteImageCell.m in Sources */,
 				C0DAA08F2542B6CD00951250 /* MZFacialView.m in Sources */,
 				C0DAA0822542B6CD00951250 /* MZM3U8DownLoadViewController.m in Sources */,
+				C0B973A32689A4BF001DF70A /* MZWatchHeaderMessageView.m in Sources */,
 				C0DAA04E2542B6CC00951250 /* MZChannelAlertView.m in Sources */,
 				C0DAA0942542B6CD00951250 /* MZChatNewCell.m in Sources */,
 				C0DAA0412542B6CC00951250 /* MZPraiseButton.m in Sources */,
 				C0DAA06C2542B6CD00951250 /* MZSessionPresetView.m in Sources */,
 				C0DAA0872542B6CD00951250 /* MZVoteBaseCell.m in Sources */,
+				C0B973862689A260001DF70A /* MZSendRedEnvelopesLayout.m in Sources */,
 				C0DAA09F2542B6CD00951250 /* MZDiscussModel.m in Sources */,
 				C0DAA0902542B6CD00951250 /* MZChatTableViewCell.m in Sources */,
 				C0DAA0662542B6CC00951250 /* YiRefreshFooter.m in Sources */,
 				C0DAA0992542B6CD00951250 /* MZCustomTapRecognizer.m in Sources */,
 				C0DAA0482542B6CC00951250 /* MZSuperPlayerView.m in Sources */,
 				C0DAA07B2542B6CD00951250 /* MZAlertController.m in Sources */,
+				C0B9739A2689A2E6001DF70A /* MZCreateWhiteUserViewController.m in Sources */,
+				C0B9737B2689A200001DF70A /* MZReceiveRedBagModel.m in Sources */,
 				C0DAA0A62542B6CD00951250 /* MZGiftCell.m in Sources */,
-				C0DAA0712542B6CD00951250 /* MZUserTipView.m in Sources */,
 				C04B9B7E24F0484D00881A6E /* AppDelegate.m in Sources */,
 				C0DAA0A72542B6CD00951250 /* MZGiftPresenter.m in Sources */,
+				C0B9737C2689A200001DF70A /* MZRedPackageAlert.m in Sources */,
 				C0DAA0462542B6CC00951250 /* MZSuperPlayerViewController.m in Sources */,
 				C0DAA0702542B6CD00951250 /* MZLiveManagerHearderView.m in Sources */,
-				C0DAA0772542B6CD00951250 /* MZReadyLiveHeaderView.m in Sources */,
+				C0B9739C2689A2E6001DF70A /* MZCreateWhiteViewController.m in Sources */,
+				C0B973992689A2E6001DF70A /* MZCurrentLive.m in Sources */,
 				C0DAA09A2542B6CD00951250 /* MZLiveAudienceHeaderView.m in Sources */,
-				C0DAA06F2542B6CD00951250 /* MZWatchHeaderMessageView.m in Sources */,
+				C0B973512689A194001DF70A /* MZAudienceCell.m in Sources */,
+				C0B973752689A200001DF70A /* MZRedRecodeTableViewCell.m in Sources */,
 				C0DAA0692542B6CD00951250 /* RefreshAnimationView.m in Sources */,
 				C0DAA08C2542B6CD00951250 /* MZMyButton.m in Sources */,
 				C0DAA0852542B6CD00951250 /* MZTopMenuView.m in Sources */,
 				C0DAA0672542B6CC00951250 /* YiRefreshHeader.m in Sources */,
+				C0B973A42689A4BF001DF70A /* MZUserTipView.m in Sources */,
 				C0DAA0752542B6CD00951250 /* VPImageCropperViewController.m in Sources */,
 				C0DAA0A12542B6CD00951250 /* UIView+MZPlayPermission.m in Sources */,
 				C04B9B8F24F0484F00881A6E /* main.m in Sources */,

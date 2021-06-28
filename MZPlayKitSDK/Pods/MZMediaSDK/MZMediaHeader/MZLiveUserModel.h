@@ -15,7 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,strong)NSString *uid;
 @property (nonatomic ,strong)NSString *nickname;
 @property (nonatomic ,strong)NSString *avatar;
-@property (nonatomic ,assign)BOOL is_banned;
+@property (nonatomic ,assign)BOOL is_banned;//是否被禁言
+@property (nonatomic ,assign)BOOL is_kickOut;//是否被踢出
+
 @property (nonatomic ,strong)NSString *lives;//直播数
 @property (nonatomic ,strong)NSString *attentions;// 关注数
 @property (nonatomic ,strong)NSString *likes;// 点赞数

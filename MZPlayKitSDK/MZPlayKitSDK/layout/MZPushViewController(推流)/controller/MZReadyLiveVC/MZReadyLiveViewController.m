@@ -13,6 +13,8 @@
 #import "MZSDKConfig.h"
 #import "MZConditionListView.h"
 
+#import "MZCurrentLive.h"
+
 typedef enum : int {
     MZWatchMode_Free = 1,
     MZWatchMode_WhiteList = 5,
@@ -63,6 +65,7 @@ typedef enum : int {
 @implementation MZReadyLiveViewController
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"推流配置界面释放");
 }
 
@@ -71,6 +74,8 @@ typedef enum : int {
     self.view.backgroundColor = [UIColor blackColor];
     self.navigationItem.title = @"推流";
     self.model = [[MZChannelManagerModel alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mzDeleteWhite:) name:@"mz_delete_white" object:nil];
     
     [self setupUI];
 }
@@ -492,6 +497,26 @@ typedef enum : int {
     }
 }
 
+/// 删除白名单的通知
+- (void)mzDeleteWhite:(NSNotification *)noti {
+    int delete_white_id = [[noti object] intValue];
+    if (self.selectWhiteListIds == delete_white_id) {
+        self.watchOfFreeButton.layer.borderColor = [UIColor colorWithRed:255/255.0 green:31/255.0 blue:96/255.0 alpha:1].CGColor;
+        self.watchOfFreeButton.layer.borderWidth = 1.0;
+        self.watchOfWhiteListButton.layer.borderColor = [UIColor clearColor].CGColor;
+        self.watchOfWhiteListButton.layer.borderWidth = 0;
+        self.watchOfFCodeButton.layer.borderColor = [UIColor clearColor].CGColor;
+        self.watchOfFCodeButton.layer.borderWidth = 0;
+        self.watchOfFreeButton.selected = YES;
+        self.watchOfWhiteListButton.selected = NO;
+        self.watchOfFCodeButton.selected = NO;
+        
+        self.selectWatchMode = MZWatchMode_Free;
+        self.selectWhiteListIds = 0;
+        self.selectFCodeId = 0;
+    }
+}
+
 /// 展示分类列表
 - (void)showCategoryList {
     NSLog(@"展示分类列表");
@@ -524,7 +549,7 @@ typedef enum : int {
     }
     
     if (user.avatar.length <= 0) {
-        user.avatar = @"https://cdn.duitang.com/uploads/item/201410/26/20141026191422_yEKyd.thumb.700_0.jpeg";
+        user.avatar = @"http://s1.t.zmengzhu.com/upload/img/c0/63/c0638527f2fd32e1b086bae5ec61c8bf.png";
     }
     
     if (user.nickName.length <= 0) {
@@ -565,18 +590,34 @@ typedef enum : int {
 
             // 获取当前频道有没有正在直播的活动
             [MZSDKBusinessManager getLiveInfoOfChannel:MZSDK_ChannelId success:^(id responseData) {
-                MZCurrentLiveInfo *live = [MZCurrentLiveInfo mj_objectWithKeyValues:responseData];
-                live.is_multipath = NO;
+                MZCurrentLive *live = [MZCurrentLive mj_objectWithKeyValues:responseData];
+                // 这一行是强制测试的，后期需要删除掉
+//                live.is_multipath = NO;
                 if (live.is_multipath || live.is_live == NO) {
                     // 该频道支持多路推流，或者当前没有没有正在直播的活动，直接创建新活动，开始直播
+                    [MZSDKSimpleHud show];
                     [weakSelf createNewLiveActivity];
                     return;
                 }
                 
                 // 获取到正在直播的活动信息
-                if (live.live_info.ticket_id.length && live.live_info.live_tk.length) {
-                    [MZAlertController showWithTitle:@"提示" message:@"发现当前频道有正在直播的活动，如果开始新的直播，旧的直播将自动关闭" cancelTitle:@"继续直播" sureTitle:@"新的直播" preferredStyle:UIAlertControllerStyleAlert handle:^(MZResultCode code) {
-                        if (code == MZResultCodeSure) {//开始新的直播
+                // 设置横屏直播还是竖屏直播
+                if (live.live_info.live_style == 0) {
+                    weakSelf.currentPusherButton = weakSelf.pusherLandspaceButton;
+                } else {
+                    weakSelf.currentPusherButton = weakSelf.pusherPortraitButton;
+                }
+                if (live.live_info.status == 3) {//断流中
+                    if (live.live_info.ticket_id.length && live.live_info.live_tk.length) {//取消，继续，关闭
+                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"发现当前频道有正在直播的活动，如果开始新的直播，旧的直播将关闭" preferredStyle:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? UIAlertControllerStyleAlert : UIAlertControllerStyleActionSheet];
+                        [alertController addAction:[UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            [MZSDKSimpleHud show];
+                            weakSelf.live_tkString = live.live_info.live_tk;
+                            weakSelf.ticket_idString = live.live_info.ticket_id;
+                            [weakSelf getLiveData];
+                        }]];
+                        [alertController addAction:[UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            [MZSDKSimpleHud show];
                             [MZSDKBusinessManager stopLive:MZSDK_ChannelId ticketId:live.live_info.ticket_id success:^(MZLiveFinishModel *model) {//结束旧活动成功
                                 // 创建新的活动
                                 [weakSelf createNewLiveActivity];
@@ -584,15 +625,34 @@ typedef enum : int {
                                 // 创建新的活动
                                 [weakSelf createNewLiveActivity];
                             }];
-                        } else {//继续正在直播的活动
-                            weakSelf.live_tkString = live.live_info.live_tk;
-                            weakSelf.ticket_idString = live.live_info.ticket_id;
-                            [weakSelf getLiveData];
-                        }
-                    }];
-                    return;
+                        }]];
+                        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                            [weakSelf.navigationController popViewControllerAnimated:YES];
+                        }]];
+                        
+                        [weakSelf presentViewController:alertController animated:YES completion:nil];
+                        return;
+                    }
+                } else if (live.live_info.status == 1) {//直播中
+                    if (live.live_info.ticket_id.length && live.live_info.live_tk.length) {
+                        [MZAlertController showWithTitle:@"提示" message:@"发现当前频道有正在直播的活动，如果开始新的直播，旧的直播将关闭" cancelTitle:@"取消" sureTitle:@"关闭" preferredStyle:UIAlertControllerStyleAlert handle:^(MZResultCode code) {
+                            if (code == MZResultCodeSure) {//关闭旧的直播，并且开始新的直播
+                                [MZSDKSimpleHud show];
+                                [MZSDKBusinessManager stopLive:MZSDK_ChannelId ticketId:live.live_info.ticket_id success:^(MZLiveFinishModel *model) {//结束旧活动成功
+                                    // 创建新的活动
+                                    [weakSelf createNewLiveActivity];
+                                } failure:^(NSError *error) {//结束旧活动失败
+                                    // 创建新的活动
+                                    [weakSelf createNewLiveActivity];
+                                }];
+                            } else {//取消
+                                [weakSelf.navigationController popViewControllerAnimated:YES];
+                            }
+                        }];
+                        return;
+                    }
                 }
-                
+
                 // 没有获取到正在直播的活动详细信息，直接去创建新的活动
                 [weakSelf createNewLiveActivity];
                 
@@ -607,7 +667,6 @@ typedef enum : int {
 }
 
 - (void)createNewLiveActivity {
-    [MZSDKSimpleHud show];
     
     // 直播封面地址（测试数据）
     NSString *live_coverURLString = @"http://s1.t.zmengzhu.com/upload/img/6e/77/6e77552721067fbc87ee0b00664556d1.png";

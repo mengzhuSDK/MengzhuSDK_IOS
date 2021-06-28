@@ -57,11 +57,94 @@
 + (void)getFCodeListSuccess:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
 
 /**
+ * 创建F码分组
+ * @param name F码分组名称
+ * @param desc F码分组描述
+ * @param num F码分组里的个数
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)createFCodeWithName:(NSString *)name desc:(NSString *)desc num:(int)num success:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * 删除F码分组
+ * @param FCode_id F码分组ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)deleteFCodeWithFCode_id:(NSString *)FCode_id success:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * 添加F码
+ * @param FCode_id F码分组ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)addFCodeWithFCode_id:(NSString *)FCode_id num:(int)num success:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * F码未使用列表
+ * @param FCode_id F码分组ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)getUnUseFCodeListWithFCode_id:(NSString *)FCode_id offset : (NSInteger)offset limit :(NSInteger)limit success:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
  * 获取白名单列表
  * @param success 成功回调
  * @param failure 失败原因回调
  */
 + (void)getWhiteListSuccess:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * 创建白名单分组
+ * @param name 白名单分组名称
+ * @param desc 白名单分组描述
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)createWhiteWithName:(NSString *)name desc:(NSString *)desc success:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * 白名单分组批量添加用户
+ * @param whiteId 白名单分组ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)batchfAddUserWhiteWithWhiteId:(NSString *)whiteId phones:(NSString *)phones success:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * 删除白名单分组
+ * @param whiteId 白名单分组ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)deleteWhiteWithWhiteId:(NSString *)whiteId success:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * 删除白名单分组里的某个用户
+ * @param whiteId 白名单分组ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)deleteWhiteUserWithWhiteId:(NSString *)whiteId phone:(NSString *)phone success:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * 清空白名单分组里的所有用户
+ * @param whiteId 白名单分组ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)clearWhiteUserWithWhiteId:(NSString *)whiteId success:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+
+/**
+ * 查询白名单用户列表
+ * @param whiteId 白名单分组ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++ (void)getWhiteUserListWithWhiteId:(NSString *)whiteId offset : (NSInteger)offset limit :(NSInteger)limit success:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
 
 /**
  * 获取主播信息
@@ -198,6 +281,48 @@
  * @param failure 失败原因回调
  */
 +(void)bannedOrUnBannedUserWithTicketId:(NSString *)ticketId uid:(NSString *)uid isBanned:(BOOL)isBanned success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 获取禁言列表
+ *
+ * @param ticketId 活动ID
+ * @param channelId 频道ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getBlockUserListWithTicketId:(NSString *)ticketId channelId:(NSString *)channelId offset:(NSInteger)offset limit:(NSInteger)limit success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 查询用户禁言状态
+ *
+ * @param ticketId 活动ID
+ * @param uid 需要查选的用户ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getUserBlockStateWithTicketId:(NSString *)ticketId uid:(NSString *)uid success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 获取踢出列表
+ *
+ * @param ticketId 活动ID
+ * @param channelId 频道ID
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)getKickoutUserListWithTicketId:(NSString *)ticketId channelId:(NSString *)channelId offset:(NSInteger)offset limit:(NSInteger)limit success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+
+/**
+ * 踢出单个用户
+ *
+ * @param ticketId 直播活动ID
+ * @param channelId 频道ID
+ * @param uid 用户ID
+ * @param isKickout 是否踢出用户 e.g YES=踢出，NO=解除踢出
+ * @param success 成功回调
+ * @param failure 失败原因回调
+ */
++(void)kickoutUserWithTicketId:(NSString *)ticketId channelId:(NSString *)channelId uid:(NSString *)uid isKickout:(BOOL)isKickout success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 
 /**
  * 聊天室里是否可以聊天
@@ -382,6 +507,51 @@
  * @param avatar 用户头像地址
  */
 + (void)updateUserInfoWithUnique_id:(NSString *)unique_id nickname:(NSString *)nickname avatar:(NSString *)avatar success:(void(^)(id responseObject))success failure:(void (^)(NSError *error))failure;
+
+/**
+ * 创建红包
+ *
+ * @param unique_id 用户唯一ID
+ * @param pay_method 支付方式
+ * @param amount 红包金额
+ * @param quantity 红包个数
+ * @param mode 红包方式 1-随机 2-固定
+ * @param ticket_id 活动ID
+ * @param channel_id 频道ID
+ * @param slogan 红包留言
+ *
+ */
++ (void)createRedPackageWithUnique_id:(NSString *)unique_id pay_method:(NSString *)pay_method amount:(NSString *)amount quantity:(NSString *)quantity mode:(int)mode ticket_id:(NSString *)ticket_id channel_id:(NSString *)channel_id slogan:(NSString *)slogan success:(void(^)(id responseObject))success failure:(void (^)(NSError *error))failure;
+
+/**
+ * 红包领取记录
+ *
+ * @param unique_id 用户唯一ID
+ * @param bonus_id 红包ID
+ * @param offset 偏移
+ * @param limit 个数
+ *
+ */
++ (void)getBonusDrawListWithUnique_id:(NSString *)unique_id bonus_id:(NSString *)bonus_id offset:(NSInteger)offset limit:(NSInteger)limit success:(void(^)(id responseObject))success failure:(void (^)(NSError *error))failure;
+
+/**
+ * 查询红包状态
+ *
+ * @param unique_id 用户唯一ID
+ * @param bonus_id 红包ID
+ *
+ */
++ (void)getCheckBonusWithUnique_id:(NSString *)unique_id bonus_id:(NSString *)bonus_id success:(void(^)(id responseObject))success failure:(void (^)(NSError *error))failure;
+
+/**
+ * 领取红包
+ *
+ * @param unique_id 用户唯一ID
+ * @param bonus_id 红包ID
+ *
+ */
++ (void)obtainBonusWithUnique_id:(NSString *)unique_id bonus_id:(NSString *)bonus_id success:(void(^)(id responseObject))success failure:(void (^)(NSError *error))failure;
+
 @end
 
 

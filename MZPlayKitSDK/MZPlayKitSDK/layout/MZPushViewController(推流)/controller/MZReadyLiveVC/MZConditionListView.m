@@ -8,6 +8,11 @@
 
 #import "MZConditionListView.h"
 
+#import "MZCreateWhiteViewController.h"
+#import "MZCreateFCodeViewController.h"
+#import "MZEditWhiteUserViewController.h"
+#import "MZFCodeInfoViewController.h"
+
 /**
  * @brief 选择选项的label
  */
@@ -140,6 +145,78 @@ typedef void (^MZReadyButtonTapBlock)(UIButton *sender);
 @end
 
 /**
+ * 白名单配置选择的cell
+ */
+
+@interface MZConditionWhiteCell : UITableViewCell
+@property (nonatomic, assign) BOOL isSelected;
+@property (nonatomic, strong) UIButton *selectedButton;
+@property (nonatomic, strong) UIButton *menuButton;
+@property (nonatomic, strong) UILabel *tLabel;
+@end
+
+@implementation MZConditionWhiteCell
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        self.contentView.backgroundColor = [UIColor clearColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        self.isSelected = NO;
+        
+        self.selectedButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.selectedButton.userInteractionEnabled = NO;
+        self.selectedButton.selected = NO;
+        [self.selectedButton setImage:[UIImage imageNamed:@"sssss_sele_no"] forState:UIControlStateNormal];
+        [self.selectedButton setImage:[UIImage imageNamed:@"sssss_sele_yes"] forState:UIControlStateSelected];
+        [self.contentView addSubview:self.selectedButton];
+        [self.selectedButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView).offset(17);
+            make.left.equalTo(self.contentView).offset(30);
+            make.width.equalTo(@(20));
+            make.height.equalTo(@(20));
+        }];
+        
+        self.menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.menuButton setTitle:@"···" forState:UIControlStateNormal];
+        [self.menuButton setTitleColor:MakeColor(255, 31, 96, 0.8) forState:UIControlStateNormal];
+        [self.menuButton.titleLabel setFont:[UIFont boldSystemFontOfSize:27]];
+        [self.contentView addSubview:self.menuButton];
+        [self.menuButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.equalTo(self.contentView);
+            make.right.equalTo(self.contentView).offset(-28);
+            make.width.equalTo(@(30));
+        }];
+        
+        self.tLabel = [[UILabel alloc] init];
+        self.tLabel.backgroundColor = [UIColor clearColor];
+        self.tLabel.textColor = MakeColor(43, 43, 43, 1);
+        self.tLabel.font = [UIFont systemFontOfSize:14];
+        [self.contentView addSubview:self.tLabel];
+        [self.tLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.equalTo(self.contentView);
+            make.left.equalTo(self.selectedButton.mas_right).offset(10);
+            make.right.equalTo(self.menuButton.mas_left);
+        }];
+
+    }
+    return self;
+}
+
+- (void)update:(NSDictionary *)info {
+    NSString *name = [NSString stringWithFormat:@"%@",info[@"name"]];
+    self.tLabel.text = name;
+}
+
+@end
+
+/**
  * 展示的列表View
  */
 typedef void(^SelectResultBlock)(BOOL isCancelled, MZReadyConditionListType conditionType, int sId, NSString *sString);
@@ -149,9 +226,13 @@ typedef void(^SelectResultBlock)(BOOL isCancelled, MZReadyConditionListType cond
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIView *createView;
+@property (nonatomic, strong) UIButton *aNewButton;
 @property (nonatomic, assign) int selectId;//当前选中的id
 @property (nonatomic,   copy) NSString *selectString;//当前选中的字符串
-@property (nonatomic, assign) NSInteger selectIndex;//当前选中的数据源索引
+
+@property (nonatomic, assign) NSDictionary *selectInfo;//编辑的某个白名单
+@property (nonatomic, strong) UIView *menuView;//编辑的某个白名单的菜单
 @end
 
 @implementation MZConditionListView
@@ -160,8 +241,8 @@ typedef void(^SelectResultBlock)(BOOL isCancelled, MZReadyConditionListType cond
 - (void)showList:(SelectResultBlock)result type:(MZReadyConditionListType)type{
     self.type = type;
     self.result = result;
-    self.selectIndex = -1;
     self.selectString = @"";
+    self.selectId = -1;
     
     [self addSubview:self.headerView];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -189,20 +270,53 @@ typedef void(^SelectResultBlock)(BOOL isCancelled, MZReadyConditionListType cond
         make.left.right.bottom.equalTo(self.headerView);
         make.height.equalTo(@0.5);
     }];
-    
-    [self addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self);
-        make.top.equalTo(self.headerView.mas_bottom);
-        
-        CGFloat bottom = 0;
-        if (@available(iOS 11.0, *)) {
-            if ([[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0) {
-                bottom = 34.0;
+
+    if (self.type == MZReadyConditionListType_White || self.type == MZReadyConditionListType_FCode) {
+        [self addSubview:self.createView];
+        [self.createView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self);
+            make.bottom.equalTo(self);
+            make.height.equalTo(@(80));
+            
+            CGFloat bottom = 0;
+            if (@available(iOS 11.0, *)) {
+                if ([[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0) {
+                    bottom = 34.0;
+                }
             }
-        }
-        make.bottom.equalTo(self).offset(-bottom);
-    }];
+            make.bottom.equalTo(self).offset(-bottom);
+        }];
+        [self addSubview:self.tableView];
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self);
+            make.top.equalTo(self.headerView.mas_bottom);
+            make.bottom.equalTo(self.createView.mas_top);
+        }];
+        
+        [_aNewButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.createView).offset(46);
+            make.right.equalTo(self.createView).offset(-46);
+            make.top.equalTo(self.createView).offset(20);
+            make.bottom.equalTo(self.createView).offset(-20);
+        }];
+    } else {
+        [self addSubview:self.tableView];
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self);
+            make.top.equalTo(self.headerView.mas_bottom);
+            CGFloat bottom = 0;
+            if (@available(iOS 11.0, *)) {
+                if ([[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0) {
+                    bottom = 34.0;
+                }
+            }
+            make.bottom.equalTo(self).offset(-bottom);
+        }];
+    }
+    
+    if (self.type == MZReadyConditionListType_White) {
+        [self.tableView.superview addSubview:self.menuView];
+    }
     
     switch (self.type) {
         case MZReadyConditionListType_Categroy:
@@ -278,6 +392,103 @@ typedef void(^SelectResultBlock)(BOOL isCancelled, MZReadyConditionListType cond
     }
 }
 
+/// 点击创建按钮
+- (void)toCreateNew:(UIButton *)sender {
+    WeaklySelf(weakSelf);
+    switch (self.type) {
+        case MZReadyConditionListType_FCode: {
+            [self animationAlplaOff];
+            MZCreateFCodeViewController *createFCodeVC = [[MZCreateFCodeViewController alloc] initWithIsCreated:^(BOOL isCreated) {
+                [weakSelf animationAlplaOn];
+                if (isCreated) {
+                    [weakSelf showFCodeList];
+                }
+            }];
+            [[self getCurrentVC].navigationController pushViewController:createFCodeVC animated:YES];
+            break;
+        }
+        case MZReadyConditionListType_White: {
+            if (self.menuView.isHidden == NO) {
+                self.menuView.hidden = YES;
+            }
+            [self animationAlplaOff];
+            MZCreateWhiteViewController *createWhiteVC = [[MZCreateWhiteViewController alloc] initWithIsCreated:^(BOOL isCreated) {
+                [weakSelf animationAlplaOn];
+                if (isCreated) {
+                    [weakSelf showWhiteList];
+                }
+            }];
+            [[self getCurrentVC].navigationController pushViewController:createWhiteVC animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+/// 点击白名单的cell上的菜单按钮
+- (void)menuButtonClick:(UIButton *)sender {
+    if (self.type != MZReadyConditionListType_White) return;
+    NSDictionary *info = self.dataArray[sender.tag];
+    self.selectInfo = info;
+    
+    CGRect rect = [sender convertRect:sender.bounds toView:self.tableView.superview];
+    
+    CGFloat bottom = 0;
+    if (@available(iOS 11.0, *)) {
+        if ([[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0) {
+            bottom = 34.0;
+        }
+    }
+    
+    CGFloat y = rect.origin.y + 50;
+    if (y + self.menuView.frame.size.height >= (self.tableView.superview.frame.size.height - bottom - 80)) {
+        y = rect.origin.y - 70;
+    }
+    
+    self.menuView.frame = CGRectMake(self.frame.size.width - 153, y, self.menuView.frame.size.width, self.menuView.frame.size.height);
+    self.menuView.hidden = NO;
+}
+
+/// 点击白名单的编辑菜单
+- (void)editMenuClick:(UIButton *)sender {
+    self.menuView.hidden = YES;
+    
+    if (sender.tag == 1) {
+        [self animationAlplaOff];
+        WeaklySelf(weakSelf);
+        MZEditWhiteUserViewController *editWhiteUserVC = [[MZEditWhiteUserViewController alloc] initWithInfo:self.selectInfo result:^{
+            [weakSelf animationAlplaOn];
+        }];
+        [[self getCurrentVC].navigationController pushViewController:editWhiteUserVC animated:YES];
+    } else if (sender.tag == 2) {
+        [MZSDKBusinessManager deleteWhiteWithWhiteId:[NSString stringWithFormat:@"%@",self.selectInfo[@"id"]] success:^(id response) {
+            int sId = [self.selectInfo[@"id"] intValue];
+            if (sId == self.selectId) {
+                self.selectId = -1;
+                self.selectString = @"";
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"mz_delete_white" object:@(sId)];
+            [self showWhiteList];
+            
+        } failure:^(NSError *error) {
+            [self show:error.domain];
+        }];
+    }
+}
+
+- (void)animationAlplaOff {
+    [UIView animateWithDuration:0.33 animations:^{
+        self.superview.alpha = 0;
+    }];
+}
+
+- (void)animationAlplaOn {
+    [UIView animateWithDuration:0.33 animations:^{
+        self.superview.alpha = 1;
+    }];
+}
+
 #pragma mark - UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -292,25 +503,55 @@ typedef void(^SelectResultBlock)(BOOL isCancelled, MZReadyConditionListType cond
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MZConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MZConditionCell"];
     NSDictionary *info = self.dataArray[indexPath.row];
-    [cell update:info];
-    if (self.selectIndex == indexPath.row) {
-        cell.conditionLabel.isSelect = YES;
+    int sId = [[NSString stringWithFormat:@"%@",info[@"id"]] intValue];
+    if (self.type == MZReadyConditionListType_White) {
+        MZConditionWhiteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MZConditionWhiteCell"];
+        [cell update:info];
+        if (self.selectId == sId) {
+            cell.isSelected = YES;
+            cell.selectedButton.selected = YES;
+        } else {
+            cell.isSelected = NO;
+            cell.selectedButton.selected = NO;
+        }
+        cell.menuButton.tag = indexPath.row;
+        [cell.menuButton addTarget:self action:@selector(menuButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
     } else {
-        cell.conditionLabel.isSelect = NO;
+        MZConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MZConditionCell"];
+        [cell update:info];
+        if (self.selectId == sId) {
+            cell.conditionLabel.isSelect = YES;
+        } else {
+            cell.conditionLabel.isSelect = NO;
+        }
+        return cell;
     }
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (self.menuView.isHidden == NO) {
+        self.menuView.hidden = YES;
+        return;
+    }
+    
     NSDictionary *info = self.dataArray[indexPath.row];
     int sId = [[NSString stringWithFormat:@"%@",info[@"id"]] intValue];
-    self.selectIndex = indexPath.row;
     self.selectId = sId;
     self.selectString =  [NSString stringWithFormat:@"%@",info[@"name"]];
     [tableView reloadData];
+    
+    if (self.type == MZReadyConditionListType_FCode) {//点击了某个F码
+        WeaklySelf(weakSelf);
+        [self animationAlplaOff];
+        MZFCodeInfoViewController *fCodeInfoVC = [[MZFCodeInfoViewController alloc] initWithFCodeInfo:info result:^{
+            [weakSelf animationAlplaOn];
+        }];
+        [[self getCurrentVC].navigationController pushViewController:fCodeInfoVC animated:YES];
+    }
 }
 
 #pragma mark - 懒加载
@@ -331,6 +572,7 @@ typedef void(^SelectResultBlock)(BOOL isCancelled, MZReadyConditionListType cond
         _tableView.estimatedSectionFooterHeight = 0;
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         [_tableView registerClass:[MZConditionCell class] forCellReuseIdentifier:@"MZConditionCell"];
+        [_tableView registerClass:[MZConditionWhiteCell class] forCellReuseIdentifier:@"MZConditionWhiteCell"];
         [_tableView setSeparatorInset:UIEdgeInsetsZero];
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -346,6 +588,19 @@ typedef void(^SelectResultBlock)(BOOL isCancelled, MZReadyConditionListType cond
     return _headerView;
 }
 
+- (UIView *)createView {
+    if (!_createView) {
+        _createView = [[UIView alloc] init];
+        _createView.backgroundColor = [UIColor whiteColor];
+        
+        _aNewButton = [MZCreatUI buttonWithTitle:@"创建" titleColor:[UIColor whiteColor] font:14 target:self sel:@selector(toCreateNew:)];
+        _aNewButton.backgroundColor = MakeColor(255, 31, 96, 0.8);
+        [_aNewButton.layer setCornerRadius:20];
+        [_createView addSubview:_aNewButton];
+    }
+    return _createView;
+}
+
 - (UIButton *)createButton:(NSString *)title {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:title forState:UIControlStateNormal];
@@ -354,6 +609,41 @@ typedef void(^SelectResultBlock)(BOOL isCancelled, MZReadyConditionListType cond
     [button setBackgroundColor:[UIColor clearColor]];
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     return button;
+}
+
+- (UIView *)menuView {
+    if (!_menuView) {
+        _menuView = [[UIView alloc] initWithFrame:CGRectMake(-1000, -1000, 140, 80)];
+        _menuView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+        [_menuView.layer setCornerRadius:8];
+        _menuView.hidden = YES;
+        
+        UIButton *editButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        editButton.frame = CGRectMake(0, 0, 140, 40);
+        editButton.tag = 1;
+        [editButton addTarget:self action:@selector(editMenuClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_menuView addSubview:editButton];
+        
+        UILabel *leftLabel = [MZCreatUI labelWithText:@"编辑" font:14 textAlignment:NSTextAlignmentLeft textColor:[UIColor whiteColor]];
+        leftLabel.frame = CGRectMake(23, 0, 110, 40);
+        [editButton addSubview:leftLabel];
+        
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 39, _menuView.frame.size.width, 1)];
+        line.backgroundColor = MakeColor(255, 255, 255, 0.2);
+        [_menuView addSubview:line];
+        
+        UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        deleteButton.frame = CGRectMake(0, 40, 140, 40);
+        deleteButton.tag = 2;
+        [deleteButton addTarget:self action:@selector(editMenuClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_menuView addSubview:deleteButton];
+        
+        UILabel *rightLabel = [MZCreatUI labelWithText:@"删除" font:14 textAlignment:NSTextAlignmentLeft textColor:[UIColor whiteColor]];
+        rightLabel.frame = CGRectMake(23, 0, 110, 40);
+        [deleteButton addSubview:rightLabel];
+
+    }
+    return _menuView;
 }
 
 #pragma mark - 工厂方法
@@ -371,7 +661,7 @@ typedef void(^HideSDKScreenViewBlock)(void);
         [screenView addSubview:listView];
         [listView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(screenView);
-            make.height.equalTo(@(344));
+            make.height.equalTo(@(424));
         }];
         
         [listView layoutIfNeeded];

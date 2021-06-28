@@ -23,6 +23,9 @@
 #import "MZGiftView.h"
 
 #import "MZVoteView.h"
+#import "MZWatchHeaderMessageView.h"
+#import "MZUserTipView.h"
+#import "MZRedPackageViewController.h"
 
 #define kViewFramePath      @"frame"
 
@@ -65,6 +68,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
 @property (nonatomic, strong) UIButton *giftButton;//礼物按钮
 @property (nonatomic, strong) MZGiftView *giftView;//礼物View
+
+@property (nonatomic, strong) UIButton *redPackageButton;//红包按钮
+@property (nonatomic, assign) BOOL isShowRedPackageButton;//是否显示红包按钮
 
 @property (nonatomic, strong) NSMutableArray *goodsListArr;//商品共用的数据源
 @property (nonatomic, strong) MZGoodsListView *goodsListView;//商品View
@@ -124,6 +130,8 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 @property (nonatomic ,strong) UIButton *prizeButton;//抽奖按钮
 @property (nonatomic ,strong) MZFuctionWebView *prizeFuctionWebView;//抽奖View
 
+@property (nonatomic, strong) MZUserTipView *tipView;
+
 @end
 
 @implementation MZVerticalPlayerView
@@ -163,6 +171,8 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         self.isShowGiftView = YES;//默认展示礼物按钮
         self.isShowPraiseView = YES;//默认展示点赞按钮
         
+        self.isShowRedPackageButton = YES;//本地默认展示抽奖
+
         [self customAddSubviews];
         [self addObserver:self forKeyPath:kViewFramePath options:NSKeyValueObservingOptionNew context:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterForeground:) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -225,6 +235,18 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             [self.giftButton removeFromSuperview];
         }
     }
+    
+    // 处理是否显示红包按钮
+    if (self.isShowRedPackageButton) {
+        if (![self.stackContainerView.subviews containsObject:self.redPackageButton]) {
+            [self.stackContainerView insertArrangedSubview:self.redPackageButton atIndex:2];
+        }
+    } else {
+        if ([self.stackContainerView.subviews containsObject:self.redPackageButton]) {
+            [self.stackContainerView removeArrangedSubview:self.redPackageButton];
+            [self.redPackageButton removeFromSuperview];
+        }
+    }
 }
 
 - (void)customAddSubviews {
@@ -277,7 +299,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     if (IPHONE_X) {
         bottomSpace+=34;
     }
-    UIStackView *stackContainerView = [[UIStackView alloc] initWithFrame:CGRectMake(191 * MZ_RATE, MZTotalScreenHeight-(44+bottomSpace)*MZ_RATE, 178*MZ_RATE, 44 *MZ_RATE)];
+    UIStackView *stackContainerView = [[UIStackView alloc] initWithFrame:CGRectMake(171 * MZ_RATE, MZTotalScreenHeight-(36+bottomSpace)*MZ_RATE, 198*MZ_RATE, 36 *MZ_RATE)];
     self.stackContainerView = stackContainerView;
     
     stackContainerView.axis = UILayoutConstraintAxisHorizontal;
@@ -286,7 +308,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     stackContainerView.distribution = UIStackViewDistributionFillEqually;
     [self addSubview:stackContainerView];
     
-    CGRect commonRect = CGRectMake(0, 0, 44 *MZ_RATE, 44*MZ_RATE);
+    CGRect commonRect = CGRectMake(0, 0, 36 *MZ_RATE, 36*MZ_RATE);
     
     UIButton *xinshouButton = [[UIButton alloc] initWithFrame:commonRect];
     [xinshouButton setImage:ImageName(@"bottomButton_jubao") forState:UIControlStateNormal];
@@ -302,6 +324,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     
     [stackContainerView addArrangedSubview:self.giftButton];
     self.giftButton.frame = commonRect;
+    
+    [stackContainerView addArrangedSubview:self.redPackageButton];
+    self.redPackageButton.frame = commonRect;
     
     UIButton *shareButton = [[UIButton alloc] initWithFrame:commonRect];
     [shareButton setImage:ImageName(@"bottomButton_share") forState:UIControlStateNormal];
@@ -323,7 +348,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     self.goodsNumLabel.hidden=YES;
     [shoppingBagButton addSubview:self.goodsNumLabel];
     
-    self.bottomTalkBtn = [[MZBottomTalkBtn alloc]initWithFrame:CGRectMake(shoppingBagButton.right + 14*MZ_RATE, shoppingBagButton.top, 120*MZ_RATE, 44*MZ_RATE)];
+    self.bottomTalkBtn = [[MZBottomTalkBtn alloc]initWithFrame:CGRectMake(shoppingBagButton.right + 5*MZ_RATE, shoppingBagButton.top, 90*MZ_RATE, 44*MZ_RATE)];
     [self addSubview:self.bottomTalkBtn];
     self.bottomTalkBtn.bottomClickBlock = ^{
         if(weakSelf.bottomTalkBtn.isBanned){
@@ -349,6 +374,15 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
 
 
 #pragma mark - 本类方法
+// 红包按钮点击
+- (void)redPackageButtonDidClick:(UIButton *)sender {
+    MZRedPackageViewController *redPackageVC = [[MZRedPackageViewController alloc] init];
+    redPackageVC.modalPresentationStyle = UIModalPresentationFullScreen;
+    redPackageVC.ticket_id = self.playInfo.ticket_id;
+    redPackageVC.channel_id = self.playInfo.channel_id;
+    [[self getCurrentVC] presentViewController:redPackageVC animated:YES completion:nil];
+}
+
 // 礼物按钮点击
 - (void)giftButtonDidClick:(UIButton *)sender {
     [self.giftView show];
@@ -583,7 +617,7 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     }
     
     WeaklySelf(weakSelf);
-    MZAudienceView *audienceView = [[MZAudienceView alloc] initWithFrame:self.bounds ticket_id:self.playInfo.ticket_id chat_idOfMe:self.playInfo.chat_uid selectUserHandle:^(MZOnlineUserListModel *userModel) {
+    MZAudienceView *audienceView = [[MZAudienceView alloc] initWithFrame:self.bounds ticket_id:self.playInfo.ticket_id channel_id:self.playInfo.channel_id chat_idOfMe:self.playInfo.chat_uid isLiveHost:NO selectUserHandle:^(MZOnlineUserListModel *userModel) {
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(onlineUserInfoDidClick:)]) {
             [weakSelf.delegate onlineUserInfoDidClick:userModel];
         }
@@ -756,6 +790,98 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatUserHeaderDidClick:)]) {
         [self.delegate chatUserHeaderDidClick:msgModel];
     }
+    // 这里不让展示用户头像信息，因为观看者没有权限
+    return;
+    
+    [MZSDKSimpleHud hide];
+    [MZSDKBusinessManager getUserBlockStateWithTicketId:self.ticket_id uid:msgModel.userId success:^(id response) {
+        [MZSDKSimpleHud hide];
+        int state = [[NSString stringWithFormat:@"%@",response[@"state"]] intValue];
+        
+        MZLiveUserModel *model = [[MZLiveUserModel alloc] init];
+        model.uid = msgModel.userId;
+        model.nickname = msgModel.userName;
+        model.avatar = msgModel.userAvatar;
+        model.is_kickOut = NO;//固定设置未踢出
+        model.is_banned = state == 1 ? NO : YES;
+        
+        [self tipUserMessageViewWithUserModel:model];
+
+    } failure:^(NSError *error) {
+        [MZSDKSimpleHud hide];
+        [self show:error.domain];
+    }];
+}
+
+// 红包点击
+- (void)redPackageClick:(MZLongPollDataModel *)msgModel {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(redPackageClick:)]) {
+        [self.delegate redPackageClick:msgModel];
+    }
+}
+
+-(void)tipUserMessageViewWithUserModel:(MZLiveUserModel *)user
+{
+    WeaklySelf(weakSelf);
+    MZWatchHeaderMessageView *headerMessageView = [[MZWatchHeaderMessageView alloc]initWithFrame:CGRectMake(0, 0, self.width, self.height)];
+    headerMessageView.isMySelf = NO;
+    if ([user.uid isEqualToString:self.playInfo.chat_uid]) {
+        headerMessageView.isMySelf = YES;
+        [self show:@"点击了自己头像"];
+        return;
+    }
+    
+    headerMessageView.otherUserInfoModel = user;
+    [headerMessageView showWithView:self action:^(HeadViewActionType actionType) {
+        if(actionType == HeadViewActionTypeBlock || actionType == HeadViewActionTypeKick){
+            weakSelf.tipView = [[MZUserTipView alloc]initWithFrame:CGRectMake(0, 0, weakSelf.width, weakSelf.height)];
+            weakSelf.tipView.isKickOut = actionType == HeadViewActionTypeKick ? YES : NO;
+            weakSelf.tipView.otherUser = user;
+            __weak typeof(weakSelf.tipView)weakTipView = weakSelf.tipView;
+            weakSelf.tipView.userTipBlock = ^(MZUserTipType type) {
+                if(type == MZUserTipTypeCancel){
+                    [weakTipView removeFromSuperview];
+                }else if(type == MZUserTipTypeBanned){
+                    [weakSelf banedOrUnBannedUserWithModel:user isBanned:YES];
+                }else if(type == MZUserTipTypeUnBanned){
+                    [weakSelf banedOrUnBannedUserWithModel:user isBanned:NO];
+                }else if(type == MZUserTipTypeKickOut){
+                    [weakSelf kickOutOrUnKickOutUserWithModel:user isKickOut:YES];
+                }else if(type == MZUserTipTypeUnKickOut){
+                    [weakSelf kickOutOrUnKickOutUserWithModel:user isKickOut:NO];
+                }
+            };
+            [weakSelf addSubview:self.tipView];
+        }
+    }];
+}
+
+/// 踢出请求 - 这里后续改成踢出接口
+-(void)kickOutOrUnKickOutUserWithModel:(MZLiveUserModel *)user isKickOut:(BOOL)isKickOut
+{
+    [MZSDKSimpleHud show];
+    [MZSDKBusinessManager kickoutUserWithTicketId:self.playInfo.ticket_id channelId:self.playInfo.channel_id uid:user.uid isKickout:isKickOut success:^(id response) {
+        [MZSDKSimpleHud hide];
+        [self show:isKickOut ? @"踢出成功":@"解除踢出成功"];
+        [self.tipView removeFromSuperview];
+    } failure:^(NSError *error) {
+        [MZSDKSimpleHud hide];
+        [self show:error.domain];
+    }];
+}
+
+/// 禁言请求
+-(void)banedOrUnBannedUserWithModel:(MZLiveUserModel *)user isBanned:(BOOL)isBanned
+{
+    [MZSDKSimpleHud show];
+    [MZSDKBusinessManager bannedOrUnBannedUserWithTicketId:self.playInfo.ticket_id uid:user.uid isBanned:isBanned success:^(id response) {
+        [MZSDKSimpleHud hide];
+        [self show:isBanned ? @"禁言成功":@"解禁成功"];
+        [self.tipView removeFromSuperview];
+    } failure:^(NSError *error) {
+        [MZSDKSimpleHud hide];
+        [self show:error.domain];
+    }];
 }
 
 /// 展示键盘
@@ -869,6 +995,11 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     
     //            @property (nonatomic, assign) int user_status;// 用户状态 1:正常 2:被踢出 3:禁言
     self.bottomTalkBtn.isBanned = self.playInfo.user_status == 1 ? NO : YES;
+    if (self.playInfo.user_status == 2) {//被踢出
+        [[UIApplication sharedApplication].keyWindow show:@"您已被踢出"];
+        [[self getCurrentVC].navigationController popViewControllerAnimated:YES];
+        return;
+    }
     if (self.playInfo.user_status == 1) {//正常
         [self show:@"状态：正常"];
     } else if (self.playInfo.user_status == 2) {//被踢出
@@ -952,9 +1083,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         NSArray *tools = data[@"tools"];
         if (tools.count) {//这个数组里是活动的所有配置开关项，这里我们就只摘出来 点赞开关/礼物开关/倍速开关 的配置
             //是否显示点赞按钮配置/是否显示礼物按钮配置/是否显示倍速按钮配置
-            NSString *open_like = @"open_like"; NSString *pay_gift = @"pay_gift"; NSString *times_speed = @"times_speed";
+            NSString *open_like = @"open_like"; NSString *pay_gift = @"pay_gift"; NSString *times_speed = @"times_speed"; NSString *bonus = @"bonus";
             
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tools == %@ or tools == %@ or tools == %@",open_like,pay_gift,times_speed];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tools == %@ or tools == %@ or tools == %@ or tools == %@",open_like,pay_gift,times_speed,bonus];
             NSArray *predicateArray = [tools filteredArrayUsingPredicate:predicate];
             for (NSDictionary *dict in predicateArray) {
                 if ([[dict objectForKey:@"tools"] isEqualToString:open_like]) {
@@ -963,6 +1094,8 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
                     self.isShowGiftView = [[dict objectForKey:@"is_open"] boolValue];
                 } else if ([[dict objectForKey:@"tools"] isEqualToString:times_speed]) {
                     self.isShowTimesSpeedView = [[dict objectForKey:@"is_open"] boolValue];
+                } else if ([[dict objectForKey:@"tools"] isEqualToString:bonus]) {
+                    self.isShowRedPackageButton = [[dict objectForKey:@"is_open"] boolValue];
                 }
             }
             [self setNeedsLayout];
@@ -1328,11 +1461,18 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     NSLog(@"用户id为%@的用户被踢出",msg.data.tickOutUserID);
     if ([self.playInfo.chat_uid isEqualToString:msg.data.tickOutUserID]) {
         self.bottomTalkBtn.isBanned = YES;
-        [self show:@"您已被踢出"];
+        [[UIApplication sharedApplication].keyWindow show:@"您已被踢出"];
+        [[self getCurrentVC].navigationController popViewControllerAnimated:YES];
     }
     if (_delegate && [_delegate respondsToSelector:@selector(newMsgForKickoutOneUser:)]) {
         [_delegate newMsgForKickoutOneUser:msg];
     }
+}
+
+/// 红包系统，收到一条红包创建消息
+-(void)activityGetCreateNewRedPackage:(MZLongPollDataModel *)msg {
+    NSLog(@"收到一条红包消息：%@ - %@ - %@ - %@ - %@ - %@",msg.data.slogan, msg.data.amount, msg.data.nickname, msg.data.unique_id, msg.data.bonus_id, msg.data.buyerAvatar);
+    [_chatView addChatData:msg];
 }
 
 /// 直播时收到一条新消息
@@ -1437,13 +1577,15 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             } else {
                 [_chatView addChatData:msg];
                 if (self.isShowBarrage && self.isCanBarrage) {
-                    [MZBarrageManager sendBarrageWithMessage:msg.data.msgText userName:msg.userName avatar:msg.userAvatar isMe:NO result:^(BOOL isSuccess, NSError * _Nonnull error) {
-                        if (isSuccess) {
-                            NSLog(@"弹幕发送成功");
-                        } else {
-                            NSLog(@"弹幕发送失败， error = %@",error.localizedDescription);
-                        }
-                    }];
+                    if (self.chatToolBar.isOnlyHostMessage == NO || [self.chatView.chatApiManager.filterUserIds containsObject:msg.userId] || [self.chatView.chatApiManager.filterUserIds containsObject:msg.data.uniqueID]) {
+                        [MZBarrageManager sendBarrageWithMessage:msg.data.msgText userName:msg.userName avatar:msg.userAvatar isMe:NO result:^(BOOL isSuccess, NSError * _Nonnull error) {
+                            if (isSuccess) {
+                                NSLog(@"弹幕发送成功");
+                            } else {
+                                NSLog(@"弹幕发送失败， error = %@",error.localizedDescription);
+                            }
+                        }];
+                    }
                 }
             }
             break;
@@ -1499,12 +1641,14 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         case MsgTypeDisableChat: {//禁言某一个用户
             if(self.playInfo.chat_uid.intValue  == msg.data.disableChatUserID.intValue){
                 self.bottomTalkBtn.isBanned = YES;
+                [self show:@"您已被禁言"];
             }
             break;
         }
         case MsgTypeAbleChat: {//解禁某一个用户的发言
             if(self.playInfo.chat_uid.intValue  == msg.data.ableChatUserID.intValue){
                 self.bottomTalkBtn.isBanned = NO;
+                [self show:@"您已解除禁言"];
             }
             break;
         }
@@ -1547,6 +1691,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
                     }
                     [self.playerView setPlayRateButtonIsHidden:!self.isShowTimesSpeedView];
 
+                } else if ([model.type isEqualToString:@"bonus"]){
+                    self.isShowRedPackageButton = model.is_open;
+                    [self setNeedsLayout];
                 } else {
                     NSLog(@"未解析的活动配置更改消息类型 = %@",model.type);
                 }
@@ -1562,10 +1709,6 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
             if ([msg.data.ticket_id isEqualToString:self.playInfo.ticket_id]) {
                 [self playVideoWithLiveIDString:msg.data.ticket_id];
             }
-            break;
-        }
-        case MsgTypeKickout: {//踢出用户
-            // "user_id": "1111", // 用户ID
             break;
         }
         case MsgTypeDocSwitchPageMsg: {
@@ -1659,6 +1802,15 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
         [self.delegate loadStateDidChange:type];
     }
 }
+- (void)connectToPlay {
+    if (self.playInfo.status == 2) {
+        [self.playerView.playerManager play];
+    } else if (self.playInfo.status == 1 || self.playInfo.status == 3) {
+        if (self.playInfo.video.url && self.playInfo.video.url.length) {
+            [self playerVideoWithURLString:self.playInfo.video.url];
+        }
+    }
+}
 /// 播放中状态回调
 - (void)moviePlayBackStateDidChange:(MZMPMoviePlaybackState)type {
     if (self.delegate && [self.delegate respondsToSelector:@selector(moviePlayBackStateDidChange:)]) {
@@ -1750,6 +1902,16 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     }
     return _giftButton;
 }
+
+- (UIButton *)redPackageButton {
+    if (!_redPackageButton) {
+        _redPackageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_redPackageButton setImage:ImageName(@"men_icon_red") forState:UIControlStateNormal];
+        [_redPackageButton addTarget:self action:@selector(redPackageButtonDidClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _redPackageButton;
+}
+
 
 - (MZMediaPlayerView *)playerView {
     if (!_playerView) {

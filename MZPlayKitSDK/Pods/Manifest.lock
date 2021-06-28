@@ -20,11 +20,11 @@ PODS:
   - MBProgressHUD (1.2.0)
   - MJExtension (3.2.2)
   - MJRefresh (3.6.1)
-  - MZChatSDK (2.6.7):
-    - MZCoreSDKLibrary (>= 2.6.0)
+  - MZChatSDK (2.7.1):
+    - MZCoreSDKLibrary (~> 2.7.0)
     - MZEmojiLabel (~> 1.1.4)
     - MZSocketIO
-  - MZCoreSDKLibrary (2.6.3):
+  - MZCoreSDKLibrary (2.7.0):
     - AFNetworking (>= 4.0.1)
     - EGOCache (~> 2.1.3)
     - GTMBase64 (~> 1.0.0)
@@ -38,8 +38,8 @@ PODS:
   - MZDownLoaderSDK (2.6.2)
   - MZEmojiLabel (1.1.7):
     - TTTAttributedLabel (~> 1.13.4)
-  - MZMediaSDK (2.6.5):
-    - MZCoreSDKLibrary (>= 2.6.0)
+  - MZMediaSDK (2.7.0):
+    - MZCoreSDKLibrary (>= 2.7.0)
   - MZPlayerSDK (2.6.1):
     - MZCoreSDKLibrary (>= 2.6.1)
     - MZEmojiLabel (~> 1.1.4)
@@ -58,10 +58,10 @@ PODS:
   - TTTAttributedLabel (1.13.4)
 
 DEPENDENCIES:
-  - MZChatSDK (= 2.6.7)
-  - MZCoreSDKLibrary (= 2.6.3)
+  - MZChatSDK (= 2.7.1)
+  - MZCoreSDKLibrary (= 2.7.0)
   - MZDownLoaderSDK (= 2.6.2)
-  - MZMediaSDK (= 2.6.5)
+  - MZMediaSDK (= 2.7.0)
   - MZPlayerSDK (= 2.6.1)
   - MZPushFlowSDK (= 2.6.1)
   - MZUploadVideoSDK (= 2.6.1)
@@ -97,11 +97,11 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJExtension: d9b9c74cbdeb724c1e9ecbb157b318276e62e876
   MJRefresh: d2c1970d1cf6e77fcfcdfe76c943dfab8dbfa5c1
-  MZChatSDK: 8153cbcf6c6ee64aef270a6aafd35308b9ef650e
-  MZCoreSDKLibrary: 40bfc376d06d33d38033c6894812cd532610a168
+  MZChatSDK: c485f8fa652897c4426f3f86dbc0a884a1de249e
+  MZCoreSDKLibrary: 5e64dbfa8039db18b05aef4a0fc42342cc89d20f
   MZDownLoaderSDK: ff574660f69f75957730292bf6c2f13f86ea4067
   MZEmojiLabel: da36d19421e619a1f703dacebd186b2357c7948f
-  MZMediaSDK: 46e33482bbf84af7ce8f26d39e08d6d6d13ade29
+  MZMediaSDK: 7d6e430e4d47982f0bd5ca5a0cb1ab671bd72a7d
   MZPlayerSDK: c0772effa0051ac16f475c5a92f0fd8176c56904
   MZPushFlowSDK: dd94d57ffc901306ca7c72afadb4be3a86a116df
   MZSocketIO: 5f4ecfeb603686699a28217fc82fe18bbdf3991c
@@ -111,6 +111,6 @@ SPEC CHECKSUMS:
   SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
-PODFILE CHECKSUM: 8eac1e6d4eb8d2765e153ebac96183390f9e783c
+PODFILE CHECKSUM: bd5ee0cbb01471637148f2c7c318ce9181683c68
 
 COCOAPODS: 1.10.0.rc.1

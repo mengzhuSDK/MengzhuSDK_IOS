@@ -73,6 +73,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)chatUserHeaderDidClick:(MZLongPollDataModel *)GoodsListModel;
 /**
+ * @brief 红包点击事件
+ */
+- (void)redPackageClick:(MZLongPollDataModel *)redPackageModel;
+/**
  * @brief 未登录回调
  */
 - (void)playerNotLogin;
@@ -188,6 +192,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 - (void)addActivityMenu:(NSString *)menu getMenuView:(void(^)(UIView * menuView))getMenuView;
+
+/// 横屏下点击某些按钮需要转换成竖屏的回调方法
+- (void)toPortraitResult:(void(^)(void))result;
 
 @end
 

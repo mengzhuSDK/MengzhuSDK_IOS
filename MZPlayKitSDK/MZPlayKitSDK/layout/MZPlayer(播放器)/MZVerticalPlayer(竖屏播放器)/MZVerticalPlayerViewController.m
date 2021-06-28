@@ -9,6 +9,8 @@
 #import "MZVerticalPlayerViewController.h"
 #import "MZVerticalPlayerView.h"
 #import "UIView+MZPlayPermission.h"
+#import "MZRedPackageRecordViewController.h"
+#import "MZRedPackageAlert.h"
 
 @interface MZVerticalPlayerViewController ()<MZVerticalPlayerViewProtocol>
 @property (nonatomic ,strong) MZVerticalPlayerView *verticalPlayerView;
@@ -132,7 +134,7 @@
 }
 
 - (void)onlineUserInfoDidClick:(id)onlineUserInfo {
-    [self sv_showMessage:@"点击一个在线用户"];
+//    [self sv_showMessage:@"点击一个在线用户"];
 }
 
 - (void)shoppingBagDidClick:(id)playInfo {
@@ -157,7 +159,20 @@
 
 - (void)chatUserHeaderDidClick:(MZLongPollDataModel *)GoodsListModel {
     NSLog(@"%s",__func__);
-    [self sv_showMessage:@"聊天点击"];
+//    [self sv_showMessage:@"聊天点击"];
+}
+
+- (void)redPackageClick:(MZLongPollDataModel *)redPackageModel {
+    NSLog(@"点击一条红包消息：%@ - %@ - %@ - %@ - %@ - %@",redPackageModel.data.slogan, redPackageModel.data.amount, redPackageModel.data.nickname, redPackageModel.data.unique_id, redPackageModel.data.bonus_id, redPackageModel.data.buyerAvatar);
+    
+    __weak typeof(self) weakSelf = self;
+    [MZRedPackageAlert showWithBonus_id:redPackageModel.data.bonus_id slogan:redPackageModel.data.slogan nickname:redPackageModel.data.nickname avatar:redPackageModel.data.buyerAvatar isGoReceiveList:^(BOOL isGoReceiveList) {
+        if (isGoReceiveList) {
+            MZRedPackageRecordViewController *redPackageRecordVC = [[MZRedPackageRecordViewController alloc] initWithBonus_id:redPackageModel.data.bonus_id];
+            redPackageRecordVC.modalPresentationStyle = UIModalPresentationFullScreen;
+            [weakSelf presentViewController:redPackageRecordVC animated:YES completion:nil];
+        }
+    }];
 }
 
 - (void)playerNotLogin {

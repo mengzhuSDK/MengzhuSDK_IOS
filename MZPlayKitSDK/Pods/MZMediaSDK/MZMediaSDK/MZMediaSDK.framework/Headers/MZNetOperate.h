@@ -65,7 +65,32 @@
 
 #define MZNet_UserInfo_Update          @"/user/updateUserInfo"//更新用户昵称和头像
 
+#define MZNET_createFCode              @"/fcode/create"//创建F码分组
+#define MZNET_deleteFCode              @"/fcode/del"//删除F码分组
+#define MZNET_AddFCode                 @"/fcode/add"//添加F码
+#define MZNET_UnUseFCode               @"/fcode/unuseList"//F码未使用列表
+
+#define MZNET_createWhite              @"/white/create"//创建白名单分组
+#define MZNET_deleteWhite              @"/white/del"//删除白名单分组
+#define MZNET_usersWhite               @"/white/users"//查询白名单用户列表
+#define MZNET_batchAddUser             @"/white/batch-add-user"//批量添加白名单
+#define MZNET_deleteUserWhite          @"/white/deluser"//删除白名单里的某个用户
+#define MZNET_clearUserWhite           @"/white/clear"//清空白名单里的所有用户
+
+#define MZNET_kickoutUser              @"/live/kick"//踢出用户
+#define MZNET_unKickoutUser            @"/live/restorekicked"//恢复踢出用户
+
+#define MZNET_kickedUserList           @"/live/kickedUsers"//踢出列表
+#define MZNET_silencedUserList         @"/live/silencedUsers"//禁言列表
+#define MZNET_getUserBlockState        @"/room/chat-state"//获取用户禁言状态
+
+#define MZNET_getCheckBonus            @"/bonus/check"//获取红包状态
+#define MZNET_getBonusDrawList         @"/bonus/drawList"//红包领取记录
+#define MZNET_createBonus              @"/bonus/create"//创建红包
+#define MZNET_obtainBonus              @"/bonus/obtain"//领取红包
+
 #endif
+
 //static BOOL isDebugs;
 //static NSString *mBusinessPrefix;
 //static NSString *mPrefix;
@@ -110,4 +135,6 @@
 +(NSString *)video_VideoAdvert;
 +(NSString *)video_RollAdvert;
 +(NSString *)updateUserInfo;
+
++(NSString *)generalURLString:(NSString *)URLString;
 @end

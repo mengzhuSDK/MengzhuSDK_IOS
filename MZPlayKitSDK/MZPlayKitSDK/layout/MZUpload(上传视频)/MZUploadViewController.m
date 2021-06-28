@@ -37,7 +37,7 @@
         user = [[MZUser alloc] init];
         user.uniqueID = @"user999";
         user.nickName = @"盟主user999";
-        user.avatar = @"https://cdn.duitang.com/uploads/item/201410/26/20141026191422_yEKyd.thumb.700_0.jpeg";
+        user.avatar = @"http://s1.t.zmengzhu.com/upload/img/c0/63/c0638527f2fd32e1b086bae5ec61c8bf.png";
 
         [MZBaseUserServer updateCurrentUser:user];
     }

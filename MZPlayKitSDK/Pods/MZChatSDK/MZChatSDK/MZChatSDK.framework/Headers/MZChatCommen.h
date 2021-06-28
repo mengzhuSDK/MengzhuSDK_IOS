@@ -116,6 +116,8 @@ typedef NS_ENUM(NSUInteger, MsgType) {
     MsgTypeUserMedalMsg,//集章推送
     MsgTypePlay,//点击开始播放或者自动开始播放（{tid:1001526, speed:1.25} 直播的speed恒为1）
     MsgTypeEnd,//点击暂停或者（视频/直播）结束 1001526
+    
+    MsgTypeSDKBonus,//SDK的红包创建消息
 };
 
 

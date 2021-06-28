@@ -12,6 +12,8 @@
 
 -(void)historyChatViewUserHeaderClick:(MZLongPollDataModel *)msgModel;
 
+-(void)redPackageClick:(MZLongPollDataModel *)msgModel;
+
 @end
 
 typedef enum : NSUInteger {
@@ -27,8 +29,11 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) MZMoviePlayerModel *activity;//播放器的详情model
 
 @property (nonatomic, assign) BOOL isHideChatHistory;//是否显示历史数据
+@property (nonatomic, assign) BOOL isLiveHost;//是否是主播直播端，默认为NO
 
 @property (nonatomic, strong) MZHostModel *hostModel;//主播信息
+
+@property (nonatomic, strong) MZChatApiManager *chatApiManager;//聊天API具柄
 
 - (instancetype)initWithFrame:(CGRect)frame cellType:(MZChatCellType)cellType;
 - (void)addChatData:(MZLongPollDataModel *)dataModel;

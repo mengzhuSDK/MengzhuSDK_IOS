@@ -16,5 +16,12 @@
 @property (nonatomic,strong)NSString * uid;
 @property (nonatomic,strong)NSString * avatar;
 @property (nonatomic ,copy) NSString *unique_id;//用户唯一id
+
+
+#pragma mark - 禁言列表和踢出列表使用
+@property (nonatomic,strong)NSString * nick_name;
+@property (nonatomic,strong)NSString * id;
+@property (nonatomic,assign)int is_kick;
+
 @end
 

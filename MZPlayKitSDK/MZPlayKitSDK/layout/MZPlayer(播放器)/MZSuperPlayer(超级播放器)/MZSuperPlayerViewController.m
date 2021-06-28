@@ -10,6 +10,10 @@
 #import "MZSuperPlayerView.h"
 #import "UIView+MZPlayPermission.h"
 
+#import "MZSendRedEnvelopesViewController.h"
+#import "MZRedPackageRecordViewController.h"
+#import "MZRedPackageAlert.h"
+
 @interface MZSuperPlayerViewController ()<MZSuperPlayerViewDelegate>
 @property (nonatomic, assign) BOOL isLandSpace;//横竖屏记录,默认竖屏
 @property (nonatomic, strong) MZSuperPlayerView *superPlayerView;
@@ -96,6 +100,9 @@
 */
 - (void)shareButtonDidClick:(id)playInfo {
     [self.view show:@"分享按钮点击"];
+    
+//    MZSendRedEnvelopesViewController *sendRedEnvelopesVC = [[MZSendRedEnvelopesViewController alloc] init];
+//    [self.navigationController pushViewController:sendRedEnvelopesVC animated:YES];
 }
 /**
  * @brief 点赞点击
@@ -113,7 +120,7 @@
  * @brief 某一个在线用户的信息点击
 */
 - (void)onlineUserInfoDidClick:(id)onlineUserInfo {
-    [self.view show:@"点击一个在线用户"];
+//    [self.view show:@"点击一个在线用户"];
 }
 /**
  * @brief 商品袋点击
@@ -137,7 +144,24 @@
  * @brief 聊天头像点击事件
  */
 - (void)chatUserHeaderDidClick:(MZLongPollDataModel *)GoodsListModel {
-    [self.view show:@"聊天用户头像点击"];
+//    [self.view show:@"聊天用户头像点击"];
+}
+/**
+ * @brief 红包点击
+ */
+- (void)redPackageClick:(MZLongPollDataModel *)redPackageModel {
+    NSLog(@"点击一条红包消息：%@ - %@ - %@ - %@ - %@ - %@",redPackageModel.data.slogan, redPackageModel.data.amount, redPackageModel.data.nickname, redPackageModel.data.unique_id, redPackageModel.data.bonus_id, redPackageModel.data.buyerAvatar);
+    
+    __weak typeof(self) weakSelf = self;
+    [MZRedPackageAlert showWithBonus_id:redPackageModel.data.bonus_id slogan:redPackageModel.data.slogan nickname:redPackageModel.data.nickname avatar:redPackageModel.data.buyerAvatar isGoReceiveList:^(BOOL isGoReceiveList) {
+        if (isGoReceiveList) {
+            [weakSelf.superPlayerView toPortraitResult:^{
+                MZRedPackageRecordViewController *redPackageRecordVC = [[MZRedPackageRecordViewController alloc] initWithBonus_id:redPackageModel.data.bonus_id];
+                redPackageRecordVC.modalPresentationStyle = UIModalPresentationFullScreen;
+                [weakSelf presentViewController:redPackageRecordVC animated:YES completion:nil];
+            }];
+        }
+    }];
 }
 /**
  * @brief 未登录回调

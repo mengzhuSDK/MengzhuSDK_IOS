@@ -13,10 +13,6 @@
 @interface MZAudienceView : MZBaseView
 
 @property (nonatomic, strong) UIView *bgView;//背景View
-@property (nonatomic, strong) UIView *dotView;//在线指示点
-@property (nonatomic, strong) UILabel *titleLabel;//标题
-@property (nonatomic, strong) UIButton *closeButton;//关闭按钮
-@property (nonatomic, strong) UIView *lineView;//线条
 
 @property (nonatomic, strong) UITableView *tableView;//tableView
 
@@ -25,13 +21,17 @@
  *
  * @param frame frame
  * @param ticket_id 活动凭证ID
+ * @param channel_id 频道ID
  * @param chat_idOfMe 我自己在聊天服务器里的ID
+ * @param isLiveHost 是否是主播直播端
  * @param selectUserHandle 选择了其中一个观众的回调
  * @param closeHandle 关闭界面的回调
  */
 - (instancetype)initWithFrame:(CGRect)frame
                     ticket_id:(NSString *)ticket_id
+                   channel_id:(NSString *)channel_id
                   chat_idOfMe:(NSString *)chat_idOfMe
+                   isLiveHost:(BOOL)isLiveHost
              selectUserHandle:(void(^)(MZOnlineUserListModel *userModel))selectUserHandle
                   closeHandle:(void(^)(void))closeHandle;
 

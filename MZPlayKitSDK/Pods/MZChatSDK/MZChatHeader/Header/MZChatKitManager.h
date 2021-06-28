@@ -37,6 +37,10 @@
  问答系统，我的问答收到一条新的回复
  */
 -(void)activityGetNewReplyMsg:(MZLongPollDataModel *)msg;
+/*!
+ 红包系统，收到一条红包创建消息
+ */
+-(void)activityGetCreateNewRedPackage:(MZLongPollDataModel *)msg;
 
 @end
 

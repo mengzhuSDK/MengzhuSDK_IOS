@@ -12,6 +12,8 @@
 #import "MZOnlineTipView.h"
 #import "MZChatGiftCell.h"
 #import "MZChatGiftNewCell.h"
+#import "MZBonusNewCell.h"
+#import "MZBonusCell.h"
 
 static double onlineButtonOffsetY = 5;
 
@@ -31,7 +33,6 @@ static double onlineButtonOffsetY = 5;
 
 @property (nonatomic, assign) BOOL isCoverAtChatView;
 
-@property (nonatomic, strong) MZChatApiManager *chatApiManager;//聊天API具柄
 
 @end
 
@@ -69,6 +70,7 @@ static double onlineButtonOffsetY = 5;
         self.autoresizesSubviews = YES;
         self.loadOldCount = 0;
         self.isTabInBottom = YES;
+        self.isLiveHost = NO;
         
         self.endSpace = MZ_RATE;
         if (UIScreen.mainScreen.bounds.size.width > UIScreen.mainScreen.bounds.size.height) {
@@ -228,7 +230,8 @@ static double onlineButtonOffsetY = 5;
                 [weakSelf.chatApiManager addMessage:dataModel success:^(NSMutableArray<MZLongPollDataModel *> * _Nonnull showMessages) {
                     weakSelf.dataArray = showMessages;
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf.chatTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+                        [weakSelf.chatTable reloadData];
+//                        [weakSelf.chatTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.dataArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
                     });
                 }];
             }else{
@@ -442,6 +445,14 @@ static double onlineButtonOffsetY = 5;
     [self scrollToBottom];
 }
 
+// 红包 点击事件
+- (void)redPackageButtonClick:(UIButton *)sender {
+    MZLongPollDataModel *msg = self.dataArray[sender.tag];
+    if (self.chatDelegate && [self.chatDelegate respondsToSelector:@selector(redPackageClick:)]) {
+        [self.chatDelegate redPackageClick:msg];
+    }
+}
+
 #pragma mark - tableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -473,12 +484,18 @@ static double onlineButtonOffsetY = 5;
                 if (model.event == MsgTypeGetGift) {
                     return [MZChatGiftNewCell getCellHeightIsLand:isLand];
                 }
+                if (model.event == MsgTypeSDKBonus) {
+                    return [MZBonusNewCell getCellHeightIsLand:isLand];
+                }
                 return [MZChatNewCell getCellHeight:_dataArray[indexPath.row] cellWidth:self.frame.size.width isLand:isLand];
                 break;
             }
             default: {
                 if (model.event == MsgTypeGetGift) {
                     return [MZChatGiftCell getCellHeightIsLand:isLand];
+                }
+                if (model.event == MsgTypeSDKBonus) {
+                    return [MZBonusCell getCellHeightIsLand:isLand];
                 }
                 return [MZChatTableViewCell getCellHeight:_dataArray[indexPath.row] cellWidth:self.frame.size.width isLand:isLand];
                 break;
@@ -509,6 +526,8 @@ static double onlineButtonOffsetY = 5;
             identitystr = MZMsgTypeNotice;
         } else if (msg.event == MsgTypeGetGift) {
             identitystr = MZMsgTypeGetGift;
+        } else if (msg.event == MsgTypeSDKBonus) {
+            identitystr = MZMsgTypeSendRedBag;
         }
         
         switch (self.cellType) {
@@ -528,6 +547,26 @@ static double onlineButtonOffsetY = 5;
                     cell.headerViewAction = ^(MZLongPollDataModel *msgModel){
                         [weakSelf.chatDelegate historyChatViewUserHeaderClick:msgModel];
                     };
+                    return cell;
+                    break;
+                }
+                if (msg.event == MsgTypeSDKBonus) {
+                    MZBonusNewCell *cell = [tableView dequeueReusableCellWithIdentifier:identitystr];
+                    if (cell == nil){
+                        cell = [[MZBonusNewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identitystr];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    }
+                    cell.pollingDate = msg;
+                    
+                    cell.headerViewAction = ^(MZLongPollDataModel *msgModel){
+                        [weakSelf.chatDelegate historyChatViewUserHeaderClick:msgModel];
+                    };
+                    
+                    if (self.isLiveHost == NO) {
+                        cell.redPackageButton.tag = indexPath.row;
+                        [cell.redPackageButton addTarget:self action:@selector(redPackageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    }
+                    
                     return cell;
                     break;
                 }
@@ -561,6 +600,25 @@ static double onlineButtonOffsetY = 5;
                     cell.headerViewAction = ^(MZLongPollDataModel *msgModel){
                         [weakSelf.chatDelegate historyChatViewUserHeaderClick:msgModel];
                     };
+                    return cell;
+                    break;
+                }
+                if (msg.event == MsgTypeSDKBonus) {
+                    MZBonusCell *cell = [tableView dequeueReusableCellWithIdentifier:identitystr];
+                    if (cell == nil){
+                        cell = [[MZBonusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identitystr];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    }
+                    cell.pollingDate = msg;
+                    
+                    cell.headerViewAction = ^(MZLongPollDataModel *msgModel){
+                        [weakSelf.chatDelegate historyChatViewUserHeaderClick:msgModel];
+                    };
+                    
+                    if (self.isLiveHost == NO) {
+                        cell.redPackageButton.tag = indexPath.row;
+                        [cell.redPackageButton addTarget:self action:@selector(redPackageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    }
                     return cell;
                     break;
                 }
@@ -609,7 +667,9 @@ static double onlineButtonOffsetY = 5;
         [self.chatApiManager.filterUserIds addObject:userId];
     }
     MZUser *user = [MZBaseUserServer currentUser];
-    [self.chatApiManager.filterUserIds addObject:user.uniqueID];
+    if (user.uniqueID.length) {
+        [self.chatApiManager.filterUserIds addObject:user.uniqueID];
+    }
 }
 
 @end

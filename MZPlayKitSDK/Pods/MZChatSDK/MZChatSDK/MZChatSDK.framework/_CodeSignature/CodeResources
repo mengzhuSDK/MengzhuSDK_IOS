@@ -46,11 +46,11 @@
 		</data>
 		<key>Headers/MZChatCommen.h</key>
 		<data>
-		Kpl/UaILH/qnKExZEiMFr4iqF64=
+		+LQhWiYWrVPhJsXGMvBJzgoBito=
 		</data>
 		<key>Headers/MZChatKitManager.h</key>
 		<data>
-		ou5GfEIUzflyXn3ja94QUA/yOlU=
+		HQ9qJH8WoQKP1med9jnUWQnojFU=
 		</data>
 		<key>Headers/MZChatNetOperate.h</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Headers/MZChatSDK.h</key>
 		<data>
-		BoD5jtiVdHnttb3U3ohkVV1hkbU=
+		lMllbAv+2OeiL7SQx+eSABtpWLE=
 		</data>
 		<key>Headers/MZChatThemeManager.h</key>
 		<data>
@@ -106,7 +106,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		o0ATOQnSuNyT9FGtRXbupk/uy3o=
+		e/4dnyw0yg4oZMofzuziFG97MZY=
 		</data>
 		<key>MZChatSDKResource.bundle/mz_barrageSwitch_off@2x.png</key>
 		<data>
@@ -261,22 +261,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Kpl/UaILH/qnKExZEiMFr4iqF64=
+			+LQhWiYWrVPhJsXGMvBJzgoBito=
 			</data>
 			<key>hash2</key>
 			<data>
-			U4NP8230caTjyvrKoK4KX+Krb45GyuYcn3kBI1xUgmg=
+			U2Qj8CYWvZloN5lyz7tFOZiCLnulKl+AJfmcXO81AhI=
 			</data>
 		</dict>
 		<key>Headers/MZChatKitManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ou5GfEIUzflyXn3ja94QUA/yOlU=
+			HQ9qJH8WoQKP1med9jnUWQnojFU=
 			</data>
 			<key>hash2</key>
 			<data>
-			NoijECnXIo0Tr1W7t6wv71iBZWqjGcN/ZzfExyKkmaI=
+			/tF4nzCEiC0jWNrlC/vHoQ6czvS3iS/LfNkr+daQJjc=
 			</data>
 		</dict>
 		<key>Headers/MZChatNetOperate.h</key>
@@ -305,11 +305,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			BoD5jtiVdHnttb3U3ohkVV1hkbU=
+			lMllbAv+2OeiL7SQx+eSABtpWLE=
 			</data>
 			<key>hash2</key>
 			<data>
-			R0QsM4r+2zOWmY0o2hUEsFu9APrBOIQxe+OUG8N5Qlo=
+			a7Z7o7MUgy1n4ZCl1yUnpp+uvxUh95CDALpfR67pOi4=
 			</data>
 		</dict>
 		<key>Headers/MZChatThemeManager.h</key>

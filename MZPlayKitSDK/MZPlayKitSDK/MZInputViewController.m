@@ -54,10 +54,10 @@
     
     NSDictionary *attrDict = @{NSFontAttributeName:[UIFont systemFontOfSize:14*MZ_RATE],NSForegroundColorAttributeName:[UIColor colorWithRed:122/255.0 green:122/255.0 blue:122/255.0 alpha:1]};
     
-    NSString *egTicketId = @"10014584";
+    NSString *egTicketId = @"10017889";
     NSString *egUniqueId = @"debugUser888";
     if (MZ_is_debug == 0) {//正式环境
-        egTicketId = @"10145420";
+        egTicketId = @"10165373";
         egUniqueId = @"releaseUser999";
     }
     
@@ -180,7 +180,7 @@
         user.avatar = self.avatarTextField.text;
     } else {
         if (user.avatar.length <= 0) {
-            user.avatar = @"https://cdn.duitang.com/uploads/item/201410/26/20141026191422_yEKyd.thumb.700_0.jpeg";
+            user.avatar = @"http://s1.t.zmengzhu.com/upload/img/c0/63/c0638527f2fd32e1b086bae5ec61c8bf.png";
         }
     }
     
@@ -192,6 +192,7 @@
         }
     }
 
+//    user.user_ext = @{@"level":@"99",@"vip":@"99"}.mj_JSONString;
     [MZBaseUserServer updateCurrentUser:user];
     
     if (self.nameTextField.text.length <= 0) {

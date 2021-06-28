@@ -28,6 +28,9 @@
     } failure:^(NSError * _Nullable error) {
         NSLog(@"SDK初始化出错 = %@", error.domain);
     }];
+#ifdef DEBUG
+    [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle"] load];
+#endif
     return YES;
 }
 
