@@ -29,7 +29,7 @@ pod 'MZUploadVideoSDK','2.6.1'#盟主视频上传组件，如需上传功能，�
 * [5. 推流](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/5.推流)
 * [6. 播放器(竖屏/二分屏/自定义)](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/6.播放器(竖屏-二分屏-自定义))
 * [7. 功能(投屏 弹幕 小窗口 倍速 防录屏)](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/7.功能(投屏-弹幕-小窗口-倍速-防录屏))
-* [8. 互动(签到 投票 文档 抽奖 广告 观看权限)](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/8.互动(签到-投票-文档-抽奖-广告-观看权限))
+* [8. 互动(签到 投票 文档 抽奖 广告 观看权限)](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/8.互动(签到-投票-文档-抽奖-广告-观看权限-红包))
 * [9. 聊天和消息](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/9.聊天和消息)
 * [10. 问答和礼物](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/10.问答和礼物)
 * [11. 下载器](https://github.com/mengzhuSDK/MengzhuSDK_IOS/wiki/11.下载器)
