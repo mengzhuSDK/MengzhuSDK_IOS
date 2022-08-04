@@ -84,6 +84,11 @@ NS_ASSUME_NONNULL_BEGIN
  播放失败
  */
 - (void)playerViewFailePlay:(MZMediaPlayerView *)player;
+/**
+ 网络连接后重新进行播放
+ */
+- (void)connectToPlay;
+
 @end
 
 
@@ -103,6 +108,7 @@ typedef enum : NSUInteger {//播放器控制栏的UI版本
 @property (nonatomic, assign) NSString                    *historyPlayingTime;//历史播放时间
 @property (nonatomic, strong) UIView                      *preview;//预览view
 @property (nonatomic, strong) MZPlayerManager             *playerManager;//控制播放器
+@property (nonatomic, strong) UIImageView                 *previewImage;//封面图
 
 /// 播放器的控制栏UI，有多套，同时只能使用一套，参考 MZMediaControlInterfaceOrientation
 @property (nonatomic, strong) MZMediaControl              *mediaControl;//旧版播放器控制栏view 可更改ui,
@@ -170,6 +176,9 @@ typedef enum : NSUInteger {//播放器控制栏的UI版本
 - (void)updateToolToHideAtDistantFuture;
 ///设置是否响应手势事件
 - (void)updateReponseTouchEvent:(BOOL)isReponse;
+
+///网络再次链接后是否重新自动播放,默认不自动播放
+- (void)updateIsAutoConnectAndPlay:(BOOL)isAutoConnectAndPlay;
 
 #pragma mark - 下面方法支持MZMediaControlInterfaceOrientationMaskAll_new和MZMediaControlInterfaceOrientationMaskPortrait)
 ///更换全屏按钮的图片

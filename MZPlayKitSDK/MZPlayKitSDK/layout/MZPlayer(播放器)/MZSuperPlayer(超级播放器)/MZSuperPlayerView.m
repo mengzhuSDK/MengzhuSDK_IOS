@@ -1979,7 +1979,9 @@ typedef void(^GoodsDataCallback)(MZGoodsListOuterModel *model);
     if (self.playInfo.status == 2) {//如果是回放，取播放器的倍速
         speed = self.playerView.playerManager.playbackRate;
     }
-    [self.chatKitManager sendStatisticsOfPlayEventWithTicket_id:self.ticket_id speed:speed];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.chatKitManager sendStatisticsOfPlayEventWithTicket_id:self.ticket_id speed:speed];
+    });
 }
 
 /// end统计事件

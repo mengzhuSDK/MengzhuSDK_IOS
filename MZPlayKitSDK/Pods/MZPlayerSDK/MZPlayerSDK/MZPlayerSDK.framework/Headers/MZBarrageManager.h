@@ -44,6 +44,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)destory;
 
+
+/**
+ * @brief 设置弹幕是否隐藏头像，默认不隐藏（该配置设置后全局生效）
+ *
+ * @param isHidden 是否隐藏头像，默认不隐藏
+ */
++ (void)setSpriteHeaderIsHidden:(BOOL)isHidden;
+
 @end
 
 NS_ASSUME_NONNULL_END

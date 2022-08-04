@@ -37,7 +37,7 @@
 /// 设置各组件打印开关 - 发布版本的时候建议关闭日志
 - (void)setLogEnable {
     // (开启/关闭）播放等相关业务的打印
-    [MZSDKInitManager setLogEnable:NO];
+    [MZSDKInitManager setLogEnable:YES];
     // (开启/关闭) 下载组件的打印 - 下载组件的日志开关可以放在你认为合适的地方
     [[MZDownLoaderCenter shareInstanced] setLogEnable:NO];
     // (开启/关闭) 推流组件的打印 - 推流组件的日志开关可以放在你认为合适的地方

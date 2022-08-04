@@ -57,7 +57,7 @@
     NSString *egTicketId = @"10017889";
     NSString *egUniqueId = @"debugUser888";
     if (MZ_is_debug == 0) {//正式环境
-        egTicketId = @"10165373";
+        egTicketId = @"10274192";
         egUniqueId = @"releaseUser999";
     }
     

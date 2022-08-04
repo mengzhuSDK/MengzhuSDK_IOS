@@ -130,9 +130,9 @@ typedef NS_ENUM(NSInteger, MZMPMovieScalingMode) {
 - (float)dropFrameRate;//bit率
 ///设置frame
 - (void)setViewFrame:(CGRect)frame;
-///有背景方式暂停
+///设置进入后台是否停止播放
 - (void)setPauseInBackground:(BOOL)pause;
-///获取背景是否暂停 NO=后台不暂停 YES=后台暂停
+///获取进入后台是否停止播放的配置孩子 NO=后台不暂停 YES=后台暂停
 - (BOOL)getPauseInBackground;
 ///解码器是否开启 是否开始解码
 - (BOOL)isVideoToolboxOpen;
