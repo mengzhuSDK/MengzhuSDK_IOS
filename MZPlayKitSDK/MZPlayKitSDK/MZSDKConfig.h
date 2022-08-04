@@ -20,8 +20,8 @@
 
 #else
 
-#define MZSDK_AppID @"2020101216055152494"
-#define MZSDK_SecretKey @"AhjHlxjB34E8kBnT7sQoLL1eVax9KVkWytf4mzHimeq9jARC5CVMzrmEhZhwjJif"
+#define MZSDK_AppID @""
+#define MZSDK_SecretKey @""
 #define MZSDK_ChannelId @""//此值只有推流才使用
 
 #endif
