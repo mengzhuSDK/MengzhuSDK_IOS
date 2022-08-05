@@ -1279,8 +1279,8 @@
 				C04B9B7624F0484D00881A6E /* Frameworks */,
 				C04B9B7724F0484D00881A6E /* Resources */,
 				05FF86DEA04B54D9788227E2 /* [CP] Embed Pods Frameworks */,
-				E87C0AD4CEC8A112C845F4F6 /* [CP] Copy Pods Resources */,
 				C00A5FB32591D7B400D226B4 /* Embed Frameworks */,
+				989BA8D2A6D4A4583C9EA2A8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1401,7 +1401,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E87C0AD4CEC8A112C845F4F6 /* [CP] Copy Pods Resources */ = {
+		989BA8D2A6D4A4583C9EA2A8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1687,7 +1687,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MZPlayKitSDK/layout/MZMeeting(会议)/Frameworks",
 				);
-				GCC_PREFIX_HEADER = $SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch";
 				INFOPLIST_FILE = MZPlayKitSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1713,7 +1713,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MZPlayKitSDK/layout/MZMeeting(会议)/Frameworks",
 				);
-				GCC_PREFIX_HEADER = $SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$SRCROOT/MZPlayKitSDK/MZKitDemoPrefixHeader.pch";
 				INFOPLIST_FILE = MZPlayKitSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

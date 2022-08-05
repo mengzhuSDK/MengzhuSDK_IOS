@@ -18,8 +18,8 @@ PODS:
   - GTMBase64 (1.0.1)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
-  - MJExtension (3.2.2)
-  - MJRefresh (3.6.1)
+  - MJExtension (3.4.1)
+  - MJRefresh (3.7.5)
   - MZChatSDK (2.7.1):
     - MZCoreSDKLibrary (~> 2.7.0)
     - MZEmojiLabel (~> 1.1.4)
@@ -45,16 +45,16 @@ PODS:
     - MZEmojiLabel (~> 1.1.4)
     - SDCycleScrollView (~> 1.75)
   - MZPushFlowSDK (2.6.1)
-  - MZSocketIO (0.0.6)
+  - MZSocketIO (0.0.7)
   - MZUploadVideoSDK (2.6.1):
     - MJExtension
     - MZCoreSDKLibrary (>= 2.6.0)
   - Reachability (3.2)
   - SDCycleScrollView (1.82):
     - SDWebImage (>= 5.0.0)
-  - SDWebImage (5.9.4):
-    - SDWebImage/Core (= 5.9.4)
-  - SDWebImage/Core (5.9.4)
+  - SDWebImage (5.13.2):
+    - SDWebImage/Core (= 5.13.2)
+  - SDWebImage/Core (5.13.2)
   - TTTAttributedLabel (1.13.4)
 
 DEPENDENCIES:
@@ -64,6 +64,7 @@ DEPENDENCIES:
   - MZMediaSDK (= 2.7.0)
   - MZPlayerSDK (= 2.6.1)
   - MZPushFlowSDK (= 2.6.1)
+  - MZSocketIO (= 0.0.7)
   - MZUploadVideoSDK (= 2.6.1)
 
 SPEC REPOS:
@@ -95,8 +96,8 @@ SPEC CHECKSUMS:
   GTMBase64: f0f91be06a7a20b84c8e4fee30c0430395091d82
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  MJExtension: d9b9c74cbdeb724c1e9ecbb157b318276e62e876
-  MJRefresh: d2c1970d1cf6e77fcfcdfe76c943dfab8dbfa5c1
+  MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   MZChatSDK: c485f8fa652897c4426f3f86dbc0a884a1de249e
   MZCoreSDKLibrary: 5e64dbfa8039db18b05aef4a0fc42342cc89d20f
   MZDownLoaderSDK: ff574660f69f75957730292bf6c2f13f86ea4067
@@ -104,13 +105,13 @@ SPEC CHECKSUMS:
   MZMediaSDK: 7d6e430e4d47982f0bd5ca5a0cb1ab671bd72a7d
   MZPlayerSDK: c0772effa0051ac16f475c5a92f0fd8176c56904
   MZPushFlowSDK: dd94d57ffc901306ca7c72afadb4be3a86a116df
-  MZSocketIO: 5f4ecfeb603686699a28217fc82fe18bbdf3991c
+  MZSocketIO: c4b0d19d36fbd8295a89ea5dccb91a129ba63493
   MZUploadVideoSDK: 360e2887211447022134983be36a8dba25af1c54
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
-  SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
+  SDWebImage: 72f86271a6f3139cc7e4a89220946489d4b9a866
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
-PODFILE CHECKSUM: bd5ee0cbb01471637148f2c7c318ce9181683c68
+PODFILE CHECKSUM: c5a2cc34b9a407adc5f62b5fda1e9c853628133e
 
 COCOAPODS: 1.10.0.rc.1

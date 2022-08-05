@@ -13,6 +13,8 @@ typedef void(^MZSocketCreatBlock)(BOOL);
 
 @interface MZSocketIOClient()
 @property(nonatomic,strong) MZSIOSocket *socketIO;//SocketIO
+
+@property(nonatomic,assign) BOOL isFirstSend;
 @end
 
 @implementation MZSocketIOClient
@@ -26,15 +28,18 @@ typedef void(^MZSocketCreatBlock)(BOOL);
     self = [super init];
     if (self) {
         URLString = [NSString stringWithFormat:@"%@?",URLString];
+        self.isFirstSend = YES;
 
         [MZSIOSocket socketWithHost:URLString Token:token response: ^(MZSIOSocket *socket) {
-            self.socketIO = socket;
-            if (self.socketIO) {
-                NSLog(@"SocketIO 链接成功 %@ %@",URLString,token);
+            if ([socket isKindOfClass:[MZSIOSocket class]]) {
+                self.socketIO = socket;
+                NSLog(@"SocketIO 链接成功 %@", socket);
                 creatResult(YES);
             }
             else{
-                NSLog(@"SocketIO 链接失败 %@ %@",URLString,token);
+                self.socketIO = nil;
+                self.isFirstSend = YES;
+                NSLog(@"SocketIO 链接失败 %@", socket);
                 creatResult(NO);
             }
         }];
@@ -44,8 +49,17 @@ typedef void(^MZSocketCreatBlock)(BOOL);
 
 /// 发送事件
 - (void)sendSocketMessageWithEvent:(NSString *)event content:(NSArray *)content {
-    if (self.socketIO) {
-        [self.socketIO emit:event args:content];
+    if (self.socketIO && self.socketIO.isConnected == YES) {
+        if (self.isFirstSend == YES) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.isFirstSend = NO;
+                NSLog(@"SocketIO 是链接状态， 发送 %@ 事件", event);
+                [self.socketIO emit:event args:content];
+            });
+        } else {
+            NSLog(@"SocketIO 是链接状态， 发送 %@ 事件", event);
+            [self.socketIO emit:event args:content];
+        }
     }
 }
 

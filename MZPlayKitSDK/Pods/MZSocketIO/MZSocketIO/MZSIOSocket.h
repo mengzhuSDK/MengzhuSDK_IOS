@@ -36,4 +36,6 @@ typedef NSArray SIOParameterArray;
 
 - (void)close;
 
+@property (nonatomic, assign) BOOL isConnected;
+
 @end

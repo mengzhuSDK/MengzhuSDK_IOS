@@ -4,6 +4,7 @@ inhibit_all_warnings!
 use_frameworks!
 target'MZPlayKitSDK'do
 
+pod 'MZSocketIO','0.0.7'
 pod 'MZPushFlowSDK','2.6.1'
 pod 'MZCoreSDKLibrary','2.7.0'
 pod 'MZMediaSDK','2.7.0'

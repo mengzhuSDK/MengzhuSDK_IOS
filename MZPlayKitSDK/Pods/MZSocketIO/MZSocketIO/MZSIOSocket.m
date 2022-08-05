@@ -47,11 +47,11 @@ static NSString *SIOMD5(NSString *string) {
 
 + (void)socketWithHost:(NSString *)hostURL reconnectAutomatically:(BOOL)reconnectAutomatically attemptLimit:(NSInteger)attempts withDelay:(NSTimeInterval)reconnectionDelay maximumDelay:(NSTimeInterval)maximumDelay timeout:(NSTimeInterval)timeout Token:(NSString *)token response:(void (^)(MZSIOSocket *))response {
     return [self socketWithHost: hostURL
-         reconnectAutomatically: NO
-                   attemptLimit: 0
-                      withDelay: 0
-                   maximumDelay: 1
-                        timeout: 2
+         reconnectAutomatically: YES
+                   attemptLimit: -1
+                      withDelay: 1
+                   maximumDelay: 5
+                        timeout: 20
                  withTransports: @[ @"polling", @"websocket" ]
                           Token: token
                        response: response];
@@ -59,6 +59,7 @@ static NSString *SIOMD5(NSString *string) {
 
 + (void)socketWithHost:(NSString *)hostURL reconnectAutomatically:(BOOL)reconnectAutomatically attemptLimit:(NSInteger)attempts withDelay:(NSTimeInterval)reconnectionDelay maximumDelay:(NSTimeInterval)maximumDelay timeout:(NSTimeInterval)timeout withTransports:(NSArray*)transports Token:(NSString *)token response:(void (^)(MZSIOSocket *))response {
     socket = [[MZSIOSocket alloc] init];
+    socket.isConnected = NO;
     if (!socket) {
         dispatch_async(dispatch_get_main_queue(), ^{
             response(nil);
@@ -76,7 +77,9 @@ static NSString *SIOMD5(NSString *string) {
     
     
     __weak typeof(socket) weakSocket = socket;
-    socket.javascriptContext[@"window"][@"onload"] = ^() {
+//    socket.javascriptContext[@"window"][@"onload"] = ^() {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
         weakSocket.thread = [NSThread currentThread];
         [weakSocket.javascriptContext evaluateScript: mz_socket_io_js];
         [weakSocket.javascriptContext evaluateScript: mz_blob_factory_js];
@@ -94,14 +97,16 @@ static NSString *SIOMD5(NSString *string) {
         weakSocket.javascriptContext[@"objc_socket"] = [weakSocket.javascriptContext evaluateScript: socketConstructor];
         if (![weakSocket.javascriptContext[@"objc_socket"] toObject]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                socket.isConnected = NO;
                 response(nil);
             });
         }
         
         // Responders
         weakSocket.javascriptContext[@"objc_onConnect"] = ^() {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                socket.isConnected = YES;
+                response(socket);
                 if (weakSocket.onConnect)
                     weakSocket.onConnect();
             });
@@ -109,6 +114,8 @@ static NSString *SIOMD5(NSString *string) {
         
         weakSocket.javascriptContext[@"objc_onConnectError"] = ^(NSDictionary *errorDictionary) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                socket.isConnected = NO;
+                response(errorDictionary);
                 if (weakSocket.onConnectError)
                     weakSocket.onConnectError(errorDictionary);
             });
@@ -116,6 +123,8 @@ static NSString *SIOMD5(NSString *string) {
         
         weakSocket.javascriptContext[@"objc_onDisconnect"] = ^() {
             dispatch_async(dispatch_get_main_queue(), ^{
+                socket.isConnected = NO;
+                response(nil);
                 if (weakSocket.onDisconnect)
                     weakSocket.onDisconnect();
             });
@@ -123,6 +132,8 @@ static NSString *SIOMD5(NSString *string) {
         
         weakSocket.javascriptContext[@"objc_onError"] = ^(NSDictionary *errorDictionary) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                socket.isConnected = NO;
+                response(errorDictionary);
                 if (weakSocket.onError)
                     weakSocket.onError(errorDictionary);
             });
@@ -130,6 +141,7 @@ static NSString *SIOMD5(NSString *string) {
         
         weakSocket.javascriptContext[@"objc_onReconnect"] = ^(NSInteger numberOfAttempts) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                socket.isConnected = NO;
                 if (weakSocket.onReconnect)
                     weakSocket.onReconnect(numberOfAttempts);
             });
@@ -137,6 +149,7 @@ static NSString *SIOMD5(NSString *string) {
         
         weakSocket.javascriptContext[@"objc_onReconnectionAttempt"] = ^(NSInteger numberOfAttempts) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                socket.isConnected = NO;
                 if (weakSocket.onReconnectionAttempt)
                     weakSocket.onReconnectionAttempt(numberOfAttempts);
             });
@@ -144,6 +157,7 @@ static NSString *SIOMD5(NSString *string) {
         
         weakSocket.javascriptContext[@"objc_onReconnectionError"] = ^(NSDictionary *errorDictionary) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                socket.isConnected = NO;
                 if (weakSocket.onReconnectionError)
                     weakSocket.onReconnectionError(errorDictionary);
             });
@@ -155,13 +169,14 @@ static NSString *SIOMD5(NSString *string) {
         [weakSocket.javascriptContext evaluateScript: @"objc_socket.on('reconnect', objc_onReconnect);"];
         [weakSocket.javascriptContext evaluateScript: @"objc_socket.on('reconnecting', objc_onReconnectionAttempt);"];
         [weakSocket.javascriptContext evaluateScript: @"objc_socket.on('reconnect_error', objc_onReconnectionError);"];
-    };
+//    };
+});
     
     [socket.javascriptWebView loadHTMLString: @"<html/>" baseURL: nil];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        response(socket);
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        response(socket);
+//    });
 }
 
 - (void)dealloc {
